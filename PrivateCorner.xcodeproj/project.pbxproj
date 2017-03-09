@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		005330EC1E70F572002890A8 /* LockScreenConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E61E70F572002890A8 /* LockScreenConfigurator.swift */; };
+		005330ED1E70F572002890A8 /* LockScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E71E70F572002890A8 /* LockScreenInteractor.swift */; };
+		005330EE1E70F572002890A8 /* LockScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E81E70F572002890A8 /* LockScreenModels.swift */; };
+		005330EF1E70F572002890A8 /* LockScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E91E70F572002890A8 /* LockScreenPresenter.swift */; };
+		005330F01E70F572002890A8 /* LockScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330EA1E70F572002890A8 /* LockScreenRouter.swift */; };
+		005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330EB1E70F572002890A8 /* LockScreenViewController.swift */; };
 		006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486AA1E70EAD900419C27 /* AppDelegate.swift */; };
-		006486AD1E70EAD900419C27 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486AC1E70EAD900419C27 /* ViewController.swift */; };
-		006486B01E70EAD900419C27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006486AE1E70EAD900419C27 /* Main.storyboard */; };
-		006486B21E70EAD900419C27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006486B11E70EAD900419C27 /* Assets.xcassets */; };
-		006486B51E70EAD900419C27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006486B31E70EAD900419C27 /* LaunchScreen.storyboard */; };
 		006486C01E70EAD900419C27 /* PrivateCornerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486BF1E70EAD900419C27 /* PrivateCornerTests.swift */; };
 		006486CB1E70EAD900419C27 /* PrivateCornerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486CA1E70EAD900419C27 /* PrivateCornerUITests.swift */; };
+		006486EA1E70EFD500419C27 /* ConstantsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486E31E70EFD500419C27 /* ConstantsAPI.swift */; };
+		006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006486EB1E70EFE400419C27 /* Assets.xcassets */; };
+		006486EE1E70EFE400419C27 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 006486EC1E70EFE400419C27 /* Info.plist */; };
+		006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006486EF1E70EFEB00419C27 /* LaunchScreen.storyboard */; };
+		006486F41E70EFEB00419C27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006486F11E70EFEB00419C27 /* Main.storyboard */; };
+		0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0073A18A1E71162100490675 /* data-security-tips.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,19 +42,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		005330E61E70F572002890A8 /* LockScreenConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenConfigurator.swift; sourceTree = "<group>"; };
+		005330E71E70F572002890A8 /* LockScreenInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenInteractor.swift; sourceTree = "<group>"; };
+		005330E81E70F572002890A8 /* LockScreenModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenModels.swift; sourceTree = "<group>"; };
+		005330E91E70F572002890A8 /* LockScreenPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenPresenter.swift; sourceTree = "<group>"; };
+		005330EA1E70F572002890A8 /* LockScreenRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenRouter.swift; sourceTree = "<group>"; };
+		005330EB1E70F572002890A8 /* LockScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenViewController.swift; sourceTree = "<group>"; };
 		006486A71E70EAD900419C27 /* PrivateCorner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrivateCorner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006486AA1E70EAD900419C27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		006486AC1E70EAD900419C27 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		006486AF1E70EAD900419C27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		006486B11E70EAD900419C27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		006486B41E70EAD900419C27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		006486B61E70EAD900419C27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006486BB1E70EAD900419C27 /* PrivateCornerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivateCornerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		006486BF1E70EAD900419C27 /* PrivateCornerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateCornerTests.swift; sourceTree = "<group>"; };
 		006486C11E70EAD900419C27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006486C61E70EAD900419C27 /* PrivateCornerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivateCornerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		006486CA1E70EAD900419C27 /* PrivateCornerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateCornerUITests.swift; sourceTree = "<group>"; };
 		006486CC1E70EAD900419C27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		006486E31E70EFD500419C27 /* ConstantsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsAPI.swift; sourceTree = "<group>"; };
+		006486EB1E70EFE400419C27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		006486EC1E70EFE400419C27 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		006486F01E70EFEB00419C27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		006486F21E70EFEB00419C27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0073A18A1E71162100490675 /* data-security-tips.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "data-security-tips.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +112,17 @@
 		006486A91E70EAD900419C27 /* PrivateCorner */ = {
 			isa = PBXGroup;
 			children = (
+				006486E21E70EFD500419C27 /* Constants */,
+				006486E41E70EFD500419C27 /* Extensions */,
+				006486E51E70EFD500419C27 /* Images */,
+				006486E61E70EFD500419C27 /* Library */,
+				006486E71E70EFD500419C27 /* Models */,
+				006486E81E70EFD500419C27 /* Scenes */,
 				006486AA1E70EAD900419C27 /* AppDelegate.swift */,
-				006486AC1E70EAD900419C27 /* ViewController.swift */,
-				006486AE1E70EAD900419C27 /* Main.storyboard */,
-				006486B11E70EAD900419C27 /* Assets.xcassets */,
-				006486B31E70EAD900419C27 /* LaunchScreen.storyboard */,
-				006486B61E70EAD900419C27 /* Info.plist */,
+				006486EF1E70EFEB00419C27 /* LaunchScreen.storyboard */,
+				006486F11E70EFEB00419C27 /* Main.storyboard */,
+				006486EB1E70EFE400419C27 /* Assets.xcassets */,
+				006486E91E70EFD500419C27 /* Supporting Files */,
 			);
 			path = PrivateCorner;
 			sourceTree = "<group>";
@@ -123,6 +143,72 @@
 				006486CC1E70EAD900419C27 /* Info.plist */,
 			);
 			path = PrivateCornerUITests;
+			sourceTree = "<group>";
+		};
+		006486E21E70EFD500419C27 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				006486E31E70EFD500419C27 /* ConstantsAPI.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		006486E41E70EFD500419C27 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		006486E51E70EFD500419C27 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0073A18A1E71162100490675 /* data-security-tips.jpg */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		006486E61E70EFD500419C27 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		006486E71E70EFD500419C27 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		006486E81E70EFD500419C27 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				006486F51E70F2E800419C27 /* LockScreen */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		006486E91E70EFD500419C27 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				006486EC1E70EFE400419C27 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		006486F51E70F2E800419C27 /* LockScreen */ = {
+			isa = PBXGroup;
+			children = (
+				005330E61E70F572002890A8 /* LockScreenConfigurator.swift */,
+				005330E71E70F572002890A8 /* LockScreenInteractor.swift */,
+				005330E81E70F572002890A8 /* LockScreenModels.swift */,
+				005330E91E70F572002890A8 /* LockScreenPresenter.swift */,
+				005330EA1E70F572002890A8 /* LockScreenRouter.swift */,
+				005330EB1E70F572002890A8 /* LockScreenViewController.swift */,
+			);
+			name = LockScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,9 +318,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				006486B51E70EAD900419C27 /* LaunchScreen.storyboard in Resources */,
-				006486B21E70EAD900419C27 /* Assets.xcassets in Resources */,
-				006486B01E70EAD900419C27 /* Main.storyboard in Resources */,
+				006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */,
+				006486EE1E70EFE400419C27 /* Info.plist in Resources */,
+				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
+				006486F41E70EFEB00419C27 /* Main.storyboard in Resources */,
+				0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +347,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				006486AD1E70EAD900419C27 /* ViewController.swift in Sources */,
+				005330F01E70F572002890A8 /* LockScreenRouter.swift in Sources */,
+				005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */,
+				005330EE1E70F572002890A8 /* LockScreenModels.swift in Sources */,
+				006486EA1E70EFD500419C27 /* ConstantsAPI.swift in Sources */,
+				005330ED1E70F572002890A8 /* LockScreenInteractor.swift in Sources */,
+				005330EF1E70F572002890A8 /* LockScreenPresenter.swift in Sources */,
 				006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */,
+				005330EC1E70F572002890A8 /* LockScreenConfigurator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,20 +390,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		006486AE1E70EAD900419C27 /* Main.storyboard */ = {
+		006486EF1E70EFEB00419C27 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				006486AF1E70EAD900419C27 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		006486B31E70EAD900419C27 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				006486B41E70EAD900419C27 /* Base */,
+				006486F01E70EFEB00419C27 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		006486F11E70EFEB00419C27 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				006486F21E70EFEB00419C27 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -505,6 +599,7 @@
 				006486D11E70EAD900419C27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		006486D21E70EAD900419C27 /* Build configuration list for PBXNativeTarget "PrivateCornerTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +608,7 @@
 				006486D41E70EAD900419C27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		006486D51E70EAD900419C27 /* Build configuration list for PBXNativeTarget "PrivateCornerUITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +617,7 @@
 				006486D71E70EAD900419C27 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
