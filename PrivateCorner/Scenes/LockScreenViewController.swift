@@ -23,6 +23,8 @@ class LockScreenViewController: UIViewController, LockScreenViewControllerInput 
     var output: LockScreenViewControllerOutput!
     var router: LockScreenRouter!
     var buttonArray = [UIButton]()
+    var startState: LockScreenScene.StartState!
+    var passcodeState: LockScreenScene.PasscodeState!
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var OneButton: UIButton!
@@ -37,6 +39,9 @@ class LockScreenViewController: UIViewController, LockScreenViewControllerInput 
     @IBOutlet weak var TenButton: UIButton!
     @IBOutlet weak var ElevenButton: UIButton!
     @IBOutlet weak var TwelveButton: UIButton!
+    @IBOutlet weak var TitleLabel: UILabel!
+    @IBOutlet weak var AcceptButton: UIButton!
+    @IBOutlet weak var CancelButton: UIButton!
     
     // MARK: Object lifecycle
     
@@ -51,7 +56,6 @@ class LockScreenViewController: UIViewController, LockScreenViewControllerInput 
         super.viewDidLoad()
         
         configureSubviews()
-        doSomethingOnLoad()
     }
     
     // MARK: Event handling
@@ -59,6 +63,7 @@ class LockScreenViewController: UIViewController, LockScreenViewControllerInput 
     func configureSubviews() {
         
         backgroundImageView.image = UIImage.init(named: "data-security-tips.jpg")
+        blurImage()
         
         buttonArray.append(OneButton)
         buttonArray.append(TwoButton)
@@ -77,15 +82,54 @@ class LockScreenViewController: UIViewController, LockScreenViewControllerInput 
             button.layer.cornerRadius = 5.0;
             button.layer.borderColor = UIColor.white.cgColor
             button.layer.borderWidth = 1.0;
+            button.tag = buttonArray.index(of: button)! + 1
+            button.addTarget(self, action: #selector(pressed(sender:)), for: .touchUpInside)
+        }
+        
+        CancelButton.layer.cornerRadius = 5.0
+        AcceptButton.layer.cornerRadius = 5.0
+
+        let firstInstall = UserDefaults.standard.bool(forKey: "firstInstall")
+        if !firstInstall {
+            TitleLabel.text = "NHẬP MẬT MÃ MỚI LẦN 1"
+            startState = .FirstStart
+            passcodeState = .FirstInput
+        } else {
+            startState = .NotFirst
         }
     }
     
-    func doSomethingOnLoad() {
-        
+    func blurImage() {
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            backgroundImageView.backgroundColor = UIColor.clear
+            
+            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //always fill the view
+            blurEffectView.frame = backgroundImageView.bounds
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            backgroundImageView.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
+        }
     }
-    
+
     // MARK: Display logic
     
+    
+    // MARK: Selector logic
+    
+    func pressed(sender: UIButton!) {
+        print("\(sender.tag)")
+    }
+    
+    @IBAction func clickResetButton(_ sender: Any) {
+        
+    }
+
+    @IBAction func clickOKButton(_ sender: Any) {
+        router.navigateToHomeScreen()
+    }
+
 }
 
 //This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there

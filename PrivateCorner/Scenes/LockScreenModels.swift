@@ -14,5 +14,14 @@ import UIKit
 
 
 struct LockScreenScene {
+    enum StartState {
+        case FirstStart
+        case NotFirst
+    }
     
+    enum PasscodeState {
+        case FirstInput
+        case SecondInput
+        case SuccessInput
+    }
 }

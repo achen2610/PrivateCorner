@@ -22,6 +22,22 @@
 		006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006486EF1E70EFEB00419C27 /* LaunchScreen.storyboard */; };
 		006486F41E70EFEB00419C27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006486F11E70EFEB00419C27 /* Main.storyboard */; };
 		0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0073A18A1E71162100490675 /* data-security-tips.jpg */; };
+		00E0B1A01E79411E0001DF8F /* folder-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19C1E79411E0001DF8F /* folder-on@3x.png */; };
+		00E0B1A11E79411E0001DF8F /* folder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19D1E79411E0001DF8F /* folder@3x.png */; };
+		00E0B1A21E79411E0001DF8F /* setting-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19E1E79411E0001DF8F /* setting-on@3x.png */; };
+		00E0B1A31E79411E0001DF8F /* setting@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19F1E79411E0001DF8F /* setting@3x.png */; };
+		00E0B1C41E7946590001DF8F /* FolderListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1BE1E7946590001DF8F /* FolderListConfigurator.swift */; };
+		00E0B1C51E7946590001DF8F /* FolderListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1BF1E7946590001DF8F /* FolderListInteractor.swift */; };
+		00E0B1C61E7946590001DF8F /* FolderListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1C01E7946590001DF8F /* FolderListModels.swift */; };
+		00E0B1C71E7946590001DF8F /* FolderListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1C11E7946590001DF8F /* FolderListPresenter.swift */; };
+		00E0B1C81E7946590001DF8F /* FolderListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1C21E7946590001DF8F /* FolderListRouter.swift */; };
+		00E0B1C91E7946590001DF8F /* FolderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1C31E7946590001DF8F /* FolderListViewController.swift */; };
+		00E0B1D01E7946AB0001DF8F /* SettingConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1CA1E7946AB0001DF8F /* SettingConfigurator.swift */; };
+		00E0B1D11E7946AB0001DF8F /* SettingInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1CB1E7946AB0001DF8F /* SettingInteractor.swift */; };
+		00E0B1D21E7946AB0001DF8F /* SettingModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1CC1E7946AB0001DF8F /* SettingModels.swift */; };
+		00E0B1D31E7946AB0001DF8F /* SettingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1CD1E7946AB0001DF8F /* SettingPresenter.swift */; };
+		00E0B1D41E7946AB0001DF8F /* SettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1CE1E7946AB0001DF8F /* SettingRouter.swift */; };
+		00E0B1D51E7946AB0001DF8F /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1CF1E7946AB0001DF8F /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +78,22 @@
 		006486F01E70EFEB00419C27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		006486F21E70EFEB00419C27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0073A18A1E71162100490675 /* data-security-tips.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "data-security-tips.jpg"; sourceTree = "<group>"; };
+		00E0B19C1E79411E0001DF8F /* folder-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-on@3x.png"; sourceTree = "<group>"; };
+		00E0B19D1E79411E0001DF8F /* folder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@3x.png"; sourceTree = "<group>"; };
+		00E0B19E1E79411E0001DF8F /* setting-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-on@3x.png"; sourceTree = "<group>"; };
+		00E0B19F1E79411E0001DF8F /* setting@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@3x.png"; sourceTree = "<group>"; };
+		00E0B1BE1E7946590001DF8F /* FolderListConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderListConfigurator.swift; sourceTree = "<group>"; };
+		00E0B1BF1E7946590001DF8F /* FolderListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderListInteractor.swift; sourceTree = "<group>"; };
+		00E0B1C01E7946590001DF8F /* FolderListModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderListModels.swift; sourceTree = "<group>"; };
+		00E0B1C11E7946590001DF8F /* FolderListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderListPresenter.swift; sourceTree = "<group>"; };
+		00E0B1C21E7946590001DF8F /* FolderListRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderListRouter.swift; sourceTree = "<group>"; };
+		00E0B1C31E7946590001DF8F /* FolderListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderListViewController.swift; sourceTree = "<group>"; };
+		00E0B1CA1E7946AB0001DF8F /* SettingConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingConfigurator.swift; sourceTree = "<group>"; };
+		00E0B1CB1E7946AB0001DF8F /* SettingInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingInteractor.swift; sourceTree = "<group>"; };
+		00E0B1CC1E7946AB0001DF8F /* SettingModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingModels.swift; sourceTree = "<group>"; };
+		00E0B1CD1E7946AB0001DF8F /* SettingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingPresenter.swift; sourceTree = "<group>"; };
+		00E0B1CE1E7946AB0001DF8F /* SettingRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingRouter.swift; sourceTree = "<group>"; };
+		00E0B1CF1E7946AB0001DF8F /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +195,10 @@
 		006486E51E70EFD500419C27 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				00E0B19C1E79411E0001DF8F /* folder-on@3x.png */,
+				00E0B19D1E79411E0001DF8F /* folder@3x.png */,
+				00E0B19E1E79411E0001DF8F /* setting-on@3x.png */,
+				00E0B19F1E79411E0001DF8F /* setting@3x.png */,
 				0073A18A1E71162100490675 /* data-security-tips.jpg */,
 			);
 			path = Images;
@@ -185,6 +221,8 @@
 		006486E81E70EFD500419C27 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				00E0B1B11E7943B40001DF8F /* Setting */,
+				00E0B1A41E7942350001DF8F /* FolderList */,
 				006486F51E70F2E800419C27 /* LockScreen */,
 			);
 			path = Scenes;
@@ -209,6 +247,32 @@
 				005330EB1E70F572002890A8 /* LockScreenViewController.swift */,
 			);
 			name = LockScreen;
+			sourceTree = "<group>";
+		};
+		00E0B1A41E7942350001DF8F /* FolderList */ = {
+			isa = PBXGroup;
+			children = (
+				00E0B1BE1E7946590001DF8F /* FolderListConfigurator.swift */,
+				00E0B1BF1E7946590001DF8F /* FolderListInteractor.swift */,
+				00E0B1C01E7946590001DF8F /* FolderListModels.swift */,
+				00E0B1C11E7946590001DF8F /* FolderListPresenter.swift */,
+				00E0B1C21E7946590001DF8F /* FolderListRouter.swift */,
+				00E0B1C31E7946590001DF8F /* FolderListViewController.swift */,
+			);
+			name = FolderList;
+			sourceTree = "<group>";
+		};
+		00E0B1B11E7943B40001DF8F /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				00E0B1CA1E7946AB0001DF8F /* SettingConfigurator.swift */,
+				00E0B1CB1E7946AB0001DF8F /* SettingInteractor.swift */,
+				00E0B1CC1E7946AB0001DF8F /* SettingModels.swift */,
+				00E0B1CD1E7946AB0001DF8F /* SettingPresenter.swift */,
+				00E0B1CE1E7946AB0001DF8F /* SettingRouter.swift */,
+				00E0B1CF1E7946AB0001DF8F /* SettingViewController.swift */,
+			);
+			name = Setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,11 +382,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00E0B1A31E79411E0001DF8F /* setting@3x.png in Resources */,
+				00E0B1A11E79411E0001DF8F /* folder@3x.png in Resources */,
 				006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */,
 				006486EE1E70EFE400419C27 /* Info.plist in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
 				006486F41E70EFEB00419C27 /* Main.storyboard in Resources */,
+				00E0B1A01E79411E0001DF8F /* folder-on@3x.png in Resources */,
 				0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */,
+				00E0B1A21E79411E0001DF8F /* setting-on@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,14 +415,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00E0B1D41E7946AB0001DF8F /* SettingRouter.swift in Sources */,
+				00E0B1D21E7946AB0001DF8F /* SettingModels.swift in Sources */,
 				005330F01E70F572002890A8 /* LockScreenRouter.swift in Sources */,
+				00E0B1C41E7946590001DF8F /* FolderListConfigurator.swift in Sources */,
 				005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */,
 				005330EE1E70F572002890A8 /* LockScreenModels.swift in Sources */,
 				006486EA1E70EFD500419C27 /* ConstantsAPI.swift in Sources */,
+				00E0B1D01E7946AB0001DF8F /* SettingConfigurator.swift in Sources */,
+				00E0B1D31E7946AB0001DF8F /* SettingPresenter.swift in Sources */,
+				00E0B1C51E7946590001DF8F /* FolderListInteractor.swift in Sources */,
 				005330ED1E70F572002890A8 /* LockScreenInteractor.swift in Sources */,
 				005330EF1E70F572002890A8 /* LockScreenPresenter.swift in Sources */,
 				006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */,
+				00E0B1C81E7946590001DF8F /* FolderListRouter.swift in Sources */,
+				00E0B1D11E7946AB0001DF8F /* SettingInteractor.swift in Sources */,
+				00E0B1D51E7946AB0001DF8F /* SettingViewController.swift in Sources */,
 				005330EC1E70F572002890A8 /* LockScreenConfigurator.swift in Sources */,
+				00E0B1C91E7946590001DF8F /* FolderListViewController.swift in Sources */,
+				00E0B1C61E7946590001DF8F /* FolderListModels.swift in Sources */,
+				00E0B1C71E7946590001DF8F /* FolderListPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

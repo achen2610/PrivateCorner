@@ -11,7 +11,7 @@
 import UIKit
 
 protocol LockScreenRouterInput {
-    
+    func navigateToHomeScreen()
 }
 
 protocol LockScreenRouterDataSource:class {
@@ -35,6 +35,22 @@ class LockScreenRouter: LockScreenRouterInput {
     }
     
     // MARK: Navigation
+    func navigateToHomeScreen() {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+        
+        let tabBar = viewController.tabBar
+        let tabBarFolderItem = tabBar.items?[0]
+        let tabBarSettingItem = tabBar.items?[1]
+        
+        tabBarFolderItem?.image = UIImage.init(named: "folder.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarFolderItem?.selectedImage = UIImage.init(named: "folder-on.png")?.withRenderingMode(.alwaysOriginal)
+        
+        tabBarSettingItem?.image = UIImage.init(named: "setting.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarSettingItem?.selectedImage = UIImage.init(named: "setting-on.png")?.withRenderingMode(.alwaysOriginal)
+        
+        UIApplication.shared.keyWindow?.rootViewController = viewController
+    }
     
     // MARK: Communication
     
