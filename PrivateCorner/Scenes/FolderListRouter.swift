@@ -11,7 +11,7 @@
 import UIKit
 
 protocol FolderListRouterInput {
-    
+    func navigateToPhotoScreen()
 }
 
 protocol FolderListRouterDataSource:class {
@@ -28,6 +28,10 @@ class FolderListRouter: FolderListRouterInput {
     weak private var dataSource:FolderListRouterDataSource!
     weak var dataDestination:FolderListRouterDataDestination!
     
+    struct SegueIdentifiers {
+        static let photoScreen = "ShowPhoto"
+    }
+    
     init(viewController:FolderListViewController, dataSource:FolderListRouterDataSource, dataDestination:FolderListRouterDataDestination) {
         self.viewController = viewController
         self.dataSource = dataSource
@@ -35,6 +39,9 @@ class FolderListRouter: FolderListRouterInput {
     }
     
     // MARK: Navigation
+    func navigateToPhotoScreen() {
+        viewController.performSegue(withIdentifier: SegueIdentifiers.photoScreen, sender: viewController)
+    }
     
     // MARK: Communication
     

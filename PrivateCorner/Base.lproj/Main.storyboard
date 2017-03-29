@@ -279,13 +279,58 @@
                     <view key="view" contentMode="scaleToFill" id="hQ6-uX-fNq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oVH-ZH-puL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.919974156920774" green="0.919974156920774" blue="0.919974156920774" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="O8I-9A-fji">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Sih-kr-yT7" id="EOM-e5-3uf"/>
+                                    <outlet property="delegate" destination="Sih-kr-yT7" id="nap-CG-aBF"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="oVH-ZH-puL" secondAttribute="bottom" id="2Ie-kB-5xo"/>
+                            <constraint firstItem="oVH-ZH-puL" firstAttribute="leading" secondItem="hQ6-uX-fNq" secondAttribute="leading" id="3ht-Yw-gnI"/>
+                            <constraint firstItem="oVH-ZH-puL" firstAttribute="top" secondItem="hQ6-uX-fNq" secondAttribute="top" id="Wc9-jY-jiV"/>
+                            <constraint firstAttribute="trailing" secondItem="oVH-ZH-puL" secondAttribute="trailing" id="xc5-sL-Nz7"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mjp-gw-OUg"/>
+                    <connections>
+                        <outlet property="folderCollectionView" destination="oVH-ZH-puL" id="g2s-Zu-Zbm"/>
+                        <segue destination="rdq-m1-FcR" kind="show" identifier="ShowPhoto" id="TJG-mE-4Aq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mFL-Jv-TKo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2814" y="-215"/>
+            <point key="canvasLocation" x="2812.5" y="-215.49295774647888"/>
+        </scene>
+        <!--Photo View Controller-->
+        <scene sceneID="Qj5-sv-2Pz">
+            <objects>
+                <viewController id="rdq-m1-FcR" customClass="PhotoViewController" customModule="PrivateCorner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="S7v-a1-9kV"/>
+                        <viewControllerLayoutGuide type="bottom" id="PcO-Ms-Q9N"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wme-Wz-pVd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PAf-jl-Lsv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3669" y="-215"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Mcm-Ru-MhA">
@@ -308,7 +353,7 @@
         <!--Folder-->
         <scene sceneID="Cyv-6H-bOR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="7l3-8E-WRy" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7l3-8E-WRy" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Folder" id="DaN-A5-A2w"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mfb-Ru-jnk">

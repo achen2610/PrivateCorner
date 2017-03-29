@@ -22,6 +22,15 @@
 		006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006486EF1E70EFEB00419C27 /* LaunchScreen.storyboard */; };
 		006486F41E70EFEB00419C27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006486F11E70EFEB00419C27 /* Main.storyboard */; };
 		0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0073A18A1E71162100490675 /* data-security-tips.jpg */; };
+		0075F1991E7A3169001DA471 /* FolderListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1981E7A3169001DA471 /* FolderListCollectionViewController.swift */; };
+		0075F19C1E7A3698001DA471 /* FolderListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0075F19B1E7A3698001DA471 /* FolderListCell.xib */; };
+		0075F19E1E7A36B7001DA471 /* FolderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F19D1E7A36B7001DA471 /* FolderListCell.swift */; };
+		0075F1A61E7A781A001DA471 /* PhotoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1A01E7A781A001DA471 /* PhotoConfigurator.swift */; };
+		0075F1A71E7A781A001DA471 /* PhotoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1A11E7A781A001DA471 /* PhotoInteractor.swift */; };
+		0075F1A81E7A781A001DA471 /* PhotoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1A21E7A781A001DA471 /* PhotoModels.swift */; };
+		0075F1A91E7A781A001DA471 /* PhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1A31E7A781A001DA471 /* PhotoPresenter.swift */; };
+		0075F1AA1E7A781A001DA471 /* PhotoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1A41E7A781A001DA471 /* PhotoRouter.swift */; };
+		0075F1AB1E7A781A001DA471 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1A51E7A781A001DA471 /* PhotoViewController.swift */; };
 		00E0B1A01E79411E0001DF8F /* folder-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19C1E79411E0001DF8F /* folder-on@3x.png */; };
 		00E0B1A11E79411E0001DF8F /* folder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19D1E79411E0001DF8F /* folder@3x.png */; };
 		00E0B1A21E79411E0001DF8F /* setting-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19E1E79411E0001DF8F /* setting-on@3x.png */; };
@@ -78,6 +87,15 @@
 		006486F01E70EFEB00419C27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		006486F21E70EFEB00419C27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0073A18A1E71162100490675 /* data-security-tips.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "data-security-tips.jpg"; sourceTree = "<group>"; };
+		0075F1981E7A3169001DA471 /* FolderListCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderListCollectionViewController.swift; sourceTree = "<group>"; };
+		0075F19B1E7A3698001DA471 /* FolderListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FolderListCell.xib; sourceTree = "<group>"; };
+		0075F19D1E7A36B7001DA471 /* FolderListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderListCell.swift; sourceTree = "<group>"; };
+		0075F1A01E7A781A001DA471 /* PhotoConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoConfigurator.swift; sourceTree = "<group>"; };
+		0075F1A11E7A781A001DA471 /* PhotoInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoInteractor.swift; sourceTree = "<group>"; };
+		0075F1A21E7A781A001DA471 /* PhotoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoModels.swift; sourceTree = "<group>"; };
+		0075F1A31E7A781A001DA471 /* PhotoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPresenter.swift; sourceTree = "<group>"; };
+		0075F1A41E7A781A001DA471 /* PhotoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoRouter.swift; sourceTree = "<group>"; };
+		0075F1A51E7A781A001DA471 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		00E0B19C1E79411E0001DF8F /* folder-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-on@3x.png"; sourceTree = "<group>"; };
 		00E0B19D1E79411E0001DF8F /* folder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@3x.png"; sourceTree = "<group>"; };
 		00E0B19E1E79411E0001DF8F /* setting-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-on@3x.png"; sourceTree = "<group>"; };
@@ -221,6 +239,7 @@
 		006486E81E70EFD500419C27 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				0075F19F1E7A7807001DA471 /* Photo */,
 				00E0B1B11E7943B40001DF8F /* Setting */,
 				00E0B1A41E7942350001DF8F /* FolderList */,
 				006486F51E70F2E800419C27 /* LockScreen */,
@@ -249,15 +268,39 @@
 			name = LockScreen;
 			sourceTree = "<group>";
 		};
+		0075F19A1E7A3682001DA471 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0075F19B1E7A3698001DA471 /* FolderListCell.xib */,
+				0075F19D1E7A36B7001DA471 /* FolderListCell.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		0075F19F1E7A7807001DA471 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				0075F1A01E7A781A001DA471 /* PhotoConfigurator.swift */,
+				0075F1A11E7A781A001DA471 /* PhotoInteractor.swift */,
+				0075F1A21E7A781A001DA471 /* PhotoModels.swift */,
+				0075F1A31E7A781A001DA471 /* PhotoPresenter.swift */,
+				0075F1A41E7A781A001DA471 /* PhotoRouter.swift */,
+				0075F1A51E7A781A001DA471 /* PhotoViewController.swift */,
+			);
+			name = Photo;
+			sourceTree = "<group>";
+		};
 		00E0B1A41E7942350001DF8F /* FolderList */ = {
 			isa = PBXGroup;
 			children = (
+				0075F19A1E7A3682001DA471 /* UI */,
 				00E0B1BE1E7946590001DF8F /* FolderListConfigurator.swift */,
 				00E0B1BF1E7946590001DF8F /* FolderListInteractor.swift */,
 				00E0B1C01E7946590001DF8F /* FolderListModels.swift */,
 				00E0B1C11E7946590001DF8F /* FolderListPresenter.swift */,
 				00E0B1C21E7946590001DF8F /* FolderListRouter.swift */,
 				00E0B1C31E7946590001DF8F /* FolderListViewController.swift */,
+				0075F1981E7A3169001DA471 /* FolderListCollectionViewController.swift */,
 			);
 			name = FolderList;
 			sourceTree = "<group>";
@@ -387,6 +430,7 @@
 				006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */,
 				006486EE1E70EFE400419C27 /* Info.plist in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
+				0075F19C1E7A3698001DA471 /* FolderListCell.xib in Resources */,
 				006486F41E70EFEB00419C27 /* Main.storyboard in Resources */,
 				00E0B1A01E79411E0001DF8F /* folder-on@3x.png in Resources */,
 				0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */,
@@ -419,14 +463,19 @@
 				00E0B1D21E7946AB0001DF8F /* SettingModels.swift in Sources */,
 				005330F01E70F572002890A8 /* LockScreenRouter.swift in Sources */,
 				00E0B1C41E7946590001DF8F /* FolderListConfigurator.swift in Sources */,
+				0075F1A61E7A781A001DA471 /* PhotoConfigurator.swift in Sources */,
 				005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */,
+				0075F19E1E7A36B7001DA471 /* FolderListCell.swift in Sources */,
 				005330EE1E70F572002890A8 /* LockScreenModels.swift in Sources */,
 				006486EA1E70EFD500419C27 /* ConstantsAPI.swift in Sources */,
 				00E0B1D01E7946AB0001DF8F /* SettingConfigurator.swift in Sources */,
 				00E0B1D31E7946AB0001DF8F /* SettingPresenter.swift in Sources */,
 				00E0B1C51E7946590001DF8F /* FolderListInteractor.swift in Sources */,
 				005330ED1E70F572002890A8 /* LockScreenInteractor.swift in Sources */,
+				0075F1A71E7A781A001DA471 /* PhotoInteractor.swift in Sources */,
+				0075F1AA1E7A781A001DA471 /* PhotoRouter.swift in Sources */,
 				005330EF1E70F572002890A8 /* LockScreenPresenter.swift in Sources */,
+				0075F1A81E7A781A001DA471 /* PhotoModels.swift in Sources */,
 				006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */,
 				00E0B1C81E7946590001DF8F /* FolderListRouter.swift in Sources */,
 				00E0B1D11E7946AB0001DF8F /* SettingInteractor.swift in Sources */,
@@ -434,7 +483,10 @@
 				005330EC1E70F572002890A8 /* LockScreenConfigurator.swift in Sources */,
 				00E0B1C91E7946590001DF8F /* FolderListViewController.swift in Sources */,
 				00E0B1C61E7946590001DF8F /* FolderListModels.swift in Sources */,
+				0075F1A91E7A781A001DA471 /* PhotoPresenter.swift in Sources */,
+				0075F1AB1E7A781A001DA471 /* PhotoViewController.swift in Sources */,
 				00E0B1C71E7946590001DF8F /* FolderListPresenter.swift in Sources */,
+				0075F1991E7A3169001DA471 /* FolderListCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

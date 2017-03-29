@@ -23,7 +23,18 @@ class FolderListViewController: UIViewController, FolderListViewControllerInput 
     var output: FolderListViewControllerOutput!
     var router: FolderListRouter!
     
+    @IBOutlet weak var folderCollectionView: UICollectionView!
+    
     // MARK: Object lifecycle
+    
+    struct cellIdentifiers {
+        static let folderCell = "folderCell"
+    }
+    
+    struct cellLayout {
+        static let itemsPerRow: CGFloat = 2
+        static let sectionInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,10 +45,22 @@ class FolderListViewController: UIViewController, FolderListViewControllerInput 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureCollectionViewOnLoad()
     }
     
     // MARK: Event handling
     
+    func configureCollectionViewOnLoad() {
+        let nibName = UINib(nibName: "FolderListCell", bundle:Bundle.main)
+        folderCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.folderCell)
+    }
+    
+    func selectedPhotoAtIndex(index: Int) {
+        
+        
+        router.navigateToPhotoScreen()
+    }
     
     // MARK: Display logic
     
