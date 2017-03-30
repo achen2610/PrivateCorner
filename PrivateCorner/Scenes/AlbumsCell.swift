@@ -1,5 +1,5 @@
 //
-//  FolderListCell.swift
+//  AlbumsCell.swift
 //  PrivateCorner
 //
 //  Created by a on 3/16/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FolderListCell: UICollectionViewCell {
+class AlbumsCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImageView: UIImageView!
     

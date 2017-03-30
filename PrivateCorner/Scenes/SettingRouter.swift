@@ -28,6 +28,10 @@ class SettingRouter: SettingRouterInput {
     weak private var dataSource:SettingRouterDataSource!
     weak var dataDestination:SettingRouterDataDestination!
     
+    struct SegueIdentifiers {
+        static let passwordScreen = "EditPassword"
+    }
+    
     init(viewController:SettingViewController, dataSource:SettingRouterDataSource, dataDestination:SettingRouterDataDestination) {
         self.viewController = viewController
         self.dataSource = dataSource
@@ -35,6 +39,9 @@ class SettingRouter: SettingRouterInput {
     }
     
     // MARK: Navigation
+    func navigateToPasswordScreen() {
+        viewController.performSegue(withIdentifier: SegueIdentifiers.passwordScreen, sender: viewController)
+    }
     
     // MARK: Communication
     

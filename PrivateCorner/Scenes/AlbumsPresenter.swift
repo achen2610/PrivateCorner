@@ -1,5 +1,5 @@
 //
-//  FolderListPresenter.swift
+//  AlbumsPresenter.swift
 //  PrivateCorner
 //
 //  Created by a on 3/15/17.
@@ -10,17 +10,17 @@
 
 import UIKit
 
-protocol FolderListPresenterInput {
+protocol AlbumsPresenterInput {
     
 }
 
-protocol FolderListPresenterOutput: class {
+protocol AlbumsPresenterOutput: class {
     
 }
 
-class FolderListPresenter: FolderListPresenterInput {
+class AlbumsPresenter: AlbumsPresenterInput {
     
-    weak var output: FolderListPresenterOutput!
+    weak var output: AlbumsPresenterOutput!
     
     // MARK: Presentation logic
     

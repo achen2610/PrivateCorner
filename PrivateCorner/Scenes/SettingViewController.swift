@@ -23,7 +23,12 @@ class SettingViewController: UIViewController, SettingViewControllerInput {
     var output: SettingViewControllerOutput!
     var router: SettingRouter!
     
+    @IBOutlet weak var settingTable: UITableView!
     // MARK: Object lifecycle
+    
+    struct cellIdentifiers {
+        static let settingCell = "settingCell"
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,10 +39,23 @@ class SettingViewController: UIViewController, SettingViewControllerInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureTableViewOnLoad()
     }
     
     // MARK: Event handling
     
+    func configureTableViewOnLoad() {
+        let nibName = UINib(nibName: "SettingCell", bundle:Bundle.main)
+        settingTable.register(nibName, forCellReuseIdentifier: cellIdentifiers.settingCell)
+    }
+    
+    func selectedSettingAtIndex(index: Int) {
+        
+        if index == 0 {
+            router.navigateToPasswordScreen()
+        }
+    }
     
     // MARK: Display logic
     

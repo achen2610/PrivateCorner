@@ -1,5 +1,5 @@
 //
-//  FolderListViewController.swift
+//  AlbumsViewController.swift
 //  PrivateCorner
 //
 //  Created by a on 3/15/17.
@@ -10,25 +10,25 @@
 
 import UIKit
 
-protocol FolderListViewControllerInput {
+protocol AlbumsViewControllerInput {
     
 }
 
-protocol FolderListViewControllerOutput {
+protocol AlbumsViewControllerOutput {
     
 }
 
-class FolderListViewController: UIViewController, FolderListViewControllerInput {
+class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     
-    var output: FolderListViewControllerOutput!
-    var router: FolderListRouter!
-    
-    @IBOutlet weak var folderCollectionView: UICollectionView!
+    var output: AlbumsViewControllerOutput!
+    var router: AlbumsRouter!
+
+    @IBOutlet weak var albumsCollectionView: UICollectionView!
     
     // MARK: Object lifecycle
     
     struct cellIdentifiers {
-        static let folderCell = "folderCell"
+        static let albumsCell = "albumsCell"
     }
     
     struct cellLayout {
@@ -38,7 +38,7 @@ class FolderListViewController: UIViewController, FolderListViewControllerInput 
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        FolderListConfigurator.sharedInstance.configure(viewController: self)
+        AlbumsConfigurator.sharedInstance.configure(viewController: self)
     }
     
     // MARK: View lifecycle
@@ -52,14 +52,14 @@ class FolderListViewController: UIViewController, FolderListViewControllerInput 
     // MARK: Event handling
     
     func configureCollectionViewOnLoad() {
-        let nibName = UINib(nibName: "FolderListCell", bundle:Bundle.main)
-        folderCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.folderCell)
+        let nibName = UINib(nibName: "AlbumsCell", bundle:Bundle.main)
+        albumsCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.albumsCell)
     }
     
-    func selectedPhotoAtIndex(index: Int) {
+    func selectedGalleryAtIndex(index: Int) {
         
         
-        router.navigateToPhotoScreen()
+        router.navigateToGalleryScreen()
     }
     
     // MARK: Display logic
@@ -67,7 +67,7 @@ class FolderListViewController: UIViewController, FolderListViewControllerInput 
 }
 
 //This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there
-extension FolderListViewController: FolderListPresenterOutput {
+extension AlbumsViewController: AlbumsPresenterOutput {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router.passDataToNextScene(for: segue)
     }

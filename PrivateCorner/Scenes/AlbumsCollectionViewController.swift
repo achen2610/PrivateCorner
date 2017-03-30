@@ -1,5 +1,5 @@
 //
-//  FolderListCollectionViewController.swift
+//  AlbumsCollectionViewController.swift
 //  PrivateCorner
 //
 //  Created by a on 3/16/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension FolderListViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     // MARK: UICollectionView DataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -20,7 +20,7 @@ extension FolderListViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.folderCell, for: indexPath) as? FolderListCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.albumsCell, for: indexPath) as? AlbumsCell {
             cell.photoImageView.layer.cornerRadius = 5.0
             return cell
         }
@@ -47,6 +47,6 @@ extension FolderListViewController: UICollectionViewDataSource, UICollectionView
     
     // MARK: UICollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedPhotoAtIndex(index: indexPath.row)
+        selectedGalleryAtIndex(index: indexPath.row)
     }
 }
