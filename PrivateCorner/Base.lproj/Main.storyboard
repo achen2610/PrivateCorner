@@ -285,7 +285,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KTW-Ka-NM1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2813" y="460"/>
+            <point key="canvasLocation" x="2813" y="1178"/>
         </scene>
         <!--Albums View Controller-->
         <scene sceneID="8eu-zg-09A">
@@ -407,6 +407,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="7l3-8E-WRy" kind="relationship" relationship="viewControllers" id="Yfu-Lo-et9"/>
+                        <segue destination="SJZ-kO-aXo" kind="relationship" relationship="viewControllers" id="CLj-nk-43M"/>
                         <segue destination="adM-Fs-fM0" kind="relationship" relationship="viewControllers" id="ioe-4d-FTE"/>
                     </connections>
                 </tabBarController>
@@ -433,6 +434,44 @@
             </objects>
             <point key="canvasLocation" x="1957.5" y="-215.49295774647888"/>
         </scene>
+        <!--Import View Controller-->
+        <scene sceneID="gUI-6a-Ggb">
+            <objects>
+                <viewController id="Zua-mZ-DX8" customClass="ImportViewController" customModule="PrivateCorner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Eed-fH-frH"/>
+                        <viewControllerLayoutGuide type="bottom" id="Oec-nU-d7k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cap-Ap-kXz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CxY-cl-CQ4">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Zua-mZ-DX8" id="NwU-Fz-7H9"/>
+                                    <outlet property="delegate" destination="Zua-mZ-DX8" id="QX4-w1-nVC"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="CxY-cl-CQ4" secondAttribute="bottom" id="91L-Dk-vPL"/>
+                            <constraint firstAttribute="trailing" secondItem="CxY-cl-CQ4" secondAttribute="trailing" id="Rld-aO-8AS"/>
+                            <constraint firstItem="CxY-cl-CQ4" firstAttribute="leading" secondItem="Cap-Ap-kXz" secondAttribute="leading" id="S7P-Cb-eVF"/>
+                            <constraint firstItem="CxY-cl-CQ4" firstAttribute="top" secondItem="Cap-Ap-kXz" secondAttribute="top" id="seU-uG-KCT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="QaS-65-zyz"/>
+                    <connections>
+                        <outlet property="importTableView" destination="CxY-cl-CQ4" id="ThP-Rv-EoE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="exK-cs-6GL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2812.5" y="451.05633802816902"/>
+        </scene>
         <!--Setting-->
         <scene sceneID="1hW-nQ-12C">
             <objects>
@@ -450,7 +489,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ryx-wi-0Ce" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1957.5" y="459.50704225352115"/>
+            <point key="canvasLocation" x="1958" y="1178"/>
+        </scene>
+        <!--Import-->
+        <scene sceneID="FBj-87-hak">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SJZ-kO-aXo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Import" id="NNu-3p-mdT"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NQ3-IZ-RKo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Zua-mZ-DX8" kind="relationship" relationship="rootViewController" id="io1-7z-48O"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ih4-a3-6PZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1958" y="453"/>
         </scene>
     </scenes>
 </document>

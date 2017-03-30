@@ -1,14 +1,14 @@
 //
-//  SettingTableViewController.swift
+//  ImportTableViewController.swift
 //  PrivateCorner
 //
-//  Created by a on 3/29/17.
+//  Created by a on 3/30/17.
 //  Copyright © 2017 MrAChen. All rights reserved.
 //
 
 import UIKit
 
-extension SettingViewController : UITableViewDataSource, UITableViewDelegate {
+extension ImportViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -16,8 +16,8 @@ extension SettingViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifiers.settingCell, for: indexPath) as? SettingCell {
-            cell.titleLabel.text = "Setting \(indexPath.row)"
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifiers.importCell, for: indexPath) as? ImportCell {
+            cell.titleLabel.text = "Import \(indexPath.row)"
             
             return cell
         }
@@ -28,11 +28,11 @@ extension SettingViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 61 * kScale
     }
-
+    
     // MARK: UITableView Delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedSettingAtIndex(index: indexPath.row)
+//        selectedSettingAtIndex(index: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -16,6 +16,17 @@
 		004B28F31E8CA555007C910A /* GalleryPhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28F21E8CA555007C910A /* GalleryPhotoCollectionViewController.swift */; };
 		004B28F61E8CA624007C910A /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28F51E8CA624007C910A /* GalleryCell.swift */; };
 		004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B28F71E8CA62D007C910A /* GalleryCell.xib */; };
+		004B29001E8CE57F007C910A /* ImportConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28FA1E8CE57F007C910A /* ImportConfigurator.swift */; };
+		004B29011E8CE57F007C910A /* ImportInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28FB1E8CE57F007C910A /* ImportInteractor.swift */; };
+		004B29021E8CE57F007C910A /* ImportModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28FC1E8CE57F007C910A /* ImportModels.swift */; };
+		004B29031E8CE57F007C910A /* ImportPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28FD1E8CE57F007C910A /* ImportPresenter.swift */; };
+		004B29041E8CE57F007C910A /* ImportRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28FE1E8CE57F007C910A /* ImportRouter.swift */; };
+		004B29051E8CE57F007C910A /* ImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28FF1E8CE57F007C910A /* ImportViewController.swift */; };
+		004B29071E8CE5A3007C910A /* ImportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B29061E8CE5A3007C910A /* ImportTableViewController.swift */; };
+		004B290A1E8CE96A007C910A /* import-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 004B29081E8CE96A007C910A /* import-on@3x.png */; };
+		004B290B1E8CE96A007C910A /* import@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 004B29091E8CE96A007C910A /* import@3x.png */; };
+		004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B290D1E8CE9D1007C910A /* ImportCell.swift */; };
+		004B29101E8CEA05007C910A /* ImportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B290F1E8CEA05007C910A /* ImportCell.xib */; };
 		005330EC1E70F572002890A8 /* LockScreenConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E61E70F572002890A8 /* LockScreenConfigurator.swift */; };
 		005330ED1E70F572002890A8 /* LockScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E71E70F572002890A8 /* LockScreenInteractor.swift */; };
 		005330EE1E70F572002890A8 /* LockScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E81E70F572002890A8 /* LockScreenModels.swift */; };
@@ -88,6 +99,17 @@
 		004B28F21E8CA555007C910A /* GalleryPhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		004B28F51E8CA624007C910A /* GalleryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCell.swift; sourceTree = "<group>"; };
 		004B28F71E8CA62D007C910A /* GalleryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryCell.xib; sourceTree = "<group>"; };
+		004B28FA1E8CE57F007C910A /* ImportConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportConfigurator.swift; sourceTree = "<group>"; };
+		004B28FB1E8CE57F007C910A /* ImportInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportInteractor.swift; sourceTree = "<group>"; };
+		004B28FC1E8CE57F007C910A /* ImportModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportModels.swift; sourceTree = "<group>"; };
+		004B28FD1E8CE57F007C910A /* ImportPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportPresenter.swift; sourceTree = "<group>"; };
+		004B28FE1E8CE57F007C910A /* ImportRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportRouter.swift; sourceTree = "<group>"; };
+		004B28FF1E8CE57F007C910A /* ImportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportViewController.swift; sourceTree = "<group>"; };
+		004B29061E8CE5A3007C910A /* ImportTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportTableViewController.swift; sourceTree = "<group>"; };
+		004B29081E8CE96A007C910A /* import-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "import-on@3x.png"; sourceTree = "<group>"; };
+		004B29091E8CE96A007C910A /* import@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "import@3x.png"; sourceTree = "<group>"; };
+		004B290D1E8CE9D1007C910A /* ImportCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportCell.swift; sourceTree = "<group>"; };
+		004B290F1E8CEA05007C910A /* ImportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportCell.xib; sourceTree = "<group>"; };
 		005330E61E70F572002890A8 /* LockScreenConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenConfigurator.swift; sourceTree = "<group>"; };
 		005330E71E70F572002890A8 /* LockScreenInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenInteractor.swift; sourceTree = "<group>"; };
 		005330E81E70F572002890A8 /* LockScreenModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenModels.swift; sourceTree = "<group>"; };
@@ -187,6 +209,30 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		004B28F91E8CE55C007C910A /* Import */ = {
+			isa = PBXGroup;
+			children = (
+				004B290C1E8CE9C6007C910A /* UI */,
+				004B28FA1E8CE57F007C910A /* ImportConfigurator.swift */,
+				004B28FB1E8CE57F007C910A /* ImportInteractor.swift */,
+				004B28FC1E8CE57F007C910A /* ImportModels.swift */,
+				004B28FD1E8CE57F007C910A /* ImportPresenter.swift */,
+				004B28FE1E8CE57F007C910A /* ImportRouter.swift */,
+				004B28FF1E8CE57F007C910A /* ImportViewController.swift */,
+				004B29061E8CE5A3007C910A /* ImportTableViewController.swift */,
+			);
+			name = Import;
+			sourceTree = "<group>";
+		};
+		004B290C1E8CE9C6007C910A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				004B290D1E8CE9D1007C910A /* ImportCell.swift */,
+				004B290F1E8CEA05007C910A /* ImportCell.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		0064869E1E70EAD900419C27 = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +307,8 @@
 		006486E51E70EFD500419C27 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				004B29081E8CE96A007C910A /* import-on@3x.png */,
+				004B29091E8CE96A007C910A /* import@3x.png */,
 				00E0B19C1E79411E0001DF8F /* folder-on@3x.png */,
 				00E0B19D1E79411E0001DF8F /* folder@3x.png */,
 				00E0B19E1E79411E0001DF8F /* setting-on@3x.png */,
@@ -287,6 +335,7 @@
 		006486E81E70EFD500419C27 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				004B28F91E8CE55C007C910A /* Import */,
 				004B28E51E8C9EA6007C910A /* GalleryPhoto */,
 				0075F19F1E7A7807001DA471 /* Photo */,
 				00E0B1B11E7943B40001DF8F /* Setting */,
@@ -485,10 +534,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004B29101E8CEA05007C910A /* ImportCell.xib in Resources */,
 				00E0B1A31E79411E0001DF8F /* setting@3x.png in Resources */,
 				00E0B1A11E79411E0001DF8F /* folder@3x.png in Resources */,
 				007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */,
 				006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */,
+				004B290A1E8CE96A007C910A /* import-on@3x.png in Resources */,
 				004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */,
 				006486EE1E70EFE400419C27 /* Info.plist in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
@@ -496,6 +547,7 @@
 				006486F41E70EFEB00419C27 /* Main.storyboard in Resources */,
 				00E0B1A01E79411E0001DF8F /* folder-on@3x.png in Resources */,
 				0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */,
+				004B290B1E8CE96A007C910A /* import@3x.png in Resources */,
 				00E0B1A21E79411E0001DF8F /* setting-on@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,27 +573,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				004B29001E8CE57F007C910A /* ImportConfigurator.swift in Sources */,
 				00E0B1D41E7946AB0001DF8F /* SettingRouter.swift in Sources */,
 				00E0B1D21E7946AB0001DF8F /* SettingModels.swift in Sources */,
 				005330F01E70F572002890A8 /* LockScreenRouter.swift in Sources */,
+				004B29071E8CE5A3007C910A /* ImportTableViewController.swift in Sources */,
 				007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */,
 				00E0B1C41E7946590001DF8F /* AlbumsConfigurator.swift in Sources */,
 				0075F1A61E7A781A001DA471 /* PhotoConfigurator.swift in Sources */,
+				004B29031E8CE57F007C910A /* ImportPresenter.swift in Sources */,
 				005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */,
 				004B28F01E8CA050007C910A /* GalleryPhotoRouter.swift in Sources */,
 				0075F19E1E7A36B7001DA471 /* AlbumsCell.swift in Sources */,
 				007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */,
 				005330EE1E70F572002890A8 /* LockScreenModels.swift in Sources */,
+				004B29021E8CE57F007C910A /* ImportModels.swift in Sources */,
 				006486EA1E70EFD500419C27 /* ConstantsAPI.swift in Sources */,
 				00E0B1D01E7946AB0001DF8F /* SettingConfigurator.swift in Sources */,
 				004B28ED1E8CA050007C910A /* GalleryPhotoInteractor.swift in Sources */,
 				00E0B1D31E7946AB0001DF8F /* SettingPresenter.swift in Sources */,
 				00E0B1C51E7946590001DF8F /* AlbumsInteractor.swift in Sources */,
+				004B29051E8CE57F007C910A /* ImportViewController.swift in Sources */,
 				005330ED1E70F572002890A8 /* LockScreenInteractor.swift in Sources */,
 				004B28EF1E8CA050007C910A /* GalleryPhotoPresenter.swift in Sources */,
 				0075F1A71E7A781A001DA471 /* PhotoInteractor.swift in Sources */,
 				0075F1AA1E7A781A001DA471 /* PhotoRouter.swift in Sources */,
 				005330EF1E70F572002890A8 /* LockScreenPresenter.swift in Sources */,
+				004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */,
 				0075F1A81E7A781A001DA471 /* PhotoModels.swift in Sources */,
 				006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */,
 				004B28EE1E8CA050007C910A /* GalleryPhotoModels.swift in Sources */,
@@ -551,6 +609,8 @@
 				00E0B1D51E7946AB0001DF8F /* SettingViewController.swift in Sources */,
 				004B28EC1E8CA050007C910A /* GalleryPhotoConfigurator.swift in Sources */,
 				005330EC1E70F572002890A8 /* LockScreenConfigurator.swift in Sources */,
+				004B29011E8CE57F007C910A /* ImportInteractor.swift in Sources */,
+				004B29041E8CE57F007C910A /* ImportRouter.swift in Sources */,
 				00E0B1C91E7946590001DF8F /* AlbumsViewController.swift in Sources */,
 				00E0B1C61E7946590001DF8F /* AlbumsModels.swift in Sources */,
 				004B28F31E8CA555007C910A /* GalleryPhotoCollectionViewController.swift in Sources */,

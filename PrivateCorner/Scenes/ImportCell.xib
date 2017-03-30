@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="importCell" id="Xmy-SO-18X" customClass="ImportCell" customModule="PrivateCorner" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xmy-SO-18X" id="dbm-Vi-coM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DwG-An-Mqr">
+                        <rect key="frame" x="8" y="8" width="64.5" height="64.5"/>
+                        <color key="backgroundColor" red="0.33983407664065979" green="0.62165362080252651" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="DwG-An-Mqr" secondAttribute="height" multiplier="1:1" id="mcw-hE-rBP"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxZ-un-pZz">
+                        <rect key="frame" x="80.5" y="30.5" width="231.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="DwG-An-Mqr" firstAttribute="leading" secondItem="dbm-Vi-coM" secondAttribute="leading" constant="8" id="0WY-is-rfz"/>
+                    <constraint firstItem="DwG-An-Mqr" firstAttribute="top" secondItem="dbm-Vi-coM" secondAttribute="top" constant="8" id="HW3-CW-b9l"/>
+                    <constraint firstAttribute="bottom" secondItem="DwG-An-Mqr" secondAttribute="bottom" constant="8" id="eBh-to-NYJ"/>
+                    <constraint firstAttribute="trailing" secondItem="RxZ-un-pZz" secondAttribute="trailing" constant="8" id="g0j-O2-Htj"/>
+                    <constraint firstItem="RxZ-un-pZz" firstAttribute="leading" secondItem="DwG-An-Mqr" secondAttribute="trailing" constant="8" id="mPr-Rl-2zb"/>
+                    <constraint firstItem="RxZ-un-pZz" firstAttribute="centerY" secondItem="DwG-An-Mqr" secondAttribute="centerY" id="o2s-8i-vfz"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="importImageView" destination="DwG-An-Mqr" id="HRB-9o-g2m"/>
+                <outlet property="titleLabel" destination="RxZ-un-pZz" id="gY4-va-T2d"/>
+            </connections>
+            <point key="canvasLocation" x="-67" y="-151.5"/>
+        </tableViewCell>
+    </objects>
+</document>

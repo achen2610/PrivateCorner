@@ -40,11 +40,15 @@ class LockScreenRouter: LockScreenRouterInput {
         let viewController = mainStoryboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
         
         let tabBar = viewController.tabBar
-        let tabBarFolderItem = tabBar.items?[0]
-        let tabBarSettingItem = tabBar.items?[1]
+        let tabBarAlbumItem = tabBar.items?[0]
+        let tabBarImportItem = tabBar.items?[1]
+        let tabBarSettingItem = tabBar.items?[2]
         
-        tabBarFolderItem?.image = UIImage.init(named: "folder.png")?.withRenderingMode(.alwaysOriginal)
-        tabBarFolderItem?.selectedImage = UIImage.init(named: "folder-on.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarAlbumItem?.image = UIImage.init(named: "folder.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarAlbumItem?.selectedImage = UIImage.init(named: "folder-on.png")?.withRenderingMode(.alwaysOriginal)
+        
+        tabBarImportItem?.image = UIImage.init(named: "import.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarImportItem?.selectedImage = UIImage.init(named: "import-on.png")?.withRenderingMode(.alwaysOriginal)
         
         tabBarSettingItem?.image = UIImage.init(named: "setting.png")?.withRenderingMode(.alwaysOriginal)
         tabBarSettingItem?.selectedImage = UIImage.init(named: "setting-on.png")?.withRenderingMode(.alwaysOriginal)

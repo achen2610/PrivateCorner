@@ -7,3 +7,7 @@
 //
 
 import Foundation
+import UIKit
+
+let kScale          =       UIScreen.main.bounds.width / 320
+let kScaleIpad      =       UIScreen.main.bounds.width / 768
