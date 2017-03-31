@@ -11,7 +11,7 @@
 import UIKit
 
 protocol ImportRouterInput {
-    
+    func navigateToImportDetailScreen()
 }
 
 protocol ImportRouterDataSource:class {
@@ -28,6 +28,10 @@ class ImportRouter: ImportRouterInput {
     weak private var dataSource:ImportRouterDataSource!
     weak var dataDestination:ImportRouterDataDestination!
     
+    struct SegueIdentifiers {
+        static let importPhotoScreen = "ImportPhoto"
+    }
+    
     init(viewController:ImportViewController, dataSource:ImportRouterDataSource, dataDestination:ImportRouterDataDestination) {
         self.viewController = viewController
         self.dataSource = dataSource
@@ -35,6 +39,9 @@ class ImportRouter: ImportRouterInput {
     }
     
     // MARK: Navigation
+    func navigateToImportDetailScreen() {
+        viewController.performSegue(withIdentifier: SegueIdentifiers.importPhotoScreen, sender: viewController)
+    }
     
     // MARK: Communication
     

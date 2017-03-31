@@ -22,7 +22,6 @@
 		004B29031E8CE57F007C910A /* ImportPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28FD1E8CE57F007C910A /* ImportPresenter.swift */; };
 		004B29041E8CE57F007C910A /* ImportRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28FE1E8CE57F007C910A /* ImportRouter.swift */; };
 		004B29051E8CE57F007C910A /* ImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28FF1E8CE57F007C910A /* ImportViewController.swift */; };
-		004B29071E8CE5A3007C910A /* ImportTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B29061E8CE5A3007C910A /* ImportTableViewController.swift */; };
 		004B290A1E8CE96A007C910A /* import-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 004B29081E8CE96A007C910A /* import-on@3x.png */; };
 		004B290B1E8CE96A007C910A /* import@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 004B29091E8CE96A007C910A /* import@3x.png */; };
 		004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B290D1E8CE9D1007C910A /* ImportCell.swift */; };
@@ -54,6 +53,9 @@
 		007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */; };
 		007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */; };
 		007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007D82D11E8B76B0005CBBC2 /* SettingCell.xib */; };
+		0094F6D01E8DF1E6007BEFAE /* ImportCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094F6CF1E8DF1E6007BEFAE /* ImportCollectionViewController.swift */; };
+		0094F6D31E8E3E56007BEFAE /* PrivateData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0094F6D11E8E3E56007BEFAE /* PrivateData.xcdatamodeld */; };
+		0094F6D51E8E46F8007BEFAE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094F6D41E8E46F8007BEFAE /* CoreDataManager.swift */; };
 		00E0B1A01E79411E0001DF8F /* folder-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19C1E79411E0001DF8F /* folder-on@3x.png */; };
 		00E0B1A11E79411E0001DF8F /* folder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19D1E79411E0001DF8F /* folder@3x.png */; };
 		00E0B1A21E79411E0001DF8F /* setting-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19E1E79411E0001DF8F /* setting-on@3x.png */; };
@@ -105,7 +107,6 @@
 		004B28FD1E8CE57F007C910A /* ImportPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportPresenter.swift; sourceTree = "<group>"; };
 		004B28FE1E8CE57F007C910A /* ImportRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportRouter.swift; sourceTree = "<group>"; };
 		004B28FF1E8CE57F007C910A /* ImportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportViewController.swift; sourceTree = "<group>"; };
-		004B29061E8CE5A3007C910A /* ImportTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportTableViewController.swift; sourceTree = "<group>"; };
 		004B29081E8CE96A007C910A /* import-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "import-on@3x.png"; sourceTree = "<group>"; };
 		004B29091E8CE96A007C910A /* import@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "import@3x.png"; sourceTree = "<group>"; };
 		004B290D1E8CE9D1007C910A /* ImportCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportCell.swift; sourceTree = "<group>"; };
@@ -142,6 +143,9 @@
 		007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		007D82D11E8B76B0005CBBC2 /* SettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
+		0094F6CF1E8DF1E6007BEFAE /* ImportCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportCollectionViewController.swift; sourceTree = "<group>"; };
+		0094F6D21E8E3E56007BEFAE /* PrivateData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PrivateData.xcdatamodel; sourceTree = "<group>"; };
+		0094F6D41E8E46F8007BEFAE /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		00E0B19C1E79411E0001DF8F /* folder-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-on@3x.png"; sourceTree = "<group>"; };
 		00E0B19D1E79411E0001DF8F /* folder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@3x.png"; sourceTree = "<group>"; };
 		00E0B19E1E79411E0001DF8F /* setting-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-on@3x.png"; sourceTree = "<group>"; };
@@ -219,7 +223,7 @@
 				004B28FD1E8CE57F007C910A /* ImportPresenter.swift */,
 				004B28FE1E8CE57F007C910A /* ImportRouter.swift */,
 				004B28FF1E8CE57F007C910A /* ImportViewController.swift */,
-				004B29061E8CE5A3007C910A /* ImportTableViewController.swift */,
+				0094F6CF1E8DF1E6007BEFAE /* ImportCollectionViewController.swift */,
 			);
 			name = Import;
 			sourceTree = "<group>";
@@ -266,6 +270,7 @@
 				006486EF1E70EFEB00419C27 /* LaunchScreen.storyboard */,
 				006486F11E70EFEB00419C27 /* Main.storyboard */,
 				006486EB1E70EFE400419C27 /* Assets.xcassets */,
+				0094F6D11E8E3E56007BEFAE /* PrivateData.xcdatamodeld */,
 				006486E91E70EFD500419C27 /* Supporting Files */,
 			);
 			path = PrivateCorner;
@@ -328,6 +333,7 @@
 		006486E71E70EFD500419C27 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0094F6D41E8E46F8007BEFAE /* CoreDataManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -577,7 +583,6 @@
 				00E0B1D41E7946AB0001DF8F /* SettingRouter.swift in Sources */,
 				00E0B1D21E7946AB0001DF8F /* SettingModels.swift in Sources */,
 				005330F01E70F572002890A8 /* LockScreenRouter.swift in Sources */,
-				004B29071E8CE5A3007C910A /* ImportTableViewController.swift in Sources */,
 				007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */,
 				00E0B1C41E7946590001DF8F /* AlbumsConfigurator.swift in Sources */,
 				0075F1A61E7A781A001DA471 /* PhotoConfigurator.swift in Sources */,
@@ -587,6 +592,7 @@
 				0075F19E1E7A36B7001DA471 /* AlbumsCell.swift in Sources */,
 				007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */,
 				005330EE1E70F572002890A8 /* LockScreenModels.swift in Sources */,
+				0094F6D01E8DF1E6007BEFAE /* ImportCollectionViewController.swift in Sources */,
 				004B29021E8CE57F007C910A /* ImportModels.swift in Sources */,
 				006486EA1E70EFD500419C27 /* ConstantsAPI.swift in Sources */,
 				00E0B1D01E7946AB0001DF8F /* SettingConfigurator.swift in Sources */,
@@ -598,10 +604,12 @@
 				004B28EF1E8CA050007C910A /* GalleryPhotoPresenter.swift in Sources */,
 				0075F1A71E7A781A001DA471 /* PhotoInteractor.swift in Sources */,
 				0075F1AA1E7A781A001DA471 /* PhotoRouter.swift in Sources */,
+				0094F6D31E8E3E56007BEFAE /* PrivateData.xcdatamodeld in Sources */,
 				005330EF1E70F572002890A8 /* LockScreenPresenter.swift in Sources */,
 				004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */,
 				0075F1A81E7A781A001DA471 /* PhotoModels.swift in Sources */,
 				006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */,
+				0094F6D51E8E46F8007BEFAE /* CoreDataManager.swift in Sources */,
 				004B28EE1E8CA050007C910A /* GalleryPhotoModels.swift in Sources */,
 				004B28F11E8CA050007C910A /* GalleryPhotoViewController.swift in Sources */,
 				00E0B1C81E7946590001DF8F /* AlbumsRouter.swift in Sources */,
@@ -884,6 +892,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0094F6D11E8E3E56007BEFAE /* PrivateData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0094F6D21E8E3E56007BEFAE /* PrivateData.xcdatamodel */,
+			);
+			currentVersion = 0094F6D21E8E3E56007BEFAE /* PrivateData.xcdatamodel */;
+			path = PrivateData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0064869F1E70EAD900419C27 /* Project object */;
 }

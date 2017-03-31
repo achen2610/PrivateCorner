@@ -23,12 +23,18 @@ class ImportViewController: UIViewController, ImportViewControllerInput {
     var output: ImportViewControllerOutput!
     var router: ImportRouter!
     
-    @IBOutlet weak var importTableView: UITableView!
+    @IBOutlet weak var importCollectionView: UICollectionView!
 
     // MARK: Object lifecycle
     
     struct cellIdentifiers {
         static let importCell = "importCell"
+    }
+    
+    struct cellLayout {
+        static let itemsPerRow: CGFloat = 2
+        static let widthPerItem: CGFloat = 80 * kScale
+        static let sectionInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
     
     override func awakeFromNib() {
@@ -41,14 +47,19 @@ class ImportViewController: UIViewController, ImportViewControllerInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureTableViewOnLoad()
+        configureCollecntionViewOnLoad()
     }
     
     // MARK: Event handling
     
-    func configureTableViewOnLoad() {
+    func configureCollecntionViewOnLoad() {
         let nibName = UINib(nibName: "ImportCell", bundle:Bundle.main)
-        importTableView.register(nibName, forCellReuseIdentifier: cellIdentifiers.importCell)
+        importCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.importCell)
+    }
+    
+    func selectedImportDetailAtIndex(index: Int) {
+        
+        router.navigateToImportDetailScreen()
     }
     
     // MARK: Display logic

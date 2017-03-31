@@ -9,5 +9,10 @@
 import Foundation
 import UIKit
 
-let kScale          =       UIScreen.main.bounds.width / 320
-let kScaleIpad      =       UIScreen.main.bounds.width / 768
+let kScale                      =       UIScreen.main.bounds.width / 320
+let kScaleIpad                  =       UIScreen.main.bounds.width / 768
+let kStatusBar :CGFloat         =       20.0
+let kNavigationBar :CGFloat     =       44.0
+let kNavigationView :CGFloat    =       64.0
+let kTabBar :CGFloat            =       49.0
+		
