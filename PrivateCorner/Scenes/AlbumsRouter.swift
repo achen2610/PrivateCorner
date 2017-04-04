@@ -30,6 +30,8 @@ class AlbumsRouter: AlbumsRouterInput {
     
     struct SegueIdentifiers {
         static let galleryScreen = "ShowGallery"
+        static let addAlbumScreen = "AddAlbum"
+        static let editAlbumScreen = "EditAlbum"
     }
     
     init(viewController:AlbumsViewController, dataSource:AlbumsRouterDataSource, dataDestination:AlbumsRouterDataDestination) {
@@ -43,10 +45,36 @@ class AlbumsRouter: AlbumsRouterInput {
         viewController.performSegue(withIdentifier: SegueIdentifiers.galleryScreen, sender: viewController)
     }
     
+    func navigateToAddEditAlbumScreen(edit: Bool) {
+        
+        if edit {
+            viewController.performSegue(withIdentifier: SegueIdentifiers.editAlbumScreen, sender: viewController)
+        } else {
+            viewController.performSegue(withIdentifier: SegueIdentifiers.addAlbumScreen, sender: viewController)
+        }
+    }
+    
     // MARK: Communication
     
     func passDataToNextScene(for segue: UIStoryboardSegue) {
         // NOTE: Teach the router which scenes it can communicate with
+
+        guard let segueIdentifier = segue.identifier else {
+            return
+        }
         
+        switch segueIdentifier {
+        case SegueIdentifiers.addAlbumScreen:
+            if let addEditAlbumViewController = segue.destination as? AddEditAlbumViewController {
+                addEditAlbumViewController.isEditAlbum = false
+            }
+        case SegueIdentifiers.editAlbumScreen:
+            if let addEditAlbumViewController = segue.destination as? AddEditAlbumViewController {
+                addEditAlbumViewController.isEditAlbum = true
+            }
+        default:
+            return
+        }
     }
+
 }

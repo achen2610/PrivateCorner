@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class AlbumManager {
     
@@ -14,7 +15,19 @@ class AlbumManager {
     static let sharedInstance = AlbumManager()
     
     func getAlbums() -> [Album] {
-        let array = [Album]()
+        var array = [Album]()
+        
+        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        
+        //2
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Album")
+        
+        //3
+        do {
+            array = try managedContext.fetch(fetchRequest) as! [Album]
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
         
         
         return array

@@ -50,6 +50,14 @@
 		0075F1A91E7A781A001DA471 /* PhotoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1A31E7A781A001DA471 /* PhotoPresenter.swift */; };
 		0075F1AA1E7A781A001DA471 /* PhotoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1A41E7A781A001DA471 /* PhotoRouter.swift */; };
 		0075F1AB1E7A781A001DA471 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1A51E7A781A001DA471 /* PhotoViewController.swift */; };
+		007B75491E91E01400483293 /* ConstantsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B75481E91E01400483293 /* ConstantsSize.swift */; };
+		007B754B1E91E08D00483293 /* ConstantsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B754A1E91E08D00483293 /* ConstantsKey.swift */; };
+		007B75521E92052100483293 /* AddEditAlbumConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B754C1E92052100483293 /* AddEditAlbumConfigurator.swift */; };
+		007B75531E92052100483293 /* AddEditAlbumInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B754D1E92052100483293 /* AddEditAlbumInteractor.swift */; };
+		007B75541E92052100483293 /* AddEditAlbumModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B754E1E92052100483293 /* AddEditAlbumModels.swift */; };
+		007B75551E92052100483293 /* AddEditAlbumPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B754F1E92052100483293 /* AddEditAlbumPresenter.swift */; };
+		007B75561E92052100483293 /* AddEditAlbumRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B75501E92052100483293 /* AddEditAlbumRouter.swift */; };
+		007B75571E92052100483293 /* AddEditAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B75511E92052100483293 /* AddEditAlbumViewController.swift */; };
 		007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */; };
 		007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */; };
 		007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007D82D11E8B76B0005CBBC2 /* SettingCell.xib */; };
@@ -142,6 +150,14 @@
 		0075F1A31E7A781A001DA471 /* PhotoPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPresenter.swift; sourceTree = "<group>"; };
 		0075F1A41E7A781A001DA471 /* PhotoRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoRouter.swift; sourceTree = "<group>"; };
 		0075F1A51E7A781A001DA471 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		007B75481E91E01400483293 /* ConstantsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsSize.swift; sourceTree = "<group>"; };
+		007B754A1E91E08D00483293 /* ConstantsKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsKey.swift; sourceTree = "<group>"; };
+		007B754C1E92052100483293 /* AddEditAlbumConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAlbumConfigurator.swift; sourceTree = "<group>"; };
+		007B754D1E92052100483293 /* AddEditAlbumInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAlbumInteractor.swift; sourceTree = "<group>"; };
+		007B754E1E92052100483293 /* AddEditAlbumModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAlbumModels.swift; sourceTree = "<group>"; };
+		007B754F1E92052100483293 /* AddEditAlbumPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAlbumPresenter.swift; sourceTree = "<group>"; };
+		007B75501E92052100483293 /* AddEditAlbumRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAlbumRouter.swift; sourceTree = "<group>"; };
+		007B75511E92052100483293 /* AddEditAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEditAlbumViewController.swift; sourceTree = "<group>"; };
 		007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		007D82D11E8B76B0005CBBC2 /* SettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
@@ -302,6 +318,8 @@
 			isa = PBXGroup;
 			children = (
 				006486E31E70EFD500419C27 /* ConstantsAPI.swift */,
+				007B75481E91E01400483293 /* ConstantsSize.swift */,
+				007B754A1E91E08D00483293 /* ConstantsKey.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -347,6 +365,7 @@
 		006486E81E70EFD500419C27 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				0094F6DA1E8E66DC007BEFAE /* Add/Edit Album */,
 				004B28F91E8CE55C007C910A /* Import */,
 				004B28E51E8C9EA6007C910A /* GalleryPhoto */,
 				0075F19F1E7A7807001DA471 /* Photo */,
@@ -407,6 +426,19 @@
 				007D82D11E8B76B0005CBBC2 /* SettingCell.xib */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		0094F6DA1E8E66DC007BEFAE /* Add/Edit Album */ = {
+			isa = PBXGroup;
+			children = (
+				007B754C1E92052100483293 /* AddEditAlbumConfigurator.swift */,
+				007B754D1E92052100483293 /* AddEditAlbumInteractor.swift */,
+				007B754E1E92052100483293 /* AddEditAlbumModels.swift */,
+				007B754F1E92052100483293 /* AddEditAlbumPresenter.swift */,
+				007B75501E92052100483293 /* AddEditAlbumRouter.swift */,
+				007B75511E92052100483293 /* AddEditAlbumViewController.swift */,
+			);
+			name = "Add/Edit Album";
 			sourceTree = "<group>";
 		};
 		00E0B1A41E7942350001DF8F /* Albums */ = {
@@ -597,6 +629,7 @@
 				004B28F01E8CA050007C910A /* GalleryPhotoRouter.swift in Sources */,
 				0075F19E1E7A36B7001DA471 /* AlbumsCell.swift in Sources */,
 				007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */,
+				007B75541E92052100483293 /* AddEditAlbumModels.swift in Sources */,
 				005330EE1E70F572002890A8 /* LockScreenModels.swift in Sources */,
 				0094F6D01E8DF1E6007BEFAE /* ImportCollectionViewController.swift in Sources */,
 				004B29021E8CE57F007C910A /* ImportModels.swift in Sources */,
@@ -604,9 +637,12 @@
 				0094F6D91E8E6331007BEFAE /* ItemManager.swift in Sources */,
 				00E0B1D01E7946AB0001DF8F /* SettingConfigurator.swift in Sources */,
 				004B28ED1E8CA050007C910A /* GalleryPhotoInteractor.swift in Sources */,
+				007B75521E92052100483293 /* AddEditAlbumConfigurator.swift in Sources */,
+				007B754B1E91E08D00483293 /* ConstantsKey.swift in Sources */,
 				00E0B1D31E7946AB0001DF8F /* SettingPresenter.swift in Sources */,
 				00E0B1C51E7946590001DF8F /* AlbumsInteractor.swift in Sources */,
 				004B29051E8CE57F007C910A /* ImportViewController.swift in Sources */,
+				007B75531E92052100483293 /* AddEditAlbumInteractor.swift in Sources */,
 				005330ED1E70F572002890A8 /* LockScreenInteractor.swift in Sources */,
 				004B28EF1E8CA050007C910A /* GalleryPhotoPresenter.swift in Sources */,
 				0075F1A71E7A781A001DA471 /* PhotoInteractor.swift in Sources */,
@@ -615,11 +651,14 @@
 				005330EF1E70F572002890A8 /* LockScreenPresenter.swift in Sources */,
 				004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */,
 				0075F1A81E7A781A001DA471 /* PhotoModels.swift in Sources */,
+				007B75561E92052100483293 /* AddEditAlbumRouter.swift in Sources */,
 				006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */,
+				007B75491E91E01400483293 /* ConstantsSize.swift in Sources */,
 				0094F6D51E8E46F8007BEFAE /* CoreDataManager.swift in Sources */,
 				004B28EE1E8CA050007C910A /* GalleryPhotoModels.swift in Sources */,
 				0094F6D71E8E5AF3007BEFAE /* AlbumManager.swift in Sources */,
 				004B28F11E8CA050007C910A /* GalleryPhotoViewController.swift in Sources */,
+				007B75551E92052100483293 /* AddEditAlbumPresenter.swift in Sources */,
 				00E0B1C81E7946590001DF8F /* AlbumsRouter.swift in Sources */,
 				00E0B1D11E7946AB0001DF8F /* SettingInteractor.swift in Sources */,
 				00E0B1D51E7946AB0001DF8F /* SettingViewController.swift in Sources */,
@@ -632,6 +671,7 @@
 				004B28F31E8CA555007C910A /* GalleryPhotoCollectionViewController.swift in Sources */,
 				0075F1A91E7A781A001DA471 /* PhotoPresenter.swift in Sources */,
 				004B28F61E8CA624007C910A /* GalleryCell.swift in Sources */,
+				007B75571E92052100483293 /* AddEditAlbumViewController.swift in Sources */,
 				0075F1AB1E7A781A001DA471 /* PhotoViewController.swift in Sources */,
 				00E0B1C71E7946590001DF8F /* AlbumsPresenter.swift in Sources */,
 				0075F1991E7A3169001DA471 /* AlbumsCollectionViewController.swift in Sources */,

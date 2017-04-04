@@ -21,9 +21,9 @@ class ItemManager {
     }
     
     func getItem(id: NSInteger) -> Item {
-        let album = Item()
+        let item = Item()
         
-        return album
+        return item
     }
     
     func add(item: Item) {

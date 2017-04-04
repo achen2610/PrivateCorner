@@ -29,8 +29,29 @@ protocol AlbumsDataDestination {
 class AlbumsInteractor: AlbumsInteractorInput, AlbumsDataSource, AlbumsDataDestination {
     
     var output: AlbumsInteractorOutput!
+    var selectedAlbum:Album!
+    private var albums:[Album] = []
     
     // MARK: Business logic
+    func getAlbum(request: AlbumsScene.GetAlbum.Request) {
+        let result = AlbumManager.sharedInstance.getAlbums()
+        handleGetAlbumResult(result: result)
+    }
     
+    private func handleGetAlbumResult(result: [Album]) {
+//        switch result {
+//        case .Success(let user):
+//            users.insert(user, atIndex: 0)
+//            let response = UserList.GetUser.Response(user: user)
+//            output.presentUser(response)
+//        case .Failure(let error):
+//            print(error)
+//        }
+        
+    }
+    
+    func selectAlbum(request:AlbumsScene.SelectAlbum.Request) {
+        selectedAlbum = albums[request.index]
+    }
 
 }

@@ -62,6 +62,28 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
         router.navigateToGalleryScreen()
     }
     
+    @IBAction func addAlbumButtonItemTapped(_ sender: Any) {
+        let alert = UIAlertController.init(title: "New Album", message: "Enter a name for this album", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.keyboardType = .alphabet
+            textField.placeholder = "Title"
+        }
+        
+        let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        let saveAction = UIAlertAction.init(title: "Save", style: .default) { (action) in
+            let textField = alert.textFields?.first
+        }
+        alert.addAction(saveAction)
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    @IBAction func editAlbumButtonItemTapped(_ sender: Any) {
+        
+    }
+    
     // MARK: Display logic
     
 }
