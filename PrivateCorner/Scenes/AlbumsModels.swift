@@ -22,11 +22,11 @@ struct AlbumsScene {
         }
         
         struct Response {
-            let album:Album
+            let albums:[Album]
         }
         
         struct ViewModel {
-            let album:AlbumsScene.ViewModel.Album
+            let albums:[Album]
         }
     }
     
@@ -38,11 +38,7 @@ struct AlbumsScene {
     }
     
     struct ViewModel {
-        
-        struct Album {
-            let name:String
-            let totalItem:Int
-        }
+
         
     }
 }

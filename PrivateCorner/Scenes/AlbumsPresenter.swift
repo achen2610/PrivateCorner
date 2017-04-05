@@ -11,11 +11,11 @@
 import UIKit
 
 protocol AlbumsPresenterInput {
-    
+    func presentAlbum(response:AlbumsScene.GetAlbum.Response)
 }
 
 protocol AlbumsPresenterOutput: class {
-    
+    func displayAlbums(viewModel: AlbumsScene.GetAlbum.ViewModel)
 }
 
 class AlbumsPresenter: AlbumsPresenterInput {
@@ -23,5 +23,13 @@ class AlbumsPresenter: AlbumsPresenterInput {
     weak var output: AlbumsPresenterOutput!
     
     // MARK: Presentation logic
+    func presentAlbum(response:AlbumsScene.GetAlbum.Response) {
+        let viewModel = mapGetAlbumResponseToViewModel(response: response)
+        output.displayAlbums(viewModel: viewModel)
+    }
     
+    private func mapGetAlbumResponseToViewModel(response:AlbumsScene.GetAlbum.Response) -> AlbumsScene.GetAlbum.ViewModel {
+        let albums = response.albums
+        return AlbumsScene.GetAlbum.ViewModel(albums: albums)
+    }
 }

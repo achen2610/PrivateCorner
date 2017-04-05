@@ -11,11 +11,11 @@
 import UIKit
 
 protocol AlbumsInteractorInput {
-    
+    func getAlbum(request: AlbumsScene.GetAlbum.Request)
 }
 
 protocol AlbumsInteractorOutput {
-    
+    func presentAlbum(response:AlbumsScene.GetAlbum.Response)
 }
 
 protocol AlbumsDataSource {
@@ -39,15 +39,8 @@ class AlbumsInteractor: AlbumsInteractorInput, AlbumsDataSource, AlbumsDataDesti
     }
     
     private func handleGetAlbumResult(result: [Album]) {
-//        switch result {
-//        case .Success(let user):
-//            users.insert(user, atIndex: 0)
-//            let response = UserList.GetUser.Response(user: user)
-//            output.presentUser(response)
-//        case .Failure(let error):
-//            print(error)
-//        }
-        
+        let response = AlbumsScene.GetAlbum.Response(albums: result)
+        output.presentAlbum(response: response)
     }
     
     func selectAlbum(request:AlbumsScene.SelectAlbum.Request) {

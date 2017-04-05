@@ -10,6 +10,8 @@ import UIKit
 
 extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    
+    
     // MARK: UICollectionView DataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -17,11 +19,17 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
+//        return albums.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.albumsCell, for: indexPath) as? AlbumsCell {
-            cell.photoImageView.layer.cornerRadius = 5.0
+            
+            cell.configureLayout()
+            
+//            let album = albums[indexPath.row]
+//            cell.configure(forAlbum: album)
+            
             return cell
         }
         
@@ -34,7 +42,7 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
         let availableWidth = view.frame.width - paddingSpace
         let widthPerItem = availableWidth / cellLayout.itemsPerRow
         
-        return CGSize(width: widthPerItem, height: widthPerItem)
+        return CGSize(width: widthPerItem, height: widthPerItem + 63)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

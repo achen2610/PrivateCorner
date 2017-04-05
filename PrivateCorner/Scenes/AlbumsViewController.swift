@@ -11,18 +11,19 @@
 import UIKit
 
 protocol AlbumsViewControllerInput {
-    
+    func displayAlbums(viewModel: AlbumsScene.GetAlbum.ViewModel)
 }
 
 protocol AlbumsViewControllerOutput {
-    
+    func getAlbum(request:AlbumsScene.GetAlbum.Request)
 }
 
 class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     
     var output: AlbumsViewControllerOutput!
     var router: AlbumsRouter!
-
+    var albums:[Album] = []
+    
     @IBOutlet weak var albumsCollectionView: UICollectionView!
     
     // MARK: Object lifecycle
@@ -46,7 +47,9 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Album"
         configureCollectionViewOnLoad()
+        getAlbumFromCoreData()
     }
     
     // MARK: Event handling
@@ -54,6 +57,11 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     func configureCollectionViewOnLoad() {
         let nibName = UINib(nibName: "AlbumsCell", bundle:Bundle.main)
         albumsCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.albumsCell)
+    }
+    
+    func getAlbumFromCoreData() {
+        let request = AlbumsScene.GetAlbum.Request()
+        output.getAlbum(request: request)
     }
     
     func selectedGalleryAtIndex(index: Int) {
@@ -85,7 +93,10 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     }
     
     // MARK: Display logic
-    
+    func displayAlbums(viewModel: AlbumsScene.GetAlbum.ViewModel) {
+        albums = viewModel.albums
+        albumsCollectionView.reloadData()
+    }
 }
 
 //This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there
