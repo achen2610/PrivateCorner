@@ -37,6 +37,31 @@ struct AlbumsScene {
         }
     }
     
+    struct AddAlbum  {
+        struct Request {
+            let title:String
+        }
+        
+        struct Response {
+            let album:Album
+        }
+        
+        struct ViewModel {
+            let album:Album
+        }
+    }
+    
+    struct DeleteAlbum  {
+        struct Request {
+            let album:Album
+            let index:Int
+        }
+        
+        struct Response {
+            let index:Int
+        }
+    }
+    
     struct ViewModel {
 
         

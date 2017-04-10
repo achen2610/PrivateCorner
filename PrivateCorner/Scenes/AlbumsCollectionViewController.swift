@@ -18,17 +18,20 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-//        return albums.count
+//        return 10
+        return albums.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.albumsCell, for: indexPath) as? AlbumsCell {
             
             cell.configureLayout()
+            cell.deleteButton.tag = indexPath.row
+            cell.deleteButton.addTarget(self, action: #selector(clickDeleteAlbum), for: .touchUpInside)
+            cell.setEditMode(isEdit: isEditMode)
             
-//            let album = albums[indexPath.row]
-//            cell.configure(forAlbum: album)
+            let album = albums[indexPath.row]
+            cell.configure(forAlbum: album)
             
             return cell
         }

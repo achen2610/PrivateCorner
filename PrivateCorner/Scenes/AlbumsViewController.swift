@@ -12,17 +12,22 @@ import UIKit
 
 protocol AlbumsViewControllerInput {
     func displayAlbums(viewModel: AlbumsScene.GetAlbum.ViewModel)
+    func addAlbumToList(viewModel: AlbumsScene.AddAlbum.ViewModel)
+    func deleteAlbumFromList(index: Int)
 }
 
 protocol AlbumsViewControllerOutput {
-    func getAlbum(request:AlbumsScene.GetAlbum.Request)
+    func getAlbum(request: AlbumsScene.GetAlbum.Request)
+    func addAlbum(request: AlbumsScene.AddAlbum.Request)
+    func deleteAlbum(request: AlbumsScene.DeleteAlbum.Request)
 }
 
 class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     
     var output: AlbumsViewControllerOutput!
     var router: AlbumsRouter!
-    var albums:[Album] = []
+    var albums: [Album] = []
+    var isEditMode: Bool = false
     
     @IBOutlet weak var albumsCollectionView: UICollectionView!
     
@@ -34,7 +39,7 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     
     struct cellLayout {
         static let itemsPerRow: CGFloat = 2
-        static let sectionInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        static let sectionInsets: UIEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
     }
     
     override func awakeFromNib() {
@@ -64,6 +69,11 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
         output.getAlbum(request: request)
     }
     
+    func saveAlbumToCoreData(title: String) {
+        let request = AlbumsScene.AddAlbum.Request(title: title)
+        output.addAlbum(request: request)
+    }
+    
     func selectedGalleryAtIndex(index: Int) {
         
         
@@ -82,6 +92,7 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
         
         let saveAction = UIAlertAction.init(title: "Save", style: .default) { (action) in
             let textField = alert.textFields?.first
+            self.saveAlbumToCoreData(title: (textField?.text)!)
         }
         alert.addAction(saveAction)
 
@@ -89,13 +100,48 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     }
 
     @IBAction func editAlbumButtonItemTapped(_ sender: Any) {
-        
+        if !isEditMode {
+            isEditMode = true
+            albumsCollectionView.reloadData()
+            
+            let barButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editAlbumButtonItemTapped(_:)))
+            self.navigationItem.rightBarButtonItem = barButton
+        } else {
+            isEditMode = false
+            albumsCollectionView.reloadData()
+            
+            let barButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editAlbumButtonItemTapped(_:)))
+            self.navigationItem.rightBarButtonItem = barButton
+        }
+    }
+    
+    func clickDeleteAlbum(button: UIButton) {
+        let index = button.tag
+        let album = albums[index]
+        let request = AlbumsScene.DeleteAlbum.Request(album: album, index: index)
+        output.deleteAlbum(request: request)
     }
     
     // MARK: Display logic
     func displayAlbums(viewModel: AlbumsScene.GetAlbum.ViewModel) {
         albums = viewModel.albums
         albumsCollectionView.reloadData()
+    }
+    
+    func addAlbumToList(viewModel: AlbumsScene.AddAlbum.ViewModel) {
+        let album = viewModel.album
+        albumsCollectionView.performBatchUpdates({ 
+            self.albums.insert(album, at: 0)
+            self.albumsCollectionView.insertItems(at: [IndexPath.init(row: 0, section: 0)])
+        }, completion: nil)
+        
+    }
+    
+    func deleteAlbumFromList(index: Int) {
+        albumsCollectionView.performBatchUpdates({
+            self.albums.remove(at: index)
+            self.albumsCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+        }, completion: nil)
     }
 }
 

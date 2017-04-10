@@ -16,12 +16,12 @@ class AlbumManager {
     
     func getAlbums() -> [Album] {
         var array = [Album]()
-        
+        //1
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         
         //2
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Album")
-        
+
         //3
         do {
             array = try managedContext.fetch(fetchRequest) as! [Album]
@@ -29,6 +29,7 @@ class AlbumManager {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
         
+        array = array.reversed()
         
         return array
     }
@@ -39,15 +40,45 @@ class AlbumManager {
         return album
     }
     
-    func add(album: Album) {
+    func addAlbum(title: String) -> Album {
+        //1
+        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         
+        //2
+        let entity = NSEntityDescription.entity(forEntityName: "Album", in: managedContext)!
+        
+        //3
+        let album = Album(entity: entity, insertInto: managedContext)
+        album.name = title
+        album.createdDate = Date() as NSDate?
+        
+        // 4
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+        return album
     }
     
     func updateAlbum(id: NSInteger, album: Album) {
         
     }
     
-    func deleteAlbum(id: NSInteger) {
+    func deleteAlbum(album: Album) {
+        //1
+        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         
+        //2
+        managedContext.delete(album)
+        
+        //3
+        do {
+            try managedContext.save()
+            print("saved!")
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
     }
 }

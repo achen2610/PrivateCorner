@@ -11,11 +11,15 @@
 import UIKit
 
 protocol AlbumsPresenterInput {
-    func presentAlbum(response:AlbumsScene.GetAlbum.Response)
+    func presentAlbum(response: AlbumsScene.GetAlbum.Response)
+    func addAlbum(response: AlbumsScene.AddAlbum.Response)
+    func deleteAlbum(response: AlbumsScene.DeleteAlbum.Response)
 }
 
 protocol AlbumsPresenterOutput: class {
     func displayAlbums(viewModel: AlbumsScene.GetAlbum.ViewModel)
+    func addAlbumToList(viewModel: AlbumsScene.AddAlbum.ViewModel)
+    func deleteAlbumFromList(index: Int)
 }
 
 class AlbumsPresenter: AlbumsPresenterInput {
@@ -31,5 +35,18 @@ class AlbumsPresenter: AlbumsPresenterInput {
     private func mapGetAlbumResponseToViewModel(response:AlbumsScene.GetAlbum.Response) -> AlbumsScene.GetAlbum.ViewModel {
         let albums = response.albums
         return AlbumsScene.GetAlbum.ViewModel(albums: albums)
+    }
+    
+    // Add Album Presenter
+    func addAlbum(response: AlbumsScene.AddAlbum.Response) {
+        let album = response.album
+        let viewModel = AlbumsScene.AddAlbum.ViewModel(album: album)
+        output.addAlbumToList(viewModel: viewModel)
+    }
+    
+    // Delete Album Presenter
+    func deleteAlbum(response: AlbumsScene.DeleteAlbum.Response) {
+        let index = response.index
+        output.deleteAlbumFromList(index: index)
     }
 }

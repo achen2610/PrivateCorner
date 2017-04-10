@@ -12,10 +12,14 @@ import UIKit
 
 protocol AlbumsInteractorInput {
     func getAlbum(request: AlbumsScene.GetAlbum.Request)
+    func addAlbum(request: AlbumsScene.AddAlbum.Request)
+    func deleteAlbum(request: AlbumsScene.DeleteAlbum.Request)
 }
 
 protocol AlbumsInteractorOutput {
-    func presentAlbum(response:AlbumsScene.GetAlbum.Response)
+    func presentAlbum(response: AlbumsScene.GetAlbum.Response)
+    func addAlbum(response: AlbumsScene.AddAlbum.Response)
+    func deleteAlbum(response: AlbumsScene.DeleteAlbum.Response)
 }
 
 protocol AlbumsDataSource {
@@ -33,6 +37,8 @@ class AlbumsInteractor: AlbumsInteractorInput, AlbumsDataSource, AlbumsDataDesti
     private var albums:[Album] = []
     
     // MARK: Business logic
+    
+    // Get Album
     func getAlbum(request: AlbumsScene.GetAlbum.Request) {
         let result = AlbumManager.sharedInstance.getAlbums()
         handleGetAlbumResult(result: result)
@@ -43,8 +49,25 @@ class AlbumsInteractor: AlbumsInteractorInput, AlbumsDataSource, AlbumsDataDesti
         output.presentAlbum(response: response)
     }
     
-    func selectAlbum(request:AlbumsScene.SelectAlbum.Request) {
+    // Select Album
+    func selectAlbum(request: AlbumsScene.SelectAlbum.Request) {
         selectedAlbum = albums[request.index]
     }
 
+    // Add Album
+    func addAlbum(request: AlbumsScene.AddAlbum.Request) {
+        let album = AlbumManager.sharedInstance.addAlbum(title: request.title)
+        let response = AlbumsScene.AddAlbum.Response(album: album)
+        output.addAlbum(response: response)
+    }
+    
+    // Delete Album
+    func deleteAlbum(request: AlbumsScene.DeleteAlbum.Request) {
+        let album = request.album
+        AlbumManager.sharedInstance.deleteAlbum(album: album)
+        
+        let index = request.index
+        let response = AlbumsScene.DeleteAlbum.Response(index: index)
+        output.deleteAlbum(response: response)
+    }
 }

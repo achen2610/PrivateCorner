@@ -13,7 +13,7 @@ class AlbumsCell: UICollectionViewCell {
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var albumName: UILabel!
     @IBOutlet weak var totalItem: UILabel!
-    
+    @IBOutlet weak var deleteButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,8 +21,6 @@ class AlbumsCell: UICollectionViewCell {
     }
     
     func configureLayout() {
-//        contentView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-//        albumName.preferredMaxLayoutWidth = 50
         photoImageView.layer.cornerRadius = 5.0
     }
     
@@ -33,5 +31,11 @@ class AlbumsCell: UICollectionViewCell {
 //        if let URL = NSURL(string: album.imageURLString) {
 //            photoImageView.kf_setImageWithURL(URL)
 //        }
+    }
+    
+    func setEditMode(isEdit: Bool) {
+        UIView.transition(with: deleteButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
+            self.deleteButton.isHidden = !isEdit
+        }, completion: nil)
     }
 }

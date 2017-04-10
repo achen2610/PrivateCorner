@@ -13,52 +13,66 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="albumsCell" id="bSG-Db-IR2" customClass="AlbumsCell" customModule="PrivateCorner" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="250" height="313"/>
+            <rect key="frame" x="0.0" y="0.0" width="250" height="305"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="250" height="313"/>
+                <rect key="frame" x="0.0" y="0.0" width="250" height="305"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6dJ-DH-boB">
-                        <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
+                        <rect key="frame" x="8" y="8" width="234" height="234"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="6dJ-DH-boB" secondAttribute="height" multiplier="1:1" id="sAB-PZ-YJ2"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSG-ei-qJ4">
-                        <rect key="frame" x="8" y="258" width="234" height="21"/>
+                        <rect key="frame" x="8" y="250" width="234" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQL-Vb-qEZ">
-                        <rect key="frame" x="8" y="287" width="234" height="18"/>
+                        <rect key="frame" x="8" y="279" width="234" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.56675200666170666" green="0.56675200666170666" blue="0.56675200666170666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFH-Ee-vXJ">
+                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="RFw-Ix-B50"/>
+                            <constraint firstAttribute="height" constant="20" id="bn7-Cc-8oF"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="remove.png"/>
+                    </button>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="LQL-Vb-qEZ" secondAttribute="bottom" constant="8" id="1HQ-HU-2K9"/>
                 <constraint firstItem="LQL-Vb-qEZ" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" constant="8" id="Cd7-gy-X4z"/>
-                <constraint firstAttribute="bottom" secondItem="LQL-Vb-qEZ" secondAttribute="bottom" constant="8" id="Hf1-Te-J9J"/>
                 <constraint firstItem="LQL-Vb-qEZ" firstAttribute="top" secondItem="vSG-ei-qJ4" secondAttribute="bottom" constant="8" id="LfA-bM-FGb"/>
+                <constraint firstItem="HFH-Ee-vXJ" firstAttribute="top" secondItem="bSG-Db-IR2" secondAttribute="top" id="OFq-8n-c7O"/>
+                <constraint firstItem="HFH-Ee-vXJ" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" id="S85-rU-ANe"/>
                 <constraint firstItem="vSG-ei-qJ4" firstAttribute="top" secondItem="6dJ-DH-boB" secondAttribute="bottom" constant="8" id="Sfl-7V-m2n"/>
                 <constraint firstAttribute="trailing" secondItem="LQL-Vb-qEZ" secondAttribute="trailing" constant="8" id="TGA-IT-auA"/>
-                <constraint firstAttribute="trailing" secondItem="6dJ-DH-boB" secondAttribute="trailing" id="acm-6t-T9x"/>
+                <constraint firstAttribute="trailing" secondItem="6dJ-DH-boB" secondAttribute="trailing" constant="8" id="acm-6t-T9x"/>
                 <constraint firstItem="vSG-ei-qJ4" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" constant="8" id="bQO-NU-hFn"/>
                 <constraint firstAttribute="trailing" secondItem="vSG-ei-qJ4" secondAttribute="trailing" constant="8" id="h4O-FE-NcS"/>
-                <constraint firstItem="6dJ-DH-boB" firstAttribute="top" secondItem="bSG-Db-IR2" secondAttribute="top" id="jme-Cg-EE6"/>
-                <constraint firstItem="6dJ-DH-boB" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" id="rUE-PW-Gfs"/>
+                <constraint firstItem="6dJ-DH-boB" firstAttribute="top" secondItem="bSG-Db-IR2" secondAttribute="top" constant="8" id="jme-Cg-EE6"/>
+                <constraint firstItem="6dJ-DH-boB" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" constant="8" id="rUE-PW-Gfs"/>
             </constraints>
             <size key="customSize" width="268" height="272"/>
             <connections>
                 <outlet property="albumName" destination="vSG-ei-qJ4" id="Xnl-Lg-rLu"/>
+                <outlet property="deleteButton" destination="HFH-Ee-vXJ" id="pn6-hW-jY9"/>
                 <outlet property="photoImageView" destination="6dJ-DH-boB" id="00L-V3-WBL"/>
                 <outlet property="totalItem" destination="LQL-Vb-qEZ" id="JsZ-X7-Ban"/>
             </connections>
-            <point key="canvasLocation" x="-19" y="26"/>
+            <point key="canvasLocation" x="-19" y="25.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="remove.png" width="16" height="16"/>
+    </resources>
 </document>

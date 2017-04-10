@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0047FB611E9B749300BDF919 /* remove@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0047FB601E9B749300BDF919 /* remove@3x.png */; };
 		004B28EC1E8CA050007C910A /* GalleryPhotoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28E61E8CA050007C910A /* GalleryPhotoConfigurator.swift */; };
 		004B28ED1E8CA050007C910A /* GalleryPhotoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28E71E8CA050007C910A /* GalleryPhotoInteractor.swift */; };
 		004B28EE1E8CA050007C910A /* GalleryPhotoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28E81E8CA050007C910A /* GalleryPhotoModels.swift */; };
@@ -102,6 +103,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0047FB601E9B749300BDF919 /* remove@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remove@3x.png"; sourceTree = "<group>"; };
 		004B28E61E8CA050007C910A /* GalleryPhotoConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoConfigurator.swift; sourceTree = "<group>"; };
 		004B28E71E8CA050007C910A /* GalleryPhotoInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoInteractor.swift; sourceTree = "<group>"; };
 		004B28E81E8CA050007C910A /* GalleryPhotoModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoModels.swift; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 		006486E51E70EFD500419C27 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0047FB601E9B749300BDF919 /* remove@3x.png */,
 				004B29081E8CE96A007C910A /* import-on@3x.png */,
 				004B29091E8CE96A007C910A /* import@3x.png */,
 				00E0B19C1E79411E0001DF8F /* folder-on@3x.png */,
@@ -587,6 +590,7 @@
 				004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */,
 				006486EE1E70EFE400419C27 /* Info.plist in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
+				0047FB611E9B749300BDF919 /* remove@3x.png in Resources */,
 				0075F19C1E7A3698001DA471 /* AlbumsCell.xib in Resources */,
 				006486F41E70EFEB00419C27 /* Main.storyboard in Resources */,
 				00E0B1A01E79411E0001DF8F /* folder-on@3x.png in Resources */,
