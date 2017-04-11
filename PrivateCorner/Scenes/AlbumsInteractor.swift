@@ -12,6 +12,7 @@ import UIKit
 
 protocol AlbumsInteractorInput {
     func getAlbum(request: AlbumsScene.GetAlbum.Request)
+    func selectAlbum(request: AlbumsScene.SelectAlbum.Request)
     func addAlbum(request: AlbumsScene.AddAlbum.Request)
     func deleteAlbum(request: AlbumsScene.DeleteAlbum.Request)
 }
@@ -23,7 +24,7 @@ protocol AlbumsInteractorOutput {
 }
 
 protocol AlbumsDataSource {
-    
+    var selectedAlbum:Album! { get }
 }
 
 protocol AlbumsDataDestination {
@@ -34,7 +35,6 @@ class AlbumsInteractor: AlbumsInteractorInput, AlbumsDataSource, AlbumsDataDesti
     
     var output: AlbumsInteractorOutput!
     var selectedAlbum:Album!
-    private var albums:[Album] = []
     
     // MARK: Business logic
     
@@ -51,7 +51,7 @@ class AlbumsInteractor: AlbumsInteractorInput, AlbumsDataSource, AlbumsDataDesti
     
     // Select Album
     func selectAlbum(request: AlbumsScene.SelectAlbum.Request) {
-        selectedAlbum = albums[request.index]
+        selectedAlbum = request.album
     }
 
     // Add Album

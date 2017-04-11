@@ -19,7 +19,7 @@ protocol GalleryPhotoRouterDataSource:class {
 }
 
 protocol GalleryPhotoRouterDataDestination:class {
-    
+    var album:Album! {get set}
 }
 
 class GalleryPhotoRouter: GalleryPhotoRouterInput {

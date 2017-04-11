@@ -287,45 +287,6 @@
             </objects>
             <point key="canvasLocation" x="2813" y="1178"/>
         </scene>
-        <!--Add Edit Album View Controller-->
-        <scene sceneID="aEn-ft-cj7">
-            <objects>
-                <viewController id="mIi-fB-rw0" customClass="AddEditAlbumViewController" customModule="PrivateCorner" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="AUe-rZ-HOJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="4ad-Q6-nwR"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PfK-E3-squ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfK-x0-ftT">
-                                <rect key="frame" x="29" y="82" width="45" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BuM-xQ-c4M">
-                                <rect key="frame" x="29" y="111" width="263" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="Dx5-DU-XT9">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="gew-eG-59X"/>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ry4-lA-pfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3721.875" y="-929.57746478873241"/>
-        </scene>
         <!--Albums View Controller-->
         <scene sceneID="8eu-zg-09A">
             <objects>
@@ -404,7 +365,7 @@
         <!--Gallery Photo View Controller-->
         <scene sceneID="eLZ-V9-PxS">
             <objects>
-                <viewController id="jKx-Pq-flA" customClass="GalleryPhotoViewController" customModule="PrivateCorner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="jKx-Pq-flA" customClass="GalleryPhotoViewController" customModule="PrivateCorner" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jpi-6U-iNw"/>
                         <viewControllerLayoutGuide type="bottom" id="f6h-5Y-kTF"/>
@@ -428,12 +389,25 @@
                                     <outlet property="delegate" destination="jKx-Pq-flA" id="Ygw-ae-aYM"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AdB-HJ-S3A">
+                                <rect key="frame" x="256" y="455" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="6ek-eg-Oc5"/>
+                                    <constraint firstAttribute="height" constant="48" id="TKl-8W-RgP"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="upload.png"/>
+                                <connections>
+                                    <action selector="clickUploadButton:" destination="jKx-Pq-flA" eventType="touchUpInside" id="oxt-oo-zu5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="AdB-HJ-S3A" secondAttribute="trailing" constant="16" id="5Aa-ch-Xyi"/>
                             <constraint firstAttribute="bottom" secondItem="KEl-jg-kcF" secondAttribute="bottom" id="T81-mp-uby"/>
                             <constraint firstItem="KEl-jg-kcF" firstAttribute="leading" secondItem="vJq-Fr-7bv" secondAttribute="leading" id="TFK-Zd-pqw"/>
                             <constraint firstAttribute="trailing" secondItem="KEl-jg-kcF" secondAttribute="trailing" id="kxg-pr-7wD"/>
+                            <constraint firstAttribute="bottom" secondItem="AdB-HJ-S3A" secondAttribute="bottom" constant="65" id="su1-8e-miD"/>
                             <constraint firstItem="KEl-jg-kcF" firstAttribute="top" secondItem="vJq-Fr-7bv" secondAttribute="top" id="uGr-hn-6Qb"/>
                         </constraints>
                     </view>
@@ -568,4 +542,7 @@
             <point key="canvasLocation" x="1958" y="453"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="upload.png" width="16" height="16"/>
+    </resources>
 </document>

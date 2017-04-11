@@ -16,4 +16,11 @@ class GalleryCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    func configure(item: Item) {
+        if let filename = item.filename {
+            photoImageView.image = UIImage(contentsOfFile: filename)
+        }
+        
+    }
 }

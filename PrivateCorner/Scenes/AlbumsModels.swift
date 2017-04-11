@@ -33,7 +33,7 @@ struct AlbumsScene {
     struct SelectAlbum {
         
         struct Request {
-            let index:Int
+            let album:Album
         }
     }
     

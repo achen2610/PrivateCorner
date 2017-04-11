@@ -11,17 +11,18 @@
 import UIKit
 
 protocol GalleryPhotoViewControllerInput {
-    
+    func displayGallery(viewModel: GalleryPhotoScene.GetGalleryPhoto.ViewModel)
 }
 
 protocol GalleryPhotoViewControllerOutput {
-    
+    func getGallery()
 }
 
 class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerInput {
     
     var output: GalleryPhotoViewControllerOutput!
     var router: GalleryPhotoRouter!
+    var items: [Item] = []
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     
@@ -48,6 +49,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
         
         configureSubviews()
         configureCollectionViewOnLoad()
+        getGalleryPhotoOnLoad()
     }
     
     // MARK: Event handling
@@ -60,12 +62,51 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
         galleryCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.galleryCell)
     }
     
+    func getGalleryPhotoOnLoad() {
+        output.getGallery()
+    }
+    
+    @IBAction func clickUploadButton(_ sender: Any) {
+        let alertController = UIAlertController(title: "", message: "Import From", preferredStyle: .actionSheet)
+        
+        let libraryAction = UIAlertAction(title: "Photo Library", style: .default) { (alert) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
+                imagePicker.allowsEditing = true
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (alert) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+                imagePicker.allowsEditing = false
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(libraryAction)
+        alertController.addAction(cameraAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func selectedPhotoAtIndex(index: Int) {
         router.navigateToPhotoScreen()
     }
     
     // MARK: Display logic
-    
+    func displayGallery(viewModel: GalleryPhotoScene.GetGalleryPhoto.ViewModel) {
+        items = viewModel.gallery
+        galleryCollectionView.reloadData()
+    }
 }
 
 //This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there
@@ -73,4 +114,13 @@ extension GalleryPhotoViewController: GalleryPhotoPresenterOutput {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router.passDataToNextScene(for: segue)
     }
+}
+
+
+extension GalleryPhotoViewController: UIImagePickerControllerDelegate {
+
+}
+
+extension GalleryPhotoViewController: UINavigationControllerDelegate {
+    
 }

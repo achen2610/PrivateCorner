@@ -15,7 +15,7 @@ protocol AlbumsRouterInput {
 }
 
 protocol AlbumsRouterDataSource:class {
-    
+    var selectedAlbum:Album! { get }
 }
 
 protocol AlbumsRouterDataDestination:class {
@@ -30,8 +30,6 @@ class AlbumsRouter: AlbumsRouterInput {
     
     struct SegueIdentifiers {
         static let galleryScreen = "ShowGallery"
-        static let addAlbumScreen = "AddAlbum"
-        static let editAlbumScreen = "EditAlbum"
     }
     
     init(viewController:AlbumsViewController, dataSource:AlbumsRouterDataSource, dataDestination:AlbumsRouterDataDestination) {
@@ -45,15 +43,6 @@ class AlbumsRouter: AlbumsRouterInput {
         viewController.performSegue(withIdentifier: SegueIdentifiers.galleryScreen, sender: viewController)
     }
     
-    func navigateToAddEditAlbumScreen(edit: Bool) {
-        
-        if edit {
-            viewController.performSegue(withIdentifier: SegueIdentifiers.editAlbumScreen, sender: viewController)
-        } else {
-            viewController.performSegue(withIdentifier: SegueIdentifiers.addAlbumScreen, sender: viewController)
-        }
-    }
-    
     // MARK: Communication
     
     func passDataToNextScene(for segue: UIStoryboardSegue) {
@@ -64,17 +53,18 @@ class AlbumsRouter: AlbumsRouterInput {
         }
         
         switch segueIdentifier {
-        case SegueIdentifiers.addAlbumScreen:
-            if let addEditAlbumViewController = segue.destination as? AddEditAlbumViewController {
-                addEditAlbumViewController.isEditAlbum = false
-            }
-        case SegueIdentifiers.editAlbumScreen:
-            if let addEditAlbumViewController = segue.destination as? AddEditAlbumViewController {
-                addEditAlbumViewController.isEditAlbum = true
-            }
+        case SegueIdentifiers.galleryScreen:
+            passDataToPhotoGalleryScene(segue: segue)
+
         default:
             return
         }
     }
 
+    
+    func passDataToPhotoGalleryScene(segue:UIStoryboardSegue) {
+        if let galleryPhotoController = segue.destination as? GalleryPhotoViewController {
+            galleryPhotoController.router.dataDestination.album = dataSource.selectedAlbum
+        }
+    }
 }

@@ -26,12 +26,13 @@
                             <constraint firstAttribute="width" secondItem="6dJ-DH-boB" secondAttribute="height" multiplier="1:1" id="sAB-PZ-YJ2"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSG-ei-qJ4">
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Label" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IfY-Oj-CKB">
                         <rect key="frame" x="8" y="250" width="234" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQL-Vb-qEZ">
                         <rect key="frame" x="8" y="279" width="234" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -51,20 +52,20 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="LQL-Vb-qEZ" secondAttribute="bottom" constant="8" id="1HQ-HU-2K9"/>
                 <constraint firstItem="LQL-Vb-qEZ" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" constant="8" id="Cd7-gy-X4z"/>
-                <constraint firstItem="LQL-Vb-qEZ" firstAttribute="top" secondItem="vSG-ei-qJ4" secondAttribute="bottom" constant="8" id="LfA-bM-FGb"/>
+                <constraint firstItem="IfY-Oj-CKB" firstAttribute="top" secondItem="6dJ-DH-boB" secondAttribute="bottom" constant="8" id="L5k-nj-MgF"/>
                 <constraint firstItem="HFH-Ee-vXJ" firstAttribute="top" secondItem="bSG-Db-IR2" secondAttribute="top" id="OFq-8n-c7O"/>
                 <constraint firstItem="HFH-Ee-vXJ" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" id="S85-rU-ANe"/>
-                <constraint firstItem="vSG-ei-qJ4" firstAttribute="top" secondItem="6dJ-DH-boB" secondAttribute="bottom" constant="8" id="Sfl-7V-m2n"/>
+                <constraint firstItem="LQL-Vb-qEZ" firstAttribute="top" secondItem="IfY-Oj-CKB" secondAttribute="bottom" constant="8" id="SYe-KO-9Wz"/>
                 <constraint firstAttribute="trailing" secondItem="LQL-Vb-qEZ" secondAttribute="trailing" constant="8" id="TGA-IT-auA"/>
+                <constraint firstItem="IfY-Oj-CKB" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" constant="8" id="Yl4-c4-xmx"/>
                 <constraint firstAttribute="trailing" secondItem="6dJ-DH-boB" secondAttribute="trailing" constant="8" id="acm-6t-T9x"/>
-                <constraint firstItem="vSG-ei-qJ4" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" constant="8" id="bQO-NU-hFn"/>
-                <constraint firstAttribute="trailing" secondItem="vSG-ei-qJ4" secondAttribute="trailing" constant="8" id="h4O-FE-NcS"/>
+                <constraint firstAttribute="trailing" secondItem="IfY-Oj-CKB" secondAttribute="trailing" constant="8" id="jAB-7k-zEE"/>
                 <constraint firstItem="6dJ-DH-boB" firstAttribute="top" secondItem="bSG-Db-IR2" secondAttribute="top" constant="8" id="jme-Cg-EE6"/>
                 <constraint firstItem="6dJ-DH-boB" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" constant="8" id="rUE-PW-Gfs"/>
             </constraints>
             <size key="customSize" width="268" height="272"/>
             <connections>
-                <outlet property="albumName" destination="vSG-ei-qJ4" id="Xnl-Lg-rLu"/>
+                <outlet property="albumName" destination="IfY-Oj-CKB" id="yU6-J2-kF1"/>
                 <outlet property="deleteButton" destination="HFH-Ee-vXJ" id="pn6-hW-jY9"/>
                 <outlet property="photoImageView" destination="6dJ-DH-boB" id="00L-V3-WBL"/>
                 <outlet property="totalItem" destination="LQL-Vb-qEZ" id="JsZ-X7-Ban"/>

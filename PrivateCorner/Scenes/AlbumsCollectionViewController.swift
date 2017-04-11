@@ -26,12 +26,13 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.albumsCell, for: indexPath) as? AlbumsCell {
             
             cell.configureLayout()
+            cell.albumName.delegate = self
             cell.deleteButton.tag = indexPath.row
             cell.deleteButton.addTarget(self, action: #selector(clickDeleteAlbum), for: .touchUpInside)
             cell.setEditMode(isEdit: isEditMode)
             
             let album = albums[indexPath.row]
-            cell.configure(forAlbum: album)
+            cell.configure(album: album)
             
             return cell
         }

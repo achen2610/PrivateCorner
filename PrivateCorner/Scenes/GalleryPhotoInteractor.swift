@@ -11,11 +11,11 @@
 import UIKit
 
 protocol GalleryPhotoInteractorInput {
-    
+    func getGallery()
 }
 
 protocol GalleryPhotoInteractorOutput {
-    
+    func presentGallery(response: GalleryPhotoScene.GetGalleryPhoto.Response)
 }
 
 protocol GalleryPhotoDataSource {
@@ -23,14 +23,22 @@ protocol GalleryPhotoDataSource {
 }
 
 protocol GalleryPhotoDataDestination {
-    
+    var album:Album! {get set}
 }
 
 class GalleryPhotoInteractor: GalleryPhotoInteractorInput, GalleryPhotoDataSource, GalleryPhotoDataDestination {
     
     var output: GalleryPhotoInteractorOutput!
     
+    var album:Album!
+    
     // MARK: Business logic
     
+    func getGallery() {
+        let items = album.mutableSetValue(forKey: "items")
+        let array = items.allObjects as! [Item]
+        let response = GalleryPhotoScene.GetGalleryPhoto.Response(gallery: array)
+        output.presentGallery(response: response)
+    }
 
 }

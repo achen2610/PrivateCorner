@@ -11,7 +11,7 @@ import UIKit
 class AlbumsCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var albumName: UILabel!
+    @IBOutlet weak var albumName: UITextField!
     @IBOutlet weak var totalItem: UILabel!
     @IBOutlet weak var deleteButton: UIButton!
     
@@ -24,7 +24,7 @@ class AlbumsCell: UICollectionViewCell {
         photoImageView.layer.cornerRadius = 5.0
     }
     
-    func configure(forAlbum album:Album) {
+    func configure(album: Album) {
         albumName.text = album.name
         totalItem.text = "\(album.totalItem)"
         
@@ -36,6 +36,7 @@ class AlbumsCell: UICollectionViewCell {
     func setEditMode(isEdit: Bool) {
         UIView.transition(with: deleteButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
             self.deleteButton.isHidden = !isEdit
+            self.albumName.isEnabled = isEdit
         }, completion: nil)
     }
 }

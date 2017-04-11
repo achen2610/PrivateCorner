@@ -18,6 +18,7 @@ protocol AlbumsViewControllerInput {
 
 protocol AlbumsViewControllerOutput {
     func getAlbum(request: AlbumsScene.GetAlbum.Request)
+    func selectAlbum(request: AlbumsScene.SelectAlbum.Request)
     func addAlbum(request: AlbumsScene.AddAlbum.Request)
     func deleteAlbum(request: AlbumsScene.DeleteAlbum.Request)
 }
@@ -75,8 +76,9 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     }
     
     func selectedGalleryAtIndex(index: Int) {
-        
-        
+        let album = albums[index]
+        let request = AlbumsScene.SelectAlbum.Request(album: album)
+        output.selectAlbum(request: request)
         router.navigateToGalleryScreen()
     }
     
@@ -150,4 +152,26 @@ extension AlbumsViewController: AlbumsPresenterOutput {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         router.passDataToNextScene(for: segue)
     }
+}
+
+
+extension AlbumsViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let index = textField.tag
+        let album = albums[index]
+        album.name = textField.text
+        albums[index] = album
+        
+        //1
+        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+
+        //2
+        do {
+            try managedContext.save()
+            print("saved!")
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+    }
+
 }

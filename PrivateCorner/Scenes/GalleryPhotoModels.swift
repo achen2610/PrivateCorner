@@ -15,4 +15,15 @@ import UIKit
 
 struct GalleryPhotoScene {
     
+    struct GetGalleryPhoto {
+        
+        struct Response {
+            let gallery:[Item]
+        }
+        
+        struct ViewModel {
+            let gallery:[Item]
+        }
+    }
+    
 }

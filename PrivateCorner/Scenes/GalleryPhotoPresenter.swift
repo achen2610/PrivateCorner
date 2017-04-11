@@ -11,12 +11,13 @@
 import UIKit
 
 protocol GalleryPhotoPresenterInput {
-    
+    func presentGallery(response: GalleryPhotoScene.GetGalleryPhoto.Response)
 }
 
 protocol GalleryPhotoPresenterOutput: class {
-    
+    func displayGallery(viewModel: GalleryPhotoScene.GetGalleryPhoto.ViewModel)
 }
+
 
 class GalleryPhotoPresenter: GalleryPhotoPresenterInput {
     
@@ -24,4 +25,8 @@ class GalleryPhotoPresenter: GalleryPhotoPresenterInput {
     
     // MARK: Presentation logic
     
+    func presentGallery(response: GalleryPhotoScene.GetGalleryPhoto.Response) {
+        let viewModel = GalleryPhotoScene.GetGalleryPhoto.ViewModel(gallery: response.gallery)
+        output.displayGallery(viewModel: viewModel)
+    }
 }
