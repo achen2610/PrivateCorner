@@ -37,6 +37,8 @@ class AlbumsCell: UICollectionViewCell {
         UIView.transition(with: deleteButton, duration: 0.1, options: .transitionCrossDissolve, animations: {
             self.deleteButton.isHidden = !isEdit
             self.albumName.isEnabled = isEdit
+            self.totalItem.isUserInteractionEnabled = isEdit
+            self.photoImageView.isUserInteractionEnabled = isEdit
         }, completion: nil)
     }
 }

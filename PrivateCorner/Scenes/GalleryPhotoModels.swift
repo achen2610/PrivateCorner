@@ -26,4 +26,20 @@ struct GalleryPhotoScene {
         }
     }
     
+    struct UploadPhoto {
+        
+        struct Request {
+            let images:[UIImage]
+            let filenames:[String]
+        }
+        
+        struct Response {
+            let gallery:[Item]
+        }
+        
+        struct ViewModel {
+            let gallery:[Item]
+        }
+    }
+    
 }

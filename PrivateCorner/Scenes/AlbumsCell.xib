@@ -13,10 +13,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="albumsCell" id="bSG-Db-IR2" customClass="AlbumsCell" customModule="PrivateCorner" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="250" height="305"/>
+            <rect key="frame" x="0.0" y="0.0" width="250" height="293"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="250" height="305"/>
+                <rect key="frame" x="0.0" y="0.0" width="250" height="293"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6dJ-DH-boB">
@@ -27,14 +27,14 @@
                         </constraints>
                     </imageView>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Label" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IfY-Oj-CKB">
-                        <rect key="frame" x="8" y="250" width="234" height="21"/>
+                        <rect key="frame" x="8" y="246" width="234" height="21"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQL-Vb-qEZ">
-                        <rect key="frame" x="8" y="279" width="234" height="18"/>
+                        <rect key="frame" x="8" y="267" width="234" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.56675200666170666" green="0.56675200666170666" blue="0.56675200666170666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -52,10 +52,10 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="LQL-Vb-qEZ" secondAttribute="bottom" constant="8" id="1HQ-HU-2K9"/>
                 <constraint firstItem="LQL-Vb-qEZ" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" constant="8" id="Cd7-gy-X4z"/>
-                <constraint firstItem="IfY-Oj-CKB" firstAttribute="top" secondItem="6dJ-DH-boB" secondAttribute="bottom" constant="8" id="L5k-nj-MgF"/>
+                <constraint firstItem="IfY-Oj-CKB" firstAttribute="top" secondItem="6dJ-DH-boB" secondAttribute="bottom" constant="4" id="L5k-nj-MgF"/>
                 <constraint firstItem="HFH-Ee-vXJ" firstAttribute="top" secondItem="bSG-Db-IR2" secondAttribute="top" id="OFq-8n-c7O"/>
                 <constraint firstItem="HFH-Ee-vXJ" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" id="S85-rU-ANe"/>
-                <constraint firstItem="LQL-Vb-qEZ" firstAttribute="top" secondItem="IfY-Oj-CKB" secondAttribute="bottom" constant="8" id="SYe-KO-9Wz"/>
+                <constraint firstItem="LQL-Vb-qEZ" firstAttribute="top" secondItem="IfY-Oj-CKB" secondAttribute="bottom" id="SYe-KO-9Wz"/>
                 <constraint firstAttribute="trailing" secondItem="LQL-Vb-qEZ" secondAttribute="trailing" constant="8" id="TGA-IT-auA"/>
                 <constraint firstItem="IfY-Oj-CKB" firstAttribute="leading" secondItem="bSG-Db-IR2" secondAttribute="leading" constant="8" id="Yl4-c4-xmx"/>
                 <constraint firstAttribute="trailing" secondItem="6dJ-DH-boB" secondAttribute="trailing" constant="8" id="acm-6t-T9x"/>

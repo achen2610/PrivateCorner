@@ -27,6 +27,7 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
             
             cell.configureLayout()
             cell.albumName.delegate = self
+            cell.albumName.tag = indexPath.row
             cell.deleteButton.tag = indexPath.row
             cell.deleteButton.addTarget(self, action: #selector(clickDeleteAlbum), for: .touchUpInside)
             cell.setEditMode(isEdit: isEditMode)
@@ -46,7 +47,7 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
         let availableWidth = view.frame.width - paddingSpace
         let widthPerItem = availableWidth / cellLayout.itemsPerRow
         
-        return CGSize(width: widthPerItem, height: widthPerItem + 63)
+        return CGSize(width: widthPerItem, height: widthPerItem + 46)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -59,6 +60,10 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
     
     // MARK: UICollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if isEditMode {
+            return
+        }
+        
         selectedGalleryAtIndex(index: indexPath.row)
     }
 }

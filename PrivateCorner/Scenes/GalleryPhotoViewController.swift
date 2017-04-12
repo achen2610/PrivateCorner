@@ -9,6 +9,8 @@
 //
 
 import UIKit
+import Photos
+import ImagePicker
 
 protocol GalleryPhotoViewControllerInput {
     func displayGallery(viewModel: GalleryPhotoScene.GetGalleryPhoto.ViewModel)
@@ -16,12 +18,14 @@ protocol GalleryPhotoViewControllerInput {
 
 protocol GalleryPhotoViewControllerOutput {
     func getGallery()
+    func uploadPhoto(request: GalleryPhotoScene.UploadPhoto.Request)
 }
 
 class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerInput {
     
     var output: GalleryPhotoViewControllerOutput!
     var router: GalleryPhotoRouter!
+    let imagePickerController = ImagePickerController()
     var items: [Item] = []
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
@@ -67,15 +71,20 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
     }
     
     @IBAction func clickUploadButton(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            imagePickerController.delegate = self
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+        
+        
+        /*
         let alertController = UIAlertController(title: "", message: "Import From", preferredStyle: .actionSheet)
         
         let libraryAction = UIAlertAction(title: "Photo Library", style: .default) { (alert) in
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-                let imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
-                imagePicker.allowsEditing = true
-                self.present(imagePicker, animated: true, completion: nil)
+                let imagePickerController = ImagePickerController()
+                imagePickerController.delegate = self
+                self.present(imagePickerController, animated: true, completion: nil)
             }
         }
         
@@ -96,10 +105,16 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
+        */
     }
     
     func selectedPhotoAtIndex(index: Int) {
         router.navigateToPhotoScreen()
+    }
+    
+    func uploadImageToCoreData(images: [UIImage], filenames: [String]) {
+        let request = GalleryPhotoScene.UploadPhoto.Request(images: images, filenames: filenames)
+        output.uploadPhoto(request: request)
     }
     
     // MARK: Display logic
@@ -123,4 +138,38 @@ extension GalleryPhotoViewController: UIImagePickerControllerDelegate {
 
 extension GalleryPhotoViewController: UINavigationControllerDelegate {
     
+}
+
+extension GalleryPhotoViewController: ImagePickerDelegate {
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        
+    }
+
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        var filenames = [String]()
+        let assets = imagePicker.stack.assets
+        
+        let imageManager = PHImageManager.default()
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
+        let size: CGSize = CGSize(width: 720, height: 1280)
+        
+        for asset in assets {
+            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
+                if let info = info {
+                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
+                        //do sth with file name
+                        filenames.append(filename)
+                    }
+                    
+                }
+            }
+        }
+        
+        uploadImageToCoreData(images: images, filenames: filenames)
+    }
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        
+    }
 }

@@ -56,6 +56,9 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
         self.title = "Album"
         configureCollectionViewOnLoad()
         getAlbumFromCoreData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     // MARK: Event handling
@@ -143,7 +146,28 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
         albumsCollectionView.performBatchUpdates({
             self.albums.remove(at: index)
             self.albumsCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+            self.albumsCollectionView.reloadData()
         }, completion: nil)
+    }
+    
+    // MARK: Keyboard Function
+    func keyboardWillShow(notification: NSNotification) {
+        let userInfo = notification.userInfo ?? [:]
+        let keyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let adjustmentHeight = keyboardFrame.height
+        var contentInset:UIEdgeInsets = albumsCollectionView.contentInset
+        contentInset.bottom = adjustmentHeight
+
+        albumsCollectionView.contentInset = contentInset
+        albumsCollectionView.scrollIndicatorInsets = contentInset
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        var contentInset:UIEdgeInsets = albumsCollectionView.contentInset
+        contentInset.bottom = 49.0
+
+        albumsCollectionView.contentInset = contentInset
+        albumsCollectionView.scrollIndicatorInsets = contentInset
     }
 }
 
@@ -156,6 +180,13 @@ extension AlbumsViewController: AlbumsPresenterOutput {
 
 
 extension AlbumsViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let index = textField.tag
+        let indexPath = IndexPath(row: index, section: 0)
+        albumsCollectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
+    }
+    
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         let index = textField.tag
         let album = albums[index]

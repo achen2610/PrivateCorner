@@ -12,6 +12,7 @@ import UIKit
 
 protocol GalleryPhotoInteractorInput {
     func getGallery()
+    func uploadPhoto(request: GalleryPhotoScene.UploadPhoto.Request)
 }
 
 protocol GalleryPhotoInteractorOutput {
@@ -41,4 +42,34 @@ class GalleryPhotoInteractor: GalleryPhotoInteractorInput, GalleryPhotoDataSourc
         output.presentGallery(response: response)
     }
 
+    func uploadPhoto(request: GalleryPhotoScene.UploadPhoto.Request) {
+        var items = [Item]()
+        let images = request.images
+        let filenames = request.filenames
+        for image in images {
+            let index = images.index(of: image)
+            let filename = filenames[index!]
+            let item = ItemManager.sharedInstance.add(image: image, filename: filename)
+            items.append(item)
+        }
+        
+        let itemsInAlbum = album.mutableSetValue(forKey: "items")
+        if itemsInAlbum.count > 0 {
+            itemsInAlbum.addObjects(from: items)
+        } else {
+            album.items = NSSet(object: items)
+        }
+        
+        //1
+        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+
+        //2
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+        getGallery()
+    }
 }
