@@ -1,0 +1,6 @@
+framework module Pods_PrivateCorner {
+  umbrella header "Pods-PrivateCorner-umbrella.h"
+
+  export *
+  module * { export * }
+}

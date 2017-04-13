@@ -15,7 +15,7 @@ protocol GalleryPhotoRouterInput {
 }
 
 protocol GalleryPhotoRouterDataSource:class {
-    
+    var selectedItem:Item! { get }
 }
 
 protocol GalleryPhotoRouterDataDestination:class {
@@ -48,5 +48,22 @@ class GalleryPhotoRouter: GalleryPhotoRouterInput {
     func passDataToNextScene(for segue: UIStoryboardSegue) {
         // NOTE: Teach the router which scenes it can communicate with
         
+        guard let segueIdentifier = segue.identifier else {
+            return
+        }
+        
+        switch segueIdentifier {
+        case SegueIdentifiers.photoScreen:
+            passDataToPhotoScene(segue: segue)
+            
+        default:
+            return
+        }
+    }
+    
+    func passDataToPhotoScene(segue:UIStoryboardSegue) {
+        if let photoSceneController = segue.destination as? PhotoViewController {
+            photoSceneController.router.dataDestination.item = dataSource.selectedItem
+        }
     }
 }

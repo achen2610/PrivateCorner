@@ -19,7 +19,7 @@ protocol PhotoRouterDataSource:class {
 }
 
 protocol PhotoRouterDataDestination:class {
-    
+    var item:Item! {get set}
 }
 
 class PhotoRouter: PhotoRouterInput {

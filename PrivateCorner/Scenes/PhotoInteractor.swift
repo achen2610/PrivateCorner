@@ -11,11 +11,11 @@
 import UIKit
 
 protocol PhotoInteractorInput {
-    
+    func getPhoto()
 }
 
 protocol PhotoInteractorOutput {
-    
+    func presentPhoto(response: PhotoScene.GetPhoto.Response)
 }
 
 protocol PhotoDataSource {
@@ -23,14 +23,19 @@ protocol PhotoDataSource {
 }
 
 protocol PhotoDataDestination {
-    
+    var item:Item! {get set}
 }
 
 class PhotoInteractor: PhotoInteractorInput, PhotoDataSource, PhotoDataDestination {
     
     var output: PhotoInteractorOutput!
+    var item:Item!
     
     // MARK: Business logic
     
+    func getPhoto() {
+        let response = PhotoScene.GetPhoto.Response(item: item)
+        output.presentPhoto(response: response)
+    }
 
 }

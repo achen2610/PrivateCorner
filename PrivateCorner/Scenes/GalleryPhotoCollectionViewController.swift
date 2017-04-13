@@ -33,7 +33,7 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     
     // MARK: UICollectionView FlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let paddingSpace = cellLayout.sectionInsets.left * (cellLayout.itemsPerRow + 1)
+        let paddingSpace = cellLayout.sectionInsets.left * (cellLayout.itemsPerRow)
         let availableWidth = view.frame.width - paddingSpace
         let widthPerItem = availableWidth / cellLayout.itemsPerRow
         

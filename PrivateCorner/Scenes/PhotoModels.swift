@@ -15,4 +15,14 @@ import UIKit
 
 struct PhotoScene {
     
+    struct GetPhoto {
+        
+        struct Response {
+            let item:Item
+        }
+        
+        struct ViewModel {
+            let item:Item
+        }
+    }
 }

@@ -11,11 +11,11 @@
 import UIKit
 
 protocol PhotoPresenterInput {
-    
+    func presentPhoto(response: PhotoScene.GetPhoto.Response)
 }
 
 protocol PhotoPresenterOutput: class {
-    
+    func displayPhoto(viewModel: PhotoScene.GetPhoto.ViewModel)
 }
 
 class PhotoPresenter: PhotoPresenterInput {
@@ -24,4 +24,8 @@ class PhotoPresenter: PhotoPresenterInput {
     
     // MARK: Presentation logic
     
+    func presentPhoto(response: PhotoScene.GetPhoto.Response) {
+        let viewModel = PhotoScene.GetPhoto.ViewModel(item: response.item)
+        output.displayPhoto(viewModel: viewModel)
+    }
 }

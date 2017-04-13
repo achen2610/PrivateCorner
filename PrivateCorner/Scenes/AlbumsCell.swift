@@ -26,11 +26,27 @@ class AlbumsCell: UICollectionViewCell {
     
     func configure(album: Album) {
         albumName.text = album.name
-        totalItem.text = "\(album.totalItem)"
         
-//        if let URL = NSURL(string: album.imageURLString) {
-//            photoImageView.kf_setImageWithURL(URL)
-//        }
+        
+        let items = album.mutableSetValue(forKey: "items")
+        let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: false)
+        let array = items.sortedArray(using: [dateDescriptor]) as! [Item]
+        let lastImage = array.first
+        
+        if let filename = lastImage?.filename {
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documentsDirectory = paths[0]
+            let path = documentsDirectory.appendingPathComponent(filename)
+            
+            photoImageView.sd_setImage(with: path, placeholderImage: UIImage(), options: [], completed: { (image, error, cacheType, imageURL) in
+//                self.photoImageView.alpha = 0.0
+//                UIView.animate(withDuration: 1.0, animations: {
+//                    self.photoImageView.alpha = 1.0
+//                })
+            })
+        }
+        
+        totalItem.text = "\(array.count)"
     }
     
     func setEditMode(isEdit: Bool) {

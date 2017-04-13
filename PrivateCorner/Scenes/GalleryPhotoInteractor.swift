@@ -12,6 +12,7 @@ import UIKit
 
 protocol GalleryPhotoInteractorInput {
     func getGallery()
+    func selectItem(request: GalleryPhotoScene.SelectItem.Request)
     func uploadPhoto(request: GalleryPhotoScene.UploadPhoto.Request)
 }
 
@@ -20,7 +21,7 @@ protocol GalleryPhotoInteractorOutput {
 }
 
 protocol GalleryPhotoDataSource {
-    
+    var selectedItem:Item! { get }
 }
 
 protocol GalleryPhotoDataDestination {
@@ -30,16 +31,24 @@ protocol GalleryPhotoDataDestination {
 class GalleryPhotoInteractor: GalleryPhotoInteractorInput, GalleryPhotoDataSource, GalleryPhotoDataDestination {
     
     var output: GalleryPhotoInteractorOutput!
-    
+    var selectedItem:Item!
     var album:Album!
     
     // MARK: Business logic
     
     func getGallery() {
         let items = album.mutableSetValue(forKey: "items")
-        let array = items.allObjects as! [Item]
+        let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: false)
+        let array = items.sortedArray(using: [dateDescriptor]) as! [Item]
+
         let response = GalleryPhotoScene.GetGalleryPhoto.Response(gallery: array)
         output.presentGallery(response: response)
+    }
+    
+    func selectItem(request: GalleryPhotoScene.SelectItem.Request) {
+        selectedItem = request.item
+        
+        print("\(selectedItem)")
     }
 
     func uploadPhoto(request: GalleryPhotoScene.UploadPhoto.Request) {
@@ -51,13 +60,24 @@ class GalleryPhotoInteractor: GalleryPhotoInteractorInput, GalleryPhotoDataSourc
             let filename = filenames[index!]
             let item = ItemManager.sharedInstance.add(image: image, filename: filename)
             items.append(item)
+            
+            let fileManager = FileManager.default
+            let path = getDocumentsDirectory().appendingPathComponent(filename)
+            if fileManager.fileExists(atPath: path.path) {
+                print("File Exists")
+            } else {
+                if let data = UIImagePNGRepresentation(image) {
+                    try? data.write(to: path)
+                }
+            }
         }
+        
         
         let itemsInAlbum = album.mutableSetValue(forKey: "items")
         if itemsInAlbum.count > 0 {
             itemsInAlbum.addObjects(from: items)
         } else {
-            album.items = NSSet(object: items)
+            album.addToItems(NSSet(array: items))
         }
         
         //1
@@ -71,5 +91,13 @@ class GalleryPhotoInteractor: GalleryPhotoInteractorInput, GalleryPhotoDataSourc
         }
         
         getGallery()
+    }
+    
+    
+    // MARK: Private Method
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
     }
 }

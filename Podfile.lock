@@ -1,0 +1,17 @@
+PODS:
+  - ImagePicker (2.1.1)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
+
+DEPENDENCIES:
+  - ImagePicker
+  - SDWebImage
+
+SPEC CHECKSUMS:
+  ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+
+PODFILE CHECKSUM: 18a310ac27b3acae5bf37e18afed4001a7e32b1a
+
+COCOAPODS: 1.2.0

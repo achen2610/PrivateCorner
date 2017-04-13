@@ -55,10 +55,16 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
         
         self.title = "Album"
         configureCollectionViewOnLoad()
-        getAlbumFromCoreData()
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getAlbumFromCoreData()
     }
     
     // MARK: Event handling

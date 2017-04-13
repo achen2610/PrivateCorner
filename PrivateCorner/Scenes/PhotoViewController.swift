@@ -11,11 +11,11 @@
 import UIKit
 
 protocol PhotoViewControllerInput {
-    
+    func displayPhoto(viewModel: PhotoScene.GetPhoto.ViewModel)
 }
 
 protocol PhotoViewControllerOutput {
-    
+    func getPhoto()
 }
 
 class PhotoViewController: UIViewController, PhotoViewControllerInput {
@@ -23,6 +23,7 @@ class PhotoViewController: UIViewController, PhotoViewControllerInput {
     var output: PhotoViewControllerOutput!
     var router: PhotoRouter!
     
+    @IBOutlet weak var photoImageView: UIImageView!
     // MARK: Object lifecycle
     
     override func awakeFromNib() {
@@ -36,6 +37,7 @@ class PhotoViewController: UIViewController, PhotoViewControllerInput {
         super.viewDidLoad()
         
         configureSubviews()
+        configurePhotoViewOnLoad()
     }
     
     // MARK: Event handling
@@ -44,8 +46,24 @@ class PhotoViewController: UIViewController, PhotoViewControllerInput {
         self.title = "Photo"
     }
     
-    // MARK: Display logic
+    func configurePhotoViewOnLoad() {
+        output.getPhoto()
+    }
     
+    // MARK: Display logic
+    func displayPhoto(viewModel: PhotoScene.GetPhoto.ViewModel) {
+        let item = viewModel.item
+        if let filename = item.filename {
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documentsDirectory = paths[0]
+            let path = documentsDirectory.appendingPathComponent(filename)
+            
+            photoImageView.sd_setImage(with: path, placeholderImage: UIImage(), options: [], completed: { (image, error, cacheType, imageURL) in
+
+            })
+        }
+        
+    }
 }
 
 //This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there

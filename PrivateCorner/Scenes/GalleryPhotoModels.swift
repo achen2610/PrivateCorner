@@ -26,6 +26,13 @@ struct GalleryPhotoScene {
         }
     }
     
+    struct SelectItem {
+        
+        struct Request {
+            let item:Item
+        }
+    }
+    
     struct UploadPhoto {
         
         struct Request {

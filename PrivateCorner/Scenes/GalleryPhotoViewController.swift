@@ -18,6 +18,7 @@ protocol GalleryPhotoViewControllerInput {
 
 protocol GalleryPhotoViewControllerOutput {
     func getGallery()
+    func selectItem(request: GalleryPhotoScene.SelectItem.Request)
     func uploadPhoto(request: GalleryPhotoScene.UploadPhoto.Request)
 }
 
@@ -38,7 +39,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
     
     struct cellLayout {
         static let itemsPerRow: CGFloat = 4
-        static let sectionInsets: UIEdgeInsets = UIEdgeInsets(top: 1, left: 1, bottom: 0, right: 0)
+        static let sectionInsets: UIEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 0, right: 2)
     }
     
     override func awakeFromNib() {
@@ -109,6 +110,9 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
     }
     
     func selectedPhotoAtIndex(index: Int) {
+        let item = items[index]
+        let request = GalleryPhotoScene.SelectItem.Request(item: item)
+        output.selectItem(request: request)
         router.navigateToPhotoScreen()
     }
     
@@ -121,7 +125,10 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
     func displayGallery(viewModel: GalleryPhotoScene.GetGalleryPhoto.ViewModel) {
         items = viewModel.gallery
         galleryCollectionView.reloadData()
+        imagePickerController.dismiss(animated: true, completion: nil)
     }
+    
+    
 }
 
 //This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there
