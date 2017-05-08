@@ -9,6 +9,7 @@
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="albums" inverseEntity="Item" syncable="YES"/>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+        <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,6 +18,6 @@
     </entity>
     <elements>
         <element name="Album" positionX="-317" positionY="-108" width="128" height="135"/>
-        <element name="Item" positionX="-54" positionY="27" width="128" height="118"/>
+        <element name="Item" positionX="-54" positionY="27" width="128" height="135"/>
     </elements>
 </model>

@@ -27,7 +27,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
     var output: GalleryPhotoViewControllerOutput!
     var router: GalleryPhotoRouter!
     let imagePickerController = ImagePickerController()
-    var items: [Item] = []
+    var items: [INSPhotoViewable] = []
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     
@@ -109,11 +109,18 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
         */
     }
     
-    func selectedPhotoAtIndex(index: Int) {
-        let item = items[index]
-        let request = GalleryPhotoScene.SelectItem.Request(item: item)
-        output.selectItem(request: request)
-        router.navigateToPhotoScreen()
+    func selectedPhotoAtIndex(index: Int, cell: GalleryCell) {
+        let currentPhoto = items[index]
+        let galleryPreview = INSPhotosViewController(photos: items, initialPhoto: currentPhoto, referenceView: cell)
+        
+        galleryPreview.referenceViewForPhotoWhenDismissingHandler = { [weak self] photo in
+            if let index = self?.items.index(where: {$0 === photo}) {
+                let indexPath = NSIndexPath(row: index, section: 0)
+                return self?.galleryCollectionView.cellForItem(at: indexPath as IndexPath) as? GalleryCell
+            }
+            return nil
+        }
+        present(galleryPreview, animated: true, completion: nil)
     }
     
     func uploadImageToCoreData(images: [UIImage], filenames: [String]) {
@@ -123,7 +130,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
     
     // MARK: Display logic
     func displayGallery(viewModel: GalleryPhotoScene.GetGalleryPhoto.ViewModel) {
-        items = viewModel.gallery
+        items = viewModel.photos
         galleryCollectionView.reloadData()
         imagePickerController.dismiss(animated: true, completion: nil)
     }

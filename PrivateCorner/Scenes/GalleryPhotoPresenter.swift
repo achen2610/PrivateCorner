@@ -21,12 +21,33 @@ protocol GalleryPhotoPresenterOutput: class {
 
 class GalleryPhotoPresenter: GalleryPhotoPresenterInput {
     
+    static var documentsDirectory: URL = {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }()
+    
     weak var output: GalleryPhotoPresenterOutput!
     
     // MARK: Presentation logic
     
     func presentGallery(response: GalleryPhotoScene.GetGalleryPhoto.Response) {
-        let viewModel = GalleryPhotoScene.GetGalleryPhoto.ViewModel(gallery: response.gallery)
+        let photos = parseDataToPhotos(items: response.gallery)
+        let viewModel = GalleryPhotoScene.GetGalleryPhoto.ViewModel(photos: photos)
         output.displayGallery(viewModel: viewModel)
+    }
+    
+    func parseDataToPhotos(items: [Item]) -> [INSPhotoViewable] {
+        var photos = [INSPhotoViewable]();
+        
+        for item in items {
+            if let filename = item.filename {
+                let path = GalleryCell.documentsDirectory.appendingPathComponent(filename)
+                let photo = INSPhoto(imageURL: path, thumbnailImage: UIImage())
+                photos.append(photo)
+            }
+        }
+        
+        return photos
     }
 }

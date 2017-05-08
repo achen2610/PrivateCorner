@@ -22,8 +22,8 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.galleryCell, for: indexPath) as? GalleryCell {
             
-            let item = items[indexPath.row]
-            cell.configure(item: item)
+            let photo = items[indexPath.row]
+            cell.configure(photo: photo)
             
             return cell
         }
@@ -50,6 +50,7 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     
     // MARK: UICollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedPhotoAtIndex(index: indexPath.row)
+        let cell = collectionView.cellForItem(at: indexPath) as! GalleryCell
+        selectedPhotoAtIndex(index: indexPath.row, cell: cell)
     }
 }

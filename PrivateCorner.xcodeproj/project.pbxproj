@@ -33,6 +33,16 @@
 		005330EF1E70F572002890A8 /* LockScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E91E70F572002890A8 /* LockScreenPresenter.swift */; };
 		005330F01E70F572002890A8 /* LockScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330EA1E70F572002890A8 /* LockScreenRouter.swift */; };
 		005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330EB1E70F572002890A8 /* LockScreenViewController.swift */; };
+		0054A3B71EC0037D0023B17E /* INSPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3AD1EC0037D0023B17E /* INSPhoto.swift */; };
+		0054A3B81EC0037D0023B17E /* INSPhotoGallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0054A3AE1EC0037D0023B17E /* INSPhotoGallery.bundle */; };
+		0054A3B91EC0037D0023B17E /* INSPhotosDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3AF1EC0037D0023B17E /* INSPhotosDataSource.swift */; };
+		0054A3BA1EC0037D0023B17E /* INSPhotosInteractionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B01EC0037D0023B17E /* INSPhotosInteractionAnimator.swift */; };
+		0054A3BB1EC0037D0023B17E /* INSPhotosOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B11EC0037D0023B17E /* INSPhotosOverlayView.swift */; };
+		0054A3BC1EC0037D0023B17E /* INSPhotosTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B21EC0037D0023B17E /* INSPhotosTransitionAnimator.swift */; };
+		0054A3BD1EC0037D0023B17E /* INSPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B31EC0037D0023B17E /* INSPhotosViewController.swift */; };
+		0054A3BE1EC0037D0023B17E /* INSPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B41EC0037D0023B17E /* INSPhotoViewController.swift */; };
+		0054A3BF1EC0037D0023B17E /* INSScalingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B51EC0037D0023B17E /* INSScalingImageView.swift */; };
+		0054A3C01EC0037D0023B17E /* UIVIew+INSPhotoViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B61EC0037D0023B17E /* UIVIew+INSPhotoViewer.swift */; };
 		006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486AA1E70EAD900419C27 /* AppDelegate.swift */; };
 		006486C01E70EAD900419C27 /* PrivateCornerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486BF1E70EAD900419C27 /* PrivateCornerTests.swift */; };
 		006486CB1E70EAD900419C27 /* PrivateCornerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486CA1E70EAD900419C27 /* PrivateCornerUITests.swift */; };
@@ -126,6 +136,16 @@
 		005330E91E70F572002890A8 /* LockScreenPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenPresenter.swift; sourceTree = "<group>"; };
 		005330EA1E70F572002890A8 /* LockScreenRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenRouter.swift; sourceTree = "<group>"; };
 		005330EB1E70F572002890A8 /* LockScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenViewController.swift; sourceTree = "<group>"; };
+		0054A3AD1EC0037D0023B17E /* INSPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhoto.swift; sourceTree = "<group>"; };
+		0054A3AE1EC0037D0023B17E /* INSPhotoGallery.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = INSPhotoGallery.bundle; sourceTree = "<group>"; };
+		0054A3AF1EC0037D0023B17E /* INSPhotosDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhotosDataSource.swift; sourceTree = "<group>"; };
+		0054A3B01EC0037D0023B17E /* INSPhotosInteractionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhotosInteractionAnimator.swift; sourceTree = "<group>"; };
+		0054A3B11EC0037D0023B17E /* INSPhotosOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhotosOverlayView.swift; sourceTree = "<group>"; };
+		0054A3B21EC0037D0023B17E /* INSPhotosTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhotosTransitionAnimator.swift; sourceTree = "<group>"; };
+		0054A3B31EC0037D0023B17E /* INSPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhotosViewController.swift; sourceTree = "<group>"; };
+		0054A3B41EC0037D0023B17E /* INSPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhotoViewController.swift; sourceTree = "<group>"; };
+		0054A3B51EC0037D0023B17E /* INSScalingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSScalingImageView.swift; sourceTree = "<group>"; };
+		0054A3B61EC0037D0023B17E /* UIVIew+INSPhotoViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIVIew+INSPhotoViewer.swift"; sourceTree = "<group>"; };
 		006486A71E70EAD900419C27 /* PrivateCorner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrivateCorner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006486AA1E70EAD900419C27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		006486BB1E70EAD900419C27 /* PrivateCornerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivateCornerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,6 +283,23 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		0054A3AC1EC0037D0023B17E /* INSPhotoGallery */ = {
+			isa = PBXGroup;
+			children = (
+				0054A3AD1EC0037D0023B17E /* INSPhoto.swift */,
+				0054A3AE1EC0037D0023B17E /* INSPhotoGallery.bundle */,
+				0054A3AF1EC0037D0023B17E /* INSPhotosDataSource.swift */,
+				0054A3B01EC0037D0023B17E /* INSPhotosInteractionAnimator.swift */,
+				0054A3B11EC0037D0023B17E /* INSPhotosOverlayView.swift */,
+				0054A3B21EC0037D0023B17E /* INSPhotosTransitionAnimator.swift */,
+				0054A3B31EC0037D0023B17E /* INSPhotosViewController.swift */,
+				0054A3B41EC0037D0023B17E /* INSPhotoViewController.swift */,
+				0054A3B51EC0037D0023B17E /* INSScalingImageView.swift */,
+				0054A3B61EC0037D0023B17E /* UIVIew+INSPhotoViewer.swift */,
+			);
+			path = INSPhotoGallery;
+			sourceTree = "<group>";
+		};
 		0064869E1E70EAD900419C27 = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +395,7 @@
 		006486E61E70EFD500419C27 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				0054A3AC1EC0037D0023B17E /* INSPhotoGallery */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -617,6 +655,7 @@
 				004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
 				0047FB611E9B749300BDF919 /* remove@3x.png in Resources */,
+				0054A3B81EC0037D0023B17E /* INSPhotoGallery.bundle in Resources */,
 				0075F19C1E7A3698001DA471 /* AlbumsCell.xib in Resources */,
 				006486F41E70EFEB00419C27 /* Main.storyboard in Resources */,
 				00E0B1A01E79411E0001DF8F /* folder-on@3x.png in Resources */,
@@ -795,27 +834,35 @@
 				004B29031E8CE57F007C910A /* ImportPresenter.swift in Sources */,
 				005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */,
 				004B28F01E8CA050007C910A /* GalleryPhotoRouter.swift in Sources */,
+				0054A3B71EC0037D0023B17E /* INSPhoto.swift in Sources */,
 				0075F19E1E7A36B7001DA471 /* AlbumsCell.swift in Sources */,
 				007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */,
 				005330EE1E70F572002890A8 /* LockScreenModels.swift in Sources */,
 				0094F6D01E8DF1E6007BEFAE /* ImportCollectionViewController.swift in Sources */,
 				004B29021E8CE57F007C910A /* ImportModels.swift in Sources */,
 				006486EA1E70EFD500419C27 /* ConstantsAPI.swift in Sources */,
+				0054A3BC1EC0037D0023B17E /* INSPhotosTransitionAnimator.swift in Sources */,
+				0054A3BB1EC0037D0023B17E /* INSPhotosOverlayView.swift in Sources */,
 				0094F6D91E8E6331007BEFAE /* ItemManager.swift in Sources */,
+				0054A3BD1EC0037D0023B17E /* INSPhotosViewController.swift in Sources */,
 				00E0B1D01E7946AB0001DF8F /* SettingConfigurator.swift in Sources */,
 				004B28ED1E8CA050007C910A /* GalleryPhotoInteractor.swift in Sources */,
 				007B754B1E91E08D00483293 /* ConstantsKey.swift in Sources */,
 				00E0B1D31E7946AB0001DF8F /* SettingPresenter.swift in Sources */,
 				00E0B1C51E7946590001DF8F /* AlbumsInteractor.swift in Sources */,
 				004B29051E8CE57F007C910A /* ImportViewController.swift in Sources */,
+				0054A3BE1EC0037D0023B17E /* INSPhotoViewController.swift in Sources */,
 				005330ED1E70F572002890A8 /* LockScreenInteractor.swift in Sources */,
 				004B28EF1E8CA050007C910A /* GalleryPhotoPresenter.swift in Sources */,
 				0075F1A71E7A781A001DA471 /* PhotoInteractor.swift in Sources */,
+				0054A3C01EC0037D0023B17E /* UIVIew+INSPhotoViewer.swift in Sources */,
 				0075F1AA1E7A781A001DA471 /* PhotoRouter.swift in Sources */,
 				0094F6D31E8E3E56007BEFAE /* PrivateData.xcdatamodeld in Sources */,
 				005330EF1E70F572002890A8 /* LockScreenPresenter.swift in Sources */,
 				004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */,
 				0075F1A81E7A781A001DA471 /* PhotoModels.swift in Sources */,
+				0054A3BA1EC0037D0023B17E /* INSPhotosInteractionAnimator.swift in Sources */,
+				0054A3BF1EC0037D0023B17E /* INSScalingImageView.swift in Sources */,
 				006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */,
 				007B75491E91E01400483293 /* ConstantsSize.swift in Sources */,
 				0094F6D51E8E46F8007BEFAE /* CoreDataManager.swift in Sources */,
@@ -836,6 +883,7 @@
 				004B28F61E8CA624007C910A /* GalleryCell.swift in Sources */,
 				0075F1AB1E7A781A001DA471 /* PhotoViewController.swift in Sources */,
 				00E0B1C71E7946590001DF8F /* AlbumsPresenter.swift in Sources */,
+				0054A3B91EC0037D0023B17E /* INSPhotosDataSource.swift in Sources */,
 				0075F1991E7A3169001DA471 /* AlbumsCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

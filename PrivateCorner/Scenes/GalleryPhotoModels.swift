@@ -22,7 +22,7 @@ struct GalleryPhotoScene {
         }
         
         struct ViewModel {
-            let gallery:[Item]
+            let photos:[INSPhotoViewable]
         }
     }
     

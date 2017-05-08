@@ -24,19 +24,16 @@ class GalleryCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func configure(item: Item) {
+    func configure(photo: INSPhotoViewable) {
         
-        if let filename = item.filename {
-            let path = GalleryCell.documentsDirectory.appendingPathComponent(filename)
-           
-            photoImageView.sd_setImage(with: path, placeholderImage: UIImage(), options: [], completed: { (image, error, cacheType, imageURL) in
-                self.photoImageView.alpha = 0.0
-                UIView.animate(withDuration: 1.0, animations: {
-                    self.photoImageView.alpha = 1.0
-                })
-            })
+        photo.loadImageWithCompletionHandler { [weak photo](image, error) in
+            if let image = image {
+                if let photo = photo as? INSPhoto {
+                    photo.image = image
+                }
+                self.photoImageView.image = image
+            }
         }
-        
     }
 
 }
