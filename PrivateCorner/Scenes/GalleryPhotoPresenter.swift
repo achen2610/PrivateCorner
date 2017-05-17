@@ -44,6 +44,9 @@ class GalleryPhotoPresenter: GalleryPhotoPresenterInput {
             if let filename = item.filename {
                 let path = GalleryCell.documentsDirectory.appendingPathComponent(filename)
                 let photo = INSPhoto(imageURL: path, thumbnailImage: UIImage())
+                if let caption = item.caption {
+                    photo.attributedTitle = NSAttributedString(string: caption, attributes: [NSForegroundColorAttributeName: UIColor.white])
+                }
                 photos.append(photo)
             }
         }

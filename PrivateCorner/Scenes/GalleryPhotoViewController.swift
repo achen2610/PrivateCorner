@@ -10,7 +10,8 @@
 
 import UIKit
 import Photos
-import ImagePicker
+//import ImagePicker
+
 
 protocol GalleryPhotoViewControllerInput {
     func displayGallery(viewModel: GalleryPhotoScene.GetGalleryPhoto.ViewModel)
@@ -26,7 +27,8 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
     
     var output: GalleryPhotoViewControllerOutput!
     var router: GalleryPhotoRouter!
-    let imagePickerController = ImagePickerController()
+//    let imagePickerController = ImagePickerController()
+    var gallery: GalleryController!
     var items: [INSPhotoViewable] = []
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
@@ -73,8 +75,12 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
     
     @IBAction func clickUploadButton(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-            imagePickerController.delegate = self
-            self.present(imagePickerController, animated: true, completion: nil)
+//            imagePickerController.delegate = self
+//            self.present(imagePickerController, animated: true, completion: nil)
+            
+            gallery = GalleryController()
+            gallery.delegate = self
+            present(gallery, animated: true, completion: nil)
         }
         
         
@@ -128,11 +134,37 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
         output.uploadPhoto(request: request)
     }
     
+    func fetchImages(_ assets: [PHAsset]) -> [String] {
+        var filenames = [String]()
+        let imageManager = PHImageManager.default()
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
+        let size: CGSize = CGSize(width: 720, height: 1280)
+        
+        for asset in assets {
+            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
+                if let info = info {
+                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
+                        //do sth with file name
+                        filenames.append(filename)
+                    }
+                    
+                }
+            }
+        }
+        return filenames
+    }
+    
     // MARK: Display logic
     func displayGallery(viewModel: GalleryPhotoScene.GetGalleryPhoto.ViewModel) {
         items = viewModel.photos
         galleryCollectionView.reloadData()
-        imagePickerController.dismiss(animated: true, completion: nil)
+        var contentSize = galleryCollectionView.contentSize
+        if contentSize.height < kScreenHeight {
+            contentSize.height = kScreenHeight
+            galleryCollectionView.contentSize = contentSize
+        }
+//        imagePickerController.dismiss(animated: true, completion: nil)
     }
     
     
@@ -154,36 +186,66 @@ extension GalleryPhotoViewController: UINavigationControllerDelegate {
     
 }
 
-extension GalleryPhotoViewController: ImagePickerDelegate {
-    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        
-    }
+//extension GalleryPhotoViewController: ImagePickerDelegate {
+//    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+//        
+//    }
+//
+//    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+//        var filenames = [String]()
+//        let assets = imagePicker.stack.assets
+//        
+//        let imageManager = PHImageManager.default()
+//        let requestOptions = PHImageRequestOptions()
+//        requestOptions.isSynchronous = true
+//        let size: CGSize = CGSize(width: 720, height: 1280)
+//        
+//        for asset in assets {
+//            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
+//                if let info = info {
+//                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
+//                        //do sth with file name
+//                        filenames.append(filename)
+//                    }
+//                    
+//                }
+//            }
+//        }
+//        
+//        uploadImageToCoreData(images: images, filenames: filenames)
+//    }
+//    
+//    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+//        
+//    }
+//}
 
-    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-        var filenames = [String]()
-        let assets = imagePicker.stack.assets
-        
-        let imageManager = PHImageManager.default()
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
-        let size: CGSize = CGSize(width: 720, height: 1280)
-        
-        for asset in assets {
-            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
-                if let info = info {
-                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
-                        //do sth with file name
-                        filenames.append(filename)
-                    }
-                    
-                }
-            }
+extension GalleryPhotoViewController: GalleryControllerDelegate {
+    func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
+        var assets = [PHAsset]()
+        for image in Cart.shared.images {
+            let asset = image.asset
+            assets.append(asset);
         }
         
+        let filenames = fetchImages(assets)
         uploadImageToCoreData(images: images, filenames: filenames)
+        
+        controller.dismiss(animated: true, completion: nil)
+        gallery = nil
     }
     
-    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+    func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+        controller.dismiss(animated: true, completion: nil)
+        gallery = nil
+    }
+    
+    func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage]) {
         
+    }
+    
+    func galleryControllerDidCancel(_ controller: GalleryController) {
+        controller.dismiss(animated: true, completion: nil)
+        gallery = nil
     }
 }

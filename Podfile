@@ -8,7 +8,6 @@ target 'PrivateCorner' do
   pod 'ImagePicker'
   pod 'SDWebImage'
 
-
   # Pods for PrivateCorner
 
   target 'PrivateCornerTests' do

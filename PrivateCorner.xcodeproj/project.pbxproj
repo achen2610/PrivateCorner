@@ -65,6 +65,55 @@
 		007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */; };
 		007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */; };
 		007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007D82D11E8B76B0005CBBC2 /* SettingCell.xib */; };
+		0086A9811EC2F990000F5C01 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9461EC2F98F000F5C01 /* CameraController.swift */; };
+		0086A9821EC2F990000F5C01 /* CameraMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9471EC2F98F000F5C01 /* CameraMan.swift */; };
+		0086A9831EC2F990000F5C01 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9481EC2F98F000F5C01 /* CameraView.swift */; };
+		0086A9841EC2F990000F5C01 /* ShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9491EC2F98F000F5C01 /* ShutterButton.swift */; };
+		0086A9851EC2F990000F5C01 /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A94A1EC2F98F000F5C01 /* StackView.swift */; };
+		0086A9861EC2F990000F5C01 /* TripleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A94B1EC2F98F000F5C01 /* TripleButton.swift */; };
+		0086A9871EC2F990000F5C01 /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A94D1EC2F98F000F5C01 /* GalleryController.swift */; };
+		0086A9881EC2F990000F5C01 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A94F1EC2F98F000F5C01 /* Cart.swift */; };
+		0086A9891EC2F990000F5C01 /* GAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9501EC2F98F000F5C01 /* GAlbum.swift */; };
+		0086A98A1EC2F990000F5C01 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9511EC2F990000F5C01 /* Image.swift */; };
+		0086A98B1EC2F990000F5C01 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9521EC2F990000F5C01 /* ImageCell.swift */; };
+		0086A98C1EC2F990000F5C01 /* ImagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9531EC2F990000F5C01 /* ImagesController.swift */; };
+		0086A98D1EC2F990000F5C01 /* ImagesLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9541EC2F990000F5C01 /* ImagesLibrary.swift */; };
+		0086A98E1EC2F990000F5C01 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9561EC2F990000F5C01 /* Config.swift */; };
+		0086A98F1EC2F990000F5C01 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9571EC2F990000F5C01 /* Constraints.swift */; };
+		0086A9901EC2F990000F5C01 /* DropdownController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9591EC2F990000F5C01 /* DropdownController.swift */; };
+		0086A9911EC2F990000F5C01 /* EventHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A95A1EC2F990000F5C01 /* EventHub.swift */; };
+		0086A9921EC2F990000F5C01 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A95C1EC2F990000F5C01 /* Array+Extensions.swift */; };
+		0086A9931EC2F990000F5C01 /* AVAsset+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A95D1EC2F990000F5C01 /* AVAsset+Extensions.swift */; };
+		0086A9941EC2F990000F5C01 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A95E1EC2F990000F5C01 /* String+Extensions.swift */; };
+		0086A9951EC2F990000F5C01 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A95F1EC2F990000F5C01 /* UIImageView+Extensions.swift */; };
+		0086A9961EC2F990000F5C01 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9601EC2F990000F5C01 /* UIScrollView+Extensions.swift */; };
+		0086A9971EC2F990000F5C01 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9611EC2F990000F5C01 /* UIView+Extensions.swift */; };
+		0086A9981EC2F990000F5C01 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9621EC2F990000F5C01 /* UIViewController+Extensions.swift */; };
+		0086A9991EC2F990000F5C01 /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9631EC2F990000F5C01 /* Fetcher.swift */; };
+		0086A99A1EC2F990000F5C01 /* GBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9641EC2F990000F5C01 /* GBundle.swift */; };
+		0086A99B1EC2F990000F5C01 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9651EC2F990000F5C01 /* LocationManager.swift */; };
+		0086A99C1EC2F990000F5C01 /* Once.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9661EC2F990000F5C01 /* Once.swift */; };
+		0086A99D1EC2F990000F5C01 /* PageIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9681EC2F990000F5C01 /* PageIndicator.swift */; };
+		0086A99E1EC2F990000F5C01 /* PagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9691EC2F990000F5C01 /* PagesController.swift */; };
+		0086A99F1EC2F990000F5C01 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A96B1EC2F990000F5C01 /* Permission.swift */; };
+		0086A9A01EC2F990000F5C01 /* PermissionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A96C1EC2F990000F5C01 /* PermissionController.swift */; };
+		0086A9A11EC2F990000F5C01 /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A96D1EC2F990000F5C01 /* PermissionView.swift */; };
+		0086A9A21EC2F990000F5C01 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A96E1EC2F990000F5C01 /* Utils.swift */; };
+		0086A9A31EC2F990000F5C01 /* AdvancedVideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9701EC2F990000F5C01 /* AdvancedVideoEditor.swift */; };
+		0086A9A41EC2F990000F5C01 /* EditInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9711EC2F990000F5C01 /* EditInfo.swift */; };
+		0086A9A51EC2F990000F5C01 /* VideoEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9721EC2F990000F5C01 /* VideoEditing.swift */; };
+		0086A9A61EC2F990000F5C01 /* VideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9731EC2F990000F5C01 /* VideoEditor.swift */; };
+		0086A9A71EC2F990000F5C01 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9751EC2F990000F5C01 /* AlbumCell.swift */; };
+		0086A9A81EC2F990000F5C01 /* ArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9761EC2F990000F5C01 /* ArrowButton.swift */; };
+		0086A9A91EC2F990000F5C01 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9771EC2F990000F5C01 /* EmptyView.swift */; };
+		0086A9AA1EC2F990000F5C01 /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9781EC2F990000F5C01 /* FrameView.swift */; };
+		0086A9AB1EC2F990000F5C01 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9791EC2F990000F5C01 /* GridView.swift */; };
+		0086A9AC1EC2F990000F5C01 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97B1EC2F990000F5C01 /* Video.swift */; };
+		0086A9AD1EC2F990000F5C01 /* VideoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97C1EC2F990000F5C01 /* VideoBox.swift */; };
+		0086A9AE1EC2F990000F5C01 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97D1EC2F990000F5C01 /* VideoCell.swift */; };
+		0086A9AF1EC2F990000F5C01 /* VideosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97E1EC2F990000F5C01 /* VideosController.swift */; };
+		0086A9B01EC2F990000F5C01 /* VideosLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97F1EC2F990000F5C01 /* VideosLibrary.swift */; };
+		0086A9B41EC2F9B1000F5C01 /* Gallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */; };
 		0094F6D01E8DF1E6007BEFAE /* ImportCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094F6CF1E8DF1E6007BEFAE /* ImportCollectionViewController.swift */; };
 		0094F6D31E8E3E56007BEFAE /* PrivateData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0094F6D11E8E3E56007BEFAE /* PrivateData.xcdatamodeld */; };
 		0094F6D51E8E46F8007BEFAE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094F6D41E8E46F8007BEFAE /* CoreDataManager.swift */; };
@@ -174,6 +223,55 @@
 		007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		007D82D11E8B76B0005CBBC2 /* SettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
+		0086A9461EC2F98F000F5C01 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		0086A9471EC2F98F000F5C01 /* CameraMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraMan.swift; sourceTree = "<group>"; };
+		0086A9481EC2F98F000F5C01 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		0086A9491EC2F98F000F5C01 /* ShutterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShutterButton.swift; sourceTree = "<group>"; };
+		0086A94A1EC2F98F000F5C01 /* StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
+		0086A94B1EC2F98F000F5C01 /* TripleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripleButton.swift; sourceTree = "<group>"; };
+		0086A94D1EC2F98F000F5C01 /* GalleryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
+		0086A94F1EC2F98F000F5C01 /* Cart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		0086A9501EC2F98F000F5C01 /* GAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GAlbum.swift; sourceTree = "<group>"; };
+		0086A9511EC2F990000F5C01 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		0086A9521EC2F990000F5C01 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		0086A9531EC2F990000F5C01 /* ImagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesController.swift; sourceTree = "<group>"; };
+		0086A9541EC2F990000F5C01 /* ImagesLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesLibrary.swift; sourceTree = "<group>"; };
+		0086A9561EC2F990000F5C01 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		0086A9571EC2F990000F5C01 /* Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
+		0086A9591EC2F990000F5C01 /* DropdownController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownController.swift; sourceTree = "<group>"; };
+		0086A95A1EC2F990000F5C01 /* EventHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHub.swift; sourceTree = "<group>"; };
+		0086A95C1EC2F990000F5C01 /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		0086A95D1EC2F990000F5C01 /* AVAsset+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVAsset+Extensions.swift"; sourceTree = "<group>"; };
+		0086A95E1EC2F990000F5C01 /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		0086A95F1EC2F990000F5C01 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		0086A9601EC2F990000F5C01 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
+		0086A9611EC2F990000F5C01 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		0086A9621EC2F990000F5C01 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		0086A9631EC2F990000F5C01 /* Fetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
+		0086A9641EC2F990000F5C01 /* GBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GBundle.swift; sourceTree = "<group>"; };
+		0086A9651EC2F990000F5C01 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		0086A9661EC2F990000F5C01 /* Once.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Once.swift; sourceTree = "<group>"; };
+		0086A9681EC2F990000F5C01 /* PageIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIndicator.swift; sourceTree = "<group>"; };
+		0086A9691EC2F990000F5C01 /* PagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesController.swift; sourceTree = "<group>"; };
+		0086A96B1EC2F990000F5C01 /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
+		0086A96C1EC2F990000F5C01 /* PermissionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionController.swift; sourceTree = "<group>"; };
+		0086A96D1EC2F990000F5C01 /* PermissionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
+		0086A96E1EC2F990000F5C01 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		0086A9701EC2F990000F5C01 /* AdvancedVideoEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedVideoEditor.swift; sourceTree = "<group>"; };
+		0086A9711EC2F990000F5C01 /* EditInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditInfo.swift; sourceTree = "<group>"; };
+		0086A9721EC2F990000F5C01 /* VideoEditing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoEditing.swift; sourceTree = "<group>"; };
+		0086A9731EC2F990000F5C01 /* VideoEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoEditor.swift; sourceTree = "<group>"; };
+		0086A9751EC2F990000F5C01 /* AlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
+		0086A9761EC2F990000F5C01 /* ArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowButton.swift; sourceTree = "<group>"; };
+		0086A9771EC2F990000F5C01 /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		0086A9781EC2F990000F5C01 /* FrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
+		0086A9791EC2F990000F5C01 /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		0086A97B1EC2F990000F5C01 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		0086A97C1EC2F990000F5C01 /* VideoBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBox.swift; sourceTree = "<group>"; };
+		0086A97D1EC2F990000F5C01 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		0086A97E1EC2F990000F5C01 /* VideosController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosController.swift; sourceTree = "<group>"; };
+		0086A97F1EC2F990000F5C01 /* VideosLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosLibrary.swift; sourceTree = "<group>"; };
+		0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Gallery.bundle; sourceTree = "<group>"; };
 		0094F6CF1E8DF1E6007BEFAE /* ImportCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportCollectionViewController.swift; sourceTree = "<group>"; };
 		0094F6D21E8E3E56007BEFAE /* PrivateData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PrivateData.xcdatamodel; sourceTree = "<group>"; };
 		0094F6D41E8E46F8007BEFAE /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -395,6 +493,7 @@
 		006486E61E70EFD500419C27 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				0086A9411EC2F98F000F5C01 /* Gallery */,
 				0054A3AC1EC0037D0023B17E /* INSPhotoGallery */,
 			);
 			path = Library;
@@ -473,6 +572,174 @@
 				007D82D11E8B76B0005CBBC2 /* SettingCell.xib */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		0086A9411EC2F98F000F5C01 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				0086A9B11EC2F9B1000F5C01 /* Resources */,
+				0086A9441EC2F98F000F5C01 /* Sources */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
+		0086A9441EC2F98F000F5C01 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				0086A9451EC2F98F000F5C01 /* Camera */,
+				0086A94C1EC2F98F000F5C01 /* Gallery */,
+				0086A94E1EC2F98F000F5C01 /* Images */,
+				0086A9551EC2F990000F5C01 /* Utils */,
+				0086A97A1EC2F990000F5C01 /* Videos */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		0086A9451EC2F98F000F5C01 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				0086A9461EC2F98F000F5C01 /* CameraController.swift */,
+				0086A9471EC2F98F000F5C01 /* CameraMan.swift */,
+				0086A9481EC2F98F000F5C01 /* CameraView.swift */,
+				0086A9491EC2F98F000F5C01 /* ShutterButton.swift */,
+				0086A94A1EC2F98F000F5C01 /* StackView.swift */,
+				0086A94B1EC2F98F000F5C01 /* TripleButton.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		0086A94C1EC2F98F000F5C01 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				0086A94D1EC2F98F000F5C01 /* GalleryController.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
+		0086A94E1EC2F98F000F5C01 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0086A94F1EC2F98F000F5C01 /* Cart.swift */,
+				0086A9501EC2F98F000F5C01 /* GAlbum.swift */,
+				0086A9511EC2F990000F5C01 /* Image.swift */,
+				0086A9521EC2F990000F5C01 /* ImageCell.swift */,
+				0086A9531EC2F990000F5C01 /* ImagesController.swift */,
+				0086A9541EC2F990000F5C01 /* ImagesLibrary.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		0086A9551EC2F990000F5C01 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				0086A9561EC2F990000F5C01 /* Config.swift */,
+				0086A9571EC2F990000F5C01 /* Constraints.swift */,
+				0086A9581EC2F990000F5C01 /* Dropdown */,
+				0086A95A1EC2F990000F5C01 /* EventHub.swift */,
+				0086A95B1EC2F990000F5C01 /* Extensions */,
+				0086A9631EC2F990000F5C01 /* Fetcher.swift */,
+				0086A9641EC2F990000F5C01 /* GBundle.swift */,
+				0086A9651EC2F990000F5C01 /* LocationManager.swift */,
+				0086A9661EC2F990000F5C01 /* Once.swift */,
+				0086A9671EC2F990000F5C01 /* Pages */,
+				0086A96A1EC2F990000F5C01 /* Permission */,
+				0086A96E1EC2F990000F5C01 /* Utils.swift */,
+				0086A96F1EC2F990000F5C01 /* VideoEditor */,
+				0086A9741EC2F990000F5C01 /* View */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		0086A9581EC2F990000F5C01 /* Dropdown */ = {
+			isa = PBXGroup;
+			children = (
+				0086A9591EC2F990000F5C01 /* DropdownController.swift */,
+			);
+			path = Dropdown;
+			sourceTree = "<group>";
+		};
+		0086A95B1EC2F990000F5C01 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0086A95C1EC2F990000F5C01 /* Array+Extensions.swift */,
+				0086A95D1EC2F990000F5C01 /* AVAsset+Extensions.swift */,
+				0086A95E1EC2F990000F5C01 /* String+Extensions.swift */,
+				0086A95F1EC2F990000F5C01 /* UIImageView+Extensions.swift */,
+				0086A9601EC2F990000F5C01 /* UIScrollView+Extensions.swift */,
+				0086A9611EC2F990000F5C01 /* UIView+Extensions.swift */,
+				0086A9621EC2F990000F5C01 /* UIViewController+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0086A9671EC2F990000F5C01 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				0086A9681EC2F990000F5C01 /* PageIndicator.swift */,
+				0086A9691EC2F990000F5C01 /* PagesController.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		0086A96A1EC2F990000F5C01 /* Permission */ = {
+			isa = PBXGroup;
+			children = (
+				0086A96B1EC2F990000F5C01 /* Permission.swift */,
+				0086A96C1EC2F990000F5C01 /* PermissionController.swift */,
+				0086A96D1EC2F990000F5C01 /* PermissionView.swift */,
+			);
+			path = Permission;
+			sourceTree = "<group>";
+		};
+		0086A96F1EC2F990000F5C01 /* VideoEditor */ = {
+			isa = PBXGroup;
+			children = (
+				0086A9701EC2F990000F5C01 /* AdvancedVideoEditor.swift */,
+				0086A9711EC2F990000F5C01 /* EditInfo.swift */,
+				0086A9721EC2F990000F5C01 /* VideoEditing.swift */,
+				0086A9731EC2F990000F5C01 /* VideoEditor.swift */,
+			);
+			path = VideoEditor;
+			sourceTree = "<group>";
+		};
+		0086A9741EC2F990000F5C01 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0086A9751EC2F990000F5C01 /* AlbumCell.swift */,
+				0086A9761EC2F990000F5C01 /* ArrowButton.swift */,
+				0086A9771EC2F990000F5C01 /* EmptyView.swift */,
+				0086A9781EC2F990000F5C01 /* FrameView.swift */,
+				0086A9791EC2F990000F5C01 /* GridView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0086A97A1EC2F990000F5C01 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				0086A97B1EC2F990000F5C01 /* Video.swift */,
+				0086A97C1EC2F990000F5C01 /* VideoBox.swift */,
+				0086A97D1EC2F990000F5C01 /* VideoCell.swift */,
+				0086A97E1EC2F990000F5C01 /* VideosController.swift */,
+				0086A97F1EC2F990000F5C01 /* VideosLibrary.swift */,
+			);
+			path = Videos;
+			sourceTree = "<group>";
+		};
+		0086A9B11EC2F9B1000F5C01 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0086A9B21EC2F9B1000F5C01 /* Resources */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0086A9B21EC2F9B1000F5C01 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		00E0B1A41E7942350001DF8F /* Albums */ = {
@@ -657,6 +924,7 @@
 				0047FB611E9B749300BDF919 /* remove@3x.png in Resources */,
 				0054A3B81EC0037D0023B17E /* INSPhotoGallery.bundle in Resources */,
 				0075F19C1E7A3698001DA471 /* AlbumsCell.xib in Resources */,
+				0086A9B41EC2F9B1000F5C01 /* Gallery.bundle in Resources */,
 				006486F41E70EFEB00419C27 /* Main.storyboard in Resources */,
 				00E0B1A01E79411E0001DF8F /* folder-on@3x.png in Resources */,
 				0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */,
@@ -825,41 +1093,73 @@
 			buildActionMask = 2147483647;
 			files = (
 				004B29001E8CE57F007C910A /* ImportConfigurator.swift in Sources */,
+				0086A9A11EC2F990000F5C01 /* PermissionView.swift in Sources */,
 				00E0B1D41E7946AB0001DF8F /* SettingRouter.swift in Sources */,
 				00E0B1D21E7946AB0001DF8F /* SettingModels.swift in Sources */,
+				0086A98D1EC2F990000F5C01 /* ImagesLibrary.swift in Sources */,
+				0086A98F1EC2F990000F5C01 /* Constraints.swift in Sources */,
 				005330F01E70F572002890A8 /* LockScreenRouter.swift in Sources */,
+				0086A9B01EC2F990000F5C01 /* VideosLibrary.swift in Sources */,
+				0086A9911EC2F990000F5C01 /* EventHub.swift in Sources */,
+				0086A9A31EC2F990000F5C01 /* AdvancedVideoEditor.swift in Sources */,
 				007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */,
+				0086A9A01EC2F990000F5C01 /* PermissionController.swift in Sources */,
+				0086A9901EC2F990000F5C01 /* DropdownController.swift in Sources */,
 				00E0B1C41E7946590001DF8F /* AlbumsConfigurator.swift in Sources */,
 				0075F1A61E7A781A001DA471 /* PhotoConfigurator.swift in Sources */,
+				0086A9991EC2F990000F5C01 /* Fetcher.swift in Sources */,
+				0086A9AA1EC2F990000F5C01 /* FrameView.swift in Sources */,
 				004B29031E8CE57F007C910A /* ImportPresenter.swift in Sources */,
 				005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */,
 				004B28F01E8CA050007C910A /* GalleryPhotoRouter.swift in Sources */,
+				0086A9AC1EC2F990000F5C01 /* Video.swift in Sources */,
 				0054A3B71EC0037D0023B17E /* INSPhoto.swift in Sources */,
+				0086A99F1EC2F990000F5C01 /* Permission.swift in Sources */,
+				0086A9841EC2F990000F5C01 /* ShutterButton.swift in Sources */,
 				0075F19E1E7A36B7001DA471 /* AlbumsCell.swift in Sources */,
 				007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */,
 				005330EE1E70F572002890A8 /* LockScreenModels.swift in Sources */,
 				0094F6D01E8DF1E6007BEFAE /* ImportCollectionViewController.swift in Sources */,
+				0086A9831EC2F990000F5C01 /* CameraView.swift in Sources */,
 				004B29021E8CE57F007C910A /* ImportModels.swift in Sources */,
+				0086A9981EC2F990000F5C01 /* UIViewController+Extensions.swift in Sources */,
 				006486EA1E70EFD500419C27 /* ConstantsAPI.swift in Sources */,
 				0054A3BC1EC0037D0023B17E /* INSPhotosTransitionAnimator.swift in Sources */,
+				0086A98A1EC2F990000F5C01 /* Image.swift in Sources */,
 				0054A3BB1EC0037D0023B17E /* INSPhotosOverlayView.swift in Sources */,
 				0094F6D91E8E6331007BEFAE /* ItemManager.swift in Sources */,
+				0086A99C1EC2F990000F5C01 /* Once.swift in Sources */,
 				0054A3BD1EC0037D0023B17E /* INSPhotosViewController.swift in Sources */,
+				0086A9851EC2F990000F5C01 /* StackView.swift in Sources */,
 				00E0B1D01E7946AB0001DF8F /* SettingConfigurator.swift in Sources */,
+				0086A9A61EC2F990000F5C01 /* VideoEditor.swift in Sources */,
+				0086A99E1EC2F990000F5C01 /* PagesController.swift in Sources */,
+				0086A9A41EC2F990000F5C01 /* EditInfo.swift in Sources */,
+				0086A9821EC2F990000F5C01 /* CameraMan.swift in Sources */,
+				0086A9AB1EC2F990000F5C01 /* GridView.swift in Sources */,
+				0086A9A51EC2F990000F5C01 /* VideoEditing.swift in Sources */,
 				004B28ED1E8CA050007C910A /* GalleryPhotoInteractor.swift in Sources */,
 				007B754B1E91E08D00483293 /* ConstantsKey.swift in Sources */,
+				0086A98B1EC2F990000F5C01 /* ImageCell.swift in Sources */,
+				0086A99B1EC2F990000F5C01 /* LocationManager.swift in Sources */,
 				00E0B1D31E7946AB0001DF8F /* SettingPresenter.swift in Sources */,
 				00E0B1C51E7946590001DF8F /* AlbumsInteractor.swift in Sources */,
 				004B29051E8CE57F007C910A /* ImportViewController.swift in Sources */,
+				0086A9931EC2F990000F5C01 /* AVAsset+Extensions.swift in Sources */,
 				0054A3BE1EC0037D0023B17E /* INSPhotoViewController.swift in Sources */,
 				005330ED1E70F572002890A8 /* LockScreenInteractor.swift in Sources */,
 				004B28EF1E8CA050007C910A /* GalleryPhotoPresenter.swift in Sources */,
 				0075F1A71E7A781A001DA471 /* PhotoInteractor.swift in Sources */,
+				0086A9AE1EC2F990000F5C01 /* VideoCell.swift in Sources */,
+				0086A9971EC2F990000F5C01 /* UIView+Extensions.swift in Sources */,
 				0054A3C01EC0037D0023B17E /* UIVIew+INSPhotoViewer.swift in Sources */,
 				0075F1AA1E7A781A001DA471 /* PhotoRouter.swift in Sources */,
 				0094F6D31E8E3E56007BEFAE /* PrivateData.xcdatamodeld in Sources */,
+				0086A9A91EC2F990000F5C01 /* EmptyView.swift in Sources */,
 				005330EF1E70F572002890A8 /* LockScreenPresenter.swift in Sources */,
+				0086A9A21EC2F990000F5C01 /* Utils.swift in Sources */,
 				004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */,
+				0086A9811EC2F990000F5C01 /* CameraController.swift in Sources */,
 				0075F1A81E7A781A001DA471 /* PhotoModels.swift in Sources */,
 				0054A3BA1EC0037D0023B17E /* INSPhotosInteractionAnimator.swift in Sources */,
 				0054A3BF1EC0037D0023B17E /* INSScalingImageView.swift in Sources */,
@@ -868,22 +1168,38 @@
 				0094F6D51E8E46F8007BEFAE /* CoreDataManager.swift in Sources */,
 				004B28EE1E8CA050007C910A /* GalleryPhotoModels.swift in Sources */,
 				0094F6D71E8E5AF3007BEFAE /* AlbumManager.swift in Sources */,
+				0086A9961EC2F990000F5C01 /* UIScrollView+Extensions.swift in Sources */,
 				004B28F11E8CA050007C910A /* GalleryPhotoViewController.swift in Sources */,
 				00E0B1C81E7946590001DF8F /* AlbumsRouter.swift in Sources */,
+				0086A9861EC2F990000F5C01 /* TripleButton.swift in Sources */,
 				00E0B1D11E7946AB0001DF8F /* SettingInteractor.swift in Sources */,
 				00E0B1D51E7946AB0001DF8F /* SettingViewController.swift in Sources */,
+				0086A9921EC2F990000F5C01 /* Array+Extensions.swift in Sources */,
 				004B28EC1E8CA050007C910A /* GalleryPhotoConfigurator.swift in Sources */,
 				005330EC1E70F572002890A8 /* LockScreenConfigurator.swift in Sources */,
+				0086A9951EC2F990000F5C01 /* UIImageView+Extensions.swift in Sources */,
 				004B29011E8CE57F007C910A /* ImportInteractor.swift in Sources */,
 				004B29041E8CE57F007C910A /* ImportRouter.swift in Sources */,
+				0086A9881EC2F990000F5C01 /* Cart.swift in Sources */,
+				0086A9941EC2F990000F5C01 /* String+Extensions.swift in Sources */,
+				0086A98E1EC2F990000F5C01 /* Config.swift in Sources */,
+				0086A9891EC2F990000F5C01 /* GAlbum.swift in Sources */,
 				00E0B1C91E7946590001DF8F /* AlbumsViewController.swift in Sources */,
+				0086A9A71EC2F990000F5C01 /* AlbumCell.swift in Sources */,
 				00E0B1C61E7946590001DF8F /* AlbumsModels.swift in Sources */,
+				0086A9AD1EC2F990000F5C01 /* VideoBox.swift in Sources */,
+				0086A9AF1EC2F990000F5C01 /* VideosController.swift in Sources */,
 				004B28F31E8CA555007C910A /* GalleryPhotoCollectionViewController.swift in Sources */,
+				0086A99A1EC2F990000F5C01 /* GBundle.swift in Sources */,
+				0086A98C1EC2F990000F5C01 /* ImagesController.swift in Sources */,
 				0075F1A91E7A781A001DA471 /* PhotoPresenter.swift in Sources */,
 				004B28F61E8CA624007C910A /* GalleryCell.swift in Sources */,
 				0075F1AB1E7A781A001DA471 /* PhotoViewController.swift in Sources */,
 				00E0B1C71E7946590001DF8F /* AlbumsPresenter.swift in Sources */,
 				0054A3B91EC0037D0023B17E /* INSPhotosDataSource.swift in Sources */,
+				0086A9871EC2F990000F5C01 /* GalleryController.swift in Sources */,
+				0086A9A81EC2F990000F5C01 /* ArrowButton.swift in Sources */,
+				0086A99D1EC2F990000F5C01 /* PageIndicator.swift in Sources */,
 				0075F1991E7A3169001DA471 /* AlbumsCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1039,6 +1355,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = B5A39BBFXA;
 				INFOPLIST_FILE = PrivateCorner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mrachen.PrivateCorner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1053,6 +1370,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = B5A39BBFXA;
 				INFOPLIST_FILE = PrivateCorner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mrachen.PrivateCorner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
