@@ -16,6 +16,7 @@ class LockScreenViewController: UIViewController {
     var passcodeState: LockScreenScene.PasscodeState!
     
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var PasscodeView: PasscodeView!
     @IBOutlet weak var OneButton: UIButton!
     @IBOutlet weak var TwoButton: UIButton!
     @IBOutlet weak var ThreeButton: UIButton!
@@ -25,12 +26,17 @@ class LockScreenViewController: UIViewController {
     @IBOutlet weak var SevenButton: UIButton!
     @IBOutlet weak var EightButton: UIButton!
     @IBOutlet weak var NineButton: UIButton!
-    @IBOutlet weak var TenButton: UIButton!
-    @IBOutlet weak var ElevenButton: UIButton!
-    @IBOutlet weak var TwelveButton: UIButton!
+    @IBOutlet weak var ZeroButton: UIButton!
     @IBOutlet weak var TitleLabel: UILabel!
-    @IBOutlet weak var AcceptButton: UIButton!
     @IBOutlet weak var CancelButton: UIButton!
+    @IBOutlet weak var LogoButton: UIButton!
+    
+    fileprivate var inputString: String = "" {
+        didSet {
+            PasscodeView.inputDotCount = inputString.characters.count
+            checkInputComplete()
+        }
+    }
     
     // MARK: Object lifecycle
     
@@ -54,6 +60,9 @@ class LockScreenViewController: UIViewController {
         backgroundImageView.image = UIImage.init(named: "data-security-tips.jpg")
         blurImage()
         
+        PasscodeView.totalDotCount = 4
+        
+        buttonArray.append(ZeroButton)
         buttonArray.append(OneButton)
         buttonArray.append(TwoButton)
         buttonArray.append(ThreeButton)
@@ -63,20 +72,16 @@ class LockScreenViewController: UIViewController {
         buttonArray.append(SevenButton)
         buttonArray.append(EightButton)
         buttonArray.append(NineButton)
-        buttonArray.append(TenButton)
-        buttonArray.append(ElevenButton)
-        buttonArray.append(TwelveButton)
-        
+
         for button in buttonArray {
-            button.layer.cornerRadius = 5.0;
-            button.layer.borderColor = UIColor.white.cgColor
-            button.layer.borderWidth = 1.0;
-            button.tag = buttonArray.index(of: button)! + 1
-            button.addTarget(self, action: #selector(pressed(sender:)), for: .touchUpInside)
+            self.styleButton(button: button)
+            button.tag = buttonArray.index(of: button)!
+            button.addTarget(self, action: #selector(clickedNumberButton(sender:)), for: .touchUpInside)
         }
-        
-        CancelButton.layer.cornerRadius = 5.0
-        AcceptButton.layer.cornerRadius = 5.0
+        self.styleButton(button: CancelButton)
+        self.styleButton(button: LogoButton)
+        CancelButton.addTarget(self, action: #selector(clickedCancelButton(sender:)), for: .touchUpInside)
+        LogoButton.titleLabel?.numberOfLines = 2;
 
         let firstInstall = UserDefaults.standard.bool(forKey: "firstInstall")
         if !firstInstall {
@@ -88,7 +93,7 @@ class LockScreenViewController: UIViewController {
         }
     }
     
-    func blurImage() {
+    private func blurImage() {
         if !UIAccessibilityIsReduceTransparencyEnabled() {
             backgroundImageView.backgroundColor = UIColor.clear
             
@@ -102,26 +107,38 @@ class LockScreenViewController: UIViewController {
         }
     }
     
+    private func styleButton(button: UIButton) {
+        button.layer.cornerRadius = 5.0;
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 1.0;
+    }
+    
+    open func wrongPassword() {
+        PasscodeView.shakeAnimationWithCompletion {
+            self.clearInput()
+        }
+    }
+    
+    open func clearInput() {
+        inputString = ""
+    }
+    
+    open func checkInputComplete() {
+        if inputString.characters.count == PasscodeView.totalDotCount {
+            if validation(inputString) {
+                validationSuccess()
+            } else {
+                validationFail()
+            }
+        }
+    }
+    
     // MARK: Navigation
     func navigateToHomeScreen() {
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+        let tabBarController = mainStoryboard.instantiateViewController(withIdentifier: "tabBarController") as! TabBarController
         
-        let tabBar = viewController.tabBar
-        let tabBarAlbumItem = tabBar.items?[0]
-        let tabBarImportItem = tabBar.items?[1]
-        let tabBarSettingItem = tabBar.items?[2]
-        
-        tabBarAlbumItem?.image = UIImage.init(named: "folder.png")?.withRenderingMode(.alwaysOriginal)
-        tabBarAlbumItem?.selectedImage = UIImage.init(named: "folder-on.png")?.withRenderingMode(.alwaysOriginal)
-        
-        tabBarImportItem?.image = UIImage.init(named: "import.png")?.withRenderingMode(.alwaysOriginal)
-        tabBarImportItem?.selectedImage = UIImage.init(named: "import-on.png")?.withRenderingMode(.alwaysOriginal)
-        
-        tabBarSettingItem?.image = UIImage.init(named: "setting.png")?.withRenderingMode(.alwaysOriginal)
-        tabBarSettingItem?.selectedImage = UIImage.init(named: "setting-on.png")?.withRenderingMode(.alwaysOriginal)
-        
-        UIApplication.shared.keyWindow?.rootViewController = viewController
+        self.navigationController?.pushViewController(tabBarController, animated: true)
     }
 
     // MARK: Display logic
@@ -129,17 +146,39 @@ class LockScreenViewController: UIViewController {
     
     // MARK: Selector logic
     
-    func pressed(sender: UIButton!) {
-        print("\(sender.tag)")
+    func clickedNumberButton(sender: UIButton!) {
+        print("clicked \(sender.tag) Button")
+        
+        guard inputString.characters.count < PasscodeView.totalDotCount else {
+            return
+        }
+        inputString += "\(sender.tag)"
     }
     
-    @IBAction func clickResetButton(_ sender: Any) {
+    func clickedCancelButton(sender: UIButton!) {
+        print("clicked Cancel Button")
         
+        guard inputString.characters.count > 0 && !PasscodeView.isFull else {
+            return
+        }
+        inputString = String(inputString.characters.dropLast())
     }
 
-    @IBAction func clickOKButton(_ sender: Any) {
-        self.navigateToHomeScreen()
-    }
+}
 
+private extension LockScreenViewController {
+    func validation(_ input: String) -> Bool {
+        return input == "1234"
+    }
+    
+    func validationSuccess() {
+        print("*️⃣ success!")
+        navigateToHomeScreen()
+    }
+    
+    func validationFail() {
+        print("*️⃣ failure!")
+        wrongPassword()
+    }
 }
 

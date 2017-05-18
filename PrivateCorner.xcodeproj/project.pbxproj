@@ -61,6 +61,8 @@
 		007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */; };
 		007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */; };
 		007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007D82D11E8B76B0005CBBC2 /* SettingCell.xib */; };
+		007F62DC1ECD86BD00226B49 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F62DB1ECD86BD00226B49 /* PasscodeView.swift */; };
+		007F62DF1ECD91CF00226B49 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F62DE1ECD91CF00226B49 /* TabBarController.swift */; };
 		0086A9811EC2F990000F5C01 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9461EC2F98F000F5C01 /* CameraController.swift */; };
 		0086A9821EC2F990000F5C01 /* CameraMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9471EC2F98F000F5C01 /* CameraMan.swift */; };
 		0086A9831EC2F990000F5C01 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9481EC2F98F000F5C01 /* CameraView.swift */; };
@@ -215,6 +217,8 @@
 		007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		007D82D11E8B76B0005CBBC2 /* SettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
+		007F62DB1ECD86BD00226B49 /* PasscodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
+		007F62DE1ECD91CF00226B49 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0086A9461EC2F98F000F5C01 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		0086A9471EC2F98F000F5C01 /* CameraMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraMan.swift; sourceTree = "<group>"; };
 		0086A9481EC2F98F000F5C01 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -504,6 +508,7 @@
 		006486E81E70EFD500419C27 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				007F62DD1ECD91AD00226B49 /* TabBar */,
 				006486F51E70F2E800419C27 /* LockScreen */,
 				00E0B1A41E7942350001DF8F /* Albums */,
 				004B28E51E8C9EA6007C910A /* GalleryPhoto */,
@@ -525,6 +530,7 @@
 		006486F51E70F2E800419C27 /* LockScreen */ = {
 			isa = PBXGroup;
 			children = (
+				007F62DA1ECD86A100226B49 /* UI */,
 				005330E81E70F572002890A8 /* LockScreenViewModel.swift */,
 				005330EB1E70F572002890A8 /* LockScreenViewController.swift */,
 			);
@@ -560,6 +566,22 @@
 				007D82D11E8B76B0005CBBC2 /* SettingCell.xib */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		007F62DA1ECD86A100226B49 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				007F62DB1ECD86BD00226B49 /* PasscodeView.swift */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		007F62DD1ECD91AD00226B49 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				007F62DE1ECD91CF00226B49 /* TabBarController.swift */,
+			);
+			name = TabBar;
 			sourceTree = "<group>";
 		};
 		0086A9411EC2F98F000F5C01 /* Gallery */ = {
@@ -1090,6 +1112,7 @@
 				0086A9911EC2F990000F5C01 /* EventHub.swift in Sources */,
 				0086A9A31EC2F990000F5C01 /* AdvancedVideoEditor.swift in Sources */,
 				007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */,
+				007F62DC1ECD86BD00226B49 /* PasscodeView.swift in Sources */,
 				0086A9A01EC2F990000F5C01 /* PermissionController.swift in Sources */,
 				0086A9901EC2F990000F5C01 /* DropdownController.swift in Sources */,
 				00E0B1C41E7946590001DF8F /* AlbumsConfigurator.swift in Sources */,
@@ -1184,6 +1207,7 @@
 				0086A9871EC2F990000F5C01 /* GalleryController.swift in Sources */,
 				0086A9A81EC2F990000F5C01 /* ArrowButton.swift in Sources */,
 				0086A99D1EC2F990000F5C01 /* PageIndicator.swift in Sources */,
+				007F62DF1ECD91CF00226B49 /* TabBarController.swift in Sources */,
 				0075F1991E7A3169001DA471 /* AlbumsCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
