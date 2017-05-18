@@ -10,18 +10,7 @@
 
 import UIKit
 
-protocol LockScreenViewControllerInput {
-    
-}
-
-protocol LockScreenViewControllerOutput {
-    
-}
-
-class LockScreenViewController: UIViewController, LockScreenViewControllerInput {
-    
-    var output: LockScreenViewControllerOutput!
-    var router: LockScreenRouter!
+class LockScreenViewController: UIViewController {
     var buttonArray = [UIButton]()
     var startState: LockScreenScene.StartState!
     var passcodeState: LockScreenScene.PasscodeState!
@@ -47,7 +36,7 @@ class LockScreenViewController: UIViewController, LockScreenViewControllerInput 
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        LockScreenConfigurator.sharedInstance.configure(viewController: self)
+
     }
     
     // MARK: View lifecycle
@@ -60,7 +49,7 @@ class LockScreenViewController: UIViewController, LockScreenViewControllerInput 
     
     // MARK: Event handling
     
-    func configureSubviews() {
+    private func configureSubviews() {
         
         backgroundImageView.image = UIImage.init(named: "data-security-tips.jpg")
         blurImage()
@@ -112,6 +101,28 @@ class LockScreenViewController: UIViewController, LockScreenViewControllerInput 
             backgroundImageView.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
         }
     }
+    
+    // MARK: Navigation
+    func navigateToHomeScreen() {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = mainStoryboard.instantiateViewController(withIdentifier: "tabBarController") as! UITabBarController
+        
+        let tabBar = viewController.tabBar
+        let tabBarAlbumItem = tabBar.items?[0]
+        let tabBarImportItem = tabBar.items?[1]
+        let tabBarSettingItem = tabBar.items?[2]
+        
+        tabBarAlbumItem?.image = UIImage.init(named: "folder.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarAlbumItem?.selectedImage = UIImage.init(named: "folder-on.png")?.withRenderingMode(.alwaysOriginal)
+        
+        tabBarImportItem?.image = UIImage.init(named: "import.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarImportItem?.selectedImage = UIImage.init(named: "import-on.png")?.withRenderingMode(.alwaysOriginal)
+        
+        tabBarSettingItem?.image = UIImage.init(named: "setting.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarSettingItem?.selectedImage = UIImage.init(named: "setting-on.png")?.withRenderingMode(.alwaysOriginal)
+        
+        UIApplication.shared.keyWindow?.rootViewController = viewController
+    }
 
     // MARK: Display logic
     
@@ -127,14 +138,8 @@ class LockScreenViewController: UIViewController, LockScreenViewControllerInput 
     }
 
     @IBAction func clickOKButton(_ sender: Any) {
-        router.navigateToHomeScreen()
+        self.navigateToHomeScreen()
     }
 
 }
 
-//This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there
-extension LockScreenViewController: LockScreenPresenterOutput {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        router.passDataToNextScene(for: segue)
-    }
-}

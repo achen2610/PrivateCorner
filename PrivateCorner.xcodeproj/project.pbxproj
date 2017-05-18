@@ -27,11 +27,7 @@
 		004B290B1E8CE96A007C910A /* import@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 004B29091E8CE96A007C910A /* import@3x.png */; };
 		004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B290D1E8CE9D1007C910A /* ImportCell.swift */; };
 		004B29101E8CEA05007C910A /* ImportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B290F1E8CEA05007C910A /* ImportCell.xib */; };
-		005330EC1E70F572002890A8 /* LockScreenConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E61E70F572002890A8 /* LockScreenConfigurator.swift */; };
-		005330ED1E70F572002890A8 /* LockScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E71E70F572002890A8 /* LockScreenInteractor.swift */; };
-		005330EE1E70F572002890A8 /* LockScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E81E70F572002890A8 /* LockScreenModels.swift */; };
-		005330EF1E70F572002890A8 /* LockScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E91E70F572002890A8 /* LockScreenPresenter.swift */; };
-		005330F01E70F572002890A8 /* LockScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330EA1E70F572002890A8 /* LockScreenRouter.swift */; };
+		005330EE1E70F572002890A8 /* LockScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E81E70F572002890A8 /* LockScreenViewModel.swift */; };
 		005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330EB1E70F572002890A8 /* LockScreenViewController.swift */; };
 		0054A3B71EC0037D0023B17E /* INSPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3AD1EC0037D0023B17E /* INSPhoto.swift */; };
 		0054A3B81EC0037D0023B17E /* INSPhotoGallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0054A3AE1EC0037D0023B17E /* INSPhotoGallery.bundle */; };
@@ -179,11 +175,7 @@
 		004B29091E8CE96A007C910A /* import@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "import@3x.png"; sourceTree = "<group>"; };
 		004B290D1E8CE9D1007C910A /* ImportCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportCell.swift; sourceTree = "<group>"; };
 		004B290F1E8CEA05007C910A /* ImportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportCell.xib; sourceTree = "<group>"; };
-		005330E61E70F572002890A8 /* LockScreenConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenConfigurator.swift; sourceTree = "<group>"; };
-		005330E71E70F572002890A8 /* LockScreenInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenInteractor.swift; sourceTree = "<group>"; };
-		005330E81E70F572002890A8 /* LockScreenModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenModels.swift; sourceTree = "<group>"; };
-		005330E91E70F572002890A8 /* LockScreenPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenPresenter.swift; sourceTree = "<group>"; };
-		005330EA1E70F572002890A8 /* LockScreenRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenRouter.swift; sourceTree = "<group>"; };
+		005330E81E70F572002890A8 /* LockScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenViewModel.swift; sourceTree = "<group>"; };
 		005330EB1E70F572002890A8 /* LockScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenViewController.swift; sourceTree = "<group>"; };
 		0054A3AD1EC0037D0023B17E /* INSPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhoto.swift; sourceTree = "<group>"; };
 		0054A3AE1EC0037D0023B17E /* INSPhotoGallery.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = INSPhotoGallery.bundle; sourceTree = "<group>"; };
@@ -533,11 +525,7 @@
 		006486F51E70F2E800419C27 /* LockScreen */ = {
 			isa = PBXGroup;
 			children = (
-				005330E61E70F572002890A8 /* LockScreenConfigurator.swift */,
-				005330E71E70F572002890A8 /* LockScreenInteractor.swift */,
-				005330E81E70F572002890A8 /* LockScreenModels.swift */,
-				005330E91E70F572002890A8 /* LockScreenPresenter.swift */,
-				005330EA1E70F572002890A8 /* LockScreenRouter.swift */,
+				005330E81E70F572002890A8 /* LockScreenViewModel.swift */,
 				005330EB1E70F572002890A8 /* LockScreenViewController.swift */,
 			);
 			name = LockScreen;
@@ -1098,7 +1086,6 @@
 				00E0B1D21E7946AB0001DF8F /* SettingModels.swift in Sources */,
 				0086A98D1EC2F990000F5C01 /* ImagesLibrary.swift in Sources */,
 				0086A98F1EC2F990000F5C01 /* Constraints.swift in Sources */,
-				005330F01E70F572002890A8 /* LockScreenRouter.swift in Sources */,
 				0086A9B01EC2F990000F5C01 /* VideosLibrary.swift in Sources */,
 				0086A9911EC2F990000F5C01 /* EventHub.swift in Sources */,
 				0086A9A31EC2F990000F5C01 /* AdvancedVideoEditor.swift in Sources */,
@@ -1118,7 +1105,7 @@
 				0086A9841EC2F990000F5C01 /* ShutterButton.swift in Sources */,
 				0075F19E1E7A36B7001DA471 /* AlbumsCell.swift in Sources */,
 				007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */,
-				005330EE1E70F572002890A8 /* LockScreenModels.swift in Sources */,
+				005330EE1E70F572002890A8 /* LockScreenViewModel.swift in Sources */,
 				0094F6D01E8DF1E6007BEFAE /* ImportCollectionViewController.swift in Sources */,
 				0086A9831EC2F990000F5C01 /* CameraView.swift in Sources */,
 				004B29021E8CE57F007C910A /* ImportModels.swift in Sources */,
@@ -1147,7 +1134,6 @@
 				004B29051E8CE57F007C910A /* ImportViewController.swift in Sources */,
 				0086A9931EC2F990000F5C01 /* AVAsset+Extensions.swift in Sources */,
 				0054A3BE1EC0037D0023B17E /* INSPhotoViewController.swift in Sources */,
-				005330ED1E70F572002890A8 /* LockScreenInteractor.swift in Sources */,
 				004B28EF1E8CA050007C910A /* GalleryPhotoPresenter.swift in Sources */,
 				0075F1A71E7A781A001DA471 /* PhotoInteractor.swift in Sources */,
 				0086A9AE1EC2F990000F5C01 /* VideoCell.swift in Sources */,
@@ -1156,7 +1142,6 @@
 				0075F1AA1E7A781A001DA471 /* PhotoRouter.swift in Sources */,
 				0094F6D31E8E3E56007BEFAE /* PrivateData.xcdatamodeld in Sources */,
 				0086A9A91EC2F990000F5C01 /* EmptyView.swift in Sources */,
-				005330EF1E70F572002890A8 /* LockScreenPresenter.swift in Sources */,
 				0086A9A21EC2F990000F5C01 /* Utils.swift in Sources */,
 				004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */,
 				0086A9811EC2F990000F5C01 /* CameraController.swift in Sources */,
@@ -1176,7 +1161,6 @@
 				00E0B1D51E7946AB0001DF8F /* SettingViewController.swift in Sources */,
 				0086A9921EC2F990000F5C01 /* Array+Extensions.swift in Sources */,
 				004B28EC1E8CA050007C910A /* GalleryPhotoConfigurator.swift in Sources */,
-				005330EC1E70F572002890A8 /* LockScreenConfigurator.swift in Sources */,
 				0086A9951EC2F990000F5C01 /* UIImageView+Extensions.swift in Sources */,
 				004B29011E8CE57F007C910A /* ImportInteractor.swift in Sources */,
 				004B29041E8CE57F007C910A /* ImportRouter.swift in Sources */,
