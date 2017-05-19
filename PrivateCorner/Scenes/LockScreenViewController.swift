@@ -10,10 +10,9 @@
 
 import UIKit
 
-class LockScreenViewController: UIViewController {
+class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     var buttonArray = [UIButton]()
-    var startState: LockScreenScene.StartState!
-    var passcodeState: LockScreenScene.PasscodeState!
+    var viewModel: LockScreenViewModel!
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var PasscodeView: PasscodeView!
@@ -31,13 +30,6 @@ class LockScreenViewController: UIViewController {
     @IBOutlet weak var CancelButton: UIButton!
     @IBOutlet weak var LogoButton: UIButton!
     
-    fileprivate var inputString: String = "" {
-        didSet {
-            PasscodeView.inputDotCount = inputString.characters.count
-            checkInputComplete()
-        }
-    }
-    
     // MARK: Object lifecycle
     
     override func awakeFromNib() {
@@ -50,12 +42,13 @@ class LockScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureSubviews()
+        styleUI()
+        viewModel = LockScreenViewModel(delegate: self)
     }
     
     // MARK: Event handling
     
-    private func configureSubviews() {
+    private func styleUI() {
         
         backgroundImageView.image = UIImage.init(named: "data-security-tips.jpg")
         blurImage()
@@ -82,15 +75,6 @@ class LockScreenViewController: UIViewController {
         self.styleButton(button: LogoButton)
         CancelButton.addTarget(self, action: #selector(clickedCancelButton(sender:)), for: .touchUpInside)
         LogoButton.titleLabel?.numberOfLines = 2;
-
-        let firstInstall = UserDefaults.standard.bool(forKey: "firstInstall")
-        if !firstInstall {
-            TitleLabel.text = "NHẬP MẬT MÃ MỚI LẦN 1"
-            startState = .FirstStart
-            passcodeState = .FirstInput
-        } else {
-            startState = .NotFirst
-        }
     }
     
     private func blurImage() {
@@ -113,32 +97,18 @@ class LockScreenViewController: UIViewController {
         button.layer.borderWidth = 1.0;
     }
     
-    open func wrongPassword() {
+    func wrongPasscode() {
         PasscodeView.shakeAnimationWithCompletion {
-            self.clearInput()
+            self.viewModel.clearInput()
+            self.TitleLabel.text = "MẬT KHẨU SAI. THỬ LẠI !"
         }
     }
     
-    open func clearInput() {
-        inputString = ""
-    }
-    
-    open func checkInputComplete() {
-        if inputString.characters.count == PasscodeView.totalDotCount {
-            if validation(inputString) {
-                validationSuccess()
-            } else {
-                validationFail()
-            }
-        }
-    }
-    
+
     // MARK: Navigation
     func navigateToHomeScreen() {
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let tabBarController = mainStoryboard.instantiateViewController(withIdentifier: "tabBarController") as! TabBarController
-        
-        self.navigationController?.pushViewController(tabBarController, animated: true)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.navigationController?.pushViewController(appDelegate.tabBarController, animated: true)
     }
 
     // MARK: Display logic
@@ -149,36 +119,40 @@ class LockScreenViewController: UIViewController {
     func clickedNumberButton(sender: UIButton!) {
         print("clicked \(sender.tag) Button")
         
-        guard inputString.characters.count < PasscodeView.totalDotCount else {
-            return
-        }
-        inputString += "\(sender.tag)"
+        viewModel.appendInputString(string: "\(sender.tag)")
     }
     
     func clickedCancelButton(sender: UIButton!) {
         print("clicked Cancel Button")
         
-        guard inputString.characters.count > 0 && !PasscodeView.isFull else {
-            return
+        if viewModel.passcodeState == .SecondInput && viewModel.inputDotCount == 0 {
+            viewModel.resetInputString()
+        } else {
+            viewModel.deleteInputString(isFull: PasscodeView.isFull)
         }
-        inputString = String(inputString.characters.dropLast())
     }
 
-}
-
-private extension LockScreenViewController {
-    func validation(_ input: String) -> Bool {
-        return input == "1234"
-    }
-    
+    // MARK: LockScreenViewModelDelegate
     func validationSuccess() {
-        print("*️⃣ success!")
+        viewModel.clearInput()
         navigateToHomeScreen()
     }
     
     func validationFail() {
-        print("*️⃣ failure!")
-        wrongPassword()
+        wrongPasscode()
+    }
+    
+    func setInputDotCount(inputDotCount: Int) {
+        PasscodeView.inputDotCount = inputDotCount
+    }
+    
+    func setTitleLabel(text: String) {
+        TitleLabel.text = text
+    }
+    
+    func setTitleButton(text: String) {
+        CancelButton.setTitle(text, for: .normal)
     }
 }
+
 

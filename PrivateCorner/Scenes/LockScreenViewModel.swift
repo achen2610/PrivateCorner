@@ -10,18 +10,131 @@
 //  Type "usecase" for some magic!
 
 import UIKit
-
-
+import Foundation
 
 struct LockScreenScene {
-    enum StartState {
+
+    enum PasscodeState {
         case FirstStart
         case NotFirst
+        case SecondInput
+        case ChangePass
     }
     
-    enum PasscodeState {
-        case FirstInput
-        case SecondInput
-        case SuccessInput
+}
+
+public protocol LockScreenViewModelDelegate: class {
+    func validationSuccess()
+    func validationFail()
+    func setInputDotCount(inputDotCount: Int)
+    func setTitleLabel(text: String)
+    func setTitleButton(text: String)
+}
+
+open class LockScreenViewModel {
+    
+    var passcodeState: LockScreenScene.PasscodeState
+    var inputDotCount: Int
+    var totalDotCount: Int
+    var passcodeSaved: String
+    weak var delegate: LockScreenViewModelDelegate?
+    
+    fileprivate var inputString: String = "" {
+        didSet {
+            inputDotCount = inputString.characters.count
+            delegate?.setInputDotCount(inputDotCount: inputDotCount)
+            checkInputComplete()
+        }
+    }
+    
+    public init(delegate: LockScreenViewModelDelegate) {
+        inputDotCount = 0
+        totalDotCount = 4
+        self.delegate = delegate
+        
+        let firstInstall = UserDefaults.standard.bool(forKey: "firstInstall")
+        if !firstInstall {
+            passcodeState = .FirstStart
+            passcodeSaved = ""
+            self.delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU LẦN 1")
+        } else {
+            passcodeState = .NotFirst
+            passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as! String
+            self.delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU CỦA BẠN")
+        }
+    }
+
+    func appendInputString(string: String) {
+        guard inputString.characters.count < totalDotCount else {
+            return
+        }
+        
+        inputString += string
+        
+        if inputString.characters.count > 0 {
+            delegate?.setTitleButton(text: "Delete")
+        }
+    }
+    
+    func deleteInputString(isFull: Bool) {
+        guard inputString.characters.count > 0 && !isFull else {
+            return
+        }
+        inputString = String(inputString.characters.dropLast())
+        
+        if inputString.characters.count == 0 && passcodeState == .SecondInput {
+            delegate?.setTitleButton(text: "Reset")
+        } else {
+            delegate?.setTitleButton(text: "Delete")
+        }
+    }
+    
+    func resetInputString() {
+        passcodeState = .FirstStart
+        passcodeSaved = ""
+        self.delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU LẦN 1")
+    }
+    
+    func checkInputComplete() {
+        if inputString.characters.count == totalDotCount {
+            if passcodeState == .FirstStart {
+                passcodeSaved = inputString
+                passcodeState = .SecondInput
+                clearInput()
+                delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU LẦN 2")
+            } else if passcodeState == .SecondInput {
+                if inputString == passcodeSaved {
+                    UserDefaults.standard.set(passcodeSaved, forKey: "passcodeSaved")
+                    UserDefaults.standard.set(true, forKey: "firstInstall")
+                    UserDefaults.standard.synchronize()
+                    
+                    clearInput()
+                    delegate?.validationSuccess()
+                } else {
+                    
+                    clearInput()
+                    delegate?.setTitleLabel(text: "MẬT KHẨU SAI. NHẬP LẠI")
+                }
+                
+            } else {
+                if validation(inputString) {
+                    print("*️⃣ success!")
+                    delegate?.validationSuccess()
+                } else {
+                    print("*️⃣ failure!")
+                    delegate?.validationFail()
+                }
+            }
+        }
+    }
+    
+    func clearInput() {
+        inputString = ""
+        delegate?.setInputDotCount(inputDotCount: 0)
+    }
+    
+    func validation(_ input: String) -> Bool {
+        return input == passcodeSaved
     }
 }
+
