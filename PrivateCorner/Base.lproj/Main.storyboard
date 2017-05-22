@@ -358,7 +358,7 @@
         <!--Gallery Photo View Controller-->
         <scene sceneID="eLZ-V9-PxS">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="jKx-Pq-flA" customClass="GalleryPhotoViewController" customModule="PrivateCorner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GalleryPhoto" hidesBottomBarWhenPushed="YES" id="jKx-Pq-flA" customClass="GalleryPhotoViewController" customModule="PrivateCorner" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jpi-6U-iNw"/>
                         <viewControllerLayoutGuide type="bottom" id="f6h-5Y-kTF"/>

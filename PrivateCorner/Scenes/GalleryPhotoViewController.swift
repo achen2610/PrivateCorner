@@ -13,23 +13,11 @@ import Photos
 //import ImagePicker
 
 
-protocol GalleryPhotoViewControllerInput {
-    func displayGallery(viewModel: GalleryPhotoScene.GetGalleryPhoto.ViewModel)
-}
+class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegate {
 
-protocol GalleryPhotoViewControllerOutput {
-    func getGallery()
-    func selectItem(request: GalleryPhotoScene.SelectItem.Request)
-    func uploadPhoto(request: GalleryPhotoScene.UploadPhoto.Request)
-}
-
-class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerInput {
-    
-    var output: GalleryPhotoViewControllerOutput!
-    var router: GalleryPhotoRouter!
 //    let imagePickerController = ImagePickerController()
     var gallery: GalleryController!
-    var items: [INSPhotoViewable] = []
+    var viewModel: GalleryPhotoViewModel!
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     
@@ -46,7 +34,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        GalleryPhotoConfigurator.sharedInstance.configure(viewController: self)
+
     }
     
     // MARK: View lifecycle
@@ -70,7 +58,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
     }
     
     func getGalleryPhotoOnLoad() {
-        output.getGallery()
+        viewModel.getGallery()
     }
     
     @IBAction func clickUploadButton(_ sender: Any) {
@@ -116,11 +104,10 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
     }
     
     func selectedPhotoAtIndex(index: Int, cell: GalleryCell) {
-        let currentPhoto = items[index]
-        let galleryPreview = INSPhotosViewController(photos: items, initialPhoto: currentPhoto, referenceView: cell)
-        
+        let currentPhoto = viewModel.photos[index]
+        let galleryPreview = INSPhotosViewController(photos: viewModel.photos, initialPhoto: currentPhoto, referenceView: cell)
         galleryPreview.referenceViewForPhotoWhenDismissingHandler = { [weak self] photo in
-            if let index = self?.items.index(where: {$0 === photo}) {
+            if let index = self?.viewModel.photos.index(where: {$0 === photo}) {
                 let indexPath = NSIndexPath(row: index, section: 0)
                 return self?.galleryCollectionView.cellForItem(at: indexPath as IndexPath) as? GalleryCell
             }
@@ -128,12 +115,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
         }
         present(galleryPreview, animated: true, completion: nil)
     }
-    
-    func uploadImageToCoreData(images: [UIImage], filenames: [String]) {
-        let request = GalleryPhotoScene.UploadPhoto.Request(images: images, filenames: filenames)
-        output.uploadPhoto(request: request)
-    }
-    
+
     func fetchImages(_ assets: [PHAsset]) -> [String] {
         var filenames = [String]()
         let imageManager = PHImageManager.default()
@@ -154,27 +136,17 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewControllerIn
         }
         return filenames
     }
-    
-    // MARK: Display logic
-    func displayGallery(viewModel: GalleryPhotoScene.GetGalleryPhoto.ViewModel) {
-        items = viewModel.photos
+
+    // GalleryPhotoViewModelDelegate
+    func reloadGallery() {
         galleryCollectionView.reloadData()
         var contentSize = galleryCollectionView.contentSize
         if contentSize.height < kScreenHeight {
             contentSize.height = kScreenHeight
             galleryCollectionView.contentSize = contentSize
         }
-//        imagePickerController.dismiss(animated: true, completion: nil)
     }
-    
-    
-}
 
-//This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there
-extension GalleryPhotoViewController: GalleryPhotoPresenterOutput {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        router.passDataToNextScene(for: segue)
-    }
 }
 
 
@@ -229,7 +201,7 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
         }
         
         let filenames = fetchImages(assets)
-        uploadImageToCoreData(images: images, filenames: filenames)
+        viewModel.uploadImageToCoreData(images: images, filenames: filenames)
         
         controller.dismiss(animated: true, completion: nil)
         gallery = nil

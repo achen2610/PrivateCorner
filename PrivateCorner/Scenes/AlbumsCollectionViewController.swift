@@ -19,7 +19,7 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        return 10
-        return albums.count
+        return viewModel.countAlbum()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -32,8 +32,8 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
             cell.deleteButton.addTarget(self, action: #selector(clickDeleteAlbum), for: .touchUpInside)
             cell.setEditMode(isEdit: isEditMode)
             
-            let album = albums[indexPath.row]
-            cell.configure(album: album)
+            let index = indexPath.row
+            viewModel.fillUI(cell: cell, atIndex: index)
             
             return cell
         }
@@ -64,6 +64,6 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
             return
         }
         
-        selectedGalleryAtIndex(index: indexPath.row)
+        viewModel.selectedGalleryAtIndex(index: indexPath.row)
     }
 }

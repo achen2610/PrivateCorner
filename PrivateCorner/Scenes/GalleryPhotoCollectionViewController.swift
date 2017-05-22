@@ -16,14 +16,14 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        return viewModel.countPhoto()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.galleryCell, for: indexPath) as? GalleryCell {
             
-            let photo = items[indexPath.row]
-            cell.configure(photo: photo)
+            let photo = viewModel.photos[indexPath.row]
+            viewModel.configure(photo: photo, withCell:cell)
             
             return cell
         }

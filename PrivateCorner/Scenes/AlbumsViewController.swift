@@ -10,24 +10,9 @@
 
 import UIKit
 
-protocol AlbumsViewControllerInput {
-    func displayAlbums(viewModel: AlbumsScene.GetAlbum.ViewModel)
-    func addAlbumToList(viewModel: AlbumsScene.AddAlbum.ViewModel)
-    func deleteAlbumFromList(index: Int)
-}
+class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
 
-protocol AlbumsViewControllerOutput {
-    func getAlbum(request: AlbumsScene.GetAlbum.Request)
-    func selectAlbum(request: AlbumsScene.SelectAlbum.Request)
-    func addAlbum(request: AlbumsScene.AddAlbum.Request)
-    func deleteAlbum(request: AlbumsScene.DeleteAlbum.Request)
-}
-
-class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
-    
-    var output: AlbumsViewControllerOutput!
-    var router: AlbumsRouter!
-    var albums: [Album] = []
+    var viewModel: AlbumsViewModel!
     var isEditMode: Bool = false
     
     @IBOutlet weak var albumsCollectionView: UICollectionView!
@@ -45,7 +30,7 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        AlbumsConfigurator.sharedInstance.configure(viewController: self)
+
     }
     
     // MARK: View lifecycle
@@ -55,7 +40,7 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
         
         self.title = "Album"
         configureCollectionViewOnLoad()
-        
+        viewModel = AlbumsViewModel(delegate: self)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -64,7 +49,7 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        getAlbumFromCoreData()
+        viewModel.getAlbumFromCoreData()
     }
     
     // MARK: Event handling
@@ -73,23 +58,7 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
         let nibName = UINib(nibName: "AlbumsCell", bundle:Bundle.main)
         albumsCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.albumsCell)
     }
-    
-    func getAlbumFromCoreData() {
-        let request = AlbumsScene.GetAlbum.Request()
-        output.getAlbum(request: request)
-    }
-    
-    func saveAlbumToCoreData(title: String) {
-        let request = AlbumsScene.AddAlbum.Request(title: title)
-        output.addAlbum(request: request)
-    }
-    
-    func selectedGalleryAtIndex(index: Int) {
-        let album = albums[index]
-        let request = AlbumsScene.SelectAlbum.Request(album: album)
-        output.selectAlbum(request: request)
-        router.navigateToGalleryScreen()
-    }
+
     
     @IBAction func addAlbumButtonItemTapped(_ sender: Any) {
         let alert = UIAlertController.init(title: "New Album", message: "Enter a name for this album", preferredStyle: .alert)
@@ -103,7 +72,11 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
         
         let saveAction = UIAlertAction.init(title: "Save", style: .default) { (action) in
             let textField = alert.textFields?.first
-            self.saveAlbumToCoreData(title: (textField?.text)!)
+
+            self.albumsCollectionView.performBatchUpdates({
+                self.viewModel.saveAlbumToCoreData(title: (textField?.text)!)
+                self.albumsCollectionView.insertItems(at: [IndexPath.init(row: 0, section: 0)])
+            }, completion: nil)
         }
         alert.addAction(saveAction)
 
@@ -128,32 +101,28 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     
     func clickDeleteAlbum(button: UIButton) {
         let index = button.tag
-        let album = albums[index]
-        let request = AlbumsScene.DeleteAlbum.Request(album: album, index: index)
-        output.deleteAlbum(request: request)
-    }
-    
-    // MARK: Display logic
-    func displayAlbums(viewModel: AlbumsScene.GetAlbum.ViewModel) {
-        albums = viewModel.albums
-        albumsCollectionView.reloadData()
-    }
-    
-    func addAlbumToList(viewModel: AlbumsScene.AddAlbum.ViewModel) {
-        let album = viewModel.album
-        albumsCollectionView.performBatchUpdates({ 
-            self.albums.insert(album, at: 0)
-            self.albumsCollectionView.insertItems(at: [IndexPath.init(row: 0, section: 0)])
+
+        albumsCollectionView.performBatchUpdates({
+            self.viewModel.deleteAlbumFromList(index: index)
+            self.albumsCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+            self.albumsCollectionView.reloadData()
         }, completion: nil)
         
     }
     
-    func deleteAlbumFromList(index: Int) {
-        albumsCollectionView.performBatchUpdates({
-            self.albums.remove(at: index)
-            self.albumsCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
-            self.albumsCollectionView.reloadData()
-        }, completion: nil)
+    // MARK: AlbumsViewModelDelegate
+    func navigationToAlbumDetail(viewModel: GalleryPhotoViewModel){
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller  = mainStoryboard.instantiateViewController(withIdentifier: "GalleryPhoto") as! GalleryPhotoViewController
+        viewModel.delegate = controller
+        controller.viewModel = viewModel
+        
+        // Push to gallery photo
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func reloadAlbum() {
+        albumsCollectionView.reloadData()
     }
     
     // MARK: Keyboard Function
@@ -177,14 +146,6 @@ class AlbumsViewController: UIViewController, AlbumsViewControllerInput {
     }
 }
 
-//This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there
-extension AlbumsViewController: AlbumsPresenterOutput {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        router.passDataToNextScene(for: segue)
-    }
-}
-
-
 extension AlbumsViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let index = textField.tag
@@ -195,20 +156,8 @@ extension AlbumsViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         let index = textField.tag
-        let album = albums[index]
-        album.name = textField.text
-        albums[index] = album
-        
-        //1
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
-
-        //2
-        do {
-            try managedContext.save()
-            print("saved!")
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
-        }
+        let title = textField.text!
+        viewModel.editAlbum(title: title, atIndex: index)
     }
 
 }
