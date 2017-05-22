@@ -10,19 +10,8 @@
 
 import UIKit
 
-protocol SettingViewControllerInput {
-    
-}
+class SettingViewController: UIViewController {
 
-protocol SettingViewControllerOutput {
-    
-}
-
-class SettingViewController: UIViewController, SettingViewControllerInput {
-    
-    var output: SettingViewControllerOutput!
-    var router: SettingRouter!
-    
     @IBOutlet weak var settingTable: UITableView!
     // MARK: Object lifecycle
     
@@ -32,7 +21,7 @@ class SettingViewController: UIViewController, SettingViewControllerInput {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        SettingConfigurator.sharedInstance.configure(viewController: self)
+
     }
     
     // MARK: View lifecycle
@@ -52,18 +41,11 @@ class SettingViewController: UIViewController, SettingViewControllerInput {
     
     func selectedSettingAtIndex(index: Int) {
         
-        if index == 0 {
-            router.navigateToPasswordScreen()
-        }
+//        if index == 0 {
+//            router.navigateToPasswordScreen()
+//        }
     }
-    
-    // MARK: Display logic
+
     
 }
 
-//This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there
-extension SettingViewController: SettingPresenterOutput {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        router.passDataToNextScene(for: segue)
-    }
-}

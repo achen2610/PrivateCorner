@@ -67,6 +67,24 @@ class AlbumManager {
     }
     
     func deleteAlbum(album: Album) {
+        let array = album.mutableSetValue(forKey: "items")
+        let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: false)
+        let items = array.sortedArray(using: [dateDescriptor]) as! [Item]
+        for item in items {
+            if let filename = item.filename {
+                let fileManager = FileManager.default
+                let path = getDocumentsDirectory().appendingPathComponent(filename)
+                if fileManager.fileExists(atPath: path.path) {
+                    print("File Exists")
+                    do {
+                        try fileManager.removeItem(atPath: path.path)
+                    } catch let error as NSError {
+                        print(error.debugDescription)
+                    }
+                }
+            }
+        }
+        
         //1
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         
@@ -80,5 +98,12 @@ class AlbumManager {
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         }
+    }
+    
+    // Private Method
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
     }
 }

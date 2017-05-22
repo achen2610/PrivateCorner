@@ -10,19 +10,8 @@
 
 import UIKit
 
-protocol ImportViewControllerInput {
-    
-}
+class ImportViewController: UIViewController {
 
-protocol ImportViewControllerOutput {
-    
-}
-
-class ImportViewController: UIViewController, ImportViewControllerInput {
-    
-    var output: ImportViewControllerOutput!
-    var router: ImportRouter!
-    
     @IBOutlet weak var importCollectionView: UICollectionView!
 
     // MARK: Object lifecycle
@@ -39,7 +28,7 @@ class ImportViewController: UIViewController, ImportViewControllerInput {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        ImportConfigurator.sharedInstance.configure(viewController: self)
+
     }
     
     // MARK: View lifecycle
@@ -58,17 +47,8 @@ class ImportViewController: UIViewController, ImportViewControllerInput {
     }
     
     func selectedImportDetailAtIndex(index: Int) {
-        
-        router.navigateToImportDetailScreen()
+
     }
-    
-    // MARK: Display logic
-    
+
 }
 
-//This should be on configurator but for some reason storyboard doesn't detect ViewController's name if placed there
-extension ImportViewController: ImportPresenterOutput {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        router.passDataToNextScene(for: segue)
-    }
-}
