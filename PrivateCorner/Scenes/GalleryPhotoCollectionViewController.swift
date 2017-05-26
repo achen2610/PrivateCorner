@@ -21,9 +21,12 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.galleryCell, for: indexPath) as? GalleryCell {
+
+            viewModel.configure(cell:cell, atIndex:indexPath.row)
             
-            let photo = viewModel.photos[indexPath.row]
-            viewModel.configure(photo: photo, withCell:cell)
+            cell.photoImageView.heroID = "image_\(indexPath.row)"
+            cell.photoImageView.heroModifiers = [.fade, .scale(0.8)]
+            cell.photoImageView.isOpaque = true
             
             return cell
         }
@@ -33,24 +36,23 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     
     // MARK: UICollectionView FlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let paddingSpace = cellLayout.sectionInsets.left * (cellLayout.itemsPerRow)
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / cellLayout.itemsPerRow
         
-        return CGSize(width: widthPerItem, height: widthPerItem)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return cellLayout.sectionInsets
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return cellLayout.sectionInsets.left
+        return cellLayout.cellSize
     }
     
     // MARK: UICollectionView Delegate
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        let cell = collectionView.cellForItem(at: indexPath) as! GalleryCell
+        cell.isEdit = isEditMode
+        
+        return true
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! GalleryCell
-        selectedPhotoAtIndex(index: indexPath.row, cell: cell)
+
+        if !isEditMode {
+            selectedPhotoAtIndex(index: indexPath, cell: cell)
+        }
     }
 }

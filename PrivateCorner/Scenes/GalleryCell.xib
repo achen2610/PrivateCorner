@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,16 +22,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hEB-wb-gOX">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="hEB-wb-gOX" firstAttribute="bottom" secondItem="2zt-d1-Hfm" secondAttribute="bottom" id="46H-YS-2id"/>
                 <constraint firstItem="2zt-d1-Hfm" firstAttribute="top" secondItem="t0y-TM-PqS" secondAttribute="top" id="6kA-ND-5mD"/>
+                <constraint firstItem="hEB-wb-gOX" firstAttribute="leading" secondItem="2zt-d1-Hfm" secondAttribute="leading" id="91G-LK-1gY"/>
                 <constraint firstItem="2zt-d1-Hfm" firstAttribute="leading" secondItem="t0y-TM-PqS" secondAttribute="leading" id="CDH-pc-eYI"/>
                 <constraint firstAttribute="bottom" secondItem="2zt-d1-Hfm" secondAttribute="bottom" id="GWY-PN-nm0"/>
+                <constraint firstItem="hEB-wb-gOX" firstAttribute="top" secondItem="2zt-d1-Hfm" secondAttribute="top" id="eba-E3-39r"/>
                 <constraint firstAttribute="trailing" secondItem="2zt-d1-Hfm" secondAttribute="trailing" id="gO9-QV-4bM"/>
+                <constraint firstItem="hEB-wb-gOX" firstAttribute="trailing" secondItem="2zt-d1-Hfm" secondAttribute="trailing" id="vsV-li-zIs"/>
             </constraints>
             <size key="customSize" width="114" height="120"/>
             <connections>
+                <outlet property="backgroundImageView" destination="hEB-wb-gOX" id="WOQ-zU-717"/>
                 <outlet property="photoImageView" destination="2zt-d1-Hfm" id="Uca-C9-NUp"/>
             </connections>
             <point key="canvasLocation" x="-124" y="13"/>

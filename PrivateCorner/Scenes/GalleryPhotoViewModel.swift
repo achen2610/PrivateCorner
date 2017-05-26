@@ -19,10 +19,12 @@ open class GalleryPhotoViewModel {
     
     fileprivate var album: Album
     var photos = [INSPhotoViewable]()
+    var titleAlbum: String
     weak var delegate: GalleryPhotoViewModelDelegate?
     
     public init(album: Album) {
         self.album = album
+        self.titleAlbum = album.name!
     }
     
     func getGallery() {
@@ -77,8 +79,9 @@ open class GalleryPhotoViewModel {
         getGallery()
     }
     
-    func configure(photo: INSPhotoViewable, withCell cell: GalleryCell) {
+    func configure(cell: GalleryCell, atIndex index: Int) {
         
+        let photo = photos[index]
         photo.loadImageWithCompletionHandler { [weak photo](image, error) in
             if let image = image {
                 if let photo = photo as? INSPhoto {

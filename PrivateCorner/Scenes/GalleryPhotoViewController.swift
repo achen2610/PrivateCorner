@@ -18,8 +18,12 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
 //    let imagePickerController = ImagePickerController()
     var gallery: GalleryController!
     var viewModel: GalleryPhotoViewModel!
+    var isEditMode: Bool = false
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
+    @IBOutlet weak var addPhotoButton: UIButton!
+    @IBOutlet weak var toolBar: UIToolbar!
+    @IBOutlet weak var bottomConstraintCollectionView: NSLayoutConstraint!
     
     // MARK: Object lifecycle
     
@@ -28,8 +32,9 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     }
     
     struct cellLayout {
-        static let itemsPerRow: CGFloat = 4
-        static let sectionInsets: UIEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 0, right: 2)
+        static let itemsPerRow: CGFloat = 3
+        static let cellSize: CGSize = CGSize(width: kScreenWidth/CGFloat(itemsPerRow),
+                                           height: kScreenWidth/CGFloat(itemsPerRow))
     }
     
     override func awakeFromNib() {
@@ -41,15 +46,30 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isHeroEnabled = true
         
-        configureSubviews()
+        styleUI()
         configureCollectionViewOnLoad()
         getGalleryPhotoOnLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+    }
+    
     // MARK: Event handling
-    func configureSubviews() {
-        self.title = "Gallery"
+    func styleUI() {
+        self.title = viewModel.titleAlbum
+
+        var rect = self.toolBar.frame
+        rect.origin.y += rect.size.height
+        self.toolBar.frame = rect
+        
+        galleryCollectionView.allowsMultipleSelection = true
+        galleryCollectionView.indicatorStyle = .white
+        
+//        bottomConstraintCollectionView.constant = 49
     }
     
     func configureCollectionViewOnLoad() {
@@ -61,6 +81,50 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         viewModel.getGallery()
     }
     
+    func selectedPhotoAtIndex(index: IndexPath, cell: GalleryCell) {
+//        let currentPhoto = viewModel.photos[index]
+//        let galleryPreview = INSPhotosViewController(photos: viewModel.photos, initialPhoto: currentPhoto, referenceView: cell)
+//        galleryPreview.referenceViewForPhotoWhenDismissingHandler = { [weak self] photo in
+//            if let index = self?.viewModel.photos.index(where: {$0 === photo}) {
+//                let indexPath = NSIndexPath(row: index, section: 0)
+//                return self?.galleryCollectionView.cellForItem(at: indexPath as IndexPath) as? GalleryCell
+//            }
+//            return nil
+//        }
+//        present(galleryPreview, animated: true, completion: nil)
+        
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller  = mainStoryboard.instantiateViewController(withIdentifier: "PhotoView") as! PhotoViewController
+        controller.selectedIndex = index
+        
+        let vm = PhotoViewViewModel(photos: viewModel.photos)
+        controller.viewModel = vm
+        
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func fetchImages(_ assets: [PHAsset]) -> [String] {
+        var filenames = [String]()
+        let imageManager = PHImageManager.default()
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
+        let size: CGSize = CGSize(width: 720, height: 1280)
+        
+        for asset in assets {
+            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
+                if let info = info {
+                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
+                        //do sth with file name
+                        filenames.append(filename)
+                    }
+                    
+                }
+            }
+        }
+        return filenames
+    }
+    
+    // MARK: Selector Event
     @IBAction func clickUploadButton(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
 //            imagePickerController.delegate = self
@@ -102,49 +166,55 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         self.present(alertController, animated: true, completion: nil)
         */
     }
-    
-    func selectedPhotoAtIndex(index: Int, cell: GalleryCell) {
-        let currentPhoto = viewModel.photos[index]
-        let galleryPreview = INSPhotosViewController(photos: viewModel.photos, initialPhoto: currentPhoto, referenceView: cell)
-        galleryPreview.referenceViewForPhotoWhenDismissingHandler = { [weak self] photo in
-            if let index = self?.viewModel.photos.index(where: {$0 === photo}) {
-                let indexPath = NSIndexPath(row: index, section: 0)
-                return self?.galleryCollectionView.cellForItem(at: indexPath as IndexPath) as? GalleryCell
+    @IBAction func clickEditMode(_ sender: Any) {
+        isEditMode = !isEditMode
+        UIView.animate(withDuration: 0.3) {
+            var rect = self.toolBar.frame
+            if self.isEditMode {
+                rect.origin.y -= rect.size.height
+            } else {
+                rect.origin.y += rect.size.height
             }
-            return nil
+            self.toolBar.frame = rect
+            
+            self.addPhotoButton.isHidden = self.isEditMode
         }
-        present(galleryPreview, animated: true, completion: nil)
-    }
-
-    func fetchImages(_ assets: [PHAsset]) -> [String] {
-        var filenames = [String]()
-        let imageManager = PHImageManager.default()
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
-        let size: CGSize = CGSize(width: 720, height: 1280)
         
-        for asset in assets {
-            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
-                if let info = info {
-                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
-                        //do sth with file name
-                        filenames.append(filename)
-                    }
-                    
-                }
-            }
+        if isEditMode {
+            self.title = "Select Photos"
+            self.navigationItem.setHidesBackButton(true, animated: false)
+            
+            let barButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(clickEditMode(_:)))
+            self.navigationItem.rightBarButtonItem = barButton
+        } else {
+            self.title = viewModel.titleAlbum
+            self.navigationItem.setHidesBackButton(false, animated: false)
+            
+            let barButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(clickEditMode(_:)))
+            self.navigationItem.rightBarButtonItem = barButton
         }
-        return filenames
     }
+    
+    @IBAction func clickSelectAllButton(_ sender: Any) {
+        
+    }
+    
+    @IBAction func clickExportButton(_ sender: Any) {
+        
+    }
+    
+    @IBAction func clickMoveButton(_ sender: Any) {
+        
+    }
+    
+    @IBAction func clickDeleteButton(_ sender: Any) {
+        
+    }
+    
 
     // GalleryPhotoViewModelDelegate
     func reloadGallery() {
         galleryCollectionView.reloadData()
-        var contentSize = galleryCollectionView.contentSize
-        if contentSize.height < kScreenHeight {
-            contentSize.height = kScreenHeight
-            galleryCollectionView.contentSize = contentSize
-        }
     }
 
 }
@@ -219,5 +289,39 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
     func galleryControllerDidCancel(_ controller: GalleryController) {
         controller.dismiss(animated: true, completion: nil)
         gallery = nil
+    }
+}
+
+extension GalleryPhotoViewController: HeroViewControllerDelegate {
+    func heroWillStartAnimatingTo(viewController: UIViewController) {
+        if (viewController as? GalleryPhotoViewController) != nil {
+            galleryCollectionView.heroModifiers = [.cascade(delta:0.015, direction:.bottomToTop, delayMatchedViews:true)]
+        } else if (viewController as? PhotoViewController) != nil {
+            let cell = galleryCollectionView.cellForItem(at: galleryCollectionView.indexPathsForSelectedItems!.first!)!
+            galleryCollectionView.heroModifiers = [.cascade(delta: 0.015, direction: .radial(center: cell.center), delayMatchedViews: true)]
+        } else {
+            galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
+        }
+    }
+    func heroWillStartAnimatingFrom(viewController: UIViewController) {
+        view.heroModifiers = nil
+        if (viewController as? GalleryPhotoViewController) != nil {
+            galleryCollectionView.heroModifiers = [.cascade(delta:0.015), .delay(0.25)]
+        } else {
+            galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
+            addPhotoButton.heroModifiers = [.fade]
+        }
+        if let vc = viewController as? PhotoViewController,
+            let originalCellIndex = vc.selectedIndex,
+            let currentCellIndex = vc.collectionView?.indexPathsForVisibleItems[0],
+            let targetAttribute = galleryCollectionView.layoutAttributesForItem(at: currentCellIndex) {
+            galleryCollectionView.heroModifiers = [.cascade(delta:0.015, direction:.inverseRadial(center:targetAttribute.center))]
+            if !galleryCollectionView.indexPathsForVisibleItems.contains(currentCellIndex) {
+                // make the cell visible
+                galleryCollectionView.scrollToItem(at: currentCellIndex,
+                                            at: originalCellIndex < currentCellIndex ? .bottom : .top,
+                                             animated: false)
+            }
+        }
     }
 }

@@ -118,7 +118,7 @@ class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
         controller.viewModel = viewModel
         
         // Push to gallery photo
-        self.navigationController?.pushViewController(controller, animated: true)
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     func reloadAlbum() {

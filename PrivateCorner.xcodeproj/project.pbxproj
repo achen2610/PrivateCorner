@@ -47,6 +47,7 @@
 		007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */; };
 		007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */; };
 		007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007D82D11E8B76B0005CBBC2 /* SettingCell.xib */; };
+		007F06D01ED3CE3F0081EAAE /* ConstantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F06CF1ED3CE3F0081EAAE /* ConstantColor.swift */; };
 		007F62DC1ECD86BD00226B49 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F62DB1ECD86BD00226B49 /* PasscodeView.swift */; };
 		007F62DF1ECD91CF00226B49 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F62DE1ECD91CF00226B49 /* TabBarController.swift */; };
 		0086A9811EC2F990000F5C01 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9461EC2F98F000F5C01 /* CameraController.swift */; };
@@ -98,11 +99,52 @@
 		0086A9AF1EC2F990000F5C01 /* VideosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97E1EC2F990000F5C01 /* VideosController.swift */; };
 		0086A9B01EC2F990000F5C01 /* VideosLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97F1EC2F990000F5C01 /* VideosLibrary.swift */; };
 		0086A9B41EC2F9B1000F5C01 /* Gallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */; };
+		008A8CCD1ED5209800FE7A86 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A8CCC1ED5209800FE7A86 /* PhotoCell.swift */; };
+		00915EFD1ED7E6A70003BECE /* PhotoViewCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00915EFC1ED7E6A70003BECE /* PhotoViewCollectionView.swift */; };
+		00915EFF1ED7E7150003BECE /* PhotoViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00915EFE1ED7E7150003BECE /* PhotoViewViewModel.swift */; };
+		00915F011ED808B00003BECE /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00915F001ED808B00003BECE /* PhotoCell.xib */; };
 		0094F6D01E8DF1E6007BEFAE /* ImportCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094F6CF1E8DF1E6007BEFAE /* ImportCollectionViewController.swift */; };
 		0094F6D31E8E3E56007BEFAE /* PrivateData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0094F6D11E8E3E56007BEFAE /* PrivateData.xcdatamodeld */; };
 		0094F6D51E8E46F8007BEFAE /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094F6D41E8E46F8007BEFAE /* CoreDataManager.swift */; };
 		0094F6D71E8E5AF3007BEFAE /* AlbumManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094F6D61E8E5AF3007BEFAE /* AlbumManager.swift */; };
 		0094F6D91E8E6331007BEFAE /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0094F6D81E8E6331007BEFAE /* ItemManager.swift */; };
+		00DDF9911ED436E800093770 /* HeroAnimatorViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9681ED436E800093770 /* HeroAnimatorViewContext.swift */; };
+		00DDF9921ED436E800093770 /* HeroCoreAnimationViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9691ED436E800093770 /* HeroCoreAnimationViewContext.swift */; };
+		00DDF9931ED436E800093770 /* HeroDefaultAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF96A1ED436E800093770 /* HeroDefaultAnimator.swift */; };
+		00DDF9941ED436E800093770 /* HeroViewPropertyViewContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF96B1ED436E800093770 /* HeroViewPropertyViewContext.swift */; };
+		00DDF9951ED436E800093770 /* HeroDebugPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF96D1ED436E800093770 /* HeroDebugPlugin.swift */; };
+		00DDF9961ED436E800093770 /* HeroDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF96E1ED436E800093770 /* HeroDebugView.swift */; };
+		00DDF9971ED436E800093770 /* DefaultAnimationPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF96F1ED436E800093770 /* DefaultAnimationPreprocessor.swift */; };
+		00DDF9981ED436E800093770 /* Array+HeroModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9711ED436E800093770 /* Array+HeroModifier.swift */; };
+		00DDF9991ED436E800093770 /* CALayer+Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9721ED436E800093770 /* CALayer+Hero.swift */; };
+		00DDF99A1ED436E800093770 /* CAMediaTimingFunction+Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9731ED436E800093770 /* CAMediaTimingFunction+Hero.swift */; };
+		00DDF99B1ED436E800093770 /* CG+Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9741ED436E800093770 /* CG+Hero.swift */; };
+		00DDF99C1ED436E800093770 /* DispatchQueue+Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9751ED436E800093770 /* DispatchQueue+Hero.swift */; };
+		00DDF99D1ED436E800093770 /* UIKit+Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9761ED436E800093770 /* UIKit+Hero.swift */; };
+		00DDF99E1ED436E800093770 /* UIView+Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9771ED436E800093770 /* UIView+Hero.swift */; };
+		00DDF99F1ED436E800093770 /* UIViewController+Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9781ED436E800093770 /* UIViewController+Hero.swift */; };
+		00DDF9A01ED436E800093770 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF97A1ED436E800093770 /* Hero.swift */; };
+		00DDF9A11ED436E800093770 /* HeroBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF97B1ED436E800093770 /* HeroBaseController.swift */; };
+		00DDF9A21ED436E800093770 /* HeroContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF97C1ED436E800093770 /* HeroContext.swift */; };
+		00DDF9A31ED436E800093770 /* HeroIndependentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF97D1ED436E800093770 /* HeroIndependentController.swift */; };
+		00DDF9A41ED436E800093770 /* HeroModifier+HeroStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF97E1ED436E800093770 /* HeroModifier+HeroStringConvertible.swift */; };
+		00DDF9A51ED436E800093770 /* HeroModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF97F1ED436E800093770 /* HeroModifier.swift */; };
+		00DDF9A61ED436E800093770 /* HeroPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9801ED436E800093770 /* HeroPlugin.swift */; };
+		00DDF9A71ED436E800093770 /* HeroStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9811ED436E800093770 /* HeroStringConvertible.swift */; };
+		00DDF9A81ED436E800093770 /* HeroTargetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9821ED436E800093770 /* HeroTargetState.swift */; };
+		00DDF9A91ED436E800093770 /* HeroTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9831ED436E800093770 /* HeroTypes.swift */; };
+		00DDF9AA1ED436E800093770 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00DDF9841ED436E800093770 /* Info.plist */; };
+		00DDF9AB1ED436E800093770 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9861ED436E800093770 /* Lexer.swift */; };
+		00DDF9AC1ED436E800093770 /* Nodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9871ED436E800093770 /* Nodes.swift */; };
+		00DDF9AD1ED436E800093770 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9881ED436E800093770 /* Parser.swift */; };
+		00DDF9AE1ED436E800093770 /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9891ED436E800093770 /* Regex.swift */; };
+		00DDF9AF1ED436E800093770 /* BasePreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF98B1ED436E800093770 /* BasePreprocessor.swift */; };
+		00DDF9B01ED436E800093770 /* CascadePreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF98C1ED436E800093770 /* CascadePreprocessor.swift */; };
+		00DDF9B11ED436E800093770 /* DurationPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF98D1ED436E800093770 /* DurationPreprocessor.swift */; };
+		00DDF9B21ED436E800093770 /* IgnoreSubviewModifiersPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF98E1ED436E800093770 /* IgnoreSubviewModifiersPreprocessor.swift */; };
+		00DDF9B31ED436E800093770 /* MatchPreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF98F1ED436E800093770 /* MatchPreprocessor.swift */; };
+		00DDF9B41ED436E800093770 /* SourcePreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9901ED436E800093770 /* SourcePreprocessor.swift */; };
+		00DDF9B71ED43D4F00093770 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DDF9B61ED43D4F00093770 /* PhotoViewController.swift */; };
 		00E0B1A01E79411E0001DF8F /* folder-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19C1E79411E0001DF8F /* folder-on@3x.png */; };
 		00E0B1A11E79411E0001DF8F /* folder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19D1E79411E0001DF8F /* folder@3x.png */; };
 		00E0B1A21E79411E0001DF8F /* setting-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E0B19E1E79411E0001DF8F /* setting-on@3x.png */; };
@@ -179,6 +221,7 @@
 		007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		007D82D11E8B76B0005CBBC2 /* SettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
+		007F06CF1ED3CE3F0081EAAE /* ConstantColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantColor.swift; sourceTree = "<group>"; };
 		007F62DB1ECD86BD00226B49 /* PasscodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
 		007F62DE1ECD91CF00226B49 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		0086A9461EC2F98F000F5C01 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
@@ -230,11 +273,53 @@
 		0086A97E1EC2F990000F5C01 /* VideosController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosController.swift; sourceTree = "<group>"; };
 		0086A97F1EC2F990000F5C01 /* VideosLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosLibrary.swift; sourceTree = "<group>"; };
 		0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Gallery.bundle; sourceTree = "<group>"; };
+		008A8CCC1ED5209800FE7A86 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		00915EFC1ED7E6A70003BECE /* PhotoViewCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewCollectionView.swift; sourceTree = "<group>"; };
+		00915EFE1ED7E7150003BECE /* PhotoViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewViewModel.swift; sourceTree = "<group>"; };
+		00915F001ED808B00003BECE /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 		0094F6CF1E8DF1E6007BEFAE /* ImportCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportCollectionViewController.swift; sourceTree = "<group>"; };
 		0094F6D21E8E3E56007BEFAE /* PrivateData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PrivateData.xcdatamodel; sourceTree = "<group>"; };
 		0094F6D41E8E46F8007BEFAE /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		0094F6D61E8E5AF3007BEFAE /* AlbumManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumManager.swift; sourceTree = "<group>"; };
 		0094F6D81E8E6331007BEFAE /* ItemManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemManager.swift; sourceTree = "<group>"; };
+		00DDF9681ED436E800093770 /* HeroAnimatorViewContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroAnimatorViewContext.swift; sourceTree = "<group>"; };
+		00DDF9691ED436E800093770 /* HeroCoreAnimationViewContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroCoreAnimationViewContext.swift; sourceTree = "<group>"; };
+		00DDF96A1ED436E800093770 /* HeroDefaultAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroDefaultAnimator.swift; sourceTree = "<group>"; };
+		00DDF96B1ED436E800093770 /* HeroViewPropertyViewContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroViewPropertyViewContext.swift; sourceTree = "<group>"; };
+		00DDF96D1ED436E800093770 /* HeroDebugPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroDebugPlugin.swift; sourceTree = "<group>"; };
+		00DDF96E1ED436E800093770 /* HeroDebugView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroDebugView.swift; sourceTree = "<group>"; };
+		00DDF96F1ED436E800093770 /* DefaultAnimationPreprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAnimationPreprocessor.swift; sourceTree = "<group>"; };
+		00DDF9711ED436E800093770 /* Array+HeroModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+HeroModifier.swift"; sourceTree = "<group>"; };
+		00DDF9721ED436E800093770 /* CALayer+Hero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Hero.swift"; sourceTree = "<group>"; };
+		00DDF9731ED436E800093770 /* CAMediaTimingFunction+Hero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAMediaTimingFunction+Hero.swift"; sourceTree = "<group>"; };
+		00DDF9741ED436E800093770 /* CG+Hero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CG+Hero.swift"; sourceTree = "<group>"; };
+		00DDF9751ED436E800093770 /* DispatchQueue+Hero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Hero.swift"; sourceTree = "<group>"; };
+		00DDF9761ED436E800093770 /* UIKit+Hero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIKit+Hero.swift"; sourceTree = "<group>"; };
+		00DDF9771ED436E800093770 /* UIView+Hero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Hero.swift"; sourceTree = "<group>"; };
+		00DDF9781ED436E800093770 /* UIViewController+Hero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Hero.swift"; sourceTree = "<group>"; };
+		00DDF9791ED436E800093770 /* Hero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hero.h; sourceTree = "<group>"; };
+		00DDF97A1ED436E800093770 /* Hero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
+		00DDF97B1ED436E800093770 /* HeroBaseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroBaseController.swift; sourceTree = "<group>"; };
+		00DDF97C1ED436E800093770 /* HeroContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroContext.swift; sourceTree = "<group>"; };
+		00DDF97D1ED436E800093770 /* HeroIndependentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroIndependentController.swift; sourceTree = "<group>"; };
+		00DDF97E1ED436E800093770 /* HeroModifier+HeroStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HeroModifier+HeroStringConvertible.swift"; sourceTree = "<group>"; };
+		00DDF97F1ED436E800093770 /* HeroModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroModifier.swift; sourceTree = "<group>"; };
+		00DDF9801ED436E800093770 /* HeroPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroPlugin.swift; sourceTree = "<group>"; };
+		00DDF9811ED436E800093770 /* HeroStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroStringConvertible.swift; sourceTree = "<group>"; };
+		00DDF9821ED436E800093770 /* HeroTargetState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroTargetState.swift; sourceTree = "<group>"; };
+		00DDF9831ED436E800093770 /* HeroTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeroTypes.swift; sourceTree = "<group>"; };
+		00DDF9841ED436E800093770 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00DDF9861ED436E800093770 /* Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
+		00DDF9871ED436E800093770 /* Nodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nodes.swift; sourceTree = "<group>"; };
+		00DDF9881ED436E800093770 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		00DDF9891ED436E800093770 /* Regex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		00DDF98B1ED436E800093770 /* BasePreprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasePreprocessor.swift; sourceTree = "<group>"; };
+		00DDF98C1ED436E800093770 /* CascadePreprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CascadePreprocessor.swift; sourceTree = "<group>"; };
+		00DDF98D1ED436E800093770 /* DurationPreprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationPreprocessor.swift; sourceTree = "<group>"; };
+		00DDF98E1ED436E800093770 /* IgnoreSubviewModifiersPreprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IgnoreSubviewModifiersPreprocessor.swift; sourceTree = "<group>"; };
+		00DDF98F1ED436E800093770 /* MatchPreprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchPreprocessor.swift; sourceTree = "<group>"; };
+		00DDF9901ED436E800093770 /* SourcePreprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourcePreprocessor.swift; sourceTree = "<group>"; };
+		00DDF9B61ED43D4F00093770 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		00E0B19C1E79411E0001DF8F /* folder-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder-on@3x.png"; sourceTree = "<group>"; };
 		00E0B19D1E79411E0001DF8F /* folder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "folder@3x.png"; sourceTree = "<group>"; };
 		00E0B19E1E79411E0001DF8F /* setting-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-on@3x.png"; sourceTree = "<group>"; };
@@ -285,9 +370,9 @@
 			isa = PBXGroup;
 			children = (
 				004B28F41E8CA617007C910A /* UI */,
+				00784CD61ED28D18004F3E95 /* GalleryPhotoViewModel.swift */,
 				004B28EB1E8CA050007C910A /* GalleryPhotoViewController.swift */,
 				004B28F21E8CA555007C910A /* GalleryPhotoCollectionViewController.swift */,
-				00784CD61ED28D18004F3E95 /* GalleryPhotoViewModel.swift */,
 			);
 			name = GalleryPhoto;
 			sourceTree = "<group>";
@@ -402,6 +487,7 @@
 				006486E31E70EFD500419C27 /* ConstantsAPI.swift */,
 				007B75481E91E01400483293 /* ConstantsSize.swift */,
 				007B754A1E91E08D00483293 /* ConstantsKey.swift */,
+				007F06CF1ED3CE3F0081EAAE /* ConstantColor.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -432,6 +518,7 @@
 		006486E61E70EFD500419C27 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				00DDF9661ED436E800093770 /* Hero */,
 				0086A9411EC2F98F000F5C01 /* Gallery */,
 				0054A3AC1EC0037D0023B17E /* INSPhotoGallery */,
 			);
@@ -455,6 +542,7 @@
 				006486F51E70F2E800419C27 /* LockScreen */,
 				00E0B1A41E7942350001DF8F /* Albums */,
 				004B28E51E8C9EA6007C910A /* GalleryPhoto */,
+				00DDF9B51ED43D2B00093770 /* PhotoView */,
 				004B28F91E8CE55C007C910A /* Import */,
 				00E0B1B11E7943B40001DF8F /* Setting */,
 			);
@@ -681,13 +769,117 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		008A8CCB1ED5208B00FE7A86 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				008A8CCC1ED5209800FE7A86 /* PhotoCell.swift */,
+				00915F001ED808B00003BECE /* PhotoCell.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		00DDF9661ED436E800093770 /* Hero */ = {
+			isa = PBXGroup;
+			children = (
+				00DDF9671ED436E800093770 /* Animator */,
+				00DDF96C1ED436E800093770 /* Debug Plugin */,
+				00DDF96F1ED436E800093770 /* DefaultAnimationPreprocessor.swift */,
+				00DDF9701ED436E800093770 /* Extensions */,
+				00DDF9791ED436E800093770 /* Hero.h */,
+				00DDF97A1ED436E800093770 /* Hero.swift */,
+				00DDF97B1ED436E800093770 /* HeroBaseController.swift */,
+				00DDF97C1ED436E800093770 /* HeroContext.swift */,
+				00DDF97D1ED436E800093770 /* HeroIndependentController.swift */,
+				00DDF97E1ED436E800093770 /* HeroModifier+HeroStringConvertible.swift */,
+				00DDF97F1ED436E800093770 /* HeroModifier.swift */,
+				00DDF9801ED436E800093770 /* HeroPlugin.swift */,
+				00DDF9811ED436E800093770 /* HeroStringConvertible.swift */,
+				00DDF9821ED436E800093770 /* HeroTargetState.swift */,
+				00DDF9831ED436E800093770 /* HeroTypes.swift */,
+				00DDF9841ED436E800093770 /* Info.plist */,
+				00DDF9851ED436E800093770 /* Parser */,
+				00DDF98A1ED436E800093770 /* Preprocessors */,
+			);
+			path = Hero;
+			sourceTree = "<group>";
+		};
+		00DDF9671ED436E800093770 /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				00DDF9681ED436E800093770 /* HeroAnimatorViewContext.swift */,
+				00DDF9691ED436E800093770 /* HeroCoreAnimationViewContext.swift */,
+				00DDF96A1ED436E800093770 /* HeroDefaultAnimator.swift */,
+				00DDF96B1ED436E800093770 /* HeroViewPropertyViewContext.swift */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		00DDF96C1ED436E800093770 /* Debug Plugin */ = {
+			isa = PBXGroup;
+			children = (
+				00DDF96D1ED436E800093770 /* HeroDebugPlugin.swift */,
+				00DDF96E1ED436E800093770 /* HeroDebugView.swift */,
+			);
+			path = "Debug Plugin";
+			sourceTree = "<group>";
+		};
+		00DDF9701ED436E800093770 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				00DDF9711ED436E800093770 /* Array+HeroModifier.swift */,
+				00DDF9721ED436E800093770 /* CALayer+Hero.swift */,
+				00DDF9731ED436E800093770 /* CAMediaTimingFunction+Hero.swift */,
+				00DDF9741ED436E800093770 /* CG+Hero.swift */,
+				00DDF9751ED436E800093770 /* DispatchQueue+Hero.swift */,
+				00DDF9761ED436E800093770 /* UIKit+Hero.swift */,
+				00DDF9771ED436E800093770 /* UIView+Hero.swift */,
+				00DDF9781ED436E800093770 /* UIViewController+Hero.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		00DDF9851ED436E800093770 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				00DDF9861ED436E800093770 /* Lexer.swift */,
+				00DDF9871ED436E800093770 /* Nodes.swift */,
+				00DDF9881ED436E800093770 /* Parser.swift */,
+				00DDF9891ED436E800093770 /* Regex.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		00DDF98A1ED436E800093770 /* Preprocessors */ = {
+			isa = PBXGroup;
+			children = (
+				00DDF98B1ED436E800093770 /* BasePreprocessor.swift */,
+				00DDF98C1ED436E800093770 /* CascadePreprocessor.swift */,
+				00DDF98D1ED436E800093770 /* DurationPreprocessor.swift */,
+				00DDF98E1ED436E800093770 /* IgnoreSubviewModifiersPreprocessor.swift */,
+				00DDF98F1ED436E800093770 /* MatchPreprocessor.swift */,
+				00DDF9901ED436E800093770 /* SourcePreprocessor.swift */,
+			);
+			path = Preprocessors;
+			sourceTree = "<group>";
+		};
+		00DDF9B51ED43D2B00093770 /* PhotoView */ = {
+			isa = PBXGroup;
+			children = (
+				008A8CCB1ED5208B00FE7A86 /* UI */,
+				00915EFE1ED7E7150003BECE /* PhotoViewViewModel.swift */,
+				00DDF9B61ED43D4F00093770 /* PhotoViewController.swift */,
+				00915EFC1ED7E6A70003BECE /* PhotoViewCollectionView.swift */,
+			);
+			name = PhotoView;
+			sourceTree = "<group>";
+		};
 		00E0B1A41E7942350001DF8F /* Albums */ = {
 			isa = PBXGroup;
 			children = (
 				0075F19A1E7A3682001DA471 /* UI */,
+				00784CD41ED28AF6004F3E95 /* AlbumsViewModel.swift */,
 				00E0B1C31E7946590001DF8F /* AlbumsViewController.swift */,
 				0075F1981E7A3169001DA471 /* AlbumsCollectionViewController.swift */,
-				00784CD41ED28AF6004F3E95 /* AlbumsViewModel.swift */,
 			);
 			name = Albums;
 			sourceTree = "<group>";
@@ -846,11 +1038,13 @@
 				00E0B1A31E79411E0001DF8F /* setting@3x.png in Resources */,
 				00E8A0A71E9CDCA900221112 /* upload@3x.png in Resources */,
 				00E0B1A11E79411E0001DF8F /* folder@3x.png in Resources */,
+				00915F011ED808B00003BECE /* PhotoCell.xib in Resources */,
 				007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */,
 				006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */,
 				004B290A1E8CE96A007C910A /* import-on@3x.png in Resources */,
 				004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
+				00DDF9AA1ED436E800093770 /* Info.plist in Resources */,
 				0047FB611E9B749300BDF919 /* remove@3x.png in Resources */,
 				0054A3B81EC0037D0023B17E /* INSPhotoGallery.bundle in Resources */,
 				0075F19C1E7A3698001DA471 /* AlbumsCell.xib in Resources */,
@@ -1022,9 +1216,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00DDF99E1ED436E800093770 /* UIView+Hero.swift in Sources */,
+				00DDF9931ED436E800093770 /* HeroDefaultAnimator.swift in Sources */,
+				00DDF99F1ED436E800093770 /* UIViewController+Hero.swift in Sources */,
+				00DDF9B01ED436E800093770 /* CascadePreprocessor.swift in Sources */,
+				00DDF9A51ED436E800093770 /* HeroModifier.swift in Sources */,
 				0086A9A11EC2F990000F5C01 /* PermissionView.swift in Sources */,
 				0086A98D1EC2F990000F5C01 /* ImagesLibrary.swift in Sources */,
+				00DDF9A11ED436E800093770 /* HeroBaseController.swift in Sources */,
+				00DDF9921ED436E800093770 /* HeroCoreAnimationViewContext.swift in Sources */,
 				0086A98F1EC2F990000F5C01 /* Constraints.swift in Sources */,
+				00DDF9A91ED436E800093770 /* HeroTypes.swift in Sources */,
 				0086A9B01EC2F990000F5C01 /* VideosLibrary.swift in Sources */,
 				0086A9911EC2F990000F5C01 /* EventHub.swift in Sources */,
 				0086A9A31EC2F990000F5C01 /* AdvancedVideoEditor.swift in Sources */,
@@ -1035,12 +1237,20 @@
 				0086A9991EC2F990000F5C01 /* Fetcher.swift in Sources */,
 				0086A9AA1EC2F990000F5C01 /* FrameView.swift in Sources */,
 				005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */,
+				00DDF9AD1ED436E800093770 /* Parser.swift in Sources */,
+				00DDF9B11ED436E800093770 /* DurationPreprocessor.swift in Sources */,
 				0086A9AC1EC2F990000F5C01 /* Video.swift in Sources */,
 				0054A3B71EC0037D0023B17E /* INSPhoto.swift in Sources */,
 				0086A99F1EC2F990000F5C01 /* Permission.swift in Sources */,
+				00915EFD1ED7E6A70003BECE /* PhotoViewCollectionView.swift in Sources */,
 				0086A9841EC2F990000F5C01 /* ShutterButton.swift in Sources */,
 				0075F19E1E7A36B7001DA471 /* AlbumsCell.swift in Sources */,
+				00DDF9961ED436E800093770 /* HeroDebugView.swift in Sources */,
+				00DDF9B71ED43D4F00093770 /* PhotoViewController.swift in Sources */,
+				00915EFF1ED7E7150003BECE /* PhotoViewViewModel.swift in Sources */,
 				007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */,
+				00DDF9981ED436E800093770 /* Array+HeroModifier.swift in Sources */,
+				00DDF99B1ED436E800093770 /* CG+Hero.swift in Sources */,
 				005330EE1E70F572002890A8 /* LockScreenViewModel.swift in Sources */,
 				0094F6D01E8DF1E6007BEFAE /* ImportCollectionViewController.swift in Sources */,
 				0086A9831EC2F990000F5C01 /* CameraView.swift in Sources */,
@@ -1049,15 +1259,19 @@
 				00784CD51ED28AF6004F3E95 /* AlbumsViewModel.swift in Sources */,
 				0054A3BC1EC0037D0023B17E /* INSPhotosTransitionAnimator.swift in Sources */,
 				0086A98A1EC2F990000F5C01 /* Image.swift in Sources */,
+				00DDF9A61ED436E800093770 /* HeroPlugin.swift in Sources */,
 				0054A3BB1EC0037D0023B17E /* INSPhotosOverlayView.swift in Sources */,
 				0094F6D91E8E6331007BEFAE /* ItemManager.swift in Sources */,
 				0086A99C1EC2F990000F5C01 /* Once.swift in Sources */,
+				00DDF9B31ED436E800093770 /* MatchPreprocessor.swift in Sources */,
 				0054A3BD1EC0037D0023B17E /* INSPhotosViewController.swift in Sources */,
 				0086A9851EC2F990000F5C01 /* StackView.swift in Sources */,
 				0086A9A61EC2F990000F5C01 /* VideoEditor.swift in Sources */,
 				0086A99E1EC2F990000F5C01 /* PagesController.swift in Sources */,
 				0086A9A41EC2F990000F5C01 /* EditInfo.swift in Sources */,
+				00DDF9991ED436E800093770 /* CALayer+Hero.swift in Sources */,
 				0086A9821EC2F990000F5C01 /* CameraMan.swift in Sources */,
+				00DDF9A41ED436E800093770 /* HeroModifier+HeroStringConvertible.swift in Sources */,
 				0086A9AB1EC2F990000F5C01 /* GridView.swift in Sources */,
 				0086A9A51EC2F990000F5C01 /* VideoEditing.swift in Sources */,
 				007B754B1E91E08D00483293 /* ConstantsKey.swift in Sources */,
@@ -1065,7 +1279,12 @@
 				0086A99B1EC2F990000F5C01 /* LocationManager.swift in Sources */,
 				00784CD71ED28D18004F3E95 /* GalleryPhotoViewModel.swift in Sources */,
 				004B29051E8CE57F007C910A /* ImportViewController.swift in Sources */,
+				00DDF99A1ED436E800093770 /* CAMediaTimingFunction+Hero.swift in Sources */,
+				00DDF99D1ED436E800093770 /* UIKit+Hero.swift in Sources */,
+				00DDF9AF1ED436E800093770 /* BasePreprocessor.swift in Sources */,
 				0086A9931EC2F990000F5C01 /* AVAsset+Extensions.swift in Sources */,
+				00DDF9941ED436E800093770 /* HeroViewPropertyViewContext.swift in Sources */,
+				00DDF9A01ED436E800093770 /* Hero.swift in Sources */,
 				0054A3BE1EC0037D0023B17E /* INSPhotoViewController.swift in Sources */,
 				0086A9AE1EC2F990000F5C01 /* VideoCell.swift in Sources */,
 				0086A9971EC2F990000F5C01 /* UIView+Extensions.swift in Sources */,
@@ -1074,37 +1293,52 @@
 				0086A9A91EC2F990000F5C01 /* EmptyView.swift in Sources */,
 				0086A9A21EC2F990000F5C01 /* Utils.swift in Sources */,
 				004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */,
+				00DDF9971ED436E800093770 /* DefaultAnimationPreprocessor.swift in Sources */,
 				0086A9811EC2F990000F5C01 /* CameraController.swift in Sources */,
+				00DDF9B41ED436E800093770 /* SourcePreprocessor.swift in Sources */,
 				0054A3BA1EC0037D0023B17E /* INSPhotosInteractionAnimator.swift in Sources */,
 				0054A3BF1EC0037D0023B17E /* INSScalingImageView.swift in Sources */,
 				006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */,
+				00DDF99C1ED436E800093770 /* DispatchQueue+Hero.swift in Sources */,
 				007B75491E91E01400483293 /* ConstantsSize.swift in Sources */,
 				0094F6D51E8E46F8007BEFAE /* CoreDataManager.swift in Sources */,
+				00DDF9A21ED436E800093770 /* HeroContext.swift in Sources */,
 				0094F6D71E8E5AF3007BEFAE /* AlbumManager.swift in Sources */,
 				0086A9961EC2F990000F5C01 /* UIScrollView+Extensions.swift in Sources */,
+				00DDF9911ED436E800093770 /* HeroAnimatorViewContext.swift in Sources */,
 				004B28F11E8CA050007C910A /* GalleryPhotoViewController.swift in Sources */,
 				0086A9861EC2F990000F5C01 /* TripleButton.swift in Sources */,
+				00DDF9951ED436E800093770 /* HeroDebugPlugin.swift in Sources */,
 				00E0B1D51E7946AB0001DF8F /* SettingViewController.swift in Sources */,
 				0086A9921EC2F990000F5C01 /* Array+Extensions.swift in Sources */,
 				0086A9951EC2F990000F5C01 /* UIImageView+Extensions.swift in Sources */,
 				0086A9881EC2F990000F5C01 /* Cart.swift in Sources */,
 				0086A9941EC2F990000F5C01 /* String+Extensions.swift in Sources */,
 				0086A98E1EC2F990000F5C01 /* Config.swift in Sources */,
+				008A8CCD1ED5209800FE7A86 /* PhotoCell.swift in Sources */,
 				0086A9891EC2F990000F5C01 /* GAlbum.swift in Sources */,
 				00E0B1C91E7946590001DF8F /* AlbumsViewController.swift in Sources */,
+				00DDF9AE1ED436E800093770 /* Regex.swift in Sources */,
 				0086A9A71EC2F990000F5C01 /* AlbumCell.swift in Sources */,
 				0086A9AD1EC2F990000F5C01 /* VideoBox.swift in Sources */,
+				00DDF9A71ED436E800093770 /* HeroStringConvertible.swift in Sources */,
 				0086A9AF1EC2F990000F5C01 /* VideosController.swift in Sources */,
 				004B28F31E8CA555007C910A /* GalleryPhotoCollectionViewController.swift in Sources */,
+				00DDF9AC1ED436E800093770 /* Nodes.swift in Sources */,
 				0086A99A1EC2F990000F5C01 /* GBundle.swift in Sources */,
 				0086A98C1EC2F990000F5C01 /* ImagesController.swift in Sources */,
 				004B28F61E8CA624007C910A /* GalleryCell.swift in Sources */,
+				00DDF9B21ED436E800093770 /* IgnoreSubviewModifiersPreprocessor.swift in Sources */,
 				0054A3B91EC0037D0023B17E /* INSPhotosDataSource.swift in Sources */,
 				0086A9871EC2F990000F5C01 /* GalleryController.swift in Sources */,
+				007F06D01ED3CE3F0081EAAE /* ConstantColor.swift in Sources */,
+				00DDF9A81ED436E800093770 /* HeroTargetState.swift in Sources */,
+				00DDF9AB1ED436E800093770 /* Lexer.swift in Sources */,
 				0086A9A81EC2F990000F5C01 /* ArrowButton.swift in Sources */,
 				0086A99D1EC2F990000F5C01 /* PageIndicator.swift in Sources */,
 				007F62DF1ECD91CF00226B49 /* TabBarController.swift in Sources */,
 				0075F1991E7A3169001DA471 /* AlbumsCollectionViewController.swift in Sources */,
+				00DDF9A31ED436E800093770 /* HeroIndependentController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
