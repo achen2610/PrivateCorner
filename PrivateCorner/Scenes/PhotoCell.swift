@@ -126,3 +126,4 @@ extension PhotoCell: UIScrollViewDelegate {
         centerIfNeeded()
     }
 }
+

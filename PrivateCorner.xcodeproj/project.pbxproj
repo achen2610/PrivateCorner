@@ -19,16 +19,6 @@
 		004B29101E8CEA05007C910A /* ImportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B290F1E8CEA05007C910A /* ImportCell.xib */; };
 		005330EE1E70F572002890A8 /* LockScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E81E70F572002890A8 /* LockScreenViewModel.swift */; };
 		005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330EB1E70F572002890A8 /* LockScreenViewController.swift */; };
-		0054A3B71EC0037D0023B17E /* INSPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3AD1EC0037D0023B17E /* INSPhoto.swift */; };
-		0054A3B81EC0037D0023B17E /* INSPhotoGallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0054A3AE1EC0037D0023B17E /* INSPhotoGallery.bundle */; };
-		0054A3B91EC0037D0023B17E /* INSPhotosDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3AF1EC0037D0023B17E /* INSPhotosDataSource.swift */; };
-		0054A3BA1EC0037D0023B17E /* INSPhotosInteractionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B01EC0037D0023B17E /* INSPhotosInteractionAnimator.swift */; };
-		0054A3BB1EC0037D0023B17E /* INSPhotosOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B11EC0037D0023B17E /* INSPhotosOverlayView.swift */; };
-		0054A3BC1EC0037D0023B17E /* INSPhotosTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B21EC0037D0023B17E /* INSPhotosTransitionAnimator.swift */; };
-		0054A3BD1EC0037D0023B17E /* INSPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B31EC0037D0023B17E /* INSPhotosViewController.swift */; };
-		0054A3BE1EC0037D0023B17E /* INSPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B41EC0037D0023B17E /* INSPhotoViewController.swift */; };
-		0054A3BF1EC0037D0023B17E /* INSScalingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B51EC0037D0023B17E /* INSScalingImageView.swift */; };
-		0054A3C01EC0037D0023B17E /* UIVIew+INSPhotoViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0054A3B61EC0037D0023B17E /* UIVIew+INSPhotoViewer.swift */; };
 		006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486AA1E70EAD900419C27 /* AppDelegate.swift */; };
 		006486C01E70EAD900419C27 /* PrivateCornerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486BF1E70EAD900419C27 /* PrivateCornerTests.swift */; };
 		006486CB1E70EAD900419C27 /* PrivateCornerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486CA1E70EAD900419C27 /* PrivateCornerUITests.swift */; };
@@ -40,6 +30,7 @@
 		0075F1991E7A3169001DA471 /* AlbumsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1981E7A3169001DA471 /* AlbumsCollectionViewController.swift */; };
 		0075F19C1E7A3698001DA471 /* AlbumsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0075F19B1E7A3698001DA471 /* AlbumsCell.xib */; };
 		0075F19E1E7A36B7001DA471 /* AlbumsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F19D1E7A36B7001DA471 /* AlbumsCell.swift */; };
+		0077770D1EDBC90F00233D0B /* ImageLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0077770C1EDBC90F00233D0B /* ImageLibrary.swift */; };
 		00784CD51ED28AF6004F3E95 /* AlbumsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00784CD41ED28AF6004F3E95 /* AlbumsViewModel.swift */; };
 		00784CD71ED28D18004F3E95 /* GalleryPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00784CD61ED28D18004F3E95 /* GalleryPhotoViewModel.swift */; };
 		007B75491E91E01400483293 /* ConstantsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B75481E91E01400483293 /* ConstantsSize.swift */; };
@@ -187,16 +178,6 @@
 		004B290F1E8CEA05007C910A /* ImportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportCell.xib; sourceTree = "<group>"; };
 		005330E81E70F572002890A8 /* LockScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenViewModel.swift; sourceTree = "<group>"; };
 		005330EB1E70F572002890A8 /* LockScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenViewController.swift; sourceTree = "<group>"; };
-		0054A3AD1EC0037D0023B17E /* INSPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhoto.swift; sourceTree = "<group>"; };
-		0054A3AE1EC0037D0023B17E /* INSPhotoGallery.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = INSPhotoGallery.bundle; sourceTree = "<group>"; };
-		0054A3AF1EC0037D0023B17E /* INSPhotosDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhotosDataSource.swift; sourceTree = "<group>"; };
-		0054A3B01EC0037D0023B17E /* INSPhotosInteractionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhotosInteractionAnimator.swift; sourceTree = "<group>"; };
-		0054A3B11EC0037D0023B17E /* INSPhotosOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhotosOverlayView.swift; sourceTree = "<group>"; };
-		0054A3B21EC0037D0023B17E /* INSPhotosTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhotosTransitionAnimator.swift; sourceTree = "<group>"; };
-		0054A3B31EC0037D0023B17E /* INSPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhotosViewController.swift; sourceTree = "<group>"; };
-		0054A3B41EC0037D0023B17E /* INSPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSPhotoViewController.swift; sourceTree = "<group>"; };
-		0054A3B51EC0037D0023B17E /* INSScalingImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INSScalingImageView.swift; sourceTree = "<group>"; };
-		0054A3B61EC0037D0023B17E /* UIVIew+INSPhotoViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIVIew+INSPhotoViewer.swift"; sourceTree = "<group>"; };
 		006486A71E70EAD900419C27 /* PrivateCorner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrivateCorner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		006486AA1E70EAD900419C27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		006486BB1E70EAD900419C27 /* PrivateCornerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrivateCornerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +195,7 @@
 		0075F1981E7A3169001DA471 /* AlbumsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AlbumsCollectionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0075F19B1E7A3698001DA471 /* AlbumsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumsCell.xib; sourceTree = "<group>"; };
 		0075F19D1E7A36B7001DA471 /* AlbumsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AlbumsCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		0077770C1EDBC90F00233D0B /* ImageLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLibrary.swift; sourceTree = "<group>"; };
 		00784CD41ED28AF6004F3E95 /* AlbumsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumsViewModel.swift; sourceTree = "<group>"; };
 		00784CD61ED28D18004F3E95 /* GalleryPhotoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoViewModel.swift; sourceTree = "<group>"; };
 		007B75481E91E01400483293 /* ConstantsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsSize.swift; sourceTree = "<group>"; };
@@ -405,23 +387,6 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		0054A3AC1EC0037D0023B17E /* INSPhotoGallery */ = {
-			isa = PBXGroup;
-			children = (
-				0054A3AD1EC0037D0023B17E /* INSPhoto.swift */,
-				0054A3AE1EC0037D0023B17E /* INSPhotoGallery.bundle */,
-				0054A3AF1EC0037D0023B17E /* INSPhotosDataSource.swift */,
-				0054A3B01EC0037D0023B17E /* INSPhotosInteractionAnimator.swift */,
-				0054A3B11EC0037D0023B17E /* INSPhotosOverlayView.swift */,
-				0054A3B21EC0037D0023B17E /* INSPhotosTransitionAnimator.swift */,
-				0054A3B31EC0037D0023B17E /* INSPhotosViewController.swift */,
-				0054A3B41EC0037D0023B17E /* INSPhotoViewController.swift */,
-				0054A3B51EC0037D0023B17E /* INSScalingImageView.swift */,
-				0054A3B61EC0037D0023B17E /* UIVIew+INSPhotoViewer.swift */,
-			);
-			path = INSPhotoGallery;
-			sourceTree = "<group>";
-		};
 		0064869E1E70EAD900419C27 = {
 			isa = PBXGroup;
 			children = (
@@ -520,7 +485,6 @@
 			children = (
 				00DDF9661ED436E800093770 /* Hero */,
 				0086A9411EC2F98F000F5C01 /* Gallery */,
-				0054A3AC1EC0037D0023B17E /* INSPhotoGallery */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -531,6 +495,7 @@
 				0094F6D41E8E46F8007BEFAE /* CoreDataManager.swift */,
 				0094F6D61E8E5AF3007BEFAE /* AlbumManager.swift */,
 				0094F6D81E8E6331007BEFAE /* ItemManager.swift */,
+				0077770C1EDBC90F00233D0B /* ImageLibrary.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1046,7 +1011,6 @@
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
 				00DDF9AA1ED436E800093770 /* Info.plist in Resources */,
 				0047FB611E9B749300BDF919 /* remove@3x.png in Resources */,
-				0054A3B81EC0037D0023B17E /* INSPhotoGallery.bundle in Resources */,
 				0075F19C1E7A3698001DA471 /* AlbumsCell.xib in Resources */,
 				0086A9B41EC2F9B1000F5C01 /* Gallery.bundle in Resources */,
 				006486F41E70EFEB00419C27 /* Main.storyboard in Resources */,
@@ -1240,7 +1204,6 @@
 				00DDF9AD1ED436E800093770 /* Parser.swift in Sources */,
 				00DDF9B11ED436E800093770 /* DurationPreprocessor.swift in Sources */,
 				0086A9AC1EC2F990000F5C01 /* Video.swift in Sources */,
-				0054A3B71EC0037D0023B17E /* INSPhoto.swift in Sources */,
 				0086A99F1EC2F990000F5C01 /* Permission.swift in Sources */,
 				00915EFD1ED7E6A70003BECE /* PhotoViewCollectionView.swift in Sources */,
 				0086A9841EC2F990000F5C01 /* ShutterButton.swift in Sources */,
@@ -1257,14 +1220,12 @@
 				0086A9981EC2F990000F5C01 /* UIViewController+Extensions.swift in Sources */,
 				006486EA1E70EFD500419C27 /* ConstantsAPI.swift in Sources */,
 				00784CD51ED28AF6004F3E95 /* AlbumsViewModel.swift in Sources */,
-				0054A3BC1EC0037D0023B17E /* INSPhotosTransitionAnimator.swift in Sources */,
 				0086A98A1EC2F990000F5C01 /* Image.swift in Sources */,
 				00DDF9A61ED436E800093770 /* HeroPlugin.swift in Sources */,
-				0054A3BB1EC0037D0023B17E /* INSPhotosOverlayView.swift in Sources */,
 				0094F6D91E8E6331007BEFAE /* ItemManager.swift in Sources */,
 				0086A99C1EC2F990000F5C01 /* Once.swift in Sources */,
 				00DDF9B31ED436E800093770 /* MatchPreprocessor.swift in Sources */,
-				0054A3BD1EC0037D0023B17E /* INSPhotosViewController.swift in Sources */,
+				0077770D1EDBC90F00233D0B /* ImageLibrary.swift in Sources */,
 				0086A9851EC2F990000F5C01 /* StackView.swift in Sources */,
 				0086A9A61EC2F990000F5C01 /* VideoEditor.swift in Sources */,
 				0086A99E1EC2F990000F5C01 /* PagesController.swift in Sources */,
@@ -1285,10 +1246,8 @@
 				0086A9931EC2F990000F5C01 /* AVAsset+Extensions.swift in Sources */,
 				00DDF9941ED436E800093770 /* HeroViewPropertyViewContext.swift in Sources */,
 				00DDF9A01ED436E800093770 /* Hero.swift in Sources */,
-				0054A3BE1EC0037D0023B17E /* INSPhotoViewController.swift in Sources */,
 				0086A9AE1EC2F990000F5C01 /* VideoCell.swift in Sources */,
 				0086A9971EC2F990000F5C01 /* UIView+Extensions.swift in Sources */,
-				0054A3C01EC0037D0023B17E /* UIVIew+INSPhotoViewer.swift in Sources */,
 				0094F6D31E8E3E56007BEFAE /* PrivateData.xcdatamodeld in Sources */,
 				0086A9A91EC2F990000F5C01 /* EmptyView.swift in Sources */,
 				0086A9A21EC2F990000F5C01 /* Utils.swift in Sources */,
@@ -1296,8 +1255,6 @@
 				00DDF9971ED436E800093770 /* DefaultAnimationPreprocessor.swift in Sources */,
 				0086A9811EC2F990000F5C01 /* CameraController.swift in Sources */,
 				00DDF9B41ED436E800093770 /* SourcePreprocessor.swift in Sources */,
-				0054A3BA1EC0037D0023B17E /* INSPhotosInteractionAnimator.swift in Sources */,
-				0054A3BF1EC0037D0023B17E /* INSScalingImageView.swift in Sources */,
 				006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */,
 				00DDF99C1ED436E800093770 /* DispatchQueue+Hero.swift in Sources */,
 				007B75491E91E01400483293 /* ConstantsSize.swift in Sources */,
@@ -1329,7 +1286,6 @@
 				0086A98C1EC2F990000F5C01 /* ImagesController.swift in Sources */,
 				004B28F61E8CA624007C910A /* GalleryCell.swift in Sources */,
 				00DDF9B21ED436E800093770 /* IgnoreSubviewModifiersPreprocessor.swift in Sources */,
-				0054A3B91EC0037D0023B17E /* INSPhotosDataSource.swift in Sources */,
 				0086A9871EC2F990000F5C01 /* GalleryController.swift in Sources */,
 				007F06D01ED3CE3F0081EAAE /* ConstantColor.swift in Sources */,
 				00DDF9A81ED436E800093770 /* HeroTargetState.swift in Sources */,

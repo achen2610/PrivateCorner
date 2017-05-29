@@ -11,25 +11,49 @@ import UIKit
 
 open class PhotoViewViewModel {
 
-    var photos = [INSPhotoViewable]()
+    var urlPaths = [URL]()
     
-    public init(photos: [INSPhotoViewable]) {
-        self.photos = photos
+    public init(urlPaths: [URL]) {
+        self.urlPaths = urlPaths
     }
     
     func countPhoto() -> Int {
-        return photos.count
+        return urlPaths.count
     }
     
     func configure(cell: PhotoCell, atIndex index: Int) {
-        let photo = photos[index]
-        photo.loadImageWithCompletionHandler { [weak photo](image, error) in
-            if let image = image {
-                if let photo = photo as? INSPhoto {
-                    photo.image = image
-                }
-                cell.image = image
+        let urlPath = urlPaths[index]
+        cell.image = ImageLibrary.image(urlPath: urlPath)
+        
+//        cell.imageFromUrl(urlPath: urlPath)
+        
+//        ImageLibrary.getDataFromUrl(url: urlPath) { (data, urlResponse, error) in
+//            guard let data = data, error == nil else { return }
+//            print(urlResponse?.suggestedFilename ?? urlPath.lastPathComponent)
+//            print("Download Finished")
+//            DispatchQueue.main.async() { () -> Void in
+//                cell.image = UIImage(data: data)
+//            }
+//            
+//        }
+    }
+    
+    private func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
+    }
+}
+
+extension PhotoCell {
+    public func imageFromUrl(urlPath: URL) {
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: urlPath) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            DispatchQueue.main.async {
+                self.image = UIImage(data: data!)
             }
         }
     }
 }
+

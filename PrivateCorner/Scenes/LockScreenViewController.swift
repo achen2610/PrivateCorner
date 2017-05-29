@@ -134,6 +134,7 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
 
     // MARK: LockScreenViewModelDelegate
     func validationSuccess() {
+        TitleLabel.text = "NHẬP MẬT KHẨU CỦA BẠN"
         viewModel.clearInput()
         navigateToHomeScreen()
     }

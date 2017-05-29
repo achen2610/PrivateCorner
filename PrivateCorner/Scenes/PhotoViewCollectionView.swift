@@ -23,7 +23,6 @@ extension PhotoViewController: UICollectionViewDataSource {
             photoCell.imageView.isOpaque = true
             
             return photoCell
-            
         }
         
         return UICollectionViewCell()

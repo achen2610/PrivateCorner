@@ -97,31 +97,10 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         let controller  = mainStoryboard.instantiateViewController(withIdentifier: "PhotoView") as! PhotoViewController
         controller.selectedIndex = index
         
-        let vm = PhotoViewViewModel(photos: viewModel.photos)
+        let vm = PhotoViewViewModel(urlPaths: viewModel.urlPaths)
         controller.viewModel = vm
         
         navigationController?.pushViewController(controller, animated: true)
-    }
-    
-    func fetchImages(_ assets: [PHAsset]) -> [String] {
-        var filenames = [String]()
-        let imageManager = PHImageManager.default()
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
-        let size: CGSize = CGSize(width: 720, height: 1280)
-        
-        for asset in assets {
-            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
-                if let info = info {
-                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
-                        //do sth with file name
-                        filenames.append(filename)
-                    }
-                    
-                }
-            }
-        }
-        return filenames
     }
     
     // MARK: Selector Event
@@ -220,48 +199,6 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
 }
 
 
-extension GalleryPhotoViewController: UIImagePickerControllerDelegate {
-
-}
-
-extension GalleryPhotoViewController: UINavigationControllerDelegate {
-    
-}
-
-//extension GalleryPhotoViewController: ImagePickerDelegate {
-//    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-//        
-//    }
-//
-//    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-//        var filenames = [String]()
-//        let assets = imagePicker.stack.assets
-//        
-//        let imageManager = PHImageManager.default()
-//        let requestOptions = PHImageRequestOptions()
-//        requestOptions.isSynchronous = true
-//        let size: CGSize = CGSize(width: 720, height: 1280)
-//        
-//        for asset in assets {
-//            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
-//                if let info = info {
-//                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
-//                        //do sth with file name
-//                        filenames.append(filename)
-//                    }
-//                    
-//                }
-//            }
-//        }
-//        
-//        uploadImageToCoreData(images: images, filenames: filenames)
-//    }
-//    
-//    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
-//        
-//    }
-//}
-
 extension GalleryPhotoViewController: GalleryControllerDelegate {
     func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
         var assets = [PHAsset]()
@@ -269,15 +206,16 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
             let asset = image.asset
             assets.append(asset);
         }
-        
-        let filenames = fetchImages(assets)
-        viewModel.uploadImageToCoreData(images: images, filenames: filenames)
-        
+        viewModel.uploadImageToCoreData(images: images, assets: assets)
+    
         controller.dismiss(animated: true, completion: nil)
         gallery = nil
     }
     
     func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+        
+        
+        
         controller.dismiss(animated: true, completion: nil)
         gallery = nil
     }
