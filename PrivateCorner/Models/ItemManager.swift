@@ -12,9 +12,15 @@ import CoreData
 
 class ItemManager {
     
+    enum ItemType {
+        case ImageType
+        case VideoType
+    }
+    
     // MARK: - Item Manager stack
     static let sharedInstance = ItemManager()
     
+    // MARK: - Public Methods
     func getItems() -> [Item] {
         let array = [Item]()
         
@@ -28,7 +34,7 @@ class ItemManager {
         return item
     }
     
-    func add(image: UIImage, filename: String) -> Item {
+    func add(media: Any, filename: String, thumbname: String, type: ItemType) -> Item {
         //1
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         
@@ -37,9 +43,20 @@ class ItemManager {
         
         //3
         let item = Item(entity: entity, insertInto: managedContext)
-        item.filename = filename
-        item.type = "image"
+        item.fileName = filename
+        item.thumbName = thumbname
         item.uploadDate = Date() as NSDate?
+        switch type {
+        case .ImageType:
+            item.type = "image"
+            break;
+        case .VideoType:
+            item.type = "video"
+            if let media = media as? Video {
+                item.duration = media.duration
+            }
+            break;
+        }
         
         // 4
         do {

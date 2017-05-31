@@ -65,26 +65,24 @@ open class AlbumsViewModel {
         let album = albums[index]
         cell.albumName.text = album.name
         
-        
         let items = album.mutableSetValue(forKey: "items")
-        let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: false)
+        let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: true)
         let array = items.sortedArray(using: [dateDescriptor]) as! [Item]
-        let lastImage = array.first
         
-        if let filename = lastImage?.filename {
-            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            let documentsDirectory = paths[0]
-            let path = documentsDirectory.appendingPathComponent(filename)
+        if array.count > 0 {
+            let lastItem = array.last
             
-            cell.photoImageView.sd_setImage(with: path, placeholderImage: UIImage(), options: [], completed: { (image, error, cacheType, imageURL) in
-                //                self.photoImageView.alpha = 0.0
-                //                UIView.animate(withDuration: 1.0, animations: {
-                //                    self.photoImageView.alpha = 1.0
-                //                })
-            })
+            if let thumbname = lastItem?.thumbName {
+                let path = getDocumentsDirectory().appendingPathComponent(thumbname)
+                cell.photoImageView.image = MediaLibrary.image(urlPath: path)
+            }
+            
+            cell.totalItem.text = "\(array.count)"
+        } else {
+            cell.photoImageView.image = UIImage(named: "albums.png")
+            cell.totalItem.text = "0"
         }
-        
-        cell.totalItem.text = "\(array.count)"
+
     }
     
     func selectedGalleryAtIndex(index: Int) {
@@ -94,4 +92,10 @@ open class AlbumsViewModel {
         delegate?.navigationToAlbumDetail(viewModel: galleryModel)
     }
     
+    
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
 }

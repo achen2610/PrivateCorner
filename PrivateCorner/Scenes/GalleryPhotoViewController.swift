@@ -97,7 +97,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         let controller  = mainStoryboard.instantiateViewController(withIdentifier: "PhotoView") as! PhotoViewController
         controller.selectedIndex = index
         
-        let vm = PhotoViewViewModel(urlPaths: viewModel.urlPaths)
+        let vm = PhotoViewViewModel(items: viewModel.items)
         controller.viewModel = vm
         
         navigationController?.pushViewController(controller, animated: true)
@@ -194,6 +194,13 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     // GalleryPhotoViewModelDelegate
     func reloadGallery() {
         galleryCollectionView.reloadData()
+        
+        let numberItems = galleryCollectionView.numberOfItems(inSection: 0)
+        if numberItems > 0 {
+            galleryCollectionView.scrollToItem(at: NSIndexPath.init(row:(galleryCollectionView.numberOfItems(inSection: 0)) - 1, section: 0) as IndexPath,
+                                               at: UICollectionViewScrollPosition.bottom,
+                                               animated: true)
+        }
     }
 
 }
@@ -214,7 +221,7 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
     
     func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
         
-        
+        viewModel.uploadVideoToCoreData(video: video)
         
         controller.dismiss(animated: true, completion: nil)
         gallery = nil

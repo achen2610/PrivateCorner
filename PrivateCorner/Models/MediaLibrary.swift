@@ -8,20 +8,14 @@
 
 import UIKit
 
-class ImageLibrary {
-    static func thumbnail(urlPath: URL) -> UIImage {
-        var filename = urlPath.lastPathComponent
-        filename = "thumbnail_" + filename
-        let urlThumbnail = urlPath.deletingLastPathComponent().appendingPathComponent(filename)
-        return UIImage(contentsOfFile: urlThumbnail.path)!
-    }
+class MediaLibrary {
     static func image(urlPath: URL) -> UIImage {
         return UIImage(contentsOfFile: urlPath.path)!
     }
     
     static func getThumbnailImage(originalImage: UIImage) -> UIImage {
-        var width: CGFloat = 520
-        var height: CGFloat = 520
+        var width: CGFloat = 256
+        var height: CGFloat = 256
         let originalSize = originalImage.size
         if originalSize.width > originalSize.height {
             height = width * originalSize.height / originalSize.width

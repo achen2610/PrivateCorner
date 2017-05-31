@@ -71,7 +71,7 @@ class AlbumManager {
         let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: false)
         let items = array.sortedArray(using: [dateDescriptor]) as! [Item]
         for item in items {
-            if let filename = item.filename {
+            if let filename = item.fileName {
                 let fileManager = FileManager.default
                 let path = getDocumentsDirectory().appendingPathComponent(filename)
                 if fileManager.fileExists(atPath: path.path) {

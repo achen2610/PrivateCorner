@@ -46,7 +46,7 @@ class VideosController: UIViewController {
 
     gridView.collectionView.dataSource = self
     gridView.collectionView.delegate = self
-    gridView.collectionView.register(VideoCell.self, forCellWithReuseIdentifier: String(describing: VideoCell.self))
+    gridView.collectionView.register(GVideoCell.self, forCellWithReuseIdentifier: String(describing: GVideoCell.self))
 
     gridView.arrowButton.updateText("Gallery.AllVideos".g_localize(fallback: "ALL VIDEOS"))
     gridView.arrowButton.arrow.isHidden = true
@@ -149,8 +149,8 @@ extension VideosController: UICollectionViewDataSource, UICollectionViewDelegate
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: VideoCell.self), for: indexPath)
-      as! VideoCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: GVideoCell.self), for: indexPath)
+      as! GVideoCell
     let item = items[(indexPath as NSIndexPath).item]
 
     cell.configure(item)
@@ -183,14 +183,14 @@ extension VideosController: UICollectionViewDataSource, UICollectionViewDelegate
   }
 
   func configureFrameViews() {
-    for case let cell as VideoCell in gridView.collectionView.visibleCells {
+    for case let cell as GVideoCell in gridView.collectionView.visibleCells {
       if let indexPath = gridView.collectionView.indexPath(for: cell) {
         configureFrameView(cell, indexPath: indexPath)
       }
     }
   }
 
-  func configureFrameView(_ cell: VideoCell, indexPath: IndexPath) {
+  func configureFrameView(_ cell: GVideoCell, indexPath: IndexPath) {
     let item = items[(indexPath as NSIndexPath).item]
 
     if let selectedItem = Cart.shared.video , selectedItem == item {

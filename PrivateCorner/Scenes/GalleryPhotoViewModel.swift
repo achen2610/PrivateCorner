@@ -19,7 +19,7 @@ public protocol GalleryPhotoViewModelDelegate: class {
 open class GalleryPhotoViewModel {
     
     fileprivate var album: Album
-    var urlPaths = [URL]()
+    var items = [Item]()
     var titleAlbum: String
     weak var delegate: GalleryPhotoViewModelDelegate?
     
@@ -29,15 +29,15 @@ open class GalleryPhotoViewModel {
     }
     
     func getGallery() {
-        let items = album.mutableSetValue(forKey: "items")
-        let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: false)
-        urlPaths = parseDataToPhotos(items: items.sortedArray(using: [dateDescriptor]) as! [Item])
+        let temp = album.mutableSetValue(forKey: "items")
+        let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: true)
+        items = temp.sortedArray(using: [dateDescriptor]) as! [Item]
         
         delegate?.reloadGallery()
     }
     
     func countPhoto() -> Int {
-        return urlPaths.count
+        return items.count
     }
     
     func uploadImageToCoreData(images: [UIImage], assets: [PHAsset]) {
@@ -47,7 +47,8 @@ open class GalleryPhotoViewModel {
         for image in images {
             let index = images.index(of: image)
             let filename = filenames[index!]
-            let item = ItemManager.sharedInstance.add(image: image, filename: filename)
+            let thumbname = "thumbnail" + filename
+            let item = ItemManager.sharedInstance.add(media: image, filename: filename, thumbname: thumbname, type: .ImageType)
             items.append(item)
             
             let fileManager = FileManager.default
@@ -58,14 +59,12 @@ open class GalleryPhotoViewModel {
             } else {
                 if let data = UIImagePNGRepresentation(image) {
                     try? data.write(to: path)
-                    
-                    
                 }
             }
             
             // Save thumbnail image
-            let thumbnailPath = getDocumentsDirectory().appendingPathComponent("thumbnail_" + filename)
-            let thumbnailImage = ImageLibrary.getThumbnailImage(originalImage: image)
+            let thumbnailPath = getDocumentsDirectory().appendingPathComponent(thumbname)
+            let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: image)
             if fileManager.fileExists(atPath: thumbnailPath.path) {
                 print("Thumbnail Exists")
             } else {
@@ -98,14 +97,84 @@ open class GalleryPhotoViewModel {
         getGallery()
     }
     
-    func uploadVideoToCoreData(assets: [PHAsset]) {
-        
+    func uploadVideoToCoreData(video: Video) {
+
+        video.fetchAVAsset { (avasset) in
+            if let avassetURL = avasset as? AVURLAsset {
+                guard let videoData = try? Data(contentsOf: avassetURL.url) else {
+                    return
+                }
+                
+                let filename = avassetURL.url.lastPathComponent
+                let name = filename.components(separatedBy: ".").first
+                let thumbname = "thumbnail_" + name! + ".JPG"
+                
+                // Add video to database
+                let item = ItemManager.sharedInstance.add(media: video, filename: filename, thumbname: thumbname, type: .VideoType)
+                
+                // Save original video
+                let fileManager = FileManager.default
+                let path = self.getDocumentsDirectory().appendingPathComponent(filename)
+                if fileManager.fileExists(atPath: path.path) {
+                    print("Video Exists")
+                } else {
+                    try? videoData.write(to: path)
+                }
+                
+                // Save thumbnail video
+                let thumbnailPath = self.getDocumentsDirectory().appendingPathComponent(thumbname)
+                video.fetchThumbnail(CGSize(width: 256, height: 256), completion: { (image) in
+                    if fileManager.fileExists(atPath: thumbnailPath.path) {
+                        print("Thumbnail Exists")
+                    } else {
+                        if let data = UIImagePNGRepresentation(image!) {
+                            try? data.write(to: thumbnailPath)
+                        }
+                    }
+                })
+
+
+                let itemsInAlbum = self.album.mutableSetValue(forKey: "items")
+                if itemsInAlbum.count > 0 {
+//                    itemsInAlbum.addObjects(from: items)
+                    itemsInAlbum.add(item)
+                } else {
+//                    album.addToItems(NSSet(array: items))
+                }
+                
+                //1
+                let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+                
+                //2
+                do {
+                    try managedContext.save()
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                }
+                
+                self.getGallery()
+            }
+        }
     }
     
     func configure(cell: GalleryCell, atIndex index: Int) {
         
-        let urlPath = urlPaths[index]
-        cell.photoImageView.image = ImageLibrary.thumbnail(urlPath: urlPath)
+        let item = items[index]
+        let urlPath = getDocumentsDirectory().appendingPathComponent(item.thumbName!)
+        if item.type == "image" {
+
+            cell.durationLabel.isHidden = true
+            cell.shadowView.isHidden = true
+        } else { //if item.type == "video" {
+            
+            //\(lround(floor(item.duration / 3600)) % 100)
+            let string = "\(lround(floor(item.duration / 60)) % 60):\(lround(floor(item.duration)) % 60)"
+            cell.durationLabel.text = string
+            cell.durationLabel.isHidden = false
+            cell.shadowView.isHidden = false
+        }
+        
+        cell.photoImageView.image = MediaLibrary.image(urlPath: urlPath)
     }
 
     // MARK: Private Method
@@ -113,19 +182,6 @@ open class GalleryPhotoViewModel {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
         return documentsDirectory
-    }
-    
-    private func parseDataToPhotos(items: [Item]) -> [URL] {
-        var array = [URL]();
-        
-        for item in items {
-            if let filename = item.filename {
-                let path = getDocumentsDirectory().appendingPathComponent(filename)
-                array.append(path)
-            }
-        }
-        
-        return array
     }
     
     private func fetchImages(_ assets: [PHAsset]) -> [String] {

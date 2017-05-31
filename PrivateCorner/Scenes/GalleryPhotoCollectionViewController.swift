@@ -22,6 +22,7 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.galleryCell, for: indexPath) as? GalleryCell {
 
+            cell.styleUI()
             viewModel.configure(cell:cell, atIndex:indexPath.row)
             
             cell.photoImageView.heroID = "image_\(indexPath.row)"

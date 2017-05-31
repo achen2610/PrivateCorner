@@ -30,7 +30,10 @@
 		0075F1991E7A3169001DA471 /* AlbumsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1981E7A3169001DA471 /* AlbumsCollectionViewController.swift */; };
 		0075F19C1E7A3698001DA471 /* AlbumsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0075F19B1E7A3698001DA471 /* AlbumsCell.xib */; };
 		0075F19E1E7A36B7001DA471 /* AlbumsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F19D1E7A36B7001DA471 /* AlbumsCell.swift */; };
-		0077770D1EDBC90F00233D0B /* ImageLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0077770C1EDBC90F00233D0B /* ImageLibrary.swift */; };
+		0075F2081EDE61DE0006AB5F /* albums.png in Resources */ = {isa = PBXBuildFile; fileRef = 0075F2071EDE61DE0006AB5F /* albums.png */; };
+		0075F20A1EDE82CC0006AB5F /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F2091EDE82CC0006AB5F /* VideoCell.swift */; };
+		0075F20C1EDEB5820006AB5F /* VideoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0075F20B1EDEB5820006AB5F /* VideoCell.xib */; };
+		0077770D1EDBC90F00233D0B /* MediaLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0077770C1EDBC90F00233D0B /* MediaLibrary.swift */; };
 		00784CD51ED28AF6004F3E95 /* AlbumsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00784CD41ED28AF6004F3E95 /* AlbumsViewModel.swift */; };
 		00784CD71ED28D18004F3E95 /* GalleryPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00784CD61ED28D18004F3E95 /* GalleryPhotoViewModel.swift */; };
 		007B75491E91E01400483293 /* ConstantsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B75481E91E01400483293 /* ConstantsSize.swift */; };
@@ -86,7 +89,7 @@
 		0086A9AB1EC2F990000F5C01 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9791EC2F990000F5C01 /* GridView.swift */; };
 		0086A9AC1EC2F990000F5C01 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97B1EC2F990000F5C01 /* Video.swift */; };
 		0086A9AD1EC2F990000F5C01 /* VideoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97C1EC2F990000F5C01 /* VideoBox.swift */; };
-		0086A9AE1EC2F990000F5C01 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97D1EC2F990000F5C01 /* VideoCell.swift */; };
+		0086A9AE1EC2F990000F5C01 /* GVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97D1EC2F990000F5C01 /* GVideoCell.swift */; };
 		0086A9AF1EC2F990000F5C01 /* VideosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97E1EC2F990000F5C01 /* VideosController.swift */; };
 		0086A9B01EC2F990000F5C01 /* VideosLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A97F1EC2F990000F5C01 /* VideosLibrary.swift */; };
 		0086A9B41EC2F9B1000F5C01 /* Gallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */; };
@@ -195,7 +198,10 @@
 		0075F1981E7A3169001DA471 /* AlbumsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AlbumsCollectionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0075F19B1E7A3698001DA471 /* AlbumsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumsCell.xib; sourceTree = "<group>"; };
 		0075F19D1E7A36B7001DA471 /* AlbumsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AlbumsCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		0077770C1EDBC90F00233D0B /* ImageLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLibrary.swift; sourceTree = "<group>"; };
+		0075F2071EDE61DE0006AB5F /* albums.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = albums.png; sourceTree = "<group>"; };
+		0075F2091EDE82CC0006AB5F /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		0075F20B1EDEB5820006AB5F /* VideoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCell.xib; sourceTree = "<group>"; };
+		0077770C1EDBC90F00233D0B /* MediaLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaLibrary.swift; sourceTree = "<group>"; };
 		00784CD41ED28AF6004F3E95 /* AlbumsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumsViewModel.swift; sourceTree = "<group>"; };
 		00784CD61ED28D18004F3E95 /* GalleryPhotoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoViewModel.swift; sourceTree = "<group>"; };
 		007B75481E91E01400483293 /* ConstantsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsSize.swift; sourceTree = "<group>"; };
@@ -251,7 +257,7 @@
 		0086A9791EC2F990000F5C01 /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		0086A97B1EC2F990000F5C01 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		0086A97C1EC2F990000F5C01 /* VideoBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBox.swift; sourceTree = "<group>"; };
-		0086A97D1EC2F990000F5C01 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		0086A97D1EC2F990000F5C01 /* GVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GVideoCell.swift; sourceTree = "<group>"; };
 		0086A97E1EC2F990000F5C01 /* VideosController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosController.swift; sourceTree = "<group>"; };
 		0086A97F1EC2F990000F5C01 /* VideosLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosLibrary.swift; sourceTree = "<group>"; };
 		0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Gallery.bundle; sourceTree = "<group>"; };
@@ -467,6 +473,7 @@
 		006486E51E70EFD500419C27 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0075F2071EDE61DE0006AB5F /* albums.png */,
 				00E8A0A61E9CDCA900221112 /* upload@3x.png */,
 				0047FB601E9B749300BDF919 /* remove@3x.png */,
 				004B29081E8CE96A007C910A /* import-on@3x.png */,
@@ -495,7 +502,7 @@
 				0094F6D41E8E46F8007BEFAE /* CoreDataManager.swift */,
 				0094F6D61E8E5AF3007BEFAE /* AlbumManager.swift */,
 				0094F6D81E8E6331007BEFAE /* ItemManager.swift */,
-				0077770C1EDBC90F00233D0B /* ImageLibrary.swift */,
+				0077770C1EDBC90F00233D0B /* MediaLibrary.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -711,7 +718,7 @@
 			children = (
 				0086A97B1EC2F990000F5C01 /* Video.swift */,
 				0086A97C1EC2F990000F5C01 /* VideoBox.swift */,
-				0086A97D1EC2F990000F5C01 /* VideoCell.swift */,
+				0086A97D1EC2F990000F5C01 /* GVideoCell.swift */,
 				0086A97E1EC2F990000F5C01 /* VideosController.swift */,
 				0086A97F1EC2F990000F5C01 /* VideosLibrary.swift */,
 			);
@@ -738,7 +745,9 @@
 			isa = PBXGroup;
 			children = (
 				008A8CCC1ED5209800FE7A86 /* PhotoCell.swift */,
+				0075F2091EDE82CC0006AB5F /* VideoCell.swift */,
 				00915F001ED808B00003BECE /* PhotoCell.xib */,
+				0075F20B1EDEB5820006AB5F /* VideoCell.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1004,9 +1013,11 @@
 				00E8A0A71E9CDCA900221112 /* upload@3x.png in Resources */,
 				00E0B1A11E79411E0001DF8F /* folder@3x.png in Resources */,
 				00915F011ED808B00003BECE /* PhotoCell.xib in Resources */,
+				0075F2081EDE61DE0006AB5F /* albums.png in Resources */,
 				007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */,
 				006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */,
 				004B290A1E8CE96A007C910A /* import-on@3x.png in Resources */,
+				0075F20C1EDEB5820006AB5F /* VideoCell.xib in Resources */,
 				004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
 				00DDF9AA1ED436E800093770 /* Info.plist in Resources */,
@@ -1225,7 +1236,7 @@
 				0094F6D91E8E6331007BEFAE /* ItemManager.swift in Sources */,
 				0086A99C1EC2F990000F5C01 /* Once.swift in Sources */,
 				00DDF9B31ED436E800093770 /* MatchPreprocessor.swift in Sources */,
-				0077770D1EDBC90F00233D0B /* ImageLibrary.swift in Sources */,
+				0077770D1EDBC90F00233D0B /* MediaLibrary.swift in Sources */,
 				0086A9851EC2F990000F5C01 /* StackView.swift in Sources */,
 				0086A9A61EC2F990000F5C01 /* VideoEditor.swift in Sources */,
 				0086A99E1EC2F990000F5C01 /* PagesController.swift in Sources */,
@@ -1246,7 +1257,7 @@
 				0086A9931EC2F990000F5C01 /* AVAsset+Extensions.swift in Sources */,
 				00DDF9941ED436E800093770 /* HeroViewPropertyViewContext.swift in Sources */,
 				00DDF9A01ED436E800093770 /* Hero.swift in Sources */,
-				0086A9AE1EC2F990000F5C01 /* VideoCell.swift in Sources */,
+				0086A9AE1EC2F990000F5C01 /* GVideoCell.swift in Sources */,
 				0086A9971EC2F990000F5C01 /* UIView+Extensions.swift in Sources */,
 				0094F6D31E8E3E56007BEFAE /* PrivateData.xcdatamodeld in Sources */,
 				0086A9A91EC2F990000F5C01 /* EmptyView.swift in Sources */,
@@ -1265,6 +1276,7 @@
 				00DDF9911ED436E800093770 /* HeroAnimatorViewContext.swift in Sources */,
 				004B28F11E8CA050007C910A /* GalleryPhotoViewController.swift in Sources */,
 				0086A9861EC2F990000F5C01 /* TripleButton.swift in Sources */,
+				0075F20A1EDE82CC0006AB5F /* VideoCell.swift in Sources */,
 				00DDF9951ED436E800093770 /* HeroDebugPlugin.swift in Sources */,
 				00E0B1D51E7946AB0001DF8F /* SettingViewController.swift in Sources */,
 				0086A9921EC2F990000F5C01 /* Array+Extensions.swift in Sources */,

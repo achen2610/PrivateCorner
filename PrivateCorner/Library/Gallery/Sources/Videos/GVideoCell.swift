@@ -1,7 +1,7 @@
 import UIKit
 import Photos
 
-class VideoCell: ImageCell {
+class GVideoCell: ImageCell {
 
   lazy var cameraImageView: UIImageView = self.makeCameraImageView()
   lazy var durationLabel: UILabel = self.makeDurationLabel()

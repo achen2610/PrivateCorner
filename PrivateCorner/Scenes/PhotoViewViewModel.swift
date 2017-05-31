@@ -11,20 +11,32 @@ import UIKit
 
 open class PhotoViewViewModel {
 
-    var urlPaths = [URL]()
+    var items = [Item]()
     
-    public init(urlPaths: [URL]) {
-        self.urlPaths = urlPaths
+    public init(items: [Item]) {
+        self.items = items
     }
     
     func countPhoto() -> Int {
-        return urlPaths.count
+        return items.count
     }
     
-    func configure(cell: PhotoCell, atIndex index: Int) {
-        let urlPath = urlPaths[index]
-        cell.image = ImageLibrary.image(urlPath: urlPath)
+    func configure(cell: Any, atIndex index: Int) {
+        let item = items[index]
         
+        if item.type == "image" {
+            if let photoCell = cell as? PhotoCell {
+                let urlPath = getDocumentsDirectory().appendingPathComponent(item.fileName!)
+                photoCell.image = MediaLibrary.image(urlPath: urlPath)
+            }
+        } else {
+            if let videoCell = cell as? VideoCell {
+                let urlPath = getDocumentsDirectory().appendingPathComponent(item.fileName!)
+                videoCell.configureVideo(url: urlPath)
+                videoCell.playVideo()
+            }
+        }
+
 //        cell.imageFromUrl(urlPath: urlPath)
         
 //        ImageLibrary.getDataFromUrl(url: urlPath) { (data, urlResponse, error) in
@@ -36,6 +48,17 @@ open class PhotoViewViewModel {
 //            }
 //            
 //        }
+    }
+    
+    func getTypeItem(index: Int) -> String {
+        let item = items[index]
+        return item.type!
+    }
+    
+    private func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
     }
     
     private func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {

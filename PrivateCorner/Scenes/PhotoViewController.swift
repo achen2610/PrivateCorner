@@ -16,6 +16,7 @@ class PhotoViewController: UIViewController {
     
     struct cellIdentifiers {
         static let photoCell = "PhotoCell"
+        static let videoCell = "VideoCell"
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -48,8 +49,8 @@ class PhotoViewController: UIViewController {
     }
     
     func configureCollectionViewOnLoad() {
-        let nibName = UINib(nibName: "PhotoCell", bundle:Bundle.main)
-        collectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.photoCell)
+        collectionView.register(UINib(nibName: "PhotoCell", bundle:Bundle.main), forCellWithReuseIdentifier: cellIdentifiers.photoCell)
+        collectionView.register(UINib(nibName: "VideoCell", bundle:Bundle.main), forCellWithReuseIdentifier: cellIdentifiers.videoCell)
         
         view.layoutIfNeeded()
         collectionView!.reloadData()

@@ -20,6 +20,7 @@ class PhotoCell: UICollectionViewCell {
             setNeedsLayout()
         }
     }
+    
     var topInset: CGFloat = 0 {
         didSet {
             centerIfNeeded()
@@ -102,7 +103,7 @@ class PhotoCell: UICollectionViewCell {
     
     func centerIfNeeded() {
         var inset = UIEdgeInsets(top: topInset, left: 0, bottom: bottomInset, right: 0)
-        if scrollView.contentSize.height < scrollView.bounds.height - topInset {
+        if scrollView.contentSize.height < scrollView.bounds.height - topInset - bottomInset {
             let insetV = (scrollView.bounds.height - topInset - bottomInset - scrollView.contentSize.height)/2
             inset.top += insetV
             inset.bottom += insetV
