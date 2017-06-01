@@ -168,7 +168,7 @@ open class GalleryPhotoViewModel {
         } else { //if item.type == "video" {
             
             //\(lround(floor(item.duration / 3600)) % 100)
-            let string = "\(lround(floor(item.duration / 60)) % 60):\(lround(floor(item.duration)) % 60)"
+            let string = String(format: "%02d", lround(floor(item.duration / 60)) % 60) + ":" + String(format: "%02d", lround(floor(item.duration)) % 60)
             cell.durationLabel.text = string
             cell.durationLabel.isHidden = false
             cell.shadowView.isHidden = false

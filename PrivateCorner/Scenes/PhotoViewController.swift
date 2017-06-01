@@ -13,6 +13,8 @@ class PhotoViewController: UIViewController {
     var viewModel: PhotoViewViewModel!
     var selectedIndex: IndexPath?
     var panGR = UIPanGestureRecognizer()
+    var isHiddenNav: Bool = false
+    
     
     struct cellIdentifiers {
         static let photoCell = "PhotoCell"
@@ -34,13 +36,6 @@ class PhotoViewController: UIViewController {
         configureCollectionViewOnLoad()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        for v in (collectionView!.visibleCells as? [PhotoCell])! {
-            v.topInset = topLayoutGuide.length
-            v.bottomInset = bottomLayoutGuide.length
-        }
-    }
     
     // MARK: Event handling
     func styleUI() {
@@ -69,6 +64,16 @@ class PhotoViewController: UIViewController {
         let progress = translation.y / 2 / collectionView!.bounds.height
         switch panGR.state {
         case .began:
+            if let cell = collectionView?.visibleCells[0] as? VideoCell {
+                cell.setHiddenForPlayButton(isHidden: true)
+            }
+            
+            if isHiddenNav {
+                self.navigationController?.navigationBar.alpha = 1.0
+                self.tabBarController?.tabBar.alpha = 1.0
+                isHiddenNav = !isHiddenNav
+            }
+
             hero_dismissViewController()
         case .changed:
             Hero.shared.update(progress: Double(progress))
@@ -76,23 +81,77 @@ class PhotoViewController: UIViewController {
                 let currentPos = CGPoint(x: translation.x + view.center.x, y: translation.y + view.center.y)
                 Hero.shared.apply(modifiers: [.position(currentPos)], to: cell.imageView)
             }
+            if let cell = collectionView?.visibleCells[0]  as? VideoCell {
+                let currentPos = CGPoint(x: translation.x + view.center.x, y: translation.y + view.center.y)
+                Hero.shared.apply(modifiers: [.position(currentPos)], to: cell.containerView)
+            }
         default:
             if progress + panGR.velocity(in: nil).y / collectionView!.bounds.height > 0.3 {
                 Hero.shared.end()
             } else {
                 Hero.shared.cancel()
+                if let cell = collectionView?.visibleCells[0] as? VideoCell {
+                    cell.setHiddenForPlayButton(isHidden: false)
+                }
             }
         }
     }
 }
 
-extension PhotoViewController:UIGestureRecognizerDelegate {
+extension PhotoViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let cell = collectionView?.visibleCells[0] as? PhotoCell,
-            cell.scrollView.zoomScale == 1 {
+        if let cell = collectionView?.visibleCells[0] as? PhotoCell, cell.scrollView.zoomScale == 1 {
+            let v = panGR.velocity(in: nil)
+            return v.y > abs(v.x)
+        }
+        if let _ = collectionView?.visibleCells[0] as? VideoCell {
             let v = panGR.velocity(in: nil)
             return v.y > abs(v.x)
         }
         return false
+    }
+}
+
+extension PhotoViewController: HeroViewControllerDelegate {
+    
+    public func heroDidEndTransition() {
+        viewModel.isEndTransition = true
+        if let cell = collectionView?.visibleCells[0] as? VideoCell {
+            cell.playButton.isHidden = false
+        }
+    }
+}
+
+extension PhotoViewController: VideoCellDelegate {
+    func tapOverVideoView() {
+        if isHiddenNav {
+            UIView.animate(withDuration: 0.3, animations: { 
+                self.navigationController?.navigationBar.alpha = 1.0
+                self.tabBarController?.tabBar.alpha = 1.0
+            })
+        } else {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.navigationController?.navigationBar.alpha = 0.0
+                self.tabBarController?.tabBar.alpha = 0.0
+            })
+        }
+        isHiddenNav = !isHiddenNav
+    }
+}
+
+extension PhotoViewController: PhotoCellDelegate {
+    func tapPhotoView() {
+        if isHiddenNav {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.navigationController?.navigationBar.alpha = 1.0
+                self.tabBarController?.tabBar.alpha = 1.0
+            })
+        } else {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.navigationController?.navigationBar.alpha = 0.0
+                self.tabBarController?.tabBar.alpha = 0.0
+            })
+        }
+        isHiddenNav = !isHiddenNav
     }
 }

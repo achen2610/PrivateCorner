@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00438D331EDFA51C0060EFA4 /* playvideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 00438D321EDFA51C0060EFA4 /* playvideo.png */; };
 		0047FB611E9B749300BDF919 /* remove@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0047FB601E9B749300BDF919 /* remove@3x.png */; };
 		004B28F11E8CA050007C910A /* GalleryPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28EB1E8CA050007C910A /* GalleryPhotoViewController.swift */; };
 		004B28F31E8CA555007C910A /* GalleryPhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28F21E8CA555007C910A /* GalleryPhotoCollectionViewController.swift */; };
@@ -169,6 +170,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00438D321EDFA51C0060EFA4 /* playvideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playvideo.png; sourceTree = "<group>"; };
 		0047FB601E9B749300BDF919 /* remove@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remove@3x.png"; sourceTree = "<group>"; };
 		004B28EB1E8CA050007C910A /* GalleryPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoViewController.swift; sourceTree = "<group>"; };
 		004B28F21E8CA555007C910A /* GalleryPhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoCollectionViewController.swift; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 		006486E51E70EFD500419C27 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				00438D321EDFA51C0060EFA4 /* playvideo.png */,
 				0075F2071EDE61DE0006AB5F /* albums.png */,
 				00E8A0A61E9CDCA900221112 /* upload@3x.png */,
 				0047FB601E9B749300BDF919 /* remove@3x.png */,
@@ -1015,6 +1018,7 @@
 				00915F011ED808B00003BECE /* PhotoCell.xib in Resources */,
 				0075F2081EDE61DE0006AB5F /* albums.png in Resources */,
 				007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */,
+				00438D331EDFA51C0060EFA4 /* playvideo.png in Resources */,
 				006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */,
 				004B290A1E8CE96A007C910A /* import-on@3x.png in Resources */,
 				0075F20C1EDEB5820006AB5F /* VideoCell.xib in Resources */,

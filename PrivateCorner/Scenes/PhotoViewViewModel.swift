@@ -12,6 +12,7 @@ import UIKit
 open class PhotoViewViewModel {
 
     var items = [Item]()
+    var isEndTransition: Bool = false
     
     public init(items: [Item]) {
         self.items = items
@@ -32,8 +33,7 @@ open class PhotoViewViewModel {
         } else {
             if let videoCell = cell as? VideoCell {
                 let urlPath = getDocumentsDirectory().appendingPathComponent(item.fileName!)
-                videoCell.configureVideo(url: urlPath)
-                videoCell.playVideo()
+                videoCell.configureVideo(url: urlPath, isEndTransition: isEndTransition)
             }
         }
 
