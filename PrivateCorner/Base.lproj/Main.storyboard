@@ -364,13 +364,29 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Select All" id="noo-Cb-zEa"/>
+                                    <barButtonItem title="Select All" id="noo-Cb-zEa">
+                                        <connections>
+                                            <action selector="clickSelectAllButton:" destination="jKx-Pq-flA" id="mda-ok-j4f"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="qnj-Ps-Ogq"/>
-                                    <barButtonItem title="Export" id="tUk-5t-9Am"/>
+                                    <barButtonItem title="Export" id="tUk-5t-9Am">
+                                        <connections>
+                                            <action selector="clickExportButton:" destination="jKx-Pq-flA" id="kJJ-AX-M6p"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="BXW-7K-NbE"/>
-                                    <barButtonItem title="Move" id="jPm-i4-ts5"/>
+                                    <barButtonItem title="Move" id="jPm-i4-ts5">
+                                        <connections>
+                                            <action selector="clickMoveButton:" destination="jKx-Pq-flA" id="pLg-te-7Od"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="4aw-ok-NMh"/>
-                                    <barButtonItem title="Delete" id="bSd-gc-Tt8"/>
+                                    <barButtonItem title="Delete" id="bSd-gc-Tt8">
+                                        <connections>
+                                            <action selector="clickDeleteButton:" destination="jKx-Pq-flA" id="Vbh-Qk-Eta"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <color key="barTintColor" red="0.84163763879999998" green="0.96078431369999995" blue="0.69417840590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>

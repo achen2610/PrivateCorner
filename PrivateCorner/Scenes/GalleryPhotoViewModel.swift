@@ -101,6 +101,7 @@ open class GalleryPhotoViewModel {
 
         video.fetchAVAsset { (avasset) in
             if let avassetURL = avasset as? AVURLAsset {
+
                 guard let videoData = try? Data(contentsOf: avassetURL.url) else {
                     return
                 }
@@ -111,6 +112,23 @@ open class GalleryPhotoViewModel {
                 
                 // Add video to database
                 let item = ItemManager.sharedInstance.add(media: video, filename: filename, thumbname: thumbname, type: .VideoType)
+                
+                let itemsInAlbum = self.album.mutableSetValue(forKey: "items")
+                if itemsInAlbum.count > 0 {
+                    itemsInAlbum.add(item)
+                } else {
+                    self.album.addToItems(NSSet(array: [item]))
+                }
+                
+                //1
+                let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+                
+                //2
+                do {
+                    try managedContext.save()
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                }
                 
                 // Save original video
                 let fileManager = FileManager.default
@@ -131,28 +149,11 @@ open class GalleryPhotoViewModel {
                             try? data.write(to: thumbnailPath)
                         }
                     }
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        self.getGallery()
+                    })
                 })
-
-
-                let itemsInAlbum = self.album.mutableSetValue(forKey: "items")
-                if itemsInAlbum.count > 0 {
-//                    itemsInAlbum.addObjects(from: items)
-                    itemsInAlbum.add(item)
-                } else {
-//                    album.addToItems(NSSet(array: items))
-                }
-                
-                //1
-                let managedContext = CoreDataManager.sharedInstance.managedObjectContext
-                
-                //2
-                do {
-                    try managedContext.save()
-                } catch let error as NSError {
-                    print("Could not save. \(error), \(error.userInfo)")
-                }
-                
-                self.getGallery()
             }
         }
     }

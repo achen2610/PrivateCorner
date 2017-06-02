@@ -66,15 +66,15 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         rect.origin.y += rect.size.height
         self.toolBar.frame = rect
         
-        galleryCollectionView.allowsMultipleSelection = true
-        galleryCollectionView.indicatorStyle = .white
-        
 //        bottomConstraintCollectionView.constant = 49
     }
     
     func configureCollectionViewOnLoad() {
         let nibName = UINib(nibName: "GalleryCell", bundle:Bundle.main)
         galleryCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.galleryCell)
+        galleryCollectionView.alwaysBounceVertical = true
+        galleryCollectionView.allowsMultipleSelection = true
+        galleryCollectionView.indicatorStyle = .white
     }
     
     func getGalleryPhotoOnLoad() {
@@ -151,8 +151,10 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             var rect = self.toolBar.frame
             if self.isEditMode {
                 rect.origin.y -= rect.size.height
+                self.tabBarController?.tabBar.frame.origin.y += (self.tabBarController?.tabBar.frame.size.height)!
             } else {
                 rect.origin.y += rect.size.height
+                self.tabBarController?.tabBar.frame.origin.y -= (self.tabBarController?.tabBar.frame.size.height)!
             }
             self.toolBar.frame = rect
             
@@ -171,11 +173,15 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             
             let barButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(clickEditMode(_:)))
             self.navigationItem.rightBarButtonItem = barButton
+            
+            galleryCollectionView.deselectAllItems(animated: false)
         }
     }
     
     @IBAction func clickSelectAllButton(_ sender: Any) {
-        
+        if isEditMode {
+            galleryCollectionView.selectAllItems(section: 0, animated: false)
+        }
     }
     
     @IBAction func clickExportButton(_ sender: Any) {
@@ -194,7 +200,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     // GalleryPhotoViewModelDelegate
     func reloadGallery() {
         galleryCollectionView.reloadData()
-        
+
         let numberItems = galleryCollectionView.numberOfItems(inSection: 0)
         if numberItems > 0 {
             galleryCollectionView.scrollToItem(at: NSIndexPath.init(row:(galleryCollectionView.numberOfItems(inSection: 0)) - 1, section: 0) as IndexPath,
@@ -244,17 +250,23 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
         } else if (viewController as? PhotoViewController) != nil {
             let cell = galleryCollectionView.cellForItem(at: galleryCollectionView.indexPathsForSelectedItems!.first!)!
             galleryCollectionView.heroModifiers = [.cascade(delta: 0.015, direction: .radial(center: cell.center), delayMatchedViews: true)]
+            self.navigationController?.heroNavigationAnimationType = .fade
         } else {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
+            self.navigationController?.heroNavigationAnimationType = .pull(direction: .right)
         }
     }
     func heroWillStartAnimatingFrom(viewController: UIViewController) {
         view.heroModifiers = nil
         if (viewController as? GalleryPhotoViewController) != nil {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015), .delay(0.25)]
+            self.navigationController?.heroNavigationAnimationType = .fade
+        } else if (viewController as? PhotoViewController) != nil {
+            self.navigationController?.heroNavigationAnimationType = .fade
         } else {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
             addPhotoButton.heroModifiers = [.fade]
+            self.navigationController?.heroNavigationAnimationType = .push(direction: .left)
         }
         if let vc = viewController as? PhotoViewController,
             let originalCellIndex = vc.selectedIndex,
@@ -270,3 +282,4 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
         }
     }
 }
+

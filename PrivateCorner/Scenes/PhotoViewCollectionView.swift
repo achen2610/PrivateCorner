@@ -32,6 +32,7 @@ extension PhotoViewController: UICollectionViewDataSource {
                 videoCell.delegate = self
                 videoCell.containerView.heroID = "image_\(indexPath.row)"
                 videoCell.containerView.heroModifiers = [.position(CGPoint(x:view.bounds.width/2, y:view.bounds.height + view.bounds.width/2)), .scale(0.8), .fade]
+                videoCell.playButton.heroModifiers = [.fade]
                 return videoCell
             }
         }

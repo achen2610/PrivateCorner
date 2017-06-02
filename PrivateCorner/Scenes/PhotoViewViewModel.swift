@@ -37,8 +37,6 @@ open class PhotoViewViewModel {
             }
         }
 
-//        cell.imageFromUrl(urlPath: urlPath)
-        
 //        ImageLibrary.getDataFromUrl(url: urlPath) { (data, urlResponse, error) in
 //            guard let data = data, error == nil else { return }
 //            print(urlResponse?.suggestedFilename ?? urlPath.lastPathComponent)
@@ -66,17 +64,6 @@ open class PhotoViewViewModel {
             (data, response, error) in
             completion(data, response, error)
             }.resume()
-    }
-}
-
-extension PhotoCell {
-    public func imageFromUrl(urlPath: URL) {
-        DispatchQueue.global().async {
-            let data = try? Data(contentsOf: urlPath) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            DispatchQueue.main.async {
-                self.image = UIImage(data: data!)
-            }
-        }
     }
 }
 

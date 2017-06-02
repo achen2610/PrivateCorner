@@ -17,8 +17,14 @@ class VideosController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    setup()
+//    setup()
   }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setup()
+    }
 
   // MARK: - Setup
 

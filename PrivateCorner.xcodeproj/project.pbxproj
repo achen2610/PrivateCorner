@@ -18,6 +18,7 @@
 		004B290B1E8CE96A007C910A /* import@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 004B29091E8CE96A007C910A /* import@3x.png */; };
 		004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B290D1E8CE9D1007C910A /* ImportCell.swift */; };
 		004B29101E8CEA05007C910A /* ImportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B290F1E8CEA05007C910A /* ImportCell.xib */; };
+		004F71C61EE14FB70026A907 /* CollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004F71C51EE14FB70026A907 /* CollectionViewExtension.swift */; };
 		005330EE1E70F572002890A8 /* LockScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330E81E70F572002890A8 /* LockScreenViewModel.swift */; };
 		005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005330EB1E70F572002890A8 /* LockScreenViewController.swift */; };
 		006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486AA1E70EAD900419C27 /* AppDelegate.swift */; };
@@ -181,6 +182,7 @@
 		004B29091E8CE96A007C910A /* import@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "import@3x.png"; sourceTree = "<group>"; };
 		004B290D1E8CE9D1007C910A /* ImportCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportCell.swift; sourceTree = "<group>"; };
 		004B290F1E8CEA05007C910A /* ImportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportCell.xib; sourceTree = "<group>"; };
+		004F71C51EE14FB70026A907 /* CollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewExtension.swift; sourceTree = "<group>"; };
 		005330E81E70F572002890A8 /* LockScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenViewModel.swift; sourceTree = "<group>"; };
 		005330EB1E70F572002890A8 /* LockScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockScreenViewController.swift; sourceTree = "<group>"; };
 		006486A71E70EAD900419C27 /* PrivateCorner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrivateCorner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -468,6 +470,7 @@
 		006486E41E70EFD500419C27 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				004F71C51EE14FB70026A907 /* CollectionViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1196,6 +1199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00DDF99E1ED436E800093770 /* UIView+Hero.swift in Sources */,
+				004F71C61EE14FB70026A907 /* CollectionViewExtension.swift in Sources */,
 				00DDF9931ED436E800093770 /* HeroDefaultAnimator.swift in Sources */,
 				00DDF99F1ED436E800093770 /* UIViewController+Hero.swift in Sources */,
 				00DDF9B01ED436E800093770 /* CascadePreprocessor.swift in Sources */,

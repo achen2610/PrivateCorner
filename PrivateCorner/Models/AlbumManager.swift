@@ -71,14 +71,34 @@ class AlbumManager {
         let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: false)
         let items = array.sortedArray(using: [dateDescriptor]) as! [Item]
         for item in items {
+            let fileManager = FileManager.default
             if let filename = item.fileName {
-                let fileManager = FileManager.default
                 let path = getDocumentsDirectory().appendingPathComponent(filename)
                 if fileManager.fileExists(atPath: path.path) {
+                    print("===========")
                     print("File Exists")
+                    print("Delete file")
                     do {
                         try fileManager.removeItem(atPath: path.path)
                     } catch let error as NSError {
+                        print("===========")
+                        print("Delete error")
+                        print(error.debugDescription)
+                    }
+                }
+            }
+            
+            if let thumbname = item.thumbName {
+                let path = getDocumentsDirectory().appendingPathComponent(thumbname)
+                if fileManager.fileExists(atPath: path.path) {
+                    print("===========")
+                    print("Thumbnail Exists")
+                    print("Delete thumbnail")
+                    do {
+                        try fileManager.removeItem(atPath: path.path)
+                    } catch let error as NSError {
+                        print("===========")
+                        print("Delete error")
                         print(error.debugDescription)
                     }
                 }

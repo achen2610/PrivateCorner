@@ -29,6 +29,9 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
             cell.photoImageView.heroModifiers = [.fade, .scale(0.8)]
             cell.photoImageView.isOpaque = true
             
+            cell.durationLabel.heroModifiers = [.fade]
+            cell.shadowView.heroModifiers = [.fade]
+            
             return cell
         }
         
@@ -41,19 +44,15 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
         return cellLayout.cellSize
     }
     
-    // MARK: UICollectionView Delegate
-    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let cell = collectionView.cellForItem(at: indexPath) as! GalleryCell
-        cell.isEdit = isEditMode
-        
-        return true
-    }
-    
+    // MARK: UICollectionView Delegate    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! GalleryCell
 
         if !isEditMode {
             selectedPhotoAtIndex(index: indexPath, cell: cell)
+            
+            cell.backgroundImageView.backgroundColor = UIColor.clear
+            cell.backgroundImageView.alpha = 1.0
         }
     }
 }
