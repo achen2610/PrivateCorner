@@ -10,14 +10,14 @@
 
 import UIKit
 import Photos
-//import ImagePicker
-
+import DynamicColor
 
 class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegate {
 
 //    let imagePickerController = ImagePickerController()
     var gallery: GalleryController!
     var viewModel: GalleryPhotoViewModel!
+    var progressRing: UICircularProgressRingView!
     var isEditMode: Bool = false
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
@@ -60,11 +60,23 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     
     // MARK: Event handling
     func styleUI() {
-        self.title = viewModel.titleAlbum
+        title = viewModel.titleAlbum
 
-        var rect = self.toolBar.frame
+        var rect = toolBar.frame
         rect.origin.y += rect.size.height
-        self.toolBar.frame = rect
+        toolBar.frame = rect
+        
+        progressRing = UICircularProgressRingView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
+        progressRing.center = view.center
+        progressRing.isHidden = true
+        // Change any of the properties you'd like
+        let blue = UIColor(hexString: "#3498db")
+        progressRing.outerRingColor = blue
+        progressRing.outerRingWidth = 8.0
+        progressRing.innerRingColor = blue.lighter()
+        progressRing.innerRingSpacing = 0
+        progressRing.fontColor = blue.lighter()
+        view.addSubview(progressRing)
         
 //        bottomConstraintCollectionView.constant = 49
     }
@@ -162,17 +174,17 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         }
         
         if isEditMode {
-            self.title = "Select Photos"
-            self.navigationItem.setHidesBackButton(true, animated: false)
+            title = "Select Photos"
+            navigationItem.setHidesBackButton(true, animated: false)
             
             let barButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(clickEditMode(_:)))
-            self.navigationItem.rightBarButtonItem = barButton
+            navigationItem.rightBarButtonItem = barButton
         } else {
-            self.title = viewModel.titleAlbum
-            self.navigationItem.setHidesBackButton(false, animated: false)
+            title = viewModel.titleAlbum
+            navigationItem.setHidesBackButton(false, animated: false)
             
             let barButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(clickEditMode(_:)))
-            self.navigationItem.rightBarButtonItem = barButton
+            navigationItem.rightBarButtonItem = barButton
             
             galleryCollectionView.deselectAllItems(animated: false)
         }
@@ -199,6 +211,8 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
 
     // GalleryPhotoViewModelDelegate
     func reloadGallery() {
+        progressRing.isHidden = true
+        progressRing.setProgress(value: 0, animationDuration: 0)
         galleryCollectionView.reloadData()
 
         let numberItems = galleryCollectionView.numberOfItems(inSection: 0)
@@ -209,28 +223,46 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         }
     }
 
+    func updateProgressRing(value: CGFloat) {
+        
+        DispatchQueue.main.async { 
+            self.progressRing.setProgress(value: value, animationDuration: 0.3)
+        }
+    }
 }
 
 
 extension GalleryPhotoViewController: GalleryControllerDelegate {
     func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
+        DispatchQueue.main.async { 
+            controller.dismiss(animated: true, completion: nil)
+            self.gallery = nil
+            self.progressRing.isHidden = false
+        }
+
         var assets = [PHAsset]()
         for image in Cart.shared.images {
             let asset = image.asset
             assets.append(asset);
         }
-        viewModel.uploadImageToCoreData(images: images, assets: assets)
-    
-        controller.dismiss(animated: true, completion: nil)
-        gallery = nil
+
+        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+        DispatchQueue.global().asyncAfter(deadline: when) { 
+            // Your code with delay
+            self.viewModel.uploadImageToCoreData(images: images, assets: assets)
+        }
     }
     
     func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+        DispatchQueue.main.async {
+            controller.dismiss(animated: true, completion: nil)
+            self.gallery = nil
+            self.progressRing.isHidden = false
+        }
         
-        viewModel.uploadVideoToCoreData(video: video)
-        
-        controller.dismiss(animated: true, completion: nil)
-        gallery = nil
+        video.fetchAVAsset { (avasset) in
+            self.viewModel.uploadVideoToCoreData(video: video, avasset: avasset!)
+        }
     }
     
     func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage]) {
@@ -250,23 +282,23 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
         } else if (viewController as? PhotoViewController) != nil {
             let cell = galleryCollectionView.cellForItem(at: galleryCollectionView.indexPathsForSelectedItems!.first!)!
             galleryCollectionView.heroModifiers = [.cascade(delta: 0.015, direction: .radial(center: cell.center), delayMatchedViews: true)]
-            self.navigationController?.heroNavigationAnimationType = .fade
+            navigationController?.heroNavigationAnimationType = .fade
         } else {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
-            self.navigationController?.heroNavigationAnimationType = .pull(direction: .right)
+            navigationController?.heroNavigationAnimationType = .pull(direction: .right)
         }
     }
     func heroWillStartAnimatingFrom(viewController: UIViewController) {
         view.heroModifiers = nil
         if (viewController as? GalleryPhotoViewController) != nil {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015), .delay(0.25)]
-            self.navigationController?.heroNavigationAnimationType = .fade
+            navigationController?.heroNavigationAnimationType = .fade
         } else if (viewController as? PhotoViewController) != nil {
-            self.navigationController?.heroNavigationAnimationType = .fade
+            navigationController?.heroNavigationAnimationType = .fade
         } else {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
             addPhotoButton.heroModifiers = [.fade]
-            self.navigationController?.heroNavigationAnimationType = .push(direction: .left)
+            navigationController?.heroNavigationAnimationType = .push(direction: .left)
         }
         if let vc = viewController as? PhotoViewController,
             let originalCellIndex = vc.selectedIndex,

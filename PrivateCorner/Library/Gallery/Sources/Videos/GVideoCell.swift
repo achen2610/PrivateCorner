@@ -14,7 +14,7 @@ class GVideoCell: ImageCell {
 
     video.fetchDuration { duration in
       DispatchQueue.main.async {
-        self.durationLabel.text = "\(Utils.format(duration))"
+        self.durationLabel.text = "\(GUtils.format(duration))"
       }
     }
   }

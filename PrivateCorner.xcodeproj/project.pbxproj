@@ -43,6 +43,9 @@
 		007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */; };
 		007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */; };
 		007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007D82D11E8B76B0005CBBC2 /* SettingCell.xib */; };
+		007E5ADE1EE53DAA00FDC2EB /* UICircularProgressRingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007E5ADB1EE53DAA00FDC2EB /* UICircularProgressRingDelegate.swift */; };
+		007E5ADF1EE53DAA00FDC2EB /* UICircularProgressRingLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007E5ADC1EE53DAA00FDC2EB /* UICircularProgressRingLayer.swift */; };
+		007E5AE01EE53DAA00FDC2EB /* UICircularProgressRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007E5ADD1EE53DAA00FDC2EB /* UICircularProgressRingView.swift */; };
 		007F06D01ED3CE3F0081EAAE /* ConstantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F06CF1ED3CE3F0081EAAE /* ConstantColor.swift */; };
 		007F62DC1ECD86BD00226B49 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F62DB1ECD86BD00226B49 /* PasscodeView.swift */; };
 		007F62DF1ECD91CF00226B49 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F62DE1ECD91CF00226B49 /* TabBarController.swift */; };
@@ -79,7 +82,7 @@
 		0086A99F1EC2F990000F5C01 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A96B1EC2F990000F5C01 /* Permission.swift */; };
 		0086A9A01EC2F990000F5C01 /* PermissionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A96C1EC2F990000F5C01 /* PermissionController.swift */; };
 		0086A9A11EC2F990000F5C01 /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A96D1EC2F990000F5C01 /* PermissionView.swift */; };
-		0086A9A21EC2F990000F5C01 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A96E1EC2F990000F5C01 /* Utils.swift */; };
+		0086A9A21EC2F990000F5C01 /* GUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A96E1EC2F990000F5C01 /* GUtils.swift */; };
 		0086A9A31EC2F990000F5C01 /* AdvancedVideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9701EC2F990000F5C01 /* AdvancedVideoEditor.swift */; };
 		0086A9A41EC2F990000F5C01 /* EditInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9711EC2F990000F5C01 /* EditInfo.swift */; };
 		0086A9A51EC2F990000F5C01 /* VideoEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0086A9721EC2F990000F5C01 /* VideoEditing.swift */; };
@@ -213,6 +216,9 @@
 		007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		007D82D11E8B76B0005CBBC2 /* SettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
+		007E5ADB1EE53DAA00FDC2EB /* UICircularProgressRingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICircularProgressRingDelegate.swift; sourceTree = "<group>"; };
+		007E5ADC1EE53DAA00FDC2EB /* UICircularProgressRingLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICircularProgressRingLayer.swift; sourceTree = "<group>"; };
+		007E5ADD1EE53DAA00FDC2EB /* UICircularProgressRingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICircularProgressRingView.swift; sourceTree = "<group>"; };
 		007F06CF1ED3CE3F0081EAAE /* ConstantColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantColor.swift; sourceTree = "<group>"; };
 		007F62DB1ECD86BD00226B49 /* PasscodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
 		007F62DE1ECD91CF00226B49 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -249,7 +255,7 @@
 		0086A96B1EC2F990000F5C01 /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		0086A96C1EC2F990000F5C01 /* PermissionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionController.swift; sourceTree = "<group>"; };
 		0086A96D1EC2F990000F5C01 /* PermissionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
-		0086A96E1EC2F990000F5C01 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		0086A96E1EC2F990000F5C01 /* GUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUtils.swift; sourceTree = "<group>"; };
 		0086A9701EC2F990000F5C01 /* AdvancedVideoEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedVideoEditor.swift; sourceTree = "<group>"; };
 		0086A9711EC2F990000F5C01 /* EditInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditInfo.swift; sourceTree = "<group>"; };
 		0086A9721EC2F990000F5C01 /* VideoEditing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoEditing.swift; sourceTree = "<group>"; };
@@ -496,6 +502,7 @@
 		006486E61E70EFD500419C27 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				007E5ADA1EE53DAA00FDC2EB /* UICircularProgressRing */,
 				00DDF9661ED436E800093770 /* Hero */,
 				0086A9411EC2F98F000F5C01 /* Gallery */,
 			);
@@ -561,6 +568,16 @@
 				007D82D11E8B76B0005CBBC2 /* SettingCell.xib */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		007E5ADA1EE53DAA00FDC2EB /* UICircularProgressRing */ = {
+			isa = PBXGroup;
+			children = (
+				007E5ADB1EE53DAA00FDC2EB /* UICircularProgressRingDelegate.swift */,
+				007E5ADC1EE53DAA00FDC2EB /* UICircularProgressRingLayer.swift */,
+				007E5ADD1EE53DAA00FDC2EB /* UICircularProgressRingView.swift */,
+			);
+			path = UICircularProgressRing;
 			sourceTree = "<group>";
 		};
 		007F62DA1ECD86A100226B49 /* UI */ = {
@@ -648,7 +665,7 @@
 				0086A9661EC2F990000F5C01 /* Once.swift */,
 				0086A9671EC2F990000F5C01 /* Pages */,
 				0086A96A1EC2F990000F5C01 /* Permission */,
-				0086A96E1EC2F990000F5C01 /* Utils.swift */,
+				0086A96E1EC2F990000F5C01 /* GUtils.swift */,
 				0086A96F1EC2F990000F5C01 /* VideoEditor */,
 				0086A9741EC2F990000F5C01 /* View */,
 			);
@@ -1202,6 +1219,7 @@
 				004F71C61EE14FB70026A907 /* CollectionViewExtension.swift in Sources */,
 				00DDF9931ED436E800093770 /* HeroDefaultAnimator.swift in Sources */,
 				00DDF99F1ED436E800093770 /* UIViewController+Hero.swift in Sources */,
+				007E5AE01EE53DAA00FDC2EB /* UICircularProgressRingView.swift in Sources */,
 				00DDF9B01ED436E800093770 /* CascadePreprocessor.swift in Sources */,
 				00DDF9A51ED436E800093770 /* HeroModifier.swift in Sources */,
 				0086A9A11EC2F990000F5C01 /* PermissionView.swift in Sources */,
@@ -1266,10 +1284,11 @@
 				00DDF9941ED436E800093770 /* HeroViewPropertyViewContext.swift in Sources */,
 				00DDF9A01ED436E800093770 /* Hero.swift in Sources */,
 				0086A9AE1EC2F990000F5C01 /* GVideoCell.swift in Sources */,
+				007E5ADF1EE53DAA00FDC2EB /* UICircularProgressRingLayer.swift in Sources */,
 				0086A9971EC2F990000F5C01 /* UIView+Extensions.swift in Sources */,
 				0094F6D31E8E3E56007BEFAE /* PrivateData.xcdatamodeld in Sources */,
 				0086A9A91EC2F990000F5C01 /* EmptyView.swift in Sources */,
-				0086A9A21EC2F990000F5C01 /* Utils.swift in Sources */,
+				0086A9A21EC2F990000F5C01 /* GUtils.swift in Sources */,
 				004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */,
 				00DDF9971ED436E800093770 /* DefaultAnimationPreprocessor.swift in Sources */,
 				0086A9811EC2F990000F5C01 /* CameraController.swift in Sources */,
@@ -1304,6 +1323,7 @@
 				00DDF9AC1ED436E800093770 /* Nodes.swift in Sources */,
 				0086A99A1EC2F990000F5C01 /* GBundle.swift in Sources */,
 				0086A98C1EC2F990000F5C01 /* ImagesController.swift in Sources */,
+				007E5ADE1EE53DAA00FDC2EB /* UICircularProgressRingDelegate.swift in Sources */,
 				004B28F61E8CA624007C910A /* GalleryCell.swift in Sources */,
 				00DDF9B21ED436E800093770 /* IgnoreSubviewModifiersPreprocessor.swift in Sources */,
 				0086A9871EC2F990000F5C01 /* GalleryController.swift in Sources */,

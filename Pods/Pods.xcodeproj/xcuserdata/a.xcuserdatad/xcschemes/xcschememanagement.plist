@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>DynamicColor.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ImagePicker-ImagePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,12 +47,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>11B750801A72DBCA6FD030AF559292E9</key>
+		<key>19864AB8F7B8E9064740E008772C4404</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>3BFF9F651824EF6D7159B996DAA71D25</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>63142622EC5824337659C65F05DBB9CC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8E67706D8F3F468B7027BAA66F163FF7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -58,11 +73,6 @@
 			<true/>
 		</dict>
 		<key>CA3E4E7377DAD1541157E9A40EA76442</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D66FC2BC6949BC1DAFD67E5B2666AC35</key>
 		<dict>
 			<key>primary</key>
 			<true/>

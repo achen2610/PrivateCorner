@@ -13,6 +13,7 @@ import Photos
 public protocol GalleryPhotoViewModelDelegate: class {
 
     func reloadGallery()
+    func updateProgressRing(value: CGFloat)
 }
 
 
@@ -44,6 +45,10 @@ open class GalleryPhotoViewModel {
         
         let filenames = fetchImages(assets)
         var items = [Item]()
+        let group = DispatchGroup()
+        let percent: CGFloat = 100 / CGFloat(images.count * 2)
+        var currentPercent: CGFloat = 0
+
         for image in images {
             let index = images.index(of: image)
             let filename = filenames[index!]
@@ -57,8 +62,16 @@ open class GalleryPhotoViewModel {
             if fileManager.fileExists(atPath: path.path) {
                 print("Original Image Exists")
             } else {
+                group.enter()
                 if let data = UIImagePNGRepresentation(image) {
-                    try? data.write(to: path)
+//                    try? data.write(to: path)
+                    
+                    let success = fileManager.createFile(atPath: path.path, contents: data, attributes: nil)
+                    if success {
+                        group.leave()
+                        currentPercent += percent
+                        delegate?.updateProgressRing(value: currentPercent)
+                    }
                 }
             }
             
@@ -68,14 +81,19 @@ open class GalleryPhotoViewModel {
             if fileManager.fileExists(atPath: thumbnailPath.path) {
                 print("Thumbnail Exists")
             } else {
+                group.enter()
                 if let data = UIImagePNGRepresentation(thumbnailImage) {
-                    try? data.write(to: thumbnailPath)
+//                    try? data.write(to: thumbnailPath)
                     
-                    
+                    let success = fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
+                    if success {
+                        group.leave()
+                        currentPercent += percent
+                        delegate?.updateProgressRing(value: currentPercent)
+                    }
                 }
             }
         }
-        
         
         let itemsInAlbum = album.mutableSetValue(forKey: "items")
         if itemsInAlbum.count > 0 {
@@ -94,67 +112,78 @@ open class GalleryPhotoViewModel {
             print("Could not save. \(error), \(error.userInfo)")
         }
         
-        getGallery()
+        group.notify(queue: DispatchQueue.main) { 
+            self.getGallery()
+        }
     }
     
-    func uploadVideoToCoreData(video: Video) {
-
-        video.fetchAVAsset { (avasset) in
-            if let avassetURL = avasset as? AVURLAsset {
-
-                guard let videoData = try? Data(contentsOf: avassetURL.url) else {
-                    return
+    func uploadVideoToCoreData(video: Video, avasset: AVAsset) {
+        
+        if let avassetURL = avasset as? AVURLAsset {
+            guard let videoData = try? Data(contentsOf: avassetURL.url) else {
+                return
+            }
+            
+            let group = DispatchGroup()
+            let fileManager = FileManager.default
+            let filename = avassetURL.url.lastPathComponent
+            let name = filename.components(separatedBy: ".").first
+            let thumbname = "thumbnail_" + name! + ".JPG"
+            
+            // Add video to database
+            let item = ItemManager.sharedInstance.add(media: video, filename: filename, thumbname: thumbname, type: .VideoType)
+            
+            let itemsInAlbum = self.album.mutableSetValue(forKey: "items")
+            if itemsInAlbum.count > 0 {
+                itemsInAlbum.add(item)
+            } else {
+                self.album.addToItems(NSSet(array: [item]))
+            }
+            
+            //1
+            let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+            
+            //2
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+            
+            // Save original video
+            group.enter()
+            let path = self.getDocumentsDirectory().appendingPathComponent(filename)
+            if fileManager.fileExists(atPath: path.path) {
+                print("Video Exists")
+            } else {
+                
+                let success = fileManager.createFile(atPath: path.path, contents: videoData, attributes: nil)
+                if success {
+                    group.leave()
+                    delegate?.updateProgressRing(value: 50)
                 }
-                
-                let filename = avassetURL.url.lastPathComponent
-                let name = filename.components(separatedBy: ".").first
-                let thumbname = "thumbnail_" + name! + ".JPG"
-                
-                // Add video to database
-                let item = ItemManager.sharedInstance.add(media: video, filename: filename, thumbname: thumbname, type: .VideoType)
-                
-                let itemsInAlbum = self.album.mutableSetValue(forKey: "items")
-                if itemsInAlbum.count > 0 {
-                    itemsInAlbum.add(item)
+            }
+            
+            // Save thumbnail video
+            group.enter()
+            let thumbnailPath = self.getDocumentsDirectory().appendingPathComponent(thumbname)
+            video.fetchThumbnail(CGSize(width: 256, height: 256), completion: { (image) in
+                if fileManager.fileExists(atPath: thumbnailPath.path) {
+                    print("Thumbnail Exists")
                 } else {
-                    self.album.addToItems(NSSet(array: [item]))
-                }
-                
-                //1
-                let managedContext = CoreDataManager.sharedInstance.managedObjectContext
-                
-                //2
-                do {
-                    try managedContext.save()
-                } catch let error as NSError {
-                    print("Could not save. \(error), \(error.userInfo)")
-                }
-                
-                // Save original video
-                let fileManager = FileManager.default
-                let path = self.getDocumentsDirectory().appendingPathComponent(filename)
-                if fileManager.fileExists(atPath: path.path) {
-                    print("Video Exists")
-                } else {
-                    try? videoData.write(to: path)
-                }
-                
-                // Save thumbnail video
-                let thumbnailPath = self.getDocumentsDirectory().appendingPathComponent(thumbname)
-                video.fetchThumbnail(CGSize(width: 256, height: 256), completion: { (image) in
-                    if fileManager.fileExists(atPath: thumbnailPath.path) {
-                        print("Thumbnail Exists")
-                    } else {
-                        if let data = UIImagePNGRepresentation(image!) {
-                            try? data.write(to: thumbnailPath)
+                    if let data = UIImagePNGRepresentation(image!) {
+                        let success = fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
+                        if success {
+                            group.leave()
+                            self.delegate?.updateProgressRing(value: 100)
                         }
                     }
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                        self.getGallery()
-                    })
-                })
-            }
+                }
+            })
+            
+            group.notify(queue: DispatchQueue.main, execute: { 
+                self.getGallery()
+            })
         }
     }
     
