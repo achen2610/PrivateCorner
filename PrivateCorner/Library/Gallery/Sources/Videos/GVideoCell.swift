@@ -31,9 +31,9 @@ class GVideoCell: ImageCell {
     bottomOverlay.g_pinDownward()
     bottomOverlay.g_pin(height: 16)
 
-    cameraImageView.g_pinHorizontally(padding: 5)
-//    cameraImageView.g_pin(size: CGSize(width: 12, height: 6))
-    cameraImageView.g_pin(height: 6)
+    cameraImageView.g_pin(on: .left, constant: 4)
+    cameraImageView.g_pin(on: .centerY, view: durationLabel, on: .centerY)
+    cameraImageView.g_pin(size: CGSize(width: 12, height: 6))
 
     durationLabel.g_pin(on: .right, constant: -4)
     durationLabel.g_pin(on: .bottom, constant: -2)
@@ -44,6 +44,7 @@ class GVideoCell: ImageCell {
   func makeCameraImageView() -> UIImageView {
     let imageView = UIImageView()
     imageView.image = GBundle.image("gallery_video_cell_camera")
+    imageView.contentMode = .scaleAspectFit
 
     return imageView
   }

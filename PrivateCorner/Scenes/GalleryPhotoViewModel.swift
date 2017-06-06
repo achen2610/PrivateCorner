@@ -64,7 +64,7 @@ open class GalleryPhotoViewModel {
             } else {
                 group.enter()
                 if let data = UIImagePNGRepresentation(image) {
-//                    try? data.write(to: path)
+                    //                    try? data.write(to: path)
                     
                     let success = fileManager.createFile(atPath: path.path, contents: data, attributes: nil)
                     if success {
@@ -83,7 +83,7 @@ open class GalleryPhotoViewModel {
             } else {
                 group.enter()
                 if let data = UIImagePNGRepresentation(thumbnailImage) {
-//                    try? data.write(to: thumbnailPath)
+                    //                    try? data.write(to: thumbnailPath)
                     
                     let success = fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
                     if success {
@@ -120,10 +120,7 @@ open class GalleryPhotoViewModel {
     func uploadVideoToCoreData(video: Video, avasset: AVAsset) {
         
         if let avassetURL = avasset as? AVURLAsset {
-            guard let videoData = try? Data(contentsOf: avassetURL.url) else {
-                return
-            }
-            
+            let videoUrl = avassetURL.url
             let group = DispatchGroup()
             let fileManager = FileManager.default
             let filename = avassetURL.url.lastPathComponent
@@ -157,11 +154,15 @@ open class GalleryPhotoViewModel {
                 print("Video Exists")
             } else {
                 
-                let success = fileManager.createFile(atPath: path.path, contents: videoData, attributes: nil)
-                if success {
-                    group.leave()
-                    delegate?.updateProgressRing(value: 50)
-                }
+                saveVideoFile(videoUrl: videoUrl, destinationPath: path)
+                group.leave()
+                delegate?.updateProgressRing(value: 50)
+                
+//                let success = fileManager.createFile(atPath: path.path, contents: videoData, attributes: nil)
+//                if success {
+//                    group.leave()
+//                    delegate?.updateProgressRing(value: 50)
+//                }
             }
             
             // Save thumbnail video
@@ -244,5 +245,53 @@ open class GalleryPhotoViewModel {
             }
         }
         return filenames
+    }
+    
+    private func saveVideoFile(videoUrl: URL, destinationPath urlPath: URL) {
+        let fileManager = FileManager.default
+        
+        if !fileManager.fileExists(atPath: urlPath.path) {
+            fileManager.createFile(atPath: urlPath.path, contents: Data.init(), attributes: nil)
+        }
+        
+        let fileWriteHandle: FileHandle? = FileHandle.init(forWritingAtPath: urlPath.path)
+        let fileReadHandle: FileHandle? = FileHandle.init(forReadingAtPath: videoUrl.path)
+        
+        var chunk = Data()
+        let chunkSize = 64 * 1024
+        var offset: UInt64 = 0
+        
+        var fileSize : UInt64 = 0
+        do {
+            //return [FileAttributeKey : Any]
+            let attr = try FileManager.default.attributesOfItem(atPath: videoUrl.path)
+            fileSize = attr[FileAttributeKey.size] as! UInt64
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        autoreleasepool {
+            if let temp = fileReadHandle?.readData(ofLength: chunkSize) {
+                chunk = temp
+            }
+        }
+
+        while chunk.count > 0 {
+            fileWriteHandle?.write(chunk)
+            
+            offset = offset + UInt64(chunk.count)
+            fileReadHandle?.seek(toFileOffset: offset)
+            
+            autoreleasepool {
+                if let temp = fileReadHandle?.readData(ofLength: chunkSize) {
+                    chunk = temp
+                }
+            }
+            
+            let progress: CGFloat = CGFloat(offset) / CGFloat(fileSize) * 50
+            delegate?.updateProgressRing(value: progress)
+        }
+        
+        fileWriteHandle?.closeFile()
     }
 }

@@ -53,11 +53,6 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         getGalleryPhotoOnLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-    }
-    
     // MARK: Event handling
     func styleUI() {
         title = viewModel.titleAlbum
@@ -75,7 +70,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         progressRing.outerRingWidth = 8.0
         progressRing.innerRingColor = blue.lighter()
         progressRing.innerRingSpacing = 0
-        progressRing.fontColor = blue.lighter()
+        progressRing.fontColor = blue.darkened()
         view.addSubview(progressRing)
         
 //        bottomConstraintCollectionView.constant = 49
@@ -113,6 +108,15 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         controller.viewModel = vm
         
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func scrollToBottom(animated: Bool) {
+        let numberItems = self.galleryCollectionView.numberOfItems(inSection: 0)
+        if numberItems > 0 {
+            self.galleryCollectionView.scrollToItem(at: NSIndexPath.init(row:(self.galleryCollectionView.numberOfItems(inSection: 0)) - 1, section: 0) as IndexPath,
+                                                    at: UICollectionViewScrollPosition.bottom,
+                                                    animated: animated)
+        }
     }
     
     // MARK: Selector Event
@@ -211,15 +215,23 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
 
     // GalleryPhotoViewModelDelegate
     func reloadGallery() {
-        progressRing.isHidden = true
-        progressRing.setProgress(value: 0, animationDuration: 0)
-        galleryCollectionView.reloadData()
-
-        let numberItems = galleryCollectionView.numberOfItems(inSection: 0)
-        if numberItems > 0 {
-            galleryCollectionView.scrollToItem(at: NSIndexPath.init(row:(galleryCollectionView.numberOfItems(inSection: 0)) - 1, section: 0) as IndexPath,
-                                               at: UICollectionViewScrollPosition.bottom,
-                                               animated: true)
+        if progressRing.isHidden {
+            galleryCollectionView.reloadData()
+            scrollToBottom(animated: true)
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.progressRing.alpha = 0.0
+            }) { (finished) in
+                if finished {
+                    self.progressRing.isHidden = true
+                    self.progressRing.setProgress(value: 0, animationDuration: 0)
+                    
+                    DispatchQueue.main.async(execute: {
+                        self.galleryCollectionView.reloadData()
+                        self.scrollToBottom(animated: true)
+                    })
+                }
+            }
         }
     }
 
@@ -238,16 +250,40 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
             controller.dismiss(animated: true, completion: nil)
             self.gallery = nil
             self.progressRing.isHidden = false
+            self.progressRing.alpha = 1.0
         }
 
+//        autoreleasepool {
+//            var assets = [PHAsset]()
+//            for image in Cart.images {
+//                let asset = image.asset
+//                assets.append(asset);
+//            }
+//            
+//            let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+//            DispatchQueue.global().asyncAfter(deadline: when) {
+//                // Your code with delay
+//                self.viewModel.uploadImageToCoreData(images: images, assets: assets)
+//            }
+//        }
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage], imageAssets: [Image]) {
+        DispatchQueue.main.async {
+            controller.dismiss(animated: true, completion: nil)
+            self.gallery = nil
+            self.progressRing.isHidden = false
+            self.progressRing.alpha = 1.0
+        }
+        
         var assets = [PHAsset]()
-        for image in Cart.shared.images {
+        for image in imageAssets {
             let asset = image.asset
             assets.append(asset);
         }
-
+        
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
-        DispatchQueue.global().asyncAfter(deadline: when) { 
+        DispatchQueue.global().asyncAfter(deadline: when) {
             // Your code with delay
             self.viewModel.uploadImageToCoreData(images: images, assets: assets)
         }
@@ -258,6 +294,7 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
             controller.dismiss(animated: true, completion: nil)
             self.gallery = nil
             self.progressRing.isHidden = false
+            self.progressRing.alpha = 1.0
         }
         
         video.fetchAVAsset { (avasset) in

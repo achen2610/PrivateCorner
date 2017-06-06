@@ -46,7 +46,6 @@ class VideoBox: UIView {
     cameraImageView.g_pin(on: .left, constant: 5)
     cameraImageView.g_pin(on: .bottom, constant: -5)
     cameraImageView.g_pin(size: CGSize(width: 12, height: 6))
-//    cameraImageView.g_pin(height: 6)
   }
 
   // MARK: - Controls
