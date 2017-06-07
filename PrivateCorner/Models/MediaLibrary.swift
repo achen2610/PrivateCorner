@@ -14,8 +14,8 @@ class MediaLibrary {
     }
     
     static func getThumbnailImage(originalImage: UIImage) -> UIImage {
-        var width: CGFloat = 256
-        var height: CGFloat = 256
+        var width: CGFloat = 512
+        var height: CGFloat = 512
         let originalSize = originalImage.size
         if originalSize.width > originalSize.height {
             height = width * originalSize.height / originalSize.width

@@ -31,11 +31,23 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
             
             cell.durationLabel.heroModifiers = [.fade]
             cell.shadowView.heroModifiers = [.fade]
-            
+
             return cell
         }
         
         return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? GalleryCell {
+            if arraySelectedCell[indexPath.row] as Bool {
+                cell.containerView.isHidden = false
+                cell.selectedImageView.isHidden = false
+            } else {
+                cell.containerView.isHidden = true
+                cell.selectedImageView.isHidden = true
+            }
+        }
     }
     
     // MARK: UICollectionView FlowLayout
@@ -51,8 +63,21 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
         if !isEditMode {
             selectedPhotoAtIndex(index: indexPath, cell: cell)
             
-            cell.backgroundImageView.backgroundColor = UIColor.clear
-            cell.backgroundImageView.alpha = 1.0
+            cell.containerView.isHidden = true
+            cell.selectedImageView.isHidden = true
+            return
         }
+        
+        collectionView.deselectItem(at: indexPath, animated: false)
+        arraySelectedCell[indexPath.row] = !arraySelectedCell[indexPath.row]
+        cell.containerView.isHidden = !cell.containerView.isHidden
+        cell.selectedImageView.isHidden = !cell.selectedImageView.isHidden
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+//        let cell = collectionView.cellForItem(at: indexPath) as! GalleryCell
+//        
+//        arraySelectedCell[indexPath.row] = false
+//        cell.backgroundImageView.isHidden = true
+//    }
 }

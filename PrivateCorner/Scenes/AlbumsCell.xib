@@ -40,10 +40,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFH-Ee-vXJ">
-                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                        <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="RFw-Ix-B50"/>
-                            <constraint firstAttribute="height" constant="20" id="bn7-Cc-8oF"/>
+                            <constraint firstAttribute="width" constant="24" id="RFw-Ix-B50"/>
+                            <constraint firstAttribute="height" constant="24" id="bn7-Cc-8oF"/>
                         </constraints>
                         <state key="normal" backgroundImage="remove.png"/>
                     </button>

@@ -87,7 +87,6 @@ open class AlbumsViewModel {
     
     func selectedGalleryAtIndex(index: Int) {
         let album = albums[index]
-        
         let galleryModel = GalleryPhotoViewModel(album: album)
         delegate?.navigationToAlbumDetail(viewModel: galleryModel)
     }

@@ -9,9 +9,9 @@
 import UIKit
 
 extension UICollectionView {
-    func deselectAllItems(animated: Bool = false) {
-        for indexPath in self.indexPathsForSelectedItems ?? [] {
-            self.deselectItem(at: indexPath, animated: animated)
+    func deselectAllItems(section: Int = 0, animated: Bool = false) {
+        for index in 0...self.numberOfItems(inSection: section) - 1 {
+            self.deselectItem(at: IndexPath(item: index, section: section), animated: animated)
         }
     }
     

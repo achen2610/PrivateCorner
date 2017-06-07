@@ -168,7 +168,7 @@ open class GalleryPhotoViewModel {
             // Save thumbnail video
             group.enter()
             let thumbnailPath = self.getDocumentsDirectory().appendingPathComponent(thumbname)
-            video.fetchThumbnail(CGSize(width: 256, height: 256), completion: { (image) in
+            video.fetchThumbnail(CGSize(width: 512, height: 512), completion: { (image) in
                 if fileManager.fileExists(atPath: thumbnailPath.path) {
                     print("Thumbnail Exists")
                 } else {
@@ -206,6 +206,7 @@ open class GalleryPhotoViewModel {
         }
         
         cell.photoImageView.image = MediaLibrary.image(urlPath: urlPath)
+//        cell.photoImageView.sd_setImage(with: urlPath)
     }
 
     // MARK: Private Method
