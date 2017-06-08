@@ -46,3 +46,18 @@ extension PhotoViewController: UICollectionViewDelegateFlowLayout {
         return view.bounds.size
     }
 }
+
+extension PhotoViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+
+        let pageWidth = collectionView.frame.size.width
+        let currentPage = collectionView.contentOffset.x / pageWidth
+        
+        let type = viewModel.getTypeItem(index: Int(currentPage))
+        if type == "image" {
+            actionButton.isEnabled = false
+        } else {
+            actionButton.isEnabled = true
+        }
+    }
+}

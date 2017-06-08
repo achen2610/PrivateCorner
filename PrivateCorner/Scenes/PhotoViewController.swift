@@ -9,19 +9,20 @@
 import UIKit
 
 class PhotoViewController: UIViewController {
+
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var toolBar: UIToolbar!
+    @IBOutlet weak var actionButton: UIBarButtonItem!
     
     var viewModel: PhotoViewViewModel!
     var selectedIndex: IndexPath?
     var panGR = UIPanGestureRecognizer()
     var isHiddenNav: Bool = false
     
-    
     struct cellIdentifiers {
         static let photoCell = "PhotoCell"
         static let videoCell = "VideoCell"
     }
-    
-    @IBOutlet weak var collectionView: UICollectionView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,11 +37,28 @@ class PhotoViewController: UIViewController {
         configureCollectionViewOnLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isHeroEnabled = true
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.tabBarController?.tabBar.alpha = 0.0
+        })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        tabBarController?.tabBar.alpha = 1.0
+    }
     
     // MARK: Event handling
     func styleUI() {
         automaticallyAdjustsScrollViewInsets = false
         preferredContentSize = CGSize(width: view.bounds.width, height: view.bounds.width)
+        toolBar.frame.origin.y += toolBar.frame.size.height
+        toolBar.barTintColor = navigationController?.navigationBar.barTintColor
     }
     
     func configureCollectionViewOnLoad() {
@@ -51,6 +69,12 @@ class PhotoViewController: UIViewController {
         collectionView!.reloadData()
         if let selectedIndex = selectedIndex {
             collectionView!.scrollToItem(at: selectedIndex, at: .centeredHorizontally, animated: false)
+            let type = viewModel.getTypeItem(index: selectedIndex.row)
+            if type == "image" {
+                actionButton.isEnabled = false
+            } else {
+                actionButton.isEnabled = true
+            }
         }
         
         panGR.addTarget(self, action: #selector(pan))
@@ -68,9 +92,9 @@ class PhotoViewController: UIViewController {
                 cell.setHiddenForPlayButton(isHidden: true)
             }
             
+            tabBarController?.tabBar.alpha = 1.0
             if isHiddenNav {
-                self.navigationController?.navigationBar.alpha = 1.0
-                self.tabBarController?.tabBar.alpha = 1.0
+                navigationController?.navigationBar.alpha = 1.0
                 isHiddenNav = !isHiddenNav
             }
 
@@ -96,6 +120,27 @@ class PhotoViewController: UIViewController {
             }
         }
     }
+
+    @IBAction func clickExportButton(_ sender: Any) {
+        
+    }
+
+    @IBAction func clickActionButton(_ sender: Any) {
+        if let cell = collectionView?.visibleCells[0] as? VideoCell {
+            if cell.player.isPlaying {
+                print("is playing")
+                cell.pauseVideo()
+                actionButton.image = UIImage(named: "play.png")
+            } else {
+                cell.playVideo()
+            }
+        }
+    }
+
+    @IBAction func clickDeleteButton(_ sender: Any) {
+        
+    }
+    
 }
 
 extension PhotoViewController: UIGestureRecognizerDelegate {
@@ -114,10 +159,15 @@ extension PhotoViewController: UIGestureRecognizerDelegate {
 
 extension PhotoViewController: HeroViewControllerDelegate {
     
-    public func heroDidEndTransition() {
+    func heroDidEndTransition() {
         viewModel.isEndTransition = true
         if let cell = collectionView?.visibleCells[0] as? VideoCell {
             cell.playButton.isHidden = false
+        }
+        
+        toolBar.isHidden = false
+        UIView.animate(withDuration: 0.1) {
+            self.toolBar.frame.origin.y -= self.toolBar.frame.size.height
         }
     }
 }
@@ -127,14 +177,32 @@ extension PhotoViewController: VideoCellDelegate {
         if isHiddenNav {
             UIView.animate(withDuration: 0.3, animations: { 
                 self.navigationController?.navigationBar.alpha = 1.0
-                self.tabBarController?.tabBar.alpha = 1.0
+                self.toolBar.alpha = 1.0
             })
         } else {
             UIView.animate(withDuration: 0.3, animations: {
                 self.navigationController?.navigationBar.alpha = 0.0
-                self.tabBarController?.tabBar.alpha = 0.0
+                self.toolBar.alpha = 0.0
             })
         }
+        isHiddenNav = !isHiddenNav
+    }
+    
+    func tapPlayVideo() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.navigationController?.navigationBar.alpha = 0.0
+            self.toolBar.alpha = 0.0
+            self.actionButton.image = UIImage(named: "pause.png")
+        })
+        isHiddenNav = !isHiddenNav
+    }
+    
+    func videoPlayFinished() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.navigationController?.navigationBar.alpha = 1.0
+            self.toolBar.alpha = 1.0
+            self.actionButton.image = UIImage(named: "play.png")
+        })
         isHiddenNav = !isHiddenNav
     }
 }
@@ -144,12 +212,12 @@ extension PhotoViewController: PhotoCellDelegate {
         if isHiddenNav {
             UIView.animate(withDuration: 0.3, animations: {
                 self.navigationController?.navigationBar.alpha = 1.0
-                self.tabBarController?.tabBar.alpha = 1.0
+                self.toolBar.alpha = 1.0
             })
         } else {
             UIView.animate(withDuration: 0.3, animations: {
                 self.navigationController?.navigationBar.alpha = 0.0
-                self.tabBarController?.tabBar.alpha = 0.0
+                self.toolBar.alpha = 0.0
             })
         }
         isHiddenNav = !isHiddenNav

@@ -37,7 +37,7 @@ class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.title = "Album"
         configureCollectionViewOnLoad()
         viewModel = AlbumsViewModel(delegate: self)

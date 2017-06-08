@@ -12,6 +12,8 @@ import AVFoundation
 
 public protocol VideoCellDelegate: class {
     func tapOverVideoView()
+    func tapPlayVideo()
+    func videoPlayFinished()
 }
 
 class VideoCell: UICollectionViewCell {
@@ -66,15 +68,21 @@ class VideoCell: UICollectionViewCell {
     }
     
     func playVideo() {
+        if isEnd {
+            player.seek(to: kCMTimeZero)
+            isEnd = false
+        }
+        
         player.play()
         
         setHiddenForPlayButton(isHidden: true)
+        delegate?.tapPlayVideo()
     }
     
     func pauseVideo() {
         player.pause()
         
-        setHiddenForPlayButton(isHidden: false)
+//        setHiddenForPlayButton(isHidden: false)
     }
     
     func setHiddenForPlayButton(isHidden: Bool) {
@@ -153,6 +161,7 @@ class VideoCell: UICollectionViewCell {
     func playerDidFinishPlaying(note: NSNotification) {
         print("Video Finished")
         isEnd = true
+        delegate?.videoPlayFinished()
     }
     
     //MARK: - Deinit

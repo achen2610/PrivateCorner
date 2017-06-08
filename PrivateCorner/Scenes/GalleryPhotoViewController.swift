@@ -47,12 +47,16 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isHeroEnabled = true
-//        isHeroEnabled = true
-        
+
         styleUI()
         configureCollectionViewOnLoad()
         getGalleryPhotoOnLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isHeroEnabled = false
     }
     
     // MARK: Event handling
@@ -62,6 +66,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         var rect = toolBar.frame
         rect.origin.y += rect.size.height
         toolBar.frame = rect
+        toolBar.barTintColor = navigationController?.navigationBar.barTintColor
         
         containerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
         containerView.backgroundColor = UIColor(white: 0.0, alpha: 0.4)
@@ -97,6 +102,8 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     }
     
     func selectedPhotoAtIndex(index: IndexPath, cell: GalleryCell) {
+        navigationController?.isHeroEnabled = true
+        
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let controller  = mainStoryboard.instantiateViewController(withIdentifier: "PhotoView") as! PhotoViewController
         controller.selectedIndex = index
@@ -303,10 +310,6 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
 }
 
 extension GalleryPhotoViewController: HeroViewControllerDelegate {
-    func heroWillStartTransition() {
-        navigationController?.isHeroEnabled = false
-    }
-    
     func heroWillStartAnimatingTo(viewController: UIViewController) {
         if (viewController as? GalleryPhotoViewController) != nil {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015, direction:.bottomToTop, delayMatchedViews:true)]
@@ -316,9 +319,12 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
             }
             navigationController?.heroNavigationAnimationType = .fade
         } else {
-            navigationController?.isHeroEnabled = false
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
             navigationController?.heroNavigationAnimationType = .pull(direction: .right)
+        }
+        
+        if let vc = viewController as? PhotoViewController {
+            vc.toolBar.heroModifiers = [.fade]
         }
     }
     func heroWillStartAnimatingFrom(viewController: UIViewController) {
@@ -328,9 +334,9 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
             navigationController?.heroNavigationAnimationType = .fade
         } else if (viewController as? PhotoViewController) != nil {
             navigationController?.heroNavigationAnimationType = .fade
+            addPhotoButton.heroModifiers = [.fade]
         } else {
-//            galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
-            galleryCollectionView.heroModifiers = [.fade, .delay(0)]
+            galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
             addPhotoButton.heroModifiers = [.fade]
             navigationController?.heroNavigationAnimationType = .push(direction: .left)
         }
