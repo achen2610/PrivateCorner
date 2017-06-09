@@ -12,11 +12,6 @@ import CoreData
 
 class ItemManager {
     
-    enum ItemType {
-        case ImageType
-        case VideoType
-    }
-    
     // MARK: - Item Manager stack
     static let sharedInstance = ItemManager()
     
@@ -34,7 +29,7 @@ class ItemManager {
         return item
     }
     
-    func add(media: Any, filename: String, thumbname: String, type: ItemType) -> Item {
+    func add(media: Any, info: [String: Any], toAlbum album: Album) {
         //1
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         
@@ -43,10 +38,10 @@ class ItemManager {
         
         //3
         let item = Item(entity: entity, insertInto: managedContext)
-        item.fileName = filename
-        item.thumbName = thumbname
+        item.fileName = info["filename"] as? String
+        item.thumbName = info["thumbname"] as? String
         item.uploadDate = Date() as NSDate?
-        switch type {
+        switch info["type"] as! Key.ItemType {
         case .ImageType:
             item.type = "image"
             break;
@@ -57,22 +52,46 @@ class ItemManager {
             }
             break;
         }
-        
-        // 4
+
+        //4
+        let itemsInAlbum = album.mutableSetValue(forKey: "items")
+        if itemsInAlbum.count > 0 {
+            itemsInAlbum.add(item)
+        } else {
+            album.addToItems(NSSet(array: [item]))
+        }
+
+        //5
         do {
             try managedContext.save()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
-        
-        return item
+
     }
     
     func updateItem(id: NSInteger, item: Item) {
         
     }
     
-    func deleteItem(id: NSInteger) {
+    func deleteItem(item: Item, atAlbum album: Album) {
+        //1
+        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         
+        //2
+        managedContext.delete(item)
+        
+        //3
+        let itemsInAlbum = album.mutableSetValue(forKey: "items")
+        if itemsInAlbum.count > 0 {
+            itemsInAlbum.remove(item)
+        }
+        
+        //4
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
 }

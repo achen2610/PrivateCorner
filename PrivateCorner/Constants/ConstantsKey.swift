@@ -35,4 +35,9 @@ struct Key {
         static let listNotFound = "ERROR_LIST_NOT_FOUND"
         static let validationError = "ERROR_VALIDATION"
     }
+    
+    enum ItemType {
+        case ImageType
+        case VideoType
+    }
 }

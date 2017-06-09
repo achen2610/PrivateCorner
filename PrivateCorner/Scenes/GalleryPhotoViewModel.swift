@@ -24,6 +24,7 @@ open class GalleryPhotoViewModel {
     var titleAlbum: String
     weak var delegate: GalleryPhotoViewModelDelegate?
     
+    // MARK: - Public Methods
     public init(album: Album) {
         self.album = album
         self.titleAlbum = album.name!
@@ -44,28 +45,29 @@ open class GalleryPhotoViewModel {
     func uploadImageToCoreData(images: [UIImage], assets: [PHAsset]) {
         
         let filenames = fetchImages(assets)
-        var items = [Item]()
         let group = DispatchGroup()
         let percent: CGFloat = 100 / CGFloat(images.count * 2)
         var currentPercent: CGFloat = 0
+        let fileManager = FileManager.default
 
         for image in images {
             let index = images.index(of: image)
             let filename = filenames[index!]
             let thumbname = "thumbnail" + filename
-            let item = ItemManager.sharedInstance.add(media: image, filename: filename, thumbname: thumbname, type: .ImageType)
-            items.append(item)
             
-            let fileManager = FileManager.default
+            // Add image to DB
+            let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
+            ItemManager.sharedInstance.add(media: image, info: info, toAlbum: album)
+            
             // Save original image
             let path = getDocumentsDirectory().appendingPathComponent(filename)
             if fileManager.fileExists(atPath: path.path) {
-                print("Original Image Exists")
+                print("===============")
+                print("Image \(filename) exists")
             } else {
                 group.enter()
                 if let data = UIImagePNGRepresentation(image) {
-                    //                    try? data.write(to: path)
-                    
+
                     let success = fileManager.createFile(atPath: path.path, contents: data, attributes: nil)
                     if success {
                         group.leave()
@@ -79,12 +81,11 @@ open class GalleryPhotoViewModel {
             let thumbnailPath = getDocumentsDirectory().appendingPathComponent(thumbname)
             let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: image)
             if fileManager.fileExists(atPath: thumbnailPath.path) {
-                print("Thumbnail Exists")
+                print("===============")
+                print("Thumbnail \(thumbname) exists")
             } else {
                 group.enter()
                 if let data = UIImagePNGRepresentation(thumbnailImage) {
-                    //                    try? data.write(to: thumbnailPath)
-                    
                     let success = fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
                     if success {
                         group.leave()
@@ -95,25 +96,10 @@ open class GalleryPhotoViewModel {
             }
         }
         
-        let itemsInAlbum = album.mutableSetValue(forKey: "items")
-        if itemsInAlbum.count > 0 {
-            itemsInAlbum.addObjects(from: items)
-        } else {
-            album.addToItems(NSSet(array: items))
-        }
-        
-        //1
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
-        
-        //2
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-        
         group.notify(queue: DispatchQueue.main) { 
             self.getGallery()
+            print("===============")
+            print("Upload images success")
         }
     }
     
@@ -128,41 +114,20 @@ open class GalleryPhotoViewModel {
             let thumbname = "thumbnail_" + name! + ".JPG"
             
             // Add video to database
-            let item = ItemManager.sharedInstance.add(media: video, filename: filename, thumbname: thumbname, type: .VideoType)
-            
-            let itemsInAlbum = self.album.mutableSetValue(forKey: "items")
-            if itemsInAlbum.count > 0 {
-                itemsInAlbum.add(item)
-            } else {
-                self.album.addToItems(NSSet(array: [item]))
-            }
-            
-            //1
-            let managedContext = CoreDataManager.sharedInstance.managedObjectContext
-            
-            //2
-            do {
-                try managedContext.save()
-            } catch let error as NSError {
-                print("Could not save. \(error), \(error.userInfo)")
-            }
+            let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.VideoType]
+            ItemManager.sharedInstance.add(media: video, info: info, toAlbum: album)
             
             // Save original video
             group.enter()
             let path = self.getDocumentsDirectory().appendingPathComponent(filename)
             if fileManager.fileExists(atPath: path.path) {
-                print("Video Exists")
+                print("===============")
+                print("Video \(filename) exists")
             } else {
                 
                 saveVideoFile(videoUrl: videoUrl, destinationPath: path)
                 group.leave()
                 delegate?.updateProgressRing(value: 50)
-                
-//                let success = fileManager.createFile(atPath: path.path, contents: videoData, attributes: nil)
-//                if success {
-//                    group.leave()
-//                    delegate?.updateProgressRing(value: 50)
-//                }
             }
             
             // Save thumbnail video
@@ -170,7 +135,8 @@ open class GalleryPhotoViewModel {
             let thumbnailPath = self.getDocumentsDirectory().appendingPathComponent(thumbname)
             video.fetchThumbnail(CGSize(width: 512, height: 512), completion: { (image) in
                 if fileManager.fileExists(atPath: thumbnailPath.path) {
-                    print("Thumbnail Exists")
+                    print("===============")
+                    print("Thumbnail \(thumbname) exists")
                 } else {
                     if let data = UIImagePNGRepresentation(image!) {
                         let success = fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
@@ -184,9 +150,59 @@ open class GalleryPhotoViewModel {
             
             group.notify(queue: DispatchQueue.main, execute: { 
                 self.getGallery()
+                print("===============")
+                print("Upload video success")
             })
         }
     }
+    
+    func deleteItem(indexPaths: [IndexPath]) {
+        let fileManager = FileManager.default
+        
+        for indexPath in indexPaths {
+            let index = indexPath.row
+            let item = items[index]
+            
+            // Delete item from database
+            ItemManager.sharedInstance.deleteItem(item: item, atAlbum: album)
+            
+            // Delete file of item in documents
+            if let filename = item.fileName {
+                let path = getDocumentsDirectory().appendingPathComponent(filename)
+                do {
+                    if fileManager.fileExists(atPath: path.path) {
+                        try fileManager.removeItem(at: path)
+                    } else {
+                        print("===============")
+                        print("File not exists")
+                        print("Can't delete file : \(filename)")
+                    }
+                } catch {
+                    print("===============")
+                    print("Error remove item \(filename), \(error)")
+                }
+            }
+            
+            if let thumbname = item.thumbName {
+                let path = getDocumentsDirectory().appendingPathComponent(thumbname)
+                do {
+                    if fileManager.fileExists(atPath: path.path) {
+                        try fileManager.removeItem(at: path)
+                    } else {
+                        print("===============")
+                        print("File not exists")
+                        print("Can't delete file : \(thumbname)")
+                    }
+                } catch {
+                    print("===============")
+                    print("Error remove item \(thumbname), \(error)")
+                }
+            }
+        }
+        
+        getGallery()
+    }
+    
     
     func configure(cell: GalleryCell, atIndex index: Int) {
         
