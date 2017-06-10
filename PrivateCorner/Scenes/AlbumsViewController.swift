@@ -37,7 +37,7 @@ class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.title = "Album"
         configureCollectionViewOnLoad()
         viewModel = AlbumsViewModel(delegate: self)
@@ -57,6 +57,7 @@ class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
     func configureCollectionViewOnLoad() {
         let nibName = UINib(nibName: "AlbumsCell", bundle:Bundle.main)
         albumsCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.albumsCell)
+        albumsCollectionView.alwaysBounceVertical = true
     }
 
     

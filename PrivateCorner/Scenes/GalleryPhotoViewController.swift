@@ -10,15 +10,16 @@
 
 import UIKit
 import Photos
-//import ImagePicker
-
+import DynamicColor
 
 class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegate {
 
-//    let imagePickerController = ImagePickerController()
     var gallery: GalleryController!
     var viewModel: GalleryPhotoViewModel!
+    var containerView: UIView!
+    var progressRing: UICircularProgressRingView!
     var isEditMode: Bool = false
+    var arraySelectedCell: [Bool] = []
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     @IBOutlet weak var addPhotoButton: UIButton!
@@ -46,8 +47,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        isHeroEnabled = true
-        
+
         styleUI()
         configureCollectionViewOnLoad()
         getGalleryPhotoOnLoad()
@@ -55,19 +55,36 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+        navigationController?.isHeroEnabled = false
     }
     
     // MARK: Event handling
     func styleUI() {
-        self.title = viewModel.titleAlbum
+        title = viewModel.titleAlbum
 
-        var rect = self.toolBar.frame
+        var rect = toolBar.frame
         rect.origin.y += rect.size.height
-        self.toolBar.frame = rect
+        toolBar.frame = rect
+        toolBar.barTintColor = navigationController?.navigationBar.barTintColor
         
-        galleryCollectionView.allowsMultipleSelection = true
-        galleryCollectionView.indicatorStyle = .white
+        containerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        containerView.backgroundColor = UIColor(white: 0.0, alpha: 0.4)
+        containerView.isHidden = true
+        
+        let window = UIApplication.shared.keyWindow
+        window?.addSubview(containerView)
+        
+        progressRing = UICircularProgressRingView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
+        progressRing.center = containerView.center
+        // Change any of the properties you'd like
+        let blue = UIColor(hexString: "#3498db")
+        progressRing.outerRingColor = blue
+        progressRing.outerRingWidth = 8.0
+        progressRing.innerRingColor = blue.lighter()
+        progressRing.innerRingSpacing = 0
+        progressRing.fontColor = blue.darkened()
+        containerView.addSubview(progressRing)
         
 //        bottomConstraintCollectionView.constant = 49
     }
@@ -75,6 +92,9 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     func configureCollectionViewOnLoad() {
         let nibName = UINib(nibName: "GalleryCell", bundle:Bundle.main)
         galleryCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.galleryCell)
+        galleryCollectionView.alwaysBounceVertical = true
+        galleryCollectionView.allowsMultipleSelection = true
+        galleryCollectionView.indicatorStyle = .white
     }
     
     func getGalleryPhotoOnLoad() {
@@ -82,98 +102,46 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     }
     
     func selectedPhotoAtIndex(index: IndexPath, cell: GalleryCell) {
-//        let currentPhoto = viewModel.photos[index]
-//        let galleryPreview = INSPhotosViewController(photos: viewModel.photos, initialPhoto: currentPhoto, referenceView: cell)
-//        galleryPreview.referenceViewForPhotoWhenDismissingHandler = { [weak self] photo in
-//            if let index = self?.viewModel.photos.index(where: {$0 === photo}) {
-//                let indexPath = NSIndexPath(row: index, section: 0)
-//                return self?.galleryCollectionView.cellForItem(at: indexPath as IndexPath) as? GalleryCell
-//            }
-//            return nil
-//        }
-//        present(galleryPreview, animated: true, completion: nil)
+        navigationController?.isHeroEnabled = true
         
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let controller  = mainStoryboard.instantiateViewController(withIdentifier: "PhotoView") as! PhotoViewController
         controller.selectedIndex = index
         
-        let vm = PhotoViewViewModel(photos: viewModel.photos)
+        let vm = PhotoViewViewModel(items: viewModel.items)
         controller.viewModel = vm
         
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    func fetchImages(_ assets: [PHAsset]) -> [String] {
-        var filenames = [String]()
-        let imageManager = PHImageManager.default()
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
-        let size: CGSize = CGSize(width: 720, height: 1280)
-        
-        for asset in assets {
-            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
-                if let info = info {
-                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
-                        //do sth with file name
-                        filenames.append(filename)
-                    }
-                    
-                }
-            }
+    func scrollToBottom(animated: Bool) {
+        let numberItems = self.galleryCollectionView.numberOfItems(inSection: 0)
+        if numberItems > 0 {
+            self.galleryCollectionView.scrollToItem(at: NSIndexPath.init(row:(self.galleryCollectionView.numberOfItems(inSection: 0)) - 1, section: 0) as IndexPath,
+                                                    at: .top,
+                                                    animated: animated)
         }
-        return filenames
     }
     
     // MARK: Selector Event
     @IBAction func clickUploadButton(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-//            imagePickerController.delegate = self
-//            self.present(imagePickerController, animated: true, completion: nil)
-            
             gallery = GalleryController()
             gallery.delegate = self
             present(gallery, animated: true, completion: nil)
         }
-        
-        
-        /*
-        let alertController = UIAlertController(title: "", message: "Import From", preferredStyle: .actionSheet)
-        
-        let libraryAction = UIAlertAction(title: "Photo Library", style: .default) { (alert) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-                let imagePickerController = ImagePickerController()
-                imagePickerController.delegate = self
-                self.present(imagePickerController, animated: true, completion: nil)
-            }
-        }
-        
-        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (alert) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
-                let imagePicker = UIImagePickerController()
-                imagePicker.delegate = self
-                imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
-                imagePicker.allowsEditing = false
-                self.present(imagePicker, animated: true, completion: nil)
-            }
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alertController.addAction(libraryAction)
-        alertController.addAction(cameraAction)
-        alertController.addAction(cancelAction)
-        
-        self.present(alertController, animated: true, completion: nil)
-        */
     }
+    
     @IBAction func clickEditMode(_ sender: Any) {
         isEditMode = !isEditMode
         UIView.animate(withDuration: 0.3) {
             var rect = self.toolBar.frame
             if self.isEditMode {
                 rect.origin.y -= rect.size.height
+                self.tabBarController?.tabBar.frame.origin.y += (self.tabBarController?.tabBar.frame.size.height)!
             } else {
                 rect.origin.y += rect.size.height
+                self.tabBarController?.tabBar.frame.origin.y -= (self.tabBarController?.tabBar.frame.size.height)!
             }
             self.toolBar.frame = rect
             
@@ -181,22 +149,44 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         }
         
         if isEditMode {
-            self.title = "Select Photos"
-            self.navigationItem.setHidesBackButton(true, animated: false)
+            title = "Select Photos"
+            navigationItem.setHidesBackButton(true, animated: false)
             
             let barButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(clickEditMode(_:)))
-            self.navigationItem.rightBarButtonItem = barButton
+            navigationItem.rightBarButtonItem = barButton
         } else {
-            self.title = viewModel.titleAlbum
-            self.navigationItem.setHidesBackButton(false, animated: false)
+            title = viewModel.titleAlbum
+            navigationItem.setHidesBackButton(false, animated: false)
             
             let barButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(clickEditMode(_:)))
-            self.navigationItem.rightBarButtonItem = barButton
+            navigationItem.rightBarButtonItem = barButton
+            
+            galleryCollectionView.deselectAllItems(section: 0, animated: false)
+
+            for index in 0...viewModel.countPhoto() - 1 {
+                arraySelectedCell[index] = false
+                
+                if let cell = galleryCollectionView.cellForItem(at: IndexPath(row: index, section: 0))as? GalleryCell {
+                    cell.containerView.isHidden = true
+                    cell.selectedImageView.isHidden = true
+                }
+            }
         }
     }
     
     @IBAction func clickSelectAllButton(_ sender: Any) {
-        
+        if isEditMode {
+            if viewModel.countPhoto() > 0 {
+                for index in 0...viewModel.countPhoto() - 1 {
+                    arraySelectedCell[index] = true
+                    
+                    if let cell = galleryCollectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? GalleryCell {
+                        cell.containerView.isHidden = false
+                        cell.selectedImageView.isHidden = false
+                    }
+                }
+            }
+        }
     }
     
     @IBAction func clickExportButton(_ sender: Any) {
@@ -214,72 +204,99 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
 
     // GalleryPhotoViewModelDelegate
     func reloadGallery() {
-        galleryCollectionView.reloadData()
+        if containerView.isHidden {
+            galleryCollectionView.reloadData()
+            scrollToBottom(animated: true)
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.progressRing.alpha = 0.0
+            }) { (finished) in
+                if finished {
+                    self.containerView.isHidden = true
+                    self.progressRing.setProgress(value: 0, animationDuration: 0)
+                    
+                    DispatchQueue.main.async(execute: {
+                        self.galleryCollectionView.reloadData()
+                        self.scrollToBottom(animated: true)
+                    })
+                }
+            }
+        }
+        
+        
+        arraySelectedCell.removeAll()
+        if viewModel.countPhoto() > 0 {
+            for _ in 0...viewModel.countPhoto() - 1 {
+                arraySelectedCell.append(false)
+            }
+        }
     }
 
+    func updateProgressRing(value: CGFloat) {
+        
+        DispatchQueue.main.async { 
+            self.progressRing.setProgress(value: value, animationDuration: 0.3)
+        }
+    }
 }
 
-
-extension GalleryPhotoViewController: UIImagePickerControllerDelegate {
-
-}
-
-extension GalleryPhotoViewController: UINavigationControllerDelegate {
-    
-}
-
-//extension GalleryPhotoViewController: ImagePickerDelegate {
-//    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-//        
-//    }
-//
-//    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
-//        var filenames = [String]()
-//        let assets = imagePicker.stack.assets
-//        
-//        let imageManager = PHImageManager.default()
-//        let requestOptions = PHImageRequestOptions()
-//        requestOptions.isSynchronous = true
-//        let size: CGSize = CGSize(width: 720, height: 1280)
-//        
-//        for asset in assets {
-//            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
-//                if let info = info {
-//                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
-//                        //do sth with file name
-//                        filenames.append(filename)
-//                    }
-//                    
-//                }
-//            }
-//        }
-//        
-//        uploadImageToCoreData(images: images, filenames: filenames)
-//    }
-//    
-//    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
-//        
-//    }
-//}
 
 extension GalleryPhotoViewController: GalleryControllerDelegate {
     func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
+        DispatchQueue.main.async { 
+            controller.dismiss(animated: true, completion: nil)
+            self.gallery = nil
+            self.containerView.isHidden = false
+            self.progressRing.alpha = 1.0
+        }
+
+//        autoreleasepool {
+//            var assets = [PHAsset]()
+//            for image in Cart.images {
+//                let asset = image.asset
+//                assets.append(asset);
+//            }
+//            
+//            let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+//            DispatchQueue.global().asyncAfter(deadline: when) {
+//                // Your code with delay
+//                self.viewModel.uploadImageToCoreData(images: images, assets: assets)
+//            }
+//        }
+    }
+    
+    func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage], imageAssets: [Image]) {
+        DispatchQueue.main.async {
+            controller.dismiss(animated: true, completion: nil)
+            self.gallery = nil
+            self.containerView.isHidden = false
+            self.progressRing.alpha = 1.0
+        }
+        
         var assets = [PHAsset]()
-        for image in Cart.shared.images {
+        for image in imageAssets {
             let asset = image.asset
             assets.append(asset);
         }
         
-        let filenames = fetchImages(assets)
-        viewModel.uploadImageToCoreData(images: images, filenames: filenames)
-        
-        controller.dismiss(animated: true, completion: nil)
-        gallery = nil
+        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+        DispatchQueue.global().asyncAfter(deadline: when) {
+            // Your code with delay
+            self.viewModel.uploadImageToCoreData(images: images, assets: assets)
+        }
     }
     
     func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
-        controller.dismiss(animated: true, completion: nil)
-        gallery = nil
+        DispatchQueue.main.async {
+            controller.dismiss(animated: true, completion: nil)
+            self.gallery = nil
+            self.containerView.isHidden = false
+            self.progressRing.alpha = 1.0
+        }
+        
+        video.fetchAVAsset { (avasset) in
+            self.viewModel.uploadVideoToCoreData(video: video, avasset: avasset!)
+        }
     }
     
     func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage]) {
@@ -297,19 +314,31 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
         if (viewController as? GalleryPhotoViewController) != nil {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015, direction:.bottomToTop, delayMatchedViews:true)]
         } else if (viewController as? PhotoViewController) != nil {
-            let cell = galleryCollectionView.cellForItem(at: galleryCollectionView.indexPathsForSelectedItems!.first!)!
-            galleryCollectionView.heroModifiers = [.cascade(delta: 0.015, direction: .radial(center: cell.center), delayMatchedViews: true)]
+            if let cell = galleryCollectionView.cellForItem(at: galleryCollectionView.indexPathsForSelectedItems!.first!) {
+                galleryCollectionView.heroModifiers = [.cascade(delta: 0.015, direction: .radial(center: cell.center), delayMatchedViews: true)]
+            }
+            navigationController?.heroNavigationAnimationType = .fade
         } else {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
+            navigationController?.heroNavigationAnimationType = .pull(direction: .right)
+        }
+        
+        if let vc = viewController as? PhotoViewController {
+            vc.toolBar.heroModifiers = [.fade]
         }
     }
     func heroWillStartAnimatingFrom(viewController: UIViewController) {
         view.heroModifiers = nil
         if (viewController as? GalleryPhotoViewController) != nil {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015), .delay(0.25)]
+            navigationController?.heroNavigationAnimationType = .fade
+        } else if (viewController as? PhotoViewController) != nil {
+            navigationController?.heroNavigationAnimationType = .fade
+            addPhotoButton.heroModifiers = [.fade]
         } else {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
             addPhotoButton.heroModifiers = [.fade]
+            navigationController?.heroNavigationAnimationType = .push(direction: .left)
         }
         if let vc = viewController as? PhotoViewController,
             let originalCellIndex = vc.selectedIndex,
@@ -325,3 +354,4 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
         }
     }
 }
+

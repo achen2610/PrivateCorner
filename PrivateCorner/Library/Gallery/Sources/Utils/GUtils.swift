@@ -2,7 +2,7 @@ import UIKit
 import AVFoundation
 import Photos
 
-struct Utils {
+struct GUtils {
 
   static func rotationTransform() -> CGAffineTransform {
     switch UIDevice.current.orientation {

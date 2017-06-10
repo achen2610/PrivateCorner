@@ -8,11 +8,16 @@
 
 import UIKit
 
+public protocol PhotoCellDelegate: class {
+    func tapPhotoView()
+}
+
 class PhotoCell: UICollectionViewCell {
 
     var imageView: UIImageView!
     var scrollView: UIScrollView!
     var dTapGR: UITapGestureRecognizer!
+    var tapGR: UITapGestureRecognizer!
     var image: UIImage? {
         get { return imageView.image }
         set {
@@ -20,17 +25,8 @@ class PhotoCell: UICollectionViewCell {
             setNeedsLayout()
         }
     }
-    var topInset: CGFloat = 0 {
-        didSet {
-            centerIfNeeded()
-        }
-    }
     
-    var bottomInset: CGFloat = 0 {
-        didSet {
-            centerIfNeeded()
-        }
-    }
+    weak var delegate: PhotoCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -56,6 +52,9 @@ class PhotoCell: UICollectionViewCell {
         dTapGR = UITapGestureRecognizer(target: self, action: #selector(doubleTap(gr:)))
         dTapGR.numberOfTapsRequired = 2
         addGestureRecognizer(dTapGR)
+        
+        tapGR = UITapGestureRecognizer(target: self, action: #selector(tap(gr:)))
+        addGestureRecognizer(tapGR)
     }
     
     func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
@@ -76,12 +75,16 @@ class PhotoCell: UICollectionViewCell {
         }
     }
     
+    func tap(gr: UITapGestureRecognizer) {
+        delegate?.tapPhotoView()
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         scrollView.frame = bounds
         let size: CGSize
         if let image = imageView.image {
-            let containerSize = CGSize(width: bounds.width, height: bounds.height - topInset - bottomInset)
+            let containerSize = CGSize(width: bounds.width, height: bounds.height)
             if containerSize.width / containerSize.height < image.size.width / image.size.height {
                 size = CGSize(width: containerSize.width, height: containerSize.width * image.size.height / image.size.width )
             } else {
@@ -101,9 +104,9 @@ class PhotoCell: UICollectionViewCell {
     }
     
     func centerIfNeeded() {
-        var inset = UIEdgeInsets(top: topInset, left: 0, bottom: bottomInset, right: 0)
-        if scrollView.contentSize.height < scrollView.bounds.height - topInset {
-            let insetV = (scrollView.bounds.height - topInset - bottomInset - scrollView.contentSize.height)/2
+        var inset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        if scrollView.contentSize.height < scrollView.bounds.height {
+            let insetV = (scrollView.bounds.height - scrollView.contentSize.height)/2
             inset.top += insetV
             inset.bottom += insetV
         }
@@ -126,3 +129,4 @@ extension PhotoCell: UIScrollViewDelegate {
         centerIfNeeded()
     }
 }
+

@@ -24,7 +24,7 @@ class VideosLibrary {
   }
 
   fileprivate func reloadSync() {
-    fetchResults = PHAsset.fetchAssets(with: .video, options: Utils.fetchOptions())
+    fetchResults = PHAsset.fetchAssets(with: .video, options: GUtils.fetchOptions())
 
     items = []
     fetchResults?.enumerateObjects({ (asset, _, _) in

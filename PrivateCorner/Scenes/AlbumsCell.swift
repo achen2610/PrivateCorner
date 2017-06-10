@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class AlbumsCell: UICollectionViewCell {
     
@@ -33,7 +34,7 @@ class AlbumsCell: UICollectionViewCell {
         let array = items.sortedArray(using: [dateDescriptor]) as! [Item]
         let lastImage = array.first
         
-        if let filename = lastImage?.filename {
+        if let filename = lastImage?.fileName {
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             let documentsDirectory = paths[0]
             let path = documentsDirectory.appendingPathComponent(filename)

@@ -7,6 +7,7 @@ target 'PrivateCorner' do
 
   pod 'ImagePicker'
   pod 'SDWebImage'
+  pod 'DynamicColor', '~> 3.3'
 
   # Pods for PrivateCorner
 
