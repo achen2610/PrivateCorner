@@ -100,22 +100,18 @@ open class LockScreenViewModel {
             if passcodeState == .FirstStart {
                 passcodeSaved = inputString
                 passcodeState = .SecondInput
-                clearInput()
+
                 delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU LẦN 2")
             } else if passcodeState == .SecondInput {
                 if inputString == passcodeSaved {
                     UserDefaults.standard.set(passcodeSaved, forKey: "passcodeSaved")
                     UserDefaults.standard.set(true, forKey: "firstInstall")
                     UserDefaults.standard.synchronize()
-                    
-                    clearInput()
+
                     delegate?.validationSuccess()
                 } else {
-                    
-                    clearInput()
                     delegate?.setTitleLabel(text: "MẬT KHẨU SAI. NHẬP LẠI")
                 }
-                
             } else {
                 if validation(inputString) {
                     print("*️⃣ success!")
@@ -125,6 +121,7 @@ open class LockScreenViewModel {
                     delegate?.validationFail()
                 }
             }
+            clearInput()
         }
     }
     

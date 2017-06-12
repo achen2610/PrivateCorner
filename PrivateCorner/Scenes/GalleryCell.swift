@@ -37,7 +37,7 @@ class GalleryCell: UICollectionViewCell {
         containerView.backgroundColor = UIColor.black
         containerView.alpha = 0.6
     }
-    
+
     func setupData(item: Item) {
         let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(item.thumbName!)
         if item.type == "image" {
@@ -53,6 +53,7 @@ class GalleryCell: UICollectionViewCell {
         
         photoImageView.image = MediaLibrary.image(urlPath: urlPath)
     }
+
 
 //    override var isSelected: Bool {
 //        didSet {

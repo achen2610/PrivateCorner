@@ -35,7 +35,7 @@ open class GalleryPhotoViewModel {
         static let cellSize: CGSize = CGSize(width: kScreenWidth/CGFloat(itemsPerRow),
                                              height: kScreenWidth/CGFloat(itemsPerRow))
     }
-    
+
     // MARK: - Public Methods
     public init(album: Album) {
         self.album = album
@@ -49,7 +49,7 @@ open class GalleryPhotoViewModel {
         
         delegate?.reloadGallery()
     }
-    
+
     func photoViewModel() -> PhotoViewViewModel {
         return PhotoViewViewModel(items: items)
     }

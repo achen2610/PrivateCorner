@@ -37,7 +37,6 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     
     // MARK: UICollectionView FlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         return viewModel.cellSize()
     }
     
@@ -58,5 +57,4 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
         cell.containerView.isHidden = !cell.containerView.isHidden
         cell.selectedImageView.isHidden = !cell.selectedImageView.isHidden
     }
-
 }

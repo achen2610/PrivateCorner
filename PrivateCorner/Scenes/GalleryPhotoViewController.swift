@@ -235,7 +235,6 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     }
 
     func updateProgressRing(value: CGFloat) {
-        
         DispatchQueue.main.async { 
             self.progressRing.setProgress(value: value, animationDuration: 0.3)
         }
