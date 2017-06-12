@@ -37,6 +37,22 @@ class GalleryCell: UICollectionViewCell {
         containerView.backgroundColor = UIColor.black
         containerView.alpha = 0.6
     }
+    
+    func setupData(item: Item) {
+        let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(item.thumbName!)
+        if item.type == "image" {
+            
+            durationLabel.isHidden = true
+            shadowView.isHidden = true
+        } else {
+            let string = String(format: "%02d", lround(floor(item.duration / 60)) % 60) + ":" + String(format: "%02d", lround(floor(item.duration)) % 60)
+            durationLabel.text = string
+            durationLabel.isHidden = false
+            shadowView.isHidden = false
+        }
+        
+        photoImageView.image = MediaLibrary.image(urlPath: urlPath)
+    }
 
 //    override var isSelected: Bool {
 //        didSet {

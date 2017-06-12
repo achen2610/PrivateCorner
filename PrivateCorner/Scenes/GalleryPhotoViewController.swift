@@ -28,16 +28,6 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     
     // MARK: Object lifecycle
     
-    struct cellIdentifiers {
-        static let galleryCell = "galleryCell"
-    }
-    
-    struct cellLayout {
-        static let itemsPerRow: CGFloat = 3
-        static let cellSize: CGSize = CGSize(width: kScreenWidth/CGFloat(itemsPerRow),
-                                           height: kScreenWidth/CGFloat(itemsPerRow))
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -85,13 +75,11 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         progressRing.innerRingSpacing = 0
         progressRing.fontColor = blue.darkened()
         containerView.addSubview(progressRing)
-        
-//        bottomConstraintCollectionView.constant = 49
     }
     
     func configureCollectionViewOnLoad() {
         let nibName = UINib(nibName: "GalleryCell", bundle:Bundle.main)
-        galleryCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.galleryCell)
+        galleryCollectionView.register(nibName, forCellWithReuseIdentifier: viewModel.cellIdentifier())
         galleryCollectionView.alwaysBounceVertical = true
         galleryCollectionView.allowsMultipleSelection = true
         galleryCollectionView.indicatorStyle = .white
@@ -108,7 +96,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         let controller  = mainStoryboard.instantiateViewController(withIdentifier: "PhotoView") as! PhotoViewController
         controller.selectedIndex = index
         
-        let vm = PhotoViewViewModel(items: viewModel.items)
+        let vm = viewModel.photoViewModel()
         controller.viewModel = vm
         
         navigationController?.pushViewController(controller, animated: true)
@@ -163,7 +151,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             
             galleryCollectionView.deselectAllItems(section: 0, animated: false)
 
-            for index in 0...viewModel.countPhoto() - 1 {
+            for index in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
                 arraySelectedCell[index] = false
                 
                 if let cell = galleryCollectionView.cellForItem(at: IndexPath(row: index, section: 0))as? GalleryCell {
@@ -176,8 +164,8 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     
     @IBAction func clickSelectAllButton(_ sender: Any) {
         if isEditMode {
-            if viewModel.countPhoto() > 0 {
-                for index in 0...viewModel.countPhoto() - 1 {
+            if viewModel.numberOfItemInSection(section: 0) > 0 {
+                for index in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
                     arraySelectedCell[index] = true
                     
                     if let cell = galleryCollectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? GalleryCell {
@@ -198,7 +186,21 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     }
     
     @IBAction func clickDeleteButton(_ sender: Any) {
+        var indexSelectedImage = [Int]()
+        var index = 0
+        for check in arraySelectedCell {
+            if check {
+                indexSelectedImage.append(index)
+            }
+            index += 1
+        }
+        print("Check image \(indexSelectedImage)")
         
+        // Use Diff to delete image
+        viewModel.deleteItem(indexes: indexSelectedImage, collectionView: galleryCollectionView)
+        
+        let indexesToRemove = Set(indexSelectedImage.flatMap { $0 })
+        arraySelectedCell = arraySelectedCell.enumerated().filter { !indexesToRemove.contains($0.offset) }.map { $0.element }
     }
     
 
@@ -225,8 +227,8 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         
         
         arraySelectedCell.removeAll()
-        if viewModel.countPhoto() > 0 {
-            for _ in 0...viewModel.countPhoto() - 1 {
+        if viewModel.numberOfItemInSection(section: 0) > 0 {
+            for _ in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
                 arraySelectedCell.append(false)
             }
         }

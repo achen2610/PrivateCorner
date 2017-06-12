@@ -1,4 +1,5 @@
 PODS:
+  - Diff (0.5.3)
   - DynamicColor (3.3)
   - ImagePicker (2.1.1)
   - SDWebImage (4.0.0):
@@ -6,15 +7,17 @@ PODS:
   - SDWebImage/Core (4.0.0)
 
 DEPENDENCIES:
+  - Diff
   - DynamicColor (~> 3.3)
   - ImagePicker
   - SDWebImage
 
 SPEC CHECKSUMS:
+  Diff: befa1d19c32726b2b36ce915d98793e2fbde8dcc
   DynamicColor: 3cdaa1e01c16e93ba744e0630f768373e0fc7a7d
   ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
 
-PODFILE CHECKSUM: 8e21582bddf97c70923476257faf56a3d28b45fa
+PODFILE CHECKSUM: a162c4755c3e7d003d9603578692238138724c75
 
 COCOAPODS: 1.2.0

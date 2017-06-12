@@ -12,30 +12,15 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     
     // MARK: UICollectionView DataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return viewModel.numberOfSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.countPhoto()
+        return viewModel.numberOfItemInSection(section: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.galleryCell, for: indexPath) as? GalleryCell {
-
-            cell.styleUI()
-            viewModel.configure(cell:cell, atIndex:indexPath.row)
-            
-            cell.photoImageView.heroID = "image_\(indexPath.row)"
-            cell.photoImageView.heroModifiers = [.fade, .scale(0.8)]
-            cell.photoImageView.isOpaque = true
-            
-            cell.durationLabel.heroModifiers = [.fade]
-            cell.shadowView.heroModifiers = [.fade]
-
-            return cell
-        }
-        
-        return UICollectionViewCell()
+        return viewModel.setUpCollectionViewCell(indexPath: indexPath, collectionView: collectionView)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -53,7 +38,7 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     // MARK: UICollectionView FlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return cellLayout.cellSize
+        return viewModel.cellSize()
     }
     
     // MARK: UICollectionView Delegate    
@@ -73,11 +58,5 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
         cell.containerView.isHidden = !cell.containerView.isHidden
         cell.selectedImageView.isHidden = !cell.selectedImageView.isHidden
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        let cell = collectionView.cellForItem(at: indexPath) as! GalleryCell
-//        
-//        arraySelectedCell[indexPath.row] = false
-//        cell.backgroundImageView.isHidden = true
-//    }
+
 }

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Photos
+import Diff
 
 public protocol GalleryPhotoViewModelDelegate: class {
 
@@ -20,9 +21,20 @@ public protocol GalleryPhotoViewModelDelegate: class {
 open class GalleryPhotoViewModel {
     
     fileprivate var album: Album
-    var items = [Item]()
+    fileprivate var items = [Item]()
     var titleAlbum: String
+    let kNumberOfSectionsInCollectionView = 1
     weak var delegate: GalleryPhotoViewModelDelegate?
+    
+    struct cellIdentifiers {
+        static let galleryCell = "galleryCell"
+    }
+    
+    struct cellLayout {
+        static let itemsPerRow: CGFloat = 3
+        static let cellSize: CGSize = CGSize(width: kScreenWidth/CGFloat(itemsPerRow),
+                                             height: kScreenWidth/CGFloat(itemsPerRow))
+    }
     
     // MARK: - Public Methods
     public init(album: Album) {
@@ -38,8 +50,44 @@ open class GalleryPhotoViewModel {
         delegate?.reloadGallery()
     }
     
-    func countPhoto() -> Int {
+    func photoViewModel() -> PhotoViewViewModel {
+        return PhotoViewViewModel(items: items)
+    }
+    
+    func numberOfItemInSection(section: Int) -> Int {
         return items.count
+    }
+    
+    func numberOfSection() -> Int {
+        return kNumberOfSectionsInCollectionView
+    }
+    
+    func setUpCollectionViewCell(indexPath : IndexPath, collectionView : UICollectionView) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.galleryCell, for: indexPath) as? GalleryCell {
+            
+            cell.styleUI()
+            let item = items[indexPath.row]
+            cell.setupData(item: item)
+            
+            cell.photoImageView.heroID = "image_\(indexPath.row)"
+            cell.photoImageView.heroModifiers = [.fade, .scale(0.8)]
+            cell.photoImageView.isOpaque = true
+            
+            cell.durationLabel.heroModifiers = [.fade]
+            cell.shadowView.heroModifiers = [.fade]
+            
+            return cell
+        }
+        
+        return UICollectionViewCell()
+    }
+    
+    func cellSize() -> CGSize {
+        return cellLayout.cellSize
+    }
+    
+    func cellIdentifier() -> String {
+        return cellIdentifiers.galleryCell
     }
     
     func uploadImageToCoreData(images: [UIImage], assets: [PHAsset]) {
@@ -60,7 +108,7 @@ open class GalleryPhotoViewModel {
             ItemManager.sharedInstance.add(media: image, info: info, toAlbum: album)
             
             // Save original image
-            let path = getDocumentsDirectory().appendingPathComponent(filename)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
             if fileManager.fileExists(atPath: path.path) {
                 print("===============")
                 print("Image \(filename) exists")
@@ -78,7 +126,7 @@ open class GalleryPhotoViewModel {
             }
             
             // Save thumbnail image
-            let thumbnailPath = getDocumentsDirectory().appendingPathComponent(thumbname)
+            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
             let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: image)
             if fileManager.fileExists(atPath: thumbnailPath.path) {
                 print("===============")
@@ -119,7 +167,7 @@ open class GalleryPhotoViewModel {
             
             // Save original video
             group.enter()
-            let path = self.getDocumentsDirectory().appendingPathComponent(filename)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
             if fileManager.fileExists(atPath: path.path) {
                 print("===============")
                 print("Video \(filename) exists")
@@ -132,7 +180,7 @@ open class GalleryPhotoViewModel {
             
             // Save thumbnail video
             group.enter()
-            let thumbnailPath = self.getDocumentsDirectory().appendingPathComponent(thumbname)
+            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
             video.fetchThumbnail(CGSize(width: 512, height: 512), completion: { (image) in
                 if fileManager.fileExists(atPath: thumbnailPath.path) {
                     print("===============")
@@ -156,11 +204,10 @@ open class GalleryPhotoViewModel {
         }
     }
     
-    func deleteItem(indexPaths: [IndexPath]) {
+    func deleteItem(indexes: [Int], collectionView: UICollectionView) {
         let fileManager = FileManager.default
         
-        for indexPath in indexPaths {
-            let index = indexPath.row
+        for index in indexes {
             let item = items[index]
             
             // Delete item from database
@@ -168,7 +215,7 @@ open class GalleryPhotoViewModel {
             
             // Delete file of item in documents
             if let filename = item.fileName {
-                let path = getDocumentsDirectory().appendingPathComponent(filename)
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
                 do {
                     if fileManager.fileExists(atPath: path.path) {
                         try fileManager.removeItem(at: path)
@@ -184,7 +231,7 @@ open class GalleryPhotoViewModel {
             }
             
             if let thumbname = item.thumbName {
-                let path = getDocumentsDirectory().appendingPathComponent(thumbname)
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
                 do {
                     if fileManager.fileExists(atPath: path.path) {
                         try fileManager.removeItem(at: path)
@@ -200,38 +247,14 @@ open class GalleryPhotoViewModel {
             }
         }
         
-        getGallery()
-    }
-    
-    
-    func configure(cell: GalleryCell, atIndex index: Int) {
+        let indexesToRemove = Set(indexes.flatMap { $0 })
+        let newItems = items.enumerated().filter { !indexesToRemove.contains($0.offset) }.map { $0.element }
         
-        let item = items[index]
-        let urlPath = getDocumentsDirectory().appendingPathComponent(item.thumbName!)
-        if item.type == "image" {
-
-            cell.durationLabel.isHidden = true
-            cell.shadowView.isHidden = true
-        } else { //if item.type == "video" {
-            
-            //\(lround(floor(item.duration / 3600)) % 100)
-            let string = String(format: "%02d", lround(floor(item.duration / 60)) % 60) + ":" + String(format: "%02d", lround(floor(item.duration)) % 60)
-            cell.durationLabel.text = string
-            cell.durationLabel.isHidden = false
-            cell.shadowView.isHidden = false
-        }
-        
-        cell.photoImageView.image = MediaLibrary.image(urlPath: urlPath)
-//        cell.photoImageView.sd_setImage(with: urlPath)
+        collectionView.animateItemChanges(oldData: items, newData: newItems)
+        items = newItems
     }
 
     // MARK: Private Method
-    private func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
-    }
-    
     private func fetchImages(_ assets: [PHAsset]) -> [String] {
         var filenames = [String]()
         let imageManager = PHImageManager.default()
