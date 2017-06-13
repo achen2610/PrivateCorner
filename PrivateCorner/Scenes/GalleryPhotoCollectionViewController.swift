@@ -35,6 +35,20 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        var reusableView = UICollectionReusableView()
+        
+        if kind == UICollectionElementKindSectionFooter {
+            if let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterView", for: indexPath) as? GalleryCollectionFooterView {
+                footerView.footerLabel.text = "\(viewModel.numberOfItemInSection(section: 0)) Photos"
+                
+                reusableView = footerView
+            }
+        }
+        
+        return reusableView
+    }
+    
     // MARK: UICollectionView FlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return viewModel.cellSize()
@@ -45,7 +59,7 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
         let cell = collectionView.cellForItem(at: indexPath) as! GalleryCell
 
         if !isEditMode {
-            selectedPhotoAtIndex(index: indexPath, cell: cell)
+            viewModel.selectCollectionViewCell(indexPath: indexPath)
             
             cell.containerView.isHidden = true
             cell.selectedImageView.isHidden = true

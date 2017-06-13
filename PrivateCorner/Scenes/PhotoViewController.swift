@@ -35,6 +35,11 @@ class PhotoViewController: UIViewController {
         
         styleUI()
         configureCollectionViewOnLoad()
+        
+        if let selectedIndex = selectedIndex {
+            let title = viewModel.getUploadDate(index: selectedIndex.row)
+            setupTitleView(topText: title.first ?? "", bottomText: title.last ?? "")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +85,31 @@ class PhotoViewController: UIViewController {
         panGR.addTarget(self, action: #selector(pan))
         panGR.delegate = self
         collectionView?.addGestureRecognizer(panGR)
+    }
+    
+    func setupTitleView(topText: String, bottomText: String) {
+        let titleParameters = [NSForegroundColorAttributeName : UIColor.black,
+                               NSFontAttributeName : UIFont.systemFont(ofSize: 16)]
+        let subtitleParameters = [NSForegroundColorAttributeName : UIColor.black,
+                                  NSFontAttributeName : UIFont.systemFont(ofSize: 12)]
+        
+        let title:NSMutableAttributedString = NSMutableAttributedString(string: topText, attributes: titleParameters)
+        let subtitle:NSAttributedString = NSAttributedString(string: bottomText, attributes: subtitleParameters)
+        
+        title.append(NSAttributedString(string: "\n"))
+        title.append(subtitle)
+        
+        let size = title.size()
+        
+        let width = size.width
+        guard let height = navigationController?.navigationBar.frame.size.height else {return}
+        
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: height))
+        titleLabel.attributedText = title
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        
+        navigationItem.titleView = titleLabel
     }
     
     // MARK: Selector Event
@@ -138,7 +168,11 @@ class PhotoViewController: UIViewController {
     }
 
     @IBAction func clickDeleteButton(_ sender: Any) {
-        
+        if let indexPath = collectionView.indexPathsForVisibleItems.first {
+            viewModel.deleteItem(index: indexPath.row, collectionView: collectionView)
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateCollectionView), object: nil)
+        }
     }
     
 }

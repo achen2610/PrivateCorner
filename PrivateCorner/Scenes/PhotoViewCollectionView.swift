@@ -10,7 +10,7 @@ import UIKit
 
 extension PhotoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.countPhoto()
+        return viewModel.numberOfItemInSection(section: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -59,5 +59,8 @@ extension PhotoViewController: UIScrollViewDelegate {
         } else {
             actionButton.isEnabled = true
         }
+        
+        let title = viewModel.getUploadDate(index: Int(currentPage))
+        setupTitleView(topText: title.first ?? "", bottomText: title.last ?? "")
     }
 }

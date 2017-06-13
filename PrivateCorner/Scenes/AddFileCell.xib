@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddFileCell" id="5DO-2U-VWh" customClass="AddFileCell" customModule="PrivateCorner" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="293"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="250" height="293"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b5P-5V-Fb5">
+                        <rect key="frame" x="8" y="8" width="234" height="234"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="b5P-5V-Fb5" secondAttribute="height" multiplier="1:1" id="dbR-Vx-Dn7"/>
+                        </constraints>
+                    </imageView>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Label" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CCa-XV-SAS">
+                        <rect key="frame" x="8" y="246" width="234" height="21"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbW-XI-LaN">
+                        <rect key="frame" x="8" y="267" width="234" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.56675200670000003" green="0.56675200670000003" blue="0.56675200670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T7f-U4-XLY">
+                        <rect key="frame" x="8" y="8" width="234" height="234"/>
+                        <color key="backgroundColor" white="1" alpha="0.49669894366197181" colorSpace="calibratedWhite"/>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="T7f-U4-XLY" firstAttribute="leading" secondItem="b5P-5V-Fb5" secondAttribute="leading" id="70A-Hx-ysY"/>
+                <constraint firstAttribute="trailing" secondItem="CCa-XV-SAS" secondAttribute="trailing" constant="8" id="9LV-8p-GBz"/>
+                <constraint firstItem="vbW-XI-LaN" firstAttribute="leading" secondItem="5DO-2U-VWh" secondAttribute="leading" constant="8" id="P1n-kG-Bg3"/>
+                <constraint firstItem="T7f-U4-XLY" firstAttribute="bottom" secondItem="b5P-5V-Fb5" secondAttribute="bottom" id="QHF-t7-8B4"/>
+                <constraint firstItem="CCa-XV-SAS" firstAttribute="top" secondItem="b5P-5V-Fb5" secondAttribute="bottom" constant="4" id="XFn-OL-IYx"/>
+                <constraint firstItem="b5P-5V-Fb5" firstAttribute="leading" secondItem="5DO-2U-VWh" secondAttribute="leading" constant="8" id="e7K-4s-yRS"/>
+                <constraint firstItem="vbW-XI-LaN" firstAttribute="top" secondItem="CCa-XV-SAS" secondAttribute="bottom" id="nfb-Vb-l1E"/>
+                <constraint firstItem="b5P-5V-Fb5" firstAttribute="top" secondItem="5DO-2U-VWh" secondAttribute="top" constant="8" id="oHw-3o-29X"/>
+                <constraint firstAttribute="trailing" secondItem="b5P-5V-Fb5" secondAttribute="trailing" constant="8" id="omS-et-LOy"/>
+                <constraint firstItem="T7f-U4-XLY" firstAttribute="trailing" secondItem="b5P-5V-Fb5" secondAttribute="trailing" id="qPL-lP-Dhd"/>
+                <constraint firstItem="T7f-U4-XLY" firstAttribute="top" secondItem="b5P-5V-Fb5" secondAttribute="top" id="rPC-tr-ckA"/>
+                <constraint firstItem="CCa-XV-SAS" firstAttribute="leading" secondItem="5DO-2U-VWh" secondAttribute="leading" constant="8" id="u5s-UE-jQJ"/>
+                <constraint firstAttribute="trailing" secondItem="vbW-XI-LaN" secondAttribute="trailing" constant="8" id="wPX-Te-2eb"/>
+                <constraint firstAttribute="bottom" secondItem="vbW-XI-LaN" secondAttribute="bottom" constant="8" id="wZ5-x5-uBY"/>
+            </constraints>
+            <size key="customSize" width="268" height="272"/>
+            <connections>
+                <outlet property="albumName" destination="CCa-XV-SAS" id="Cxa-Ij-87G"/>
+                <outlet property="photoImageView" destination="b5P-5V-Fb5" id="NEb-zJ-ISA"/>
+                <outlet property="totalItem" destination="vbW-XI-LaN" id="4zs-Ih-IsU"/>
+                <outlet property="transparentView" destination="T7f-U4-XLY" id="qgf-z7-xAO"/>
+            </connections>
+            <point key="canvasLocation" x="-19" y="25.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -16,17 +16,24 @@ class ItemManager {
     static let sharedInstance = ItemManager()
     
     // MARK: - Public Methods
-    func getItems() -> [Item] {
-        let array = [Item]()
-        
+    func getItems(album: Album) -> [Item] {
+        let temp = album.mutableSetValue(forKey: "items")
+        let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: true)
+        let array = temp.sortedArray(using: [dateDescriptor]) as! [Item]
         
         return array
     }
     
-    func getItem(id: NSInteger) -> Item {
-        let item = Item()
+    func saveContext() {
+        //1
+        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         
-        return item
+        //2
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
     
     func add(media: Any, info: [String: Any], toAlbum album: Album) {
@@ -60,18 +67,6 @@ class ItemManager {
         } else {
             album.addToItems(NSSet(array: [item]))
         }
-
-        //5
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-
-    }
-    
-    func updateItem(id: NSInteger, item: Item) {
-        
     }
     
     func deleteItem(item: Item, atAlbum album: Album) {
@@ -85,6 +80,39 @@ class ItemManager {
         let itemsInAlbum = album.mutableSetValue(forKey: "items")
         if itemsInAlbum.count > 0 {
             itemsInAlbum.remove(item)
+        }
+        
+        //4
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func moveItem(items: [Item], fromAlbum: Album, toAlbum: Album) {
+        //1
+        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        
+        //2 Update uploadDate when move file
+        for item in items {
+            item.uploadDate = Date() as NSDate?
+        }
+        
+        //2
+        let itemsInFromAlbum = fromAlbum.mutableSetValue(forKey: "items")
+        if itemsInFromAlbum.count > 0 {
+            for item in items {
+                itemsInFromAlbum.remove(item)
+            }
+        }
+        
+        //3 
+        let itemsInToAlbum = toAlbum.mutableSetValue(forKey: "items")
+        if itemsInToAlbum.count > 0 {
+            itemsInToAlbum.addObjects(from: items)
+        } else {
+            toAlbum.addToItems(NSSet(array: items))
         }
         
         //4

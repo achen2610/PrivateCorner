@@ -1,36 +1,29 @@
 //
-//  AlbumsCollectionViewController.swift
+//  AddFileCollectionViewController.swift
 //  PrivateCorner
 //
-//  Created by a on 3/16/17.
+//  Created by a on 6/13/17.
 //  Copyright © 2017 MrAChen. All rights reserved.
 //
 
 import UIKit
 
-extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension AddFileViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    
-    
+
     // MARK: UICollectionView DataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 10
         return viewModel.numberOfItemInSection(section: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.cellIdentifier(), for: indexPath) as? AlbumsCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.cellIdentifier(), for: indexPath) as? AddFileCell {
             
             cell.configureLayout()
-            cell.albumName.delegate = self
-            cell.albumName.tag = indexPath.row
-            cell.deleteButton.tag = indexPath.row
-            cell.deleteButton.addTarget(self, action: #selector(clickDeleteAlbum), for: .touchUpInside)
-            cell.setEditMode(isEdit: isEditMode)
             
             let index = indexPath.row
             viewModel.fillUI(cell: cell, atIndex: index)
@@ -53,17 +46,13 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return viewModel.sectionInsets()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return viewModel.sectionInsets().left
     }
     
     // MARK: UICollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if isEditMode {
-            return
-        }
-        
-        viewModel.selectedGalleryAtIndex(index: indexPath.row)
+        viewModel.selectAlbumAtIndex(index: indexPath.row)
     }
 }

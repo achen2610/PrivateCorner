@@ -14,6 +14,7 @@ import Diff
 public protocol GalleryPhotoViewModelDelegate: class {
 
     func reloadGallery()
+    func navigationToPhotoScreen(viewModel: PhotoViewViewModel, indexPath: IndexPath)
     func updateProgressRing(value: CGFloat)
 }
 
@@ -43,15 +44,34 @@ open class GalleryPhotoViewModel {
     }
     
     func getGallery() {
-        let temp = album.mutableSetValue(forKey: "items")
-        let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: true)
-        items = temp.sortedArray(using: [dateDescriptor]) as! [Item]
-        
+        items = ItemManager.sharedInstance.getItems(album: album)
         delegate?.reloadGallery()
+    }
+    
+    func updateGallery(collectionView: UICollectionView) {
+        let oldItems = items
+        items = ItemManager.sharedInstance.getItems(album: album)
+        
+        collectionView.animateItemChanges(oldData: oldItems, newData: items)
     }
 
     func photoViewModel() -> PhotoViewViewModel {
-        return PhotoViewViewModel(items: items)
+        return PhotoViewViewModel(items: items, inAlbum: album)
+    }
+    
+    func addFileModel(indexes: [Int]) -> AddFileViewModel {
+        let indexesToMove = Set(indexes.flatMap { $0 })
+        let moveItems = items.enumerated().filter { indexesToMove.contains($0.offset) }.map { $0.element }
+        
+        return AddFileViewModel(items: moveItems, album: album)
+    }
+    
+    func cellSize() -> CGSize {
+        return cellLayout.cellSize
+    }
+    
+    func cellIdentifier() -> String {
+        return cellIdentifiers.galleryCell
     }
     
     func numberOfItemInSection(section: Int) -> Int {
@@ -82,15 +102,12 @@ open class GalleryPhotoViewModel {
         return UICollectionViewCell()
     }
     
-    func cellSize() -> CGSize {
-        return cellLayout.cellSize
+    func selectCollectionViewCell(indexPath: IndexPath) {
+        let vm = photoViewModel()
+        delegate?.navigationToPhotoScreen(viewModel: vm, indexPath: indexPath)
     }
     
-    func cellIdentifier() -> String {
-        return cellIdentifiers.galleryCell
-    }
-    
-    func uploadImageToCoreData(images: [UIImage], assets: [PHAsset]) {
+    func uploadImageToCoreData(images: [UIImage], assets: [PHAsset], collectionView: UICollectionView) {
         
         let filenames = fetchImages(assets)
         let group = DispatchGroup()
@@ -144,14 +161,20 @@ open class GalleryPhotoViewModel {
             }
         }
         
-        group.notify(queue: DispatchQueue.main) { 
-            self.getGallery()
+        group.notify(queue: DispatchQueue.main) {
+            ItemManager.sharedInstance.saveContext()
+            
+            let oldItems = self.items
+            self.items = ItemManager.sharedInstance.getItems(album: self.album)
+            self.delegate?.reloadGallery()
+            collectionView.animateItemChanges(oldData: oldItems, newData: self.items)
+            
             print("===============")
             print("Upload images success")
         }
     }
     
-    func uploadVideoToCoreData(video: Video, avasset: AVAsset) {
+    func uploadVideoToCoreData(video: Video, avasset: AVAsset, collectionView: UICollectionView) {
         
         if let avassetURL = avasset as? AVURLAsset {
             let videoUrl = avassetURL.url
@@ -172,32 +195,32 @@ open class GalleryPhotoViewModel {
                 print("===============")
                 print("Video \(filename) exists")
             } else {
-                
                 saveVideoFile(videoUrl: videoUrl, destinationPath: path)
-                group.leave()
-                delegate?.updateProgressRing(value: 50)
             }
+            delegate?.updateProgressRing(value: 50)
+            group.leave()
             
             // Save thumbnail video
             group.enter()
             let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
-            video.fetchThumbnail(CGSize(width: 512, height: 512), completion: { (image) in
+            video.fetchThumbnail(CGSize(width: 256, height: 256), completion: { (image) in
                 if fileManager.fileExists(atPath: thumbnailPath.path) {
                     print("===============")
                     print("Thumbnail \(thumbname) exists")
                 } else {
                     if let data = UIImagePNGRepresentation(image!) {
-                        let success = fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
-                        if success {
-                            group.leave()
-                            self.delegate?.updateProgressRing(value: 100)
-                        }
+                        fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
                     }
                 }
+                self.delegate?.updateProgressRing(value: 100)
+                group.leave()
             })
             
             group.notify(queue: DispatchQueue.main, execute: { 
-                self.getGallery()
+                let oldItems = self.items
+                self.items = ItemManager.sharedInstance.getItems(album: self.album)
+                self.delegate?.reloadGallery()
+                collectionView.animateItemChanges(oldData: oldItems, newData: self.items)
                 print("===============")
                 print("Upload video success")
             })
@@ -249,9 +272,10 @@ open class GalleryPhotoViewModel {
         
         let indexesToRemove = Set(indexes.flatMap { $0 })
         let newItems = items.enumerated().filter { !indexesToRemove.contains($0.offset) }.map { $0.element }
+        let oldItems = items
         
-        collectionView.animateItemChanges(oldData: items, newData: newItems)
         items = newItems
+        collectionView.animateItemChanges(oldData: oldItems, newData: newItems)
     }
 
     // MARK: Private Method

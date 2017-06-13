@@ -19,6 +19,15 @@ open class AlbumsViewModel {
     fileprivate var albums: [Album] = []
     weak var delegate: AlbumsViewModelDelegate?
     
+    struct cellIdentifiers {
+        static let albumsCell = "albumsCell"
+    }
+    
+    struct cellLayout {
+        static let itemsPerRow: CGFloat = 2
+        static let sectionInsets: UIEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+    }
+    
     public init(delegate: AlbumsViewModelDelegate) {
         self.delegate = delegate
         getAlbumFromCoreData()
@@ -29,8 +38,47 @@ open class AlbumsViewModel {
         delegate?.reloadAlbum()
     }
     
-    func countAlbum() -> Int {
+    func sectionInsets() -> UIEdgeInsets {
+        return cellLayout.sectionInsets
+    }
+    
+    func itemsPerRow() -> CGFloat {
+        return cellLayout.itemsPerRow
+    }
+    
+    func cellIdentifier() -> String {
+        return cellIdentifiers.albumsCell
+    }
+    
+    func numberOfItemInSection(section: Int) -> Int {
         return albums.count
+    }
+    
+    func fillUI(cell: AlbumsCell, atIndex index: Int) {
+        let album = albums[index]
+        cell.albumName.text = album.name
+
+        let array = ItemManager.sharedInstance.getItems(album: album)
+        if array.count > 0 {
+            let lastItem = array.last
+            
+            if let thumbname = lastItem?.thumbName {
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
+                cell.photoImageView.image = MediaLibrary.image(urlPath: path)
+            }
+            
+            cell.totalItem.text = "\(array.count)"
+        } else {
+            cell.photoImageView.image = UIImage(named: "albums.png")
+            cell.totalItem.text = "0"
+        }
+        
+    }
+    
+    func selectedGalleryAtIndex(index: Int) {
+        let album = albums[index]
+        let galleryModel = GalleryPhotoViewModel(album: album)
+        delegate?.navigationToAlbumDetail(viewModel: galleryModel)
     }
     
     func saveAlbumToCoreData(title: String) {
@@ -59,42 +107,5 @@ open class AlbumsViewModel {
         let album = albums[index]
         AlbumManager.sharedInstance.deleteAlbum(album: album)
         self.albums.remove(at: index)
-    }
-    
-    func fillUI(cell: AlbumsCell, atIndex index: Int) {
-        let album = albums[index]
-        cell.albumName.text = album.name
-        
-        let items = album.mutableSetValue(forKey: "items")
-        let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: true)
-        let array = items.sortedArray(using: [dateDescriptor]) as! [Item]
-        
-        if array.count > 0 {
-            let lastItem = array.last
-            
-            if let thumbname = lastItem?.thumbName {
-                let path = getDocumentsDirectory().appendingPathComponent(thumbname)
-                cell.photoImageView.image = MediaLibrary.image(urlPath: path)
-            }
-            
-            cell.totalItem.text = "\(array.count)"
-        } else {
-            cell.photoImageView.image = UIImage(named: "albums.png")
-            cell.totalItem.text = "0"
-        }
-
-    }
-    
-    func selectedGalleryAtIndex(index: Int) {
-        let album = albums[index]
-        let galleryModel = GalleryPhotoViewModel(album: album)
-        delegate?.navigationToAlbumDetail(viewModel: galleryModel)
-    }
-    
-    
-    private func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
     }
 }

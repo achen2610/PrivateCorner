@@ -36,6 +36,10 @@ struct Key {
         static let validationError = "ERROR_VALIDATION"
     }
     
+    struct String {
+        static let notiUpdateCollectionView = "UpdateCollectionView"
+    }
+    
     enum ItemType {
         case ImageType
         case VideoType

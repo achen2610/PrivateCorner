@@ -105,6 +105,12 @@
 		007F62DF1ECD91CF00226B49 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F62DE1ECD91CF00226B49 /* TabBarController.swift */; };
 		00815FAD1EE7DF050029FE02 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 00815FAC1EE7DF050029FE02 /* selected.png */; };
 		0086A9B41EC2F9B1000F5C01 /* Gallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */; };
+		008775EA1EEF8151003C50AF /* AddFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775E91EEF8151003C50AF /* AddFileViewModel.swift */; };
+		008775EC1EEF815F003C50AF /* AddFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775EB1EEF815F003C50AF /* AddFileViewController.swift */; };
+		008775EE1EEF8185003C50AF /* AddFileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775ED1EEF8185003C50AF /* AddFileCollectionViewController.swift */; };
+		008775F11EEF8193003C50AF /* AddFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775F01EEF8193003C50AF /* AddFileCell.swift */; };
+		008775F31EEF819E003C50AF /* AddFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 008775F21EEF819E003C50AF /* AddFileCell.xib */; };
+		008775F61EEFDDF6003C50AF /* GalleryCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775F51EEFDDF6003C50AF /* GalleryCollectionFooterView.swift */; };
 		008A8CCD1ED5209800FE7A86 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A8CCC1ED5209800FE7A86 /* PhotoCell.swift */; };
 		00915EFD1ED7E6A70003BECE /* PhotoViewCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00915EFC1ED7E6A70003BECE /* PhotoViewCollectionView.swift */; };
 		00915EFF1ED7E7150003BECE /* PhotoViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00915EFE1ED7E7150003BECE /* PhotoViewViewModel.swift */; };
@@ -285,6 +291,12 @@
 		007F62DE1ECD91CF00226B49 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		00815FAC1EE7DF050029FE02 /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
 		0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Gallery.bundle; sourceTree = "<group>"; };
+		008775E91EEF8151003C50AF /* AddFileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFileViewModel.swift; sourceTree = "<group>"; };
+		008775EB1EEF815F003C50AF /* AddFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFileViewController.swift; sourceTree = "<group>"; };
+		008775ED1EEF8185003C50AF /* AddFileCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFileCollectionViewController.swift; sourceTree = "<group>"; };
+		008775F01EEF8193003C50AF /* AddFileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFileCell.swift; sourceTree = "<group>"; };
+		008775F21EEF819E003C50AF /* AddFileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFileCell.xib; sourceTree = "<group>"; };
+		008775F51EEFDDF6003C50AF /* GalleryCollectionFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionFooterView.swift; sourceTree = "<group>"; };
 		008A8CCC1ED5209800FE7A86 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		00915EFC1ED7E6A70003BECE /* PhotoViewCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewCollectionView.swift; sourceTree = "<group>"; };
 		00915EFE1ED7E7150003BECE /* PhotoViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewViewModel.swift; sourceTree = "<group>"; };
@@ -394,6 +406,7 @@
 			children = (
 				004B28F51E8CA624007C910A /* GalleryCell.swift */,
 				004B28F71E8CA62D007C910A /* GalleryCell.xib */,
+				008775F51EEFDDF6003C50AF /* GalleryCollectionFooterView.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -547,6 +560,7 @@
 				007F62DD1ECD91AD00226B49 /* TabBar */,
 				006486F51E70F2E800419C27 /* LockScreen */,
 				00E0B1A41E7942350001DF8F /* Albums */,
+				008775E81EEF80FF003C50AF /* AddFile */,
 				004B28E51E8C9EA6007C910A /* GalleryPhoto */,
 				00DDF9B51ED43D2B00093770 /* PhotoView */,
 				004B28F91E8CE55C007C910A /* Import */,
@@ -783,6 +797,26 @@
 				0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		008775E81EEF80FF003C50AF /* AddFile */ = {
+			isa = PBXGroup;
+			children = (
+				008775EF1EEF8187003C50AF /* UI */,
+				008775E91EEF8151003C50AF /* AddFileViewModel.swift */,
+				008775EB1EEF815F003C50AF /* AddFileViewController.swift */,
+				008775ED1EEF8185003C50AF /* AddFileCollectionViewController.swift */,
+			);
+			name = AddFile;
+			sourceTree = "<group>";
+		};
+		008775EF1EEF8187003C50AF /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				008775F01EEF8193003C50AF /* AddFileCell.swift */,
+				008775F21EEF819E003C50AF /* AddFileCell.xib */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		008A8CCB1ED5208B00FE7A86 /* UI */ = {
@@ -1069,6 +1103,7 @@
 				0075F20C1EDEB5820006AB5F /* VideoCell.xib in Resources */,
 				004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
+				008775F31EEF819E003C50AF /* AddFileCell.xib in Resources */,
 				00DDF9AA1ED436E800093770 /* Info.plist in Resources */,
 				0047FB611E9B749300BDF919 /* remove@3x.png in Resources */,
 				0075F19C1E7A3698001DA471 /* AlbumsCell.xib in Resources */,
@@ -1257,9 +1292,11 @@
 				00DDF9A11ED436E800093770 /* HeroBaseController.swift in Sources */,
 				007980511EE696EF00C5E13D /* Permission.swift in Sources */,
 				00DDF9921ED436E800093770 /* HeroCoreAnimationViewContext.swift in Sources */,
+				008775EC1EEF815F003C50AF /* AddFileViewController.swift in Sources */,
 				0079803B1EE696EF00C5E13D /* Cart.swift in Sources */,
 				00DDF9A91ED436E800093770 /* HeroTypes.swift in Sources */,
 				007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */,
+				008775EA1EEF8151003C50AF /* AddFileViewModel.swift in Sources */,
 				007980341EE696EF00C5E13D /* CameraMan.swift in Sources */,
 				007F62DC1ECD86BD00226B49 /* PasscodeView.swift in Sources */,
 				007980361EE696EF00C5E13D /* ShutterButton.swift in Sources */,
@@ -1272,6 +1309,7 @@
 				00DDF9961ED436E800093770 /* HeroDebugView.swift in Sources */,
 				0079805B1EE696EF00C5E13D /* EmptyView.swift in Sources */,
 				007980581EE696EF00C5E13D /* VideoEditor.swift in Sources */,
+				008775F61EEFDDF6003C50AF /* GalleryCollectionFooterView.swift in Sources */,
 				00DDF9B71ED43D4F00093770 /* PhotoViewController.swift in Sources */,
 				00915EFF1ED7E7150003BECE /* PhotoViewViewModel.swift in Sources */,
 				007980571EE696EF00C5E13D /* VideoEditing.swift in Sources */,
@@ -1302,6 +1340,7 @@
 				0079805A1EE696EF00C5E13D /* ArrowButton.swift in Sources */,
 				0079803A1EE696EF00C5E13D /* GAlbum.swift in Sources */,
 				004B29051E8CE57F007C910A /* ImportViewController.swift in Sources */,
+				008775F11EEF8193003C50AF /* AddFileCell.swift in Sources */,
 				0079804C1EE696EF00C5E13D /* Fetcher.swift in Sources */,
 				00DDF99A1ED436E800093770 /* CAMediaTimingFunction+Hero.swift in Sources */,
 				00DDF99D1ED436E800093770 /* UIKit+Hero.swift in Sources */,
@@ -1350,6 +1389,7 @@
 				00DDF9B21ED436E800093770 /* IgnoreSubviewModifiersPreprocessor.swift in Sources */,
 				007F06D01ED3CE3F0081EAAE /* ConstantColor.swift in Sources */,
 				0079803F1EE696EF00C5E13D /* ImagesLibrary.swift in Sources */,
+				008775EE1EEF8185003C50AF /* AddFileCollectionViewController.swift in Sources */,
 				007980411EE696EF00C5E13D /* Config.swift in Sources */,
 				007980541EE696EF00C5E13D /* GUtils.swift in Sources */,
 				007980501EE696EF00C5E13D /* PagesController.swift in Sources */,

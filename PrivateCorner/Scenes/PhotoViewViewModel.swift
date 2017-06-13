@@ -11,14 +11,16 @@ import UIKit
 
 open class PhotoViewViewModel {
 
-    var items = [Item]()
+    fileprivate var album = Album()
+    fileprivate var items = [Item]()
     var isEndTransition: Bool = false
     
-    public init(items: [Item]) {
+    public init(items: [Item], inAlbum album: Album) {
         self.items = items
+        self.album = album
     }
     
-    func countPhoto() -> Int {
+    func numberOfItemInSection(section: Int) -> Int {
         return items.count
     }
     
@@ -27,25 +29,15 @@ open class PhotoViewViewModel {
         
         if item.type == "image" {
             if let photoCell = cell as? PhotoCell {
-                let urlPath = getDocumentsDirectory().appendingPathComponent(item.fileName!)
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(item.fileName!)
                 photoCell.image = MediaLibrary.image(urlPath: urlPath)
             }
         } else {
             if let videoCell = cell as? VideoCell {
-                let urlPath = getDocumentsDirectory().appendingPathComponent(item.fileName!)
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(item.fileName!)
                 videoCell.configureVideo(url: urlPath, isEndTransition: isEndTransition)
             }
         }
-
-//        ImageLibrary.getDataFromUrl(url: urlPath) { (data, urlResponse, error) in
-//            guard let data = data, error == nil else { return }
-//            print(urlResponse?.suggestedFilename ?? urlPath.lastPathComponent)
-//            print("Download Finished")
-//            DispatchQueue.main.async() { () -> Void in
-//                cell.image = UIImage(data: data)
-//            }
-//            
-//        }
     }
     
     func getTypeItem(index: Int) -> String {
@@ -53,17 +45,67 @@ open class PhotoViewViewModel {
         return item.type!
     }
     
-    private func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
+    func getUploadDate(index: Int) -> [String] {
+        let item = items[index]
+        var title = [String]()
+        if let uploadDate = item.uploadDate as Date? {
+            let dateFormatter = DateFormatter()
+            dateFormatter.amSymbol = "AM"
+            dateFormatter.pmSymbol = "PM"
+            dateFormatter.dateFormat = "MMM dd"
+            let topText = dateFormatter.string(from: uploadDate)
+            title.append(topText)
+            
+            dateFormatter.dateFormat = "h:mm a"
+            let bottomText = dateFormatter.string(from: uploadDate)
+            title.append(bottomText)
+        }
+        return title
     }
     
-    private func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
-        URLSession.shared.dataTask(with: url) {
-            (data, response, error) in
-            completion(data, response, error)
-            }.resume()
+    func deleteItem(index: Int, collectionView: UICollectionView) {
+        let fileManager = FileManager.default
+        let item = items[index]
+        
+        // Delete item from database
+        ItemManager.sharedInstance.deleteItem(item: item, atAlbum: album)
+        
+        // Delete file of item in documents
+        if let filename = item.fileName {
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
+            do {
+                if fileManager.fileExists(atPath: path.path) {
+                    try fileManager.removeItem(at: path)
+                } else {
+                    print("===============")
+                    print("File not exists")
+                    print("Can't delete file : \(filename)")
+                }
+            } catch {
+                print("===============")
+                print("Error remove item \(filename), \(error)")
+            }
+        }
+        
+        if let thumbname = item.thumbName {
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
+            do {
+                if fileManager.fileExists(atPath: path.path) {
+                    try fileManager.removeItem(at: path)
+                } else {
+                    print("===============")
+                    print("File not exists")
+                    print("Can't delete file : \(thumbname)")
+                }
+            } catch {
+                print("===============")
+                print("Error remove item \(thumbname), \(error)")
+            }
+        }
+        
+        let oldItems = items
+        items.remove(at: index)
+        collectionView.animateItemChanges(oldData: oldItems, newData: items)
     }
 }
 

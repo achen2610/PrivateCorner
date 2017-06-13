@@ -41,6 +41,8 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         styleUI()
         configureCollectionViewOnLoad()
         getGalleryPhotoOnLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionViewWhenMoveFile), name: NSNotification.Name(rawValue: Key.String.notiUpdateCollectionView), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,24 +91,15 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         viewModel.getGallery()
     }
     
-    func selectedPhotoAtIndex(index: IndexPath, cell: GalleryCell) {
-        navigationController?.isHeroEnabled = true
-        
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller  = mainStoryboard.instantiateViewController(withIdentifier: "PhotoView") as! PhotoViewController
-        controller.selectedIndex = index
-        
-        let vm = viewModel.photoViewModel()
-        controller.viewModel = vm
-        
-        navigationController?.pushViewController(controller, animated: true)
+    func updateCollectionViewWhenMoveFile() {
+        viewModel.updateGallery(collectionView: galleryCollectionView)
     }
     
     func scrollToBottom(animated: Bool) {
         let numberItems = self.galleryCollectionView.numberOfItems(inSection: 0)
         if numberItems > 0 {
-            self.galleryCollectionView.scrollToItem(at: NSIndexPath.init(row:(self.galleryCollectionView.numberOfItems(inSection: 0)) - 1, section: 0) as IndexPath,
-                                                    at: .top,
+            self.galleryCollectionView.scrollToItem(at: NSIndexPath.init(row:numberItems - 1, section: 0) as IndexPath,
+                                                    at: .bottom,
                                                     animated: animated)
         }
     }
@@ -182,7 +175,27 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     }
     
     @IBAction func clickMoveButton(_ sender: Any) {
+        var indexSelectedImage = [Int]()
+        var index = 0
+        for check in arraySelectedCell {
+            if check {
+                indexSelectedImage.append(index)
+            }
+            index += 1
+        }
         
+        if indexSelectedImage.count <= 0 {
+            return
+        }
+
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let navi  = mainStoryboard.instantiateViewController(withIdentifier: "AddFile") as! UINavigationController
+        if let controller = navi.visibleViewController as? AddFileViewController {
+            let vm = viewModel.addFileModel(indexes: indexSelectedImage)
+            controller.viewModel = vm
+        }
+
+        present(navi, animated: true, completion: nil)
     }
     
     @IBAction func clickDeleteButton(_ sender: Any) {
@@ -194,11 +207,11 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             }
             index += 1
         }
-        print("Check image \(indexSelectedImage)")
         
         // Use Diff to delete image
         viewModel.deleteItem(indexes: indexSelectedImage, collectionView: galleryCollectionView)
         
+        // Update array check select cell
         let indexesToRemove = Set(indexSelectedImage.flatMap { $0 })
         arraySelectedCell = arraySelectedCell.enumerated().filter { !indexesToRemove.contains($0.offset) }.map { $0.element }
     }
@@ -218,7 +231,6 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
                     self.progressRing.setProgress(value: 0, animationDuration: 0)
                     
                     DispatchQueue.main.async(execute: {
-                        self.galleryCollectionView.reloadData()
                         self.scrollToBottom(animated: true)
                     })
                 }
@@ -232,6 +244,17 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
                 arraySelectedCell.append(false)
             }
         }
+    }
+    
+    func navigationToPhotoScreen(viewModel: PhotoViewViewModel, indexPath: IndexPath) {
+        navigationController?.isHeroEnabled = true
+        
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller  = mainStoryboard.instantiateViewController(withIdentifier: "PhotoView") as! PhotoViewController
+        controller.selectedIndex = indexPath
+        controller.viewModel = viewModel
+        
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     func updateProgressRing(value: CGFloat) {
@@ -283,7 +306,7 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.global().asyncAfter(deadline: when) {
             // Your code with delay
-            self.viewModel.uploadImageToCoreData(images: images, assets: assets)
+            self.viewModel.uploadImageToCoreData(images: images, assets: assets, collectionView: self.galleryCollectionView)
         }
     }
     
@@ -296,7 +319,7 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
         }
         
         video.fetchAVAsset { (avasset) in
-            self.viewModel.uploadVideoToCoreData(video: video, avasset: avasset!)
+            self.viewModel.uploadVideoToCoreData(video: video, avasset: avasset!, collectionView: self.galleryCollectionView)
         }
     }
     

@@ -340,10 +340,31 @@
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="hGs-hN-LjH">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="50" height="50"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FooterView" id="J2u-rp-Lgc" customClass="GalleryCollectionFooterView" customModule="PrivateCorner" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwU-o4-OoU">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="rwU-o4-OoU" secondAttribute="trailing" id="O3w-vy-u7r"/>
+                                        <constraint firstItem="rwU-o4-OoU" firstAttribute="top" secondItem="J2u-rp-Lgc" secondAttribute="top" id="ShO-qU-fTC"/>
+                                        <constraint firstAttribute="bottom" secondItem="rwU-o4-OoU" secondAttribute="bottom" id="jqW-YL-Te7"/>
+                                        <constraint firstItem="rwU-o4-OoU" firstAttribute="leading" secondItem="J2u-rp-Lgc" secondAttribute="leading" id="mQu-40-rbA"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="footerLabel" destination="rwU-o4-OoU" id="eyp-9e-fgs"/>
+                                    </connections>
+                                </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="jKx-Pq-flA" id="5mr-TP-tph"/>
                                     <outlet property="delegate" destination="jKx-Pq-flA" id="Ygw-ae-aYM"/>
@@ -636,6 +657,75 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="42e-27-KCC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="114.375" y="121.47887323943662"/>
+        </scene>
+        <!--Add File View Controller-->
+        <scene sceneID="fb2-ze-owh">
+            <objects>
+                <viewController id="L4H-kO-aq6" customClass="AddFileViewController" customModule="PrivateCorner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rks-mm-0lu"/>
+                        <viewControllerLayoutGuide type="bottom" id="rvD-NF-Eti"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ls2-v1-5fH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kWm-hR-JuD">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="BgC-o9-hy0">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="L4H-kO-aq6" id="CkP-MY-bDp"/>
+                                    <outlet property="delegate" destination="L4H-kO-aq6" id="TNm-sS-9xQ"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kWm-hR-JuD" firstAttribute="top" secondItem="Ls2-v1-5fH" secondAttribute="top" id="GRx-6q-RP9"/>
+                            <constraint firstAttribute="trailing" secondItem="kWm-hR-JuD" secondAttribute="trailing" id="Kbb-U7-iHF"/>
+                            <constraint firstItem="kWm-hR-JuD" firstAttribute="leading" secondItem="Ls2-v1-5fH" secondAttribute="leading" id="dIE-7y-fdY"/>
+                            <constraint firstAttribute="bottom" secondItem="kWm-hR-JuD" secondAttribute="bottom" id="qgE-K5-Ssl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="xgC-5q-K3w">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="3eo-d9-ySI">
+                            <connections>
+                                <action selector="clickCancelButton:" destination="L4H-kO-aq6" id="Som-TU-j7h"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="albumsCollectionView" destination="kWm-hR-JuD" id="E3c-Jd-CPV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nk8-gp-a5n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5490" y="-887"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qnW-h8-b5a">
+            <objects>
+                <navigationController storyboardIdentifier="AddFile" automaticallyAdjustsScrollViewInsets="NO" id="cKb-sK-3Id" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yW2-9C-bRx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="L4H-kO-aq6" kind="relationship" relationship="rootViewController" id="HIf-w5-Qgb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fvj-R9-lfr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4717.5" y="-887.32394366197184"/>
         </scene>
     </scenes>
     <resources>

@@ -67,9 +67,8 @@ class AlbumManager {
     }
     
     func deleteAlbum(album: Album) {
-        let array = album.mutableSetValue(forKey: "items")
-        let dateDescriptor = NSSortDescriptor(key: "uploadDate", ascending: false)
-        let items = array.sortedArray(using: [dateDescriptor]) as! [Item]
+
+        let items = ItemManager.sharedInstance.getItems(album: album)
         for item in items {
             let fileManager = FileManager.default
             if let filename = item.fileName {

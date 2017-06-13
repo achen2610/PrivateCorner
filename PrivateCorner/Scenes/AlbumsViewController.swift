@@ -19,15 +19,6 @@ class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
     
     // MARK: Object lifecycle
     
-    struct cellIdentifiers {
-        static let albumsCell = "albumsCell"
-    }
-    
-    struct cellLayout {
-        static let itemsPerRow: CGFloat = 2
-        static let sectionInsets: UIEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -38,9 +29,9 @@ class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Album"
-        configureCollectionViewOnLoad()
+        title = "Album"
         viewModel = AlbumsViewModel(delegate: self)
+        configureCollectionViewOnLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -56,7 +47,7 @@ class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
     
     func configureCollectionViewOnLoad() {
         let nibName = UINib(nibName: "AlbumsCell", bundle:Bundle.main)
-        albumsCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.albumsCell)
+        albumsCollectionView.register(nibName, forCellWithReuseIdentifier: viewModel.cellIdentifier())
         albumsCollectionView.alwaysBounceVertical = true
     }
 
