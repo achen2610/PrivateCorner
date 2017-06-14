@@ -10,7 +10,7 @@ import UIKit
 
 class MediaLibrary {
     static func image(urlPath: URL) -> UIImage {
-        return UIImage(contentsOfFile: urlPath.path)!
+        return UIImage(contentsOfFile: urlPath.path) ?? UIImage(named: "noimagefound.png")!
     }
     
     static func getThumbnailImage(originalImage: UIImage) -> UIImage {

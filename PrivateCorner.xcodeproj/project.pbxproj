@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0035DEFD1EF0D0A9004581FF /* noimagefound.png in Resources */ = {isa = PBXBuildFile; fileRef = 0035DEFC1EF0D0A9004581FF /* noimagefound.png */; };
+		0035DEFF1EF0DC59004581FF /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0035DEFE1EF0DC59004581FF /* UploadManager.swift */; };
 		00438D331EDFA51C0060EFA4 /* playvideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 00438D321EDFA51C0060EFA4 /* playvideo.png */; };
 		0047FB611E9B749300BDF919 /* remove@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0047FB601E9B749300BDF919 /* remove@3x.png */; };
 		004B28F11E8CA050007C910A /* GalleryPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28EB1E8CA050007C910A /* GalleryPhotoViewController.swift */; };
@@ -187,6 +189,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0035DEFC1EF0D0A9004581FF /* noimagefound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimagefound.png; sourceTree = "<group>"; };
+		0035DEFE1EF0DC59004581FF /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
 		00438D321EDFA51C0060EFA4 /* playvideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playvideo.png; sourceTree = "<group>"; };
 		0047FB601E9B749300BDF919 /* remove@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remove@3x.png"; sourceTree = "<group>"; };
 		004B28EB1E8CA050007C910A /* GalleryPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoViewController.swift; sourceTree = "<group>"; };
@@ -511,6 +515,7 @@
 		006486E51E70EFD500419C27 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0035DEFC1EF0D0A9004581FF /* noimagefound.png */,
 				007718BD1EE951D8001211CB /* pause@3x.png */,
 				007718B91EE947CA001211CB /* move@3x.png */,
 				007718BA1EE947CA001211CB /* selectall@3x.png */,
@@ -550,6 +555,7 @@
 				0094F6D61E8E5AF3007BEFAE /* AlbumManager.swift */,
 				0094F6D81E8E6331007BEFAE /* ItemManager.swift */,
 				0077770C1EDBC90F00233D0B /* MediaLibrary.swift */,
+				0035DEFE1EF0DC59004581FF /* UploadManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1103,6 +1109,7 @@
 				0075F20C1EDEB5820006AB5F /* VideoCell.xib in Resources */,
 				004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
+				0035DEFD1EF0D0A9004581FF /* noimagefound.png in Resources */,
 				008775F31EEF819E003C50AF /* AddFileCell.xib in Resources */,
 				00DDF9AA1ED436E800093770 /* Info.plist in Resources */,
 				0047FB611E9B749300BDF919 /* remove@3x.png in Resources */,
@@ -1310,6 +1317,7 @@
 				0079805B1EE696EF00C5E13D /* EmptyView.swift in Sources */,
 				007980581EE696EF00C5E13D /* VideoEditor.swift in Sources */,
 				008775F61EEFDDF6003C50AF /* GalleryCollectionFooterView.swift in Sources */,
+				0035DEFF1EF0DC59004581FF /* UploadManager.swift in Sources */,
 				00DDF9B71ED43D4F00093770 /* PhotoViewController.swift in Sources */,
 				00915EFF1ED7E7150003BECE /* PhotoViewViewModel.swift in Sources */,
 				007980571EE696EF00C5E13D /* VideoEditing.swift in Sources */,

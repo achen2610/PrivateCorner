@@ -143,6 +143,12 @@ public extension HeroBaseController {
    current state to the **end** state
    */
   public func end(animate: Bool = true) {
+    DispatchQueue.main.async {
+     self.end(animate)
+    }
+  }
+
+  fileprivate func end(_ animate: Bool) {
     guard transitioning else { return }
     if !animate {
       self.complete(finished:true)
@@ -162,6 +168,12 @@ public extension HeroBaseController {
    current state to the **begining** state
    */
   public func cancel(animate: Bool = true) {
+    DispatchQueue.main.async {
+        self.cancel(animate)
+    }
+  }
+    
+  fileprivate func cancel(_ animate: Bool) {
     guard transitioning else { return }
     if !animate {
       self.complete(finished:false)

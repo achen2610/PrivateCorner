@@ -132,12 +132,11 @@ open class GalleryPhotoViewModel {
             } else {
                 group.enter()
                 if let data = UIImagePNGRepresentation(image) {
-
                     let success = fileManager.createFile(atPath: path.path, contents: data, attributes: nil)
                     if success {
-                        group.leave()
                         currentPercent += percent
                         delegate?.updateProgressRing(value: currentPercent)
+                        group.leave()
                     }
                 }
             }
@@ -153,9 +152,9 @@ open class GalleryPhotoViewModel {
                 if let data = UIImagePNGRepresentation(thumbnailImage) {
                     let success = fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
                     if success {
-                        group.leave()
                         currentPercent += percent
                         delegate?.updateProgressRing(value: currentPercent)
+                        group.leave()
                     }
                 }
             }
@@ -178,8 +177,6 @@ open class GalleryPhotoViewModel {
         
         if let avassetURL = avasset as? AVURLAsset {
             let videoUrl = avassetURL.url
-            let group = DispatchGroup()
-            let fileManager = FileManager.default
             let filename = avassetURL.url.lastPathComponent
             let name = filename.components(separatedBy: ".").first
             let thumbname = "thumbnail_" + name! + ".JPG"
@@ -187,42 +184,25 @@ open class GalleryPhotoViewModel {
             // Add video to database
             let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.VideoType]
             ItemManager.sharedInstance.add(media: video, info: info, toAlbum: album)
-            
-            // Save original video
-            group.enter()
+        
+            // Save original video & thumbnail
             let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
-            if fileManager.fileExists(atPath: path.path) {
-                print("===============")
-                print("Video \(filename) exists")
-            } else {
-                saveVideoFile(videoUrl: videoUrl, destinationPath: path)
-            }
-            delegate?.updateProgressRing(value: 50)
-            group.leave()
+            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
             
-            // Save thumbnail video
-            group.enter()
-            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
-            video.fetchThumbnail(CGSize(width: 256, height: 256), completion: { (image) in
-                if fileManager.fileExists(atPath: thumbnailPath.path) {
-                    print("===============")
-                    print("Thumbnail \(thumbname) exists")
-                } else {
-                    if let data = UIImagePNGRepresentation(image!) {
-                        fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
+            UploadManager.sharedInstance.uploadVideo(video: video, videoPath: videoUrl, destinationPath: path, thumbPath: thumbPath, delegate: delegate, completion: { (status) in
+                if status {
+                    
+                    DispatchQueue.main.async {
+                        ItemManager.sharedInstance.saveContext()
+                        
+                        let oldItems = self.items
+                        self.items = ItemManager.sharedInstance.getItems(album: self.album)
+                        self.delegate?.reloadGallery()
+                        collectionView.animateItemChanges(oldData: oldItems, newData: self.items)
+                        print("===============")
+                        print("Upload video success")
                     }
                 }
-                self.delegate?.updateProgressRing(value: 100)
-                group.leave()
-            })
-            
-            group.notify(queue: DispatchQueue.main, execute: { 
-                let oldItems = self.items
-                self.items = ItemManager.sharedInstance.getItems(album: self.album)
-                self.delegate?.reloadGallery()
-                collectionView.animateItemChanges(oldData: oldItems, newData: self.items)
-                print("===============")
-                print("Upload video success")
             })
         }
     }
