@@ -53,6 +53,7 @@ open class GalleryPhotoViewModel {
         items = ItemManager.sharedInstance.getItems(album: album)
         
         collectionView.animateItemChanges(oldData: oldItems, newData: items)
+        updateSupplementaryElement(collectionView: collectionView)
     }
 
     func photoViewModel() -> PhotoViewViewModel {
@@ -167,7 +168,8 @@ open class GalleryPhotoViewModel {
             self.items = ItemManager.sharedInstance.getItems(album: self.album)
             self.delegate?.reloadGallery()
             collectionView.animateItemChanges(oldData: oldItems, newData: self.items)
-            
+            self.updateSupplementaryElement(collectionView: collectionView)
+
             print("===============")
             print("Upload images success")
         }
@@ -199,6 +201,8 @@ open class GalleryPhotoViewModel {
                         self.items = ItemManager.sharedInstance.getItems(album: self.album)
                         self.delegate?.reloadGallery()
                         collectionView.animateItemChanges(oldData: oldItems, newData: self.items)
+                        self.updateSupplementaryElement(collectionView: collectionView)
+                        
                         print("===============")
                         print("Upload video success")
                     }
@@ -256,9 +260,34 @@ open class GalleryPhotoViewModel {
         
         items = newItems
         collectionView.animateItemChanges(oldData: oldItems, newData: newItems)
+        updateSupplementaryElement(collectionView: collectionView)
+    }
+    
+    func getCountPhotosAndVideos() -> String {
+        var string: String
+        var photos: Int = 0, videos: Int = 0
+        for item in items {
+            if item.type == "image" {
+                photos += 1
+            } else {
+                videos += 1
+            }
+        }
+        string = "\(photos) Photos, \(videos) Videos"
+        return string
     }
 
     // MARK: Private Method
+    private func updateSupplementaryElement(collectionView: UICollectionView) {
+        if let footerView = collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(row: 0, section: 0)) as? GalleryCollectionFooterView {
+            if numberOfItemInSection(section: 0) > 0 {
+                footerView.footerLabel.text = getCountPhotosAndVideos()
+            } else {
+                footerView.footerLabel.text = ""
+            }
+        }
+    }
+    
     private func fetchImages(_ assets: [PHAsset]) -> [String] {
         var filenames = [String]()
         let imageManager = PHImageManager.default()

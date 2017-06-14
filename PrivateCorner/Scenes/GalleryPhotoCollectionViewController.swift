@@ -40,7 +40,11 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
         
         if kind == UICollectionElementKindSectionFooter {
             if let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterView", for: indexPath) as? GalleryCollectionFooterView {
-                footerView.footerLabel.text = "\(viewModel.numberOfItemInSection(section: 0)) Photos"
+                if viewModel.numberOfItemInSection(section: 0) > 0 {
+                    footerView.footerLabel.text = viewModel.getCountPhotosAndVideos()
+                } else {
+                    footerView.footerLabel.text = ""
+                }
                 
                 reusableView = footerView
             }

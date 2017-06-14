@@ -8,11 +8,11 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         let tabBar = self.tabBar
         let tabBarAlbumItem = tabBar.items?[0]
         let tabBarImportItem = tabBar.items?[1]
@@ -28,5 +28,13 @@ class TabBarController: UITabBarController {
         tabBarSettingItem?.selectedImage = UIImage.init(named: "setting-on.png")?.withRenderingMode(.alwaysOriginal)
     }
     
-    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if let controller = (tabBarController.selectedViewController as? UINavigationController)?.visibleViewController as? AlbumsViewController {
+            if controller.isEditMode {
+                controller.editAlbumButtonItemTapped((Any).self)
+            }
+        }
+        
+        return true
+    }
 }

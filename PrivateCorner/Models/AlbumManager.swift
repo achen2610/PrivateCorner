@@ -72,7 +72,7 @@ class AlbumManager {
         for item in items {
             let fileManager = FileManager.default
             if let filename = item.fileName {
-                let path = getDocumentsDirectory().appendingPathComponent(filename)
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
                 if fileManager.fileExists(atPath: path.path) {
                     print("===========")
                     print("File Exists")
@@ -88,7 +88,7 @@ class AlbumManager {
             }
             
             if let thumbname = item.thumbName {
-                let path = getDocumentsDirectory().appendingPathComponent(thumbname)
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
                 if fileManager.fileExists(atPath: path.path) {
                     print("===========")
                     print("Thumbnail Exists")
@@ -117,12 +117,5 @@ class AlbumManager {
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         }
-    }
-    
-    // Private Method
-    private func getDocumentsDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
     }
 }

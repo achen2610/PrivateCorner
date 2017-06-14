@@ -43,7 +43,8 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
         super.viewDidLoad()
         
         styleUI()
-        viewModel = LockScreenViewModel(delegate: self)
+        PasscodeView.totalDotCount = 6
+        viewModel = LockScreenViewModel(delegate: self, totalDotCount: 6)
     }
     
     // MARK: Event handling
@@ -52,9 +53,7 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
         
         backgroundImageView.image = UIImage.init(named: "data-security-tips.jpg")
         blurImage()
-        
-        PasscodeView.totalDotCount = 4
-        
+
         buttonArray.append(ZeroButton)
         buttonArray.append(OneButton)
         buttonArray.append(TwoButton)

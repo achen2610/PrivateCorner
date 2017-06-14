@@ -93,12 +93,19 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     
     func updateCollectionViewWhenMoveFile() {
         viewModel.updateGallery(collectionView: galleryCollectionView)
+        
+        arraySelectedCell.removeAll()
+        if viewModel.numberOfItemInSection(section: 0) > 0 {
+            for _ in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
+                arraySelectedCell.append(false)
+            }
+        }
     }
     
     func scrollToBottom(animated: Bool) {
-        let numberItems = self.galleryCollectionView.numberOfItems(inSection: 0)
+        let numberItems = viewModel.numberOfItemInSection(section: 0)
         if numberItems > 0 {
-            self.galleryCollectionView.scrollToItem(at: NSIndexPath.init(row:numberItems - 1, section: 0) as IndexPath,
+            galleryCollectionView.scrollToItem(at: NSIndexPath.init(row:numberItems - 1, section: 0) as IndexPath,
                                                     at: .bottom,
                                                     animated: animated)
         }
@@ -142,14 +149,16 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             let barButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(clickEditMode(_:)))
             navigationItem.rightBarButtonItem = barButton
             
-            galleryCollectionView.deselectAllItems(section: 0, animated: false)
-
-            for index in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
-                arraySelectedCell[index] = false
+            if viewModel.numberOfItemInSection(section: 0) > 0 {
+                galleryCollectionView.deselectAllItems(section: 0, animated: false)
                 
-                if let cell = galleryCollectionView.cellForItem(at: IndexPath(row: index, section: 0))as? GalleryCell {
-                    cell.containerView.isHidden = true
-                    cell.selectedImageView.isHidden = true
+                for index in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
+                    arraySelectedCell[index] = false
+                    
+                    if let cell = galleryCollectionView.cellForItem(at: IndexPath(row: index, section: 0))as? GalleryCell {
+                        cell.containerView.isHidden = true
+                        cell.selectedImageView.isHidden = true
+                    }
                 }
             }
         }
@@ -219,9 +228,20 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
 
     // GalleryPhotoViewModelDelegate
     func reloadGallery() {
+        arraySelectedCell.removeAll()
+        if viewModel.numberOfItemInSection(section: 0) > 0 {
+            for _ in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
+                arraySelectedCell.append(false)
+            }
+        }
+        
         if containerView.isHidden {
             galleryCollectionView.reloadData()
-            scrollToBottom(animated: true)
+            galleryCollectionView.performBatchUpdates({ }, completion: { (finished) in
+                if finished {
+                    self.scrollToBottom(animated: false)
+                }
+            })
         } else {
             UIView.animate(withDuration: 0.5, animations: {
                 self.progressRing.alpha = 0.0
@@ -234,14 +254,6 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
                         self.scrollToBottom(animated: true)
                     })
                 }
-            }
-        }
-        
-        
-        arraySelectedCell.removeAll()
-        if viewModel.numberOfItemInSection(section: 0) > 0 {
-            for _ in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
-                arraySelectedCell.append(false)
             }
         }
     }
@@ -344,7 +356,7 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
             navigationController?.heroNavigationAnimationType = .fade
         } else {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
-            navigationController?.heroNavigationAnimationType = .pull(direction: .right)
+            navigationController?.heroNavigationAnimationType = .fade
         }
         
         if let vc = viewController as? PhotoViewController {
@@ -361,8 +373,8 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
             addPhotoButton.heroModifiers = [.fade]
         } else {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
+            navigationController?.heroNavigationAnimationType = .fade
             addPhotoButton.heroModifiers = [.fade]
-            navigationController?.heroNavigationAnimationType = .push(direction: .left)
         }
         if let vc = viewController as? PhotoViewController,
             let originalCellIndex = vc.selectedIndex,

@@ -47,9 +47,9 @@ open class LockScreenViewModel {
         }
     }
     
-    public init(delegate: LockScreenViewModelDelegate) {
-        inputDotCount = 0
-        totalDotCount = 4
+    public init(delegate: LockScreenViewModelDelegate, totalDotCount: Int) {
+        self.inputDotCount = 0
+        self.totalDotCount = totalDotCount
         self.delegate = delegate
         
         let firstInstall = UserDefaults.standard.bool(forKey: "firstInstall")
