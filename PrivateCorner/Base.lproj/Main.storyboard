@@ -434,7 +434,11 @@
                     <connections>
                         <outlet property="addPhotoButton" destination="AdB-HJ-S3A" id="KiR-LI-srh"/>
                         <outlet property="bottomConstraintCollectionView" destination="T81-mp-uby" id="rpW-iR-QKJ"/>
+                        <outlet property="deleteButton" destination="bSd-gc-Tt8" id="ghi-ee-n8K"/>
+                        <outlet property="exportButton" destination="tUk-5t-9Am" id="Exo-Jl-x3C"/>
                         <outlet property="galleryCollectionView" destination="KEl-jg-kcF" id="dm6-j7-9tc"/>
+                        <outlet property="moveButton" destination="jPm-i4-ts5" id="dup-3p-gTd"/>
+                        <outlet property="selectAllButton" destination="noo-Cb-zEa" id="1mV-Ji-6KD"/>
                         <outlet property="toolBar" destination="UBF-xy-cJ4" id="Tox-Mp-Qt9"/>
                         <segue destination="ybH-jC-KGx" kind="show" identifier="ShowPhoto" id="vXL-lT-OgA"/>
                     </connections>
@@ -509,6 +513,8 @@
                     <connections>
                         <outlet property="actionButton" destination="iYJ-aO-gXe" id="jFK-ot-qxh"/>
                         <outlet property="collectionView" destination="5vW-To-EEk" id="p13-cy-I4c"/>
+                        <outlet property="deleteButton" destination="NOx-jr-td1" id="Wxx-Nf-L39"/>
+                        <outlet property="exportButton" destination="hDA-XG-XOw" id="6Q0-4o-JQL"/>
                         <outlet property="toolBar" destination="1Hn-yD-wI5" id="gSC-F9-Ack"/>
                     </connections>
                 </viewController>

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Photos
+import MessageUI
 import Diff
 
 public protocol GalleryPhotoViewModelDelegate: class {
@@ -16,6 +17,8 @@ public protocol GalleryPhotoViewModelDelegate: class {
     func reloadGallery()
     func navigationToPhotoScreen(viewModel: PhotoViewViewModel, indexPath: IndexPath)
     func updateProgressRing(value: CGFloat)
+    func exportSuccess()
+    func sendEmail(emailVC: MFMailComposeViewController)
 }
 
 
@@ -65,6 +68,57 @@ open class GalleryPhotoViewModel {
         let moveItems = items.enumerated().filter { indexesToMove.contains($0.offset) }.map { $0.element }
         
         return AddFileViewModel(items: moveItems, album: album)
+    }
+    
+    func exportFile(indexes: [Int], type: Key.ExportType) {
+        let indexesToExport = Set(indexes.flatMap { $0 })
+        let exportItems = items.enumerated().filter { indexesToExport.contains($0.offset) }.map { $0.element }
+        
+        switch type {
+        case .PhotoLibrary:
+            for item in exportItems {
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(item.fileName!)
+                PHPhotoLibrary.shared().performChanges({ 
+                    PHAssetChangeRequest.creationRequestForAsset(from: MediaLibrary.image(urlPath: urlPath))
+                }, completionHandler: { (success, error) in
+                    if success {
+                        // Saved successfully!
+                        if item == exportItems.last {
+                            self.delegate?.exportSuccess()
+                        }
+                        print("Export \(item.fileName!) success")
+                    }
+                    else if error != nil {
+                        // Save photo failed with error
+                        
+                        print("Export \(item.fileName!) error: \(error!)")
+                    }
+                    else {
+                        // Save photo failed with no error
+                    }
+                })
+            }
+            break
+        case .Email:
+            let composeVC = MFMailComposeViewController()
+            for item in exportItems {
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(item.fileName!)
+                let ext = item.fileName!.components(separatedBy: ".").last?.lowercased()
+                do {
+                    let fileData = try Data(contentsOf: urlPath)
+                    composeVC.addAttachmentData(fileData, mimeType: String.init(format: "image/%@", ext!), fileName: item.fileName!)
+                }
+                catch {
+                    print("\(error.localizedDescription)")
+                }
+            }
+            delegate?.sendEmail(emailVC: composeVC)
+            
+            break
+        case .Copy:
+            
+            break
+        }
     }
     
     func cellSize() -> CGSize {

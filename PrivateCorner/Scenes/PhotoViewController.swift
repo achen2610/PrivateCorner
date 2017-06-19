@@ -13,6 +13,8 @@ class PhotoViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var actionButton: UIBarButtonItem!
+    @IBOutlet weak var exportButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     var viewModel: PhotoViewViewModel!
     var selectedIndex: IndexPath?
@@ -152,7 +154,22 @@ class PhotoViewController: UIViewController {
     }
 
     @IBAction func clickExportButton(_ sender: Any) {
-        
+        let alertController = UIAlertController(title: nil, message: "Export to", preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "Photo Library", style: .default) { (alertAction) in
+            
+        }
+        let emailAction = UIAlertAction(title: "Email", style: .default) { (alertAction) in
+            
+        }
+        let copyAction = UIAlertAction(title: "Copy", style: .default) { (alertAction) in
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cameraAction)
+        alertController.addAction(emailAction)
+        alertController.addAction(copyAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
 
     @IBAction func clickActionButton(_ sender: Any) {

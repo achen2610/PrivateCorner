@@ -44,4 +44,10 @@ struct Key {
         case ImageType
         case VideoType
     }
+    
+    enum ExportType {
+        case PhotoLibrary
+        case Email
+        case Copy
+    }
 }

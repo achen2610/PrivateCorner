@@ -10,6 +10,7 @@
 
 import UIKit
 import Photos
+import MessageUI
 import DynamicColor
 
 class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegate {
@@ -24,6 +25,10 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var toolBar: UIToolbar!
+    @IBOutlet weak var selectAllButton: UIBarButtonItem!
+    @IBOutlet weak var exportButton: UIBarButtonItem!
+    @IBOutlet weak var moveButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     @IBOutlet weak var bottomConstraintCollectionView: NSLayoutConstraint!
     
     // MARK: Object lifecycle
@@ -100,6 +105,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
                 arraySelectedCell.append(false)
             }
         }
+        updateStateEditButton()
     }
     
     func scrollToBottom(animated: Bool) {
@@ -109,6 +115,42 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
                                                     at: .bottom,
                                                     animated: animated)
         }
+    }
+    
+    func updateStateEditButton() {
+        if viewModel.numberOfItemInSection(section: 0) > 0 {
+            exportButton.isEnabled = true
+            moveButton.isEnabled = true
+            deleteButton.isEnabled = true
+        } else {
+            exportButton.isEnabled = false
+            moveButton.isEnabled = false
+            deleteButton.isEnabled = false
+        }
+    }
+    
+    func alertExport() {
+        let alertController = UIAlertController(title: nil, message: "Do you want to export images to Photo Library?", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Export", style: .default, handler: { (action) in
+            var indexSelectedImage = [Int]()
+            var index = 0
+            for check in self.arraySelectedCell {
+                if check {
+                    indexSelectedImage.append(index)
+                }
+                index += 1
+            }
+            
+            if indexSelectedImage.count <= 0 {
+                return
+            }
+            
+            self.viewModel.exportFile(indexes: indexSelectedImage, type: .PhotoLibrary)
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(alertAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     // MARK: Selector Event
@@ -142,6 +184,8 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             
             let barButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(clickEditMode(_:)))
             navigationItem.rightBarButtonItem = barButton
+            
+            updateStateEditButton()
         } else {
             title = viewModel.titleAlbum
             navigationItem.setHidesBackButton(false, animated: false)
@@ -180,7 +224,37 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     }
     
     @IBAction func clickExportButton(_ sender: Any) {
-        
+        let alertController = UIAlertController(title: nil, message: "Export to", preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "Photo Library", style: .default) { (alertAction) in
+            self.alertExport()
+        }
+        let emailAction = UIAlertAction(title: "Email", style: .default) { (alertAction) in
+            if MFMailComposeViewController.canSendMail() {
+                var indexSelectedImage = [Int]()
+                var index = 0
+                for check in self.arraySelectedCell {
+                    if check {
+                        indexSelectedImage.append(index)
+                    }
+                    index += 1
+                }
+                
+                if indexSelectedImage.count <= 0 {
+                    return
+                }
+                
+                self.viewModel.exportFile(indexes: indexSelectedImage, type: .Email)
+            }
+        }
+        let copyAction = UIAlertAction(title: "Copy", style: .default) { (alertAction) in
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cameraAction)
+        alertController.addAction(emailAction)
+        alertController.addAction(copyAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func clickMoveButton(_ sender: Any) {
@@ -208,21 +282,33 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     }
     
     @IBAction func clickDeleteButton(_ sender: Any) {
-        var indexSelectedImage = [Int]()
-        var index = 0
-        for check in arraySelectedCell {
-            if check {
-                indexSelectedImage.append(index)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "Delete", style: .default) { (deleteAction) in
+            var indexSelectedImage = [Int]()
+            var index = 0
+            for check in self.arraySelectedCell {
+                if check {
+                    indexSelectedImage.append(index)
+                }
+                index += 1
             }
-            index += 1
+            
+            // Use Diff to delete image
+            self.viewModel.deleteItem(indexes: indexSelectedImage, collectionView: self.galleryCollectionView)
+            
+            // Update array check select cell
+            let indexesToRemove = Set(indexSelectedImage.flatMap { $0 })
+            self.arraySelectedCell = self.arraySelectedCell.enumerated().filter { !indexesToRemove.contains($0.offset) }.map { $0.element }
+    
+            // Update state edit buttons
+            self.updateStateEditButton()
         }
+        deleteAction.setValue(UIColor(hexString: "#F71700"), forKey: "titleTextColor")
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        // Use Diff to delete image
-        viewModel.deleteItem(indexes: indexSelectedImage, collectionView: galleryCollectionView)
-        
-        // Update array check select cell
-        let indexesToRemove = Set(indexSelectedImage.flatMap { $0 })
-        arraySelectedCell = arraySelectedCell.enumerated().filter { !indexesToRemove.contains($0.offset) }.map { $0.element }
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
     
 
@@ -273,6 +359,20 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         DispatchQueue.main.async { 
             self.progressRing.setProgress(value: value, animationDuration: 0.3)
         }
+    }
+
+    func exportSuccess() {
+        let alertController = UIAlertController(title: nil, message: "Export success", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func sendEmail(emailVC: MFMailComposeViewController) {
+        emailVC.mailComposeDelegate = self
+        present(emailVC, animated: true, completion: nil)
     }
 }
 
@@ -389,5 +489,29 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
             }
         }
     }
+}
+
+extension GalleryPhotoViewController: MFMailComposeViewControllerDelegate {
+    
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .sent:
+            let alertController = UIAlertController(title: nil, message: "Send email success", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            DispatchQueue.main.async {
+                self.present(alertController, animated: true, completion: nil)
+            }
+        break
+            
+        case .cancelled:
+            controller.dismiss(animated: true, completion: nil)
+        break
+            
+        default: break
+            
+        }
+    }
+    
 }
 
