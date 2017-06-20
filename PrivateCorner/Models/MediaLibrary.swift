@@ -48,4 +48,10 @@ class MediaLibrary {
         return documentsDirectory
     }
     
+    static func getSubTypeOfFile(filename: String) -> String {
+        var subtype: String
+        let array = filename.components(separatedBy: ".")
+        subtype = array.last!
+        return subtype
+    }
 }

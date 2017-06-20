@@ -10,7 +10,7 @@ import UIKit
 
 extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    // MARK: UICollectionView DataSource
+    // MARK: - UICollectionView DataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return viewModel.numberOfSection()
     }
@@ -53,12 +53,12 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
         return reusableView
     }
     
-    // MARK: UICollectionView FlowLayout
+    // MARK: - UICollectionView FlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return viewModel.cellSize()
     }
     
-    // MARK: UICollectionView Delegate    
+    // MARK: - UICollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! GalleryCell
 

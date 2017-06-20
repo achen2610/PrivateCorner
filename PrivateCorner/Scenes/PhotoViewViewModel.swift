@@ -29,12 +29,12 @@ open class PhotoViewViewModel {
         
         if item.type == "image" {
             if let photoCell = cell as? PhotoCell {
-                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(item.fileName!)
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(item.fileName!)
                 photoCell.image = MediaLibrary.image(urlPath: urlPath)
             }
         } else {
             if let videoCell = cell as? VideoCell {
-                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(item.fileName!)
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(item.fileName!)
                 videoCell.configureVideo(url: urlPath, isEndTransition: isEndTransition)
             }
         }
@@ -72,7 +72,7 @@ open class PhotoViewViewModel {
         
         // Delete file of item in documents
         if let filename = item.fileName {
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
             do {
                 if fileManager.fileExists(atPath: path.path) {
                     try fileManager.removeItem(at: path)
@@ -88,7 +88,7 @@ open class PhotoViewViewModel {
         }
         
         if let thumbname = item.thumbName {
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
             do {
                 if fileManager.fileExists(atPath: path.path) {
                     try fileManager.removeItem(at: path)

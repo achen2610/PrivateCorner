@@ -667,10 +667,10 @@
             </objects>
             <point key="canvasLocation" x="114.375" y="121.47887323943662"/>
         </scene>
-        <!--Add File View Controller-->
+        <!--Move File View Controller-->
         <scene sceneID="fb2-ze-owh">
             <objects>
-                <viewController id="L4H-kO-aq6" customClass="AddFileViewController" customModule="PrivateCorner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="L4H-kO-aq6" customClass="MoveFileViewController" customModule="PrivateCorner" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rks-mm-0lu"/>
                         <viewControllerLayoutGuide type="bottom" id="rvD-NF-Eti"/>
@@ -721,7 +721,7 @@
         <!--Navigation Controller-->
         <scene sceneID="qnW-h8-b5a">
             <objects>
-                <navigationController storyboardIdentifier="AddFile" automaticallyAdjustsScrollViewInsets="NO" id="cKb-sK-3Id" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MoveFile" automaticallyAdjustsScrollViewInsets="NO" id="cKb-sK-3Id" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yW2-9C-bRx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

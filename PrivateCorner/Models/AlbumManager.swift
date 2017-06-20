@@ -45,18 +45,32 @@ class AlbumManager {
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         
         //2
-        let entity = NSEntityDescription.entity(forEntityName: "Album", in: managedContext)!
-        
-        //3
-        let album = Album(entity: entity, insertInto: managedContext)
+        let album = NSEntityDescription.insertNewObject(forEntityName: "Album", into: managedContext) as! Album
         album.name = title
         album.createdDate = Date() as NSDate?
+        album.currentIndex = 0
         
-        // 4
+        //3
         do {
             try managedContext.save()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+        //4
+        let fileManager = FileManager.default
+        var isDir : ObjCBool = false
+        let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(title)
+        if !fileManager.fileExists(atPath: urlPath.path, isDirectory: &isDir) {
+            do {
+                try fileManager.createDirectory(at: urlPath, withIntermediateDirectories: false, attributes: nil)
+            }
+            catch let error as NSError {
+                print("====================")
+                print("Create folder error")
+                print(error.debugDescription)
+            }
+            
         }
         
         return album
@@ -67,55 +81,69 @@ class AlbumManager {
     }
     
     func deleteAlbum(album: Album) {
-
+        //1
+        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        let fileManager = FileManager.default
+        
+        //2
         let items = ItemManager.sharedInstance.getItems(album: album)
         for item in items {
-            let fileManager = FileManager.default
-            if let filename = item.fileName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
-                if fileManager.fileExists(atPath: path.path) {
-                    print("===========")
-                    print("File Exists")
-                    print("Delete file")
-                    do {
-                        try fileManager.removeItem(atPath: path.path)
-                    } catch let error as NSError {
-                        print("===========")
-                        print("Delete error")
-                        print(error.debugDescription)
-                    }
-                }
-            }
             
-            if let thumbname = item.thumbName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
-                if fileManager.fileExists(atPath: path.path) {
-                    print("===========")
-                    print("Thumbnail Exists")
-                    print("Delete thumbnail")
-                    do {
-                        try fileManager.removeItem(atPath: path.path)
-                    } catch let error as NSError {
-                        print("===========")
-                        print("Delete error")
-                        print(error.debugDescription)
-                    }
-                }
+//            if let filename = item.fileName {
+//                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
+//                if fileManager.fileExists(atPath: path.path) {
+//                    print("===========")
+//                    print("File Exists")
+//                    print("Delete file")
+//                    do {
+//                        try fileManager.removeItem(atPath: path.path)
+//                    } catch let error as NSError {
+//                        print("===========")
+//                        print("Delete error")
+//                        print(error.debugDescription)
+//                    }
+//                }
+//            }
+//            
+//            if let thumbname = item.thumbName {
+//                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
+//                if fileManager.fileExists(atPath: path.path) {
+//                    print("===========")
+//                    print("Thumbnail Exists")
+//                    print("Delete thumbnail")
+//                    do {
+//                        try fileManager.removeItem(atPath: path.path)
+//                    } catch let error as NSError {
+//                        print("===========")
+//                        print("Delete error")
+//                        print(error.debugDescription)
+//                    }
+//                }
+//            }
+            managedContext.delete(item)
+        }
+
+        //3
+        let albumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!)
+        if fileManager.fileExists(atPath: albumPath.path) {
+            do {
+                try fileManager.removeItem(at: albumPath)
+            } catch let error as NSError {
+                print("============")
+                print("Remove album error")
+                print(error.debugDescription)
             }
         }
         
-        //1
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
-        
-        //2
+        //4
         managedContext.delete(album)
         
-        //3
+        //5
         do {
             try managedContext.save()
-            print("saved!")
+            print("Saved!✅")
         } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
+            print("Could not save \(error), \(error.userInfo)⛔️")
         }
     }
 }

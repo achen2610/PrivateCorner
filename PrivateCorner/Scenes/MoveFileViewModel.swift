@@ -9,19 +9,19 @@
 import Foundation
 import UIKit
 
-public protocol AddFileViewModelDelegate: class {
+public protocol MoveFileViewModelDelegate: class {
     func moveFileToAlbum(onSuccess: Bool)
 }
 
-open class AddFileViewModel {
+open class MoveFileViewModel {
     
     fileprivate var albums: [Album] = []
     fileprivate var selectedItems: [Item] = []
     fileprivate var currentAlbum: Album
-    weak var delegate: AddFileViewModelDelegate?
+    weak var delegate: MoveFileViewModelDelegate?
     
     struct cellIdentifiers {
-        static let addFileCell = "AddFileCell"
+        static let moveFileCell = "MoveFileCell"
     }
     
     struct cellLayout {
@@ -48,14 +48,14 @@ open class AddFileViewModel {
     }
     
     func cellIdentifier() -> String {
-        return cellIdentifiers.addFileCell
+        return cellIdentifiers.moveFileCell
     }
     
     func numberOfItemInSection(section: Int) -> Int {
         return albums.count
     }
     
-    func fillUI(cell: AddFileCell, atIndex index: Int) {
+    func fillUI(cell: MoveFileCell, atIndex index: Int) {
         let album = albums[index]
         cell.albumName.text = album.name
 
@@ -64,7 +64,7 @@ open class AddFileViewModel {
             let lastItem = array.last
             
             if let thumbname = lastItem?.thumbName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
                 cell.photoImageView.image = MediaLibrary.image(urlPath: path)
             }
             

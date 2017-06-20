@@ -8,9 +8,9 @@
 
 import UIKit
 
-class AddFileViewController: UIViewController, AddFileViewModelDelegate {
+class MoveFileViewController: UIViewController, MoveFileViewModelDelegate {
 
-    var viewModel: AddFileViewModel!
+    var viewModel: MoveFileViewModel!
 
     @IBOutlet weak var albumsCollectionView: UICollectionView!
     
@@ -41,7 +41,7 @@ class AddFileViewController: UIViewController, AddFileViewModelDelegate {
     // MARK: Event handling
     
     func configureCollectionViewOnLoad() {
-        let nibName = UINib(nibName: "AddFileCell", bundle:Bundle.main)
+        let nibName = UINib(nibName: "MoveFileCell", bundle:Bundle.main)
         albumsCollectionView.register(nibName, forCellWithReuseIdentifier: viewModel.cellIdentifier())
         albumsCollectionView.alwaysBounceVertical = true
     }

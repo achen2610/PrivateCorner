@@ -31,14 +31,14 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     @IBOutlet weak var deleteButton: UIBarButtonItem!
     @IBOutlet weak var bottomConstraintCollectionView: NSLayoutConstraint!
     
-    // MARK: Object lifecycle
+    // MARK: - Object lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
 
     }
     
-    // MARK: View lifecycle
+    // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         navigationController?.isHeroEnabled = false
     }
     
-    // MARK: Event handling
+    // MARK: - Event handling
     func styleUI() {
         title = viewModel.titleAlbum
 
@@ -153,13 +153,55 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         present(alertController, animated: true, completion: nil)
     }
     
-    // MARK: Selector Event
-    @IBAction func clickUploadButton(_ sender: Any) {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-            gallery = GalleryController()
-            gallery.delegate = self
-            present(gallery, animated: true, completion: nil)
+    func copyImages() {
+        var indexSelectedImage = [Int]()
+        var index = 0
+        for check in self.arraySelectedCell {
+            if check {
+                indexSelectedImage.append(index)
+            }
+            index += 1
         }
+        
+        if indexSelectedImage.count <= 0 {
+            return
+        }
+        
+        viewModel.exportFile(indexes: indexSelectedImage, type: .Copy)
+    }
+    
+    // MARK: - Selector Event
+    @IBAction func clickUploadButton(_ sender: Any) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+                self.gallery = GalleryController()
+                self.gallery.delegate = self
+                self.present(self.gallery, animated: true, completion: nil)
+            }
+        }
+        let pasteAction = UIAlertAction(title: "Paste", style: .default) { (action) in
+            let dict = UIPasteboard.general.items
+            var pasteItems = [Item]()
+            
+            if dict.count > 0 {
+                for info in dict  {
+                    for (_, value) in info {
+                        pasteItems.append(value as! Item)
+                    }
+                }
+                if pasteItems.count > 0 {
+                    self.viewModel.pasteItemToAlbum(pasteItems: pasteItems)
+                }
+            } else {
+                
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(photoLibraryAction)
+        alertController.addAction(pasteAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func clickEditMode(_ sender: Any) {
@@ -247,7 +289,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             }
         }
         let copyAction = UIAlertAction(title: "Copy", style: .default) { (alertAction) in
-            
+            self.copyImages()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cameraAction)
@@ -272,9 +314,9 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         }
 
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let navi  = mainStoryboard.instantiateViewController(withIdentifier: "AddFile") as! UINavigationController
-        if let controller = navi.visibleViewController as? AddFileViewController {
-            let vm = viewModel.addFileModel(indexes: indexSelectedImage)
+        let navi  = mainStoryboard.instantiateViewController(withIdentifier: "MoveFile") as! UINavigationController
+        if let controller = navi.visibleViewController as? MoveFileViewController {
+            let vm = viewModel.moveFileModel(indexes: indexSelectedImage)
             controller.viewModel = vm
         }
 
@@ -312,7 +354,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     }
     
 
-    // GalleryPhotoViewModelDelegate
+    // MARK: - GalleryPhotoViewModelDelegate
     func reloadGallery() {
         arraySelectedCell.removeAll()
         if viewModel.numberOfItemInSection(section: 0) > 0 {
@@ -503,13 +545,17 @@ extension GalleryPhotoViewController: MFMailComposeViewControllerDelegate {
                 self.present(alertController, animated: true, completion: nil)
             }
         break
-            
-        case .cancelled:
+        case .cancelled, .saved:
             controller.dismiss(animated: true, completion: nil)
         break
-            
-        default: break
-            
+        case .failed:
+            let alertController = UIAlertController(title: nil, message: "Send email failed. Please try again!", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            DispatchQueue.main.async {
+                self.present(alertController, animated: true, completion: nil)
+            }
+        break
         }
     }
     

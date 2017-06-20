@@ -41,10 +41,7 @@ class ItemManager {
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         
         //2
-        let entity = NSEntityDescription.entity(forEntityName: "Item", in: managedContext)!
-        
-        //3
-        let item = Item(entity: entity, insertInto: managedContext)
+        let item = NSEntityDescription.insertNewObject(forEntityName: "Item", into: managedContext) as! Item
         item.fileName = info["filename"] as? String
         item.thumbName = info["thumbname"] as? String
         item.uploadDate = Date() as NSDate?
@@ -60,7 +57,7 @@ class ItemManager {
             break;
         }
 
-        //4
+        //3
         let itemsInAlbum = album.mutableSetValue(forKey: "items")
         if itemsInAlbum.count > 0 {
             itemsInAlbum.add(item)
@@ -83,21 +80,51 @@ class ItemManager {
         }
         
         //4
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+        saveContext()
     }
     
     func moveItem(items: [Item], fromAlbum: Album, toAlbum: Album) {
-        //1
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
-        
-        //2 Update uploadDate when move file
+        //1 Update uploadDate when move file
+        let fileManager = FileManager.default
+        let currentIndex = toAlbum.currentIndex
         for item in items {
             item.uploadDate = Date() as NSDate?
+            let index = items.index(of: item)
+            let subtype = MediaLibrary.getSubTypeOfFile(filename: item.fileName!)
+            let type: String = item.type!.uppercased()
+            
+            //large image
+            let filePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.name!).appendingPathComponent(item.fileName!)
+            if fileManager.fileExists(atPath: filePath.path) {
+                let filename = String.init(format: "%@_%i", type, currentIndex + Int32(index!)) + "." + subtype
+                item.fileName = filename
+                let newPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(toAlbum.name!).appendingPathComponent(filename)
+                do {
+                    try fileManager.moveItem(at: filePath, to: newPath)
+                } catch let error as NSError {
+                    print("================")
+                    print("Move \(item.fileName!) error")
+                    print(error.debugDescription)
+                }
+                
+            }
+            
+            //thumb image
+            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.name!).appendingPathComponent(item.thumbName!)
+            if fileManager.fileExists(atPath: thumbPath.path) {
+                let filename = "thumbnail" + "_" + String.init(format: "%@_%i", type, currentIndex + Int32(index!)) + "." + subtype
+                item.thumbName = filename
+                let newPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(toAlbum.name!).appendingPathComponent(filename)
+                do {
+                    try fileManager.moveItem(at: thumbPath, to: newPath)
+                } catch let error as NSError {
+                    print("================")
+                    print("Move \(item.fileName!) error")
+                    print(error.debugDescription)
+                }
+            }
         }
+        toAlbum.currentIndex = currentIndex + Int32(items.count)
         
         //2
         let itemsInFromAlbum = fromAlbum.mutableSetValue(forKey: "items")
@@ -116,10 +143,6 @@ class ItemManager {
         }
         
         //4
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+        saveContext()
     }
 }

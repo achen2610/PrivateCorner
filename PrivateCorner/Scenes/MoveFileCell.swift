@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class AddFileCell: UICollectionViewCell {
+class MoveFileCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var albumName: UITextField!
@@ -34,9 +34,7 @@ class AddFileCell: UICollectionViewCell {
         let lastImage = array.first
         
         if let filename = lastImage?.fileName {
-            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            let documentsDirectory = paths[0]
-            let path = documentsDirectory.appendingPathComponent(filename)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
             
             photoImageView.sd_setImage(with: path, placeholderImage: UIImage(), options: [], completed: { (image, error, cacheType, imageURL) in
                 

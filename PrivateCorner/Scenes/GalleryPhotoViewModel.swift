@@ -63,62 +63,11 @@ open class GalleryPhotoViewModel {
         return PhotoViewViewModel(items: items, inAlbum: album)
     }
     
-    func addFileModel(indexes: [Int]) -> AddFileViewModel {
+    func moveFileModel(indexes: [Int]) -> MoveFileViewModel {
         let indexesToMove = Set(indexes.flatMap { $0 })
         let moveItems = items.enumerated().filter { indexesToMove.contains($0.offset) }.map { $0.element }
         
-        return AddFileViewModel(items: moveItems, album: album)
-    }
-    
-    func exportFile(indexes: [Int], type: Key.ExportType) {
-        let indexesToExport = Set(indexes.flatMap { $0 })
-        let exportItems = items.enumerated().filter { indexesToExport.contains($0.offset) }.map { $0.element }
-        
-        switch type {
-        case .PhotoLibrary:
-            for item in exportItems {
-                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(item.fileName!)
-                PHPhotoLibrary.shared().performChanges({ 
-                    PHAssetChangeRequest.creationRequestForAsset(from: MediaLibrary.image(urlPath: urlPath))
-                }, completionHandler: { (success, error) in
-                    if success {
-                        // Saved successfully!
-                        if item == exportItems.last {
-                            self.delegate?.exportSuccess()
-                        }
-                        print("Export \(item.fileName!) success")
-                    }
-                    else if error != nil {
-                        // Save photo failed with error
-                        
-                        print("Export \(item.fileName!) error: \(error!)")
-                    }
-                    else {
-                        // Save photo failed with no error
-                    }
-                })
-            }
-            break
-        case .Email:
-            let composeVC = MFMailComposeViewController()
-            for item in exportItems {
-                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(item.fileName!)
-                let ext = item.fileName!.components(separatedBy: ".").last?.lowercased()
-                do {
-                    let fileData = try Data(contentsOf: urlPath)
-                    composeVC.addAttachmentData(fileData, mimeType: String.init(format: "image/%@", ext!), fileName: item.fileName!)
-                }
-                catch {
-                    print("\(error.localizedDescription)")
-                }
-            }
-            delegate?.sendEmail(emailVC: composeVC)
-            
-            break
-        case .Copy:
-            
-            break
-        }
+        return MoveFileViewModel(items: moveItems, album: album)
     }
     
     func cellSize() -> CGSize {
@@ -142,7 +91,7 @@ open class GalleryPhotoViewModel {
             
             cell.styleUI()
             let item = items[indexPath.row]
-            cell.setupData(item: item)
+            cell.setupData(item: item, albumName: album.name!)
             
             cell.photoImageView.heroID = "image_\(indexPath.row)"
             cell.photoImageView.heroModifiers = [.fade, .scale(0.8)]
@@ -165,22 +114,26 @@ open class GalleryPhotoViewModel {
     func uploadImageToCoreData(images: [UIImage], assets: [PHAsset], collectionView: UICollectionView) {
         
         let filenames = fetchImages(assets)
+        
         let group = DispatchGroup()
         let percent: CGFloat = 100 / CGFloat(images.count * 2)
         var currentPercent: CGFloat = 0
         let fileManager = FileManager.default
+        let currentIndex = Int(album.currentIndex)
 
         for image in images {
-            let index = images.index(of: image)
-            let filename = filenames[index!]
-            let thumbname = "thumbnail" + filename
+            let index = images.index(of: image) 
+            let name = filenames[index!]
+            let subtype = MediaLibrary.getSubTypeOfFile(filename: name)
+            let filename = String.init(format: "IMAGE_%i", currentIndex + index!) + "." + subtype
+            let thumbname = "thumbnail" + "_" + filename
             
             // Add image to DB
             let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
             ItemManager.sharedInstance.add(media: image, info: info, toAlbum: album)
             
             // Save original image
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
             if fileManager.fileExists(atPath: path.path) {
                 print("===============")
                 print("Image \(filename) exists")
@@ -197,7 +150,7 @@ open class GalleryPhotoViewModel {
             }
             
             // Save thumbnail image
-            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
+            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
             let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: image)
             if fileManager.fileExists(atPath: thumbnailPath.path) {
                 print("===============")
@@ -216,6 +169,7 @@ open class GalleryPhotoViewModel {
         }
         
         group.notify(queue: DispatchQueue.main) {
+            self.album.currentIndex = Int32(currentIndex + images.count)
             ItemManager.sharedInstance.saveContext()
             
             let oldItems = self.items
@@ -233,22 +187,25 @@ open class GalleryPhotoViewModel {
         
         if let avassetURL = avasset as? AVURLAsset {
             let videoUrl = avassetURL.url
-            let filename = avassetURL.url.lastPathComponent
-            let name = filename.components(separatedBy: ".").first
-            let thumbname = "thumbnail_" + name! + ".JPG"
+            let name = avassetURL.url.lastPathComponent
+            let currentIndex = album.currentIndex
+            let subtype = MediaLibrary.getSubTypeOfFile(filename: name)
+            let filename = String.init(format: "VIDEO_%i", currentIndex) + "." + subtype
+            let thumbname = "thumbnail_" + String.init(format: "VIDEO_%i", currentIndex) + ".JPG"
             
             // Add video to database
             let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.VideoType]
             ItemManager.sharedInstance.add(media: video, info: info, toAlbum: album)
         
             // Save original video & thumbnail
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
-            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
+            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
             
             UploadManager.sharedInstance.uploadVideo(video: video, videoPath: videoUrl, destinationPath: path, thumbPath: thumbPath, delegate: delegate, completion: { (status) in
                 if status {
                     
                     DispatchQueue.main.async {
+                        self.album.currentIndex = currentIndex + 1
                         ItemManager.sharedInstance.saveContext()
                         
                         let oldItems = self.items
@@ -271,12 +228,9 @@ open class GalleryPhotoViewModel {
         for index in indexes {
             let item = items[index]
             
-            // Delete item from database
-            ItemManager.sharedInstance.deleteItem(item: item, atAlbum: album)
-            
             // Delete file of item in documents
             if let filename = item.fileName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
                 do {
                     if fileManager.fileExists(atPath: path.path) {
                         try fileManager.removeItem(at: path)
@@ -292,7 +246,7 @@ open class GalleryPhotoViewModel {
             }
             
             if let thumbname = item.thumbName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
                 do {
                     if fileManager.fileExists(atPath: path.path) {
                         try fileManager.removeItem(at: path)
@@ -306,6 +260,9 @@ open class GalleryPhotoViewModel {
                     print("Error remove item \(thumbname), \(error)")
                 }
             }
+            
+            // Delete item from database
+            ItemManager.sharedInstance.deleteItem(item: item, atAlbum: album)
         }
         
         let indexesToRemove = Set(indexes.flatMap { $0 })
@@ -315,6 +272,66 @@ open class GalleryPhotoViewModel {
         items = newItems
         collectionView.animateItemChanges(oldData: oldItems, newData: newItems)
         updateSupplementaryElement(collectionView: collectionView)
+    }
+    
+    func exportFile(indexes: [Int], type: Key.ExportType) {
+        let indexesToExport = Set(indexes.flatMap { $0 })
+        let exportItems = items.enumerated().filter { indexesToExport.contains($0.offset) }.map { $0.element }
+        
+        switch type {
+        case .PhotoLibrary:
+            for item in exportItems {
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(item.fileName!)
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAsset(from: MediaLibrary.image(urlPath: urlPath))
+                }, completionHandler: { (success, error) in
+                    if success {
+                        // Saved successfully!
+                        if item == exportItems.last {
+                            self.delegate?.exportSuccess()
+                        }
+                        print("Export \(item.fileName!) success")
+                    }
+                    else if error != nil {
+                        // Save photo failed with error
+                        
+                        print("Export \(item.fileName!) error: \(error!)")
+                    }
+                    else {
+                        // Save photo failed with no error
+                    }
+                })
+            }
+            break
+        case .Email:
+            let composeVC = MFMailComposeViewController()
+            for item in exportItems {
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(item.fileName!)
+                let ext = item.fileName!.components(separatedBy: ".").last?.lowercased()
+                do {
+                    let fileData = try Data(contentsOf: urlPath)
+                    composeVC.addAttachmentData(fileData, mimeType: String.init(format: "image/%@", ext!), fileName: item.fileName!)
+                }
+                catch {
+                    print("\(error.localizedDescription)")
+                }
+            }
+            delegate?.sendEmail(emailVC: composeVC)
+            
+            break
+        case .Copy:
+            var temp = [[String: Any]]()
+            for item in exportItems {
+                temp.append([String(describing: exportItems.index(of: item)): item])
+            }
+            UIPasteboard.general.items = temp
+            
+            break
+        }
+    }
+    
+    func pasteItemToAlbum(pasteItems: [Item]) {
+        
     }
     
     func getCountPhotosAndVideos() -> String {
@@ -331,7 +348,7 @@ open class GalleryPhotoViewModel {
         return string
     }
 
-    // MARK: Private Method
+    // MARK: - Private Method
     private func updateSupplementaryElement(collectionView: UICollectionView) {
         if let footerView = collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(row: 0, section: 0)) as? GalleryCollectionFooterView {
             if numberOfItemInSection(section: 0) > 0 {
