@@ -12,6 +12,7 @@ import UIKit
 import Photos
 import MessageUI
 import DynamicColor
+import CoreData
 
 class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegate {
 
@@ -181,21 +182,24 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             }
         }
         let pasteAction = UIAlertAction(title: "Paste", style: .default) { (action) in
-            let dict = UIPasteboard.general.items
-            var pasteItems = [Item]()
-            
-            if dict.count > 0 {
-                for info in dict  {
-                    for (_, value) in info {
-                        pasteItems.append(value as! Item)
+            if let data = UserDefaults.standard.value(forKey: "ItemCopy") as? Data {
+                if let info = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any] {
+                    let fromAlbum = AlbumManager.sharedInstance.getAlbum(url: info["album"] as! URL)
+                    let pasteItems = ItemManager.sharedInstance.getItems(urls: info["items"] as! [URL])
+                    
+                    if let fromAlbum = fromAlbum, pasteItems.count > 0 {
+                        self.containerView.isHidden = false
+                        self.progressRing.alpha = 1.0
+                        
+                        self.viewModel.pasteItemToAlbum(pasteItems: pasteItems, fromAlbum: fromAlbum, collectionView: self.galleryCollectionView)
+                        
+                        return
                     }
                 }
-                if pasteItems.count > 0 {
-                    self.viewModel.pasteItemToAlbum(pasteItems: pasteItems)
-                }
-            } else {
-                
             }
+
+            let controller = GlobalMethods.alertController(title: nil, message: "No images copy!", cancelTitle: "Ok")
+            self.present(controller, animated: true, completion: nil)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(photoLibraryAction)

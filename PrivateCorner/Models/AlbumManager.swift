@@ -34,8 +34,17 @@ class AlbumManager {
         return array
     }
     
-    func getAlbum(id: NSInteger) -> Album {
-        let album = Album()
+    func getAlbum(url: URL) -> Album? {
+        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        var album: Album?
+        if let oid = CoreDataManager.sharedInstance.managedObjectId(url: url) {
+            do {
+                try album = managedContext.existingObject(with: oid) as? Album
+            } catch let error as NSError {
+                print("==============")
+                print("Get album error \(error.debugDescription)")
+            }
+        }
         
         return album
     }
@@ -51,11 +60,7 @@ class AlbumManager {
         album.currentIndex = 0
         
         //3
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
+        CoreDataManager.sharedInstance.saveContext()
         
         //4
         let fileManager = FileManager.default
@@ -139,11 +144,6 @@ class AlbumManager {
         managedContext.delete(album)
         
         //5
-        do {
-            try managedContext.save()
-            print("Saved!✅")
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)⛔️")
-        }
+       CoreDataManager.sharedInstance.saveContext()
     }
 }

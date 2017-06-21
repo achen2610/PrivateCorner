@@ -130,7 +130,7 @@ open class GalleryPhotoViewModel {
             
             // Add image to DB
             let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
-            ItemManager.sharedInstance.add(media: image, info: info, toAlbum: album)
+            ItemManager.sharedInstance.add(info: info, toAlbum: album)
             
             // Save original image
             let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
@@ -170,7 +170,7 @@ open class GalleryPhotoViewModel {
         
         group.notify(queue: DispatchQueue.main) {
             self.album.currentIndex = Int32(currentIndex + images.count)
-            ItemManager.sharedInstance.saveContext()
+            CoreDataManager.sharedInstance.saveContext()
             
             let oldItems = self.items
             self.items = ItemManager.sharedInstance.getItems(album: self.album)
@@ -194,8 +194,11 @@ open class GalleryPhotoViewModel {
             let thumbname = "thumbnail_" + String.init(format: "VIDEO_%i", currentIndex) + ".JPG"
             
             // Add video to database
-            let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.VideoType]
-            ItemManager.sharedInstance.add(media: video, info: info, toAlbum: album)
+            let info: [String: Any] = ["filename": filename,
+                                       "thumbname": thumbname,
+                                       "type": Key.ItemType.VideoType,
+                                       "duration": video.duration]
+            ItemManager.sharedInstance.add(info: info, toAlbum: album)
         
             // Save original video & thumbnail
             let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
@@ -206,7 +209,7 @@ open class GalleryPhotoViewModel {
                     
                     DispatchQueue.main.async {
                         self.album.currentIndex = currentIndex + 1
-                        ItemManager.sharedInstance.saveContext()
+                        CoreDataManager.sharedInstance.saveContext()
                         
                         let oldItems = self.items
                         self.items = ItemManager.sharedInstance.getItems(album: self.album)
@@ -320,18 +323,87 @@ open class GalleryPhotoViewModel {
             
             break
         case .Copy:
-            var temp = [[String: Any]]()
-            for item in exportItems {
-                temp.append([String(describing: exportItems.index(of: item)): item])
-            }
-            UIPasteboard.general.items = temp
+            let info: [String: Any] = ["album": album.objectID.uriRepresentation(),
+                                       "items": exportItems.map({ $0.objectID.uriRepresentation() })]
+            let data = NSKeyedArchiver.archivedData(withRootObject: info)
+            UserDefaults.standard.set(data, forKey: "ItemCopy")
+            UserDefaults.standard.synchronize()
             
             break
         }
     }
     
-    func pasteItemToAlbum(pasteItems: [Item]) {
+    func pasteItemToAlbum(pasteItems: [Item], fromAlbum: Album, collectionView: UICollectionView) {
+        let currentIndex = album.currentIndex
+        let fileManager = FileManager.default
+        let percent: CGFloat = 100 / CGFloat(pasteItems.count * 2)
+        var currentPercent: CGFloat = 0
         
+        for item in pasteItems {
+            let index = pasteItems.index(of: item)
+            let name = item.fileName!
+            let type = item.type!.uppercased()
+            let subtype = MediaLibrary.getSubTypeOfFile(filename: name)
+            let filename = String.init(format: "%@_%i", type, currentIndex + Int32(index!)) + "." + subtype
+            var thumbname = "thumbnail" + "_" + filename
+            if type == "video" {
+                thumbname = "thumbnail" + "_" + String.init(format: "%@_%i", type, currentIndex + Int32(index!)) + "." + "JPG"
+            }
+            
+            // Add image to DB
+            var info: [String: Any] = ["filename": filename,
+                                       "thumbname": thumbname,
+                                       "type": Key.ItemType.ImageType]
+            if type == "video" {
+                info = ["filename": filename,
+                        "thumbname": thumbname,
+                        "type": Key.ItemType.VideoType,
+                        "duration": item.duration]
+            }
+            ItemManager.sharedInstance.add(info: info, toAlbum: album)
+            
+            // Copy image to folder album
+            let imagePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.name!).appendingPathComponent(item.fileName!)
+            let newImagePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
+            if fileManager.fileExists(atPath: imagePath.path) {
+                do {
+                    try fileManager.copyItem(at: imagePath, to: newImagePath)
+                } catch let error as NSError {
+                    print("=============")
+                    print("Copy \(item.fileName!) to \(album.name!) error : \(error.debugDescription)")
+                }
+                currentPercent += percent
+                delegate?.updateProgressRing(value: currentPercent)
+            }
+            
+            // Copy thumbnail to folder album
+            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.name!).appendingPathComponent(item.thumbName!)
+            let newThumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
+            if fileManager.fileExists(atPath: thumbPath.path) {
+                do {
+                    try fileManager.copyItem(at: thumbPath, to: newThumbPath)
+                } catch let error as NSError {
+                    print("=============")
+                    print("Copy \(item.thumbName!) to \(album.name!) error : \(error.debugDescription)")
+                }
+                currentPercent += percent
+                delegate?.updateProgressRing(value: currentPercent)
+            }
+        }
+        
+        //Copy Item success
+        album.currentIndex = currentIndex + Int32(pasteItems.count)
+        CoreDataManager.sharedInstance.saveContext()
+        
+        let oldItems = self.items
+        items = ItemManager.sharedInstance.getItems(album: album)
+        delegate?.reloadGallery()
+        collectionView.animateItemChanges(oldData: oldItems, newData: items)
+        updateSupplementaryElement(collectionView: collectionView)
+        
+        print("===============")
+        print("Copy success")
+
     }
     
     func getCountPhotosAndVideos() -> String {

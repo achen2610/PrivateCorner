@@ -31,6 +31,7 @@
 		006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006486EF1E70EFEB00419C27 /* LaunchScreen.storyboard */; };
 		006486F41E70EFEB00419C27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006486F11E70EFEB00419C27 /* Main.storyboard */; };
 		0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0073A18A1E71162100490675 /* data-security-tips.jpg */; };
+		0075E44A1EFA25A600E18B64 /* GlobalMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075E4491EFA25A600E18B64 /* GlobalMethods.swift */; };
 		0075F1991E7A3169001DA471 /* AlbumsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F1981E7A3169001DA471 /* AlbumsCollectionViewController.swift */; };
 		0075F19C1E7A3698001DA471 /* AlbumsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0075F19B1E7A3698001DA471 /* AlbumsCell.xib */; };
 		0075F19E1E7A36B7001DA471 /* AlbumsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075F19D1E7A36B7001DA471 /* AlbumsCell.swift */; };
@@ -219,6 +220,7 @@
 		006486F01E70EFEB00419C27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		006486F21E70EFEB00419C27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0073A18A1E71162100490675 /* data-security-tips.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "data-security-tips.jpg"; sourceTree = "<group>"; };
+		0075E4491EFA25A600E18B64 /* GlobalMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalMethods.swift; sourceTree = "<group>"; };
 		0075F1981E7A3169001DA471 /* AlbumsCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AlbumsCollectionViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0075F19B1E7A3698001DA471 /* AlbumsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlbumsCell.xib; sourceTree = "<group>"; };
 		0075F19D1E7A36B7001DA471 /* AlbumsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AlbumsCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -556,6 +558,7 @@
 				0094F6D81E8E6331007BEFAE /* ItemManager.swift */,
 				0077770C1EDBC90F00233D0B /* MediaLibrary.swift */,
 				0035DEFE1EF0DC59004581FF /* UploadManager.swift */,
+				0075E4491EFA25A600E18B64 /* GlobalMethods.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1353,6 +1356,7 @@
 				00DDF99A1ED436E800093770 /* CAMediaTimingFunction+Hero.swift in Sources */,
 				00DDF99D1ED436E800093770 /* UIKit+Hero.swift in Sources */,
 				00DDF9AF1ED436E800093770 /* BasePreprocessor.swift in Sources */,
+				0075E44A1EFA25A600E18B64 /* GlobalMethods.swift in Sources */,
 				00DDF9941ED436E800093770 /* HeroViewPropertyViewContext.swift in Sources */,
 				00DDF9A01ED436E800093770 /* Hero.swift in Sources */,
 				007E5ADF1EE53DAA00FDC2EB /* UICircularProgressRingLayer.swift in Sources */,
