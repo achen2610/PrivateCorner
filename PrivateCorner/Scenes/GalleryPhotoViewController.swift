@@ -13,6 +13,7 @@ import Photos
 import MessageUI
 import DynamicColor
 import CoreData
+import CDAlertView
 
 class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegate {
 
@@ -20,7 +21,9 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     var viewModel: GalleryPhotoViewModel!
     var containerView: UIView!
     var progressRing: UICircularProgressRingView!
+    var alert: CDAlertView!
     var isEditMode: Bool = false
+    var isUploading: Bool = false
     var arraySelectedCell: [Bool] = []
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
@@ -66,15 +69,11 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         toolBar.frame = rect
         toolBar.barTintColor = navigationController?.navigationBar.barTintColor
         
-        containerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
-        containerView.backgroundColor = UIColor(white: 0.0, alpha: 0.4)
-        containerView.isHidden = true
+        containerView = UIView()
+        containerView.backgroundColor = UIColor.clear
+        containerView.heightAnchor.constraint(equalToConstant: 153.0).isActive = true
         
-        let window = UIApplication.shared.keyWindow
-        window?.addSubview(containerView)
-        
-        progressRing = UICircularProgressRingView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
-        progressRing.center = containerView.center
+        progressRing = UICircularProgressRingView(frame: CGRect(x: 35, y: 0, width: 153, height: 153))
         // Change any of the properties you'd like
         let blue = UIColor(hexString: "#3498db")
         progressRing.outerRingColor = blue
@@ -107,6 +106,13 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             }
         }
         updateStateEditButton()
+        
+        alert = CDAlertView(title: nil, message: "Move file success!", type: .success)
+        alert.show()
+        
+        delay(1.0) {
+            self.alert.hide(isPopupAnimated: true)
+        }
     }
     
     func scrollToBottom(animated: Bool) {
@@ -131,8 +137,8 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     }
     
     func alertExport() {
-        let alertController = UIAlertController(title: nil, message: "Do you want to export images to Photo Library?", preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "Export", style: .default, handler: { (action) in
+        alert = CDAlertView(title: nil, message: "Do you want to export images to Photo Library?", type: .warning)
+        let alertAction = CDAlertViewAction(title: "Export", font: nil, textColor: nil, backgroundColor: nil) { (action) in
             var indexSelectedImage = [Int]()
             var index = 0
             for check in self.arraySelectedCell {
@@ -147,11 +153,11 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             }
             
             self.viewModel.exportFile(indexes: indexSelectedImage, type: .PhotoLibrary)
-        })
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(alertAction)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true, completion: nil)
+        }
+        alert.add(action: alertAction)
+        let cancelAction = CDAlertViewAction(title: "Cancel")
+        alert.add(action: cancelAction)
+        alert.show()
     }
     
     func copyImages() {
@@ -188,8 +194,9 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
                     let pasteItems = ItemManager.sharedInstance.getItems(urls: info["items"] as! [URL])
                     
                     if let fromAlbum = fromAlbum, pasteItems.count > 0 {
-                        self.containerView.isHidden = false
-                        self.progressRing.alpha = 1.0
+                        self.alert = CDAlertView(title: nil, message: "Paste images processing!", type: .warning)
+                        self.alert.customView = self.containerView
+                        self.alert.show()
                         
                         self.viewModel.pasteItemToAlbum(pasteItems: pasteItems, fromAlbum: fromAlbum, collectionView: self.galleryCollectionView)
                         
@@ -367,26 +374,27 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             }
         }
         
-        if containerView.isHidden {
+        if isUploading {
+            self.alert.hide(isPopupAnimated: false)
+            self.alert = CDAlertView(title: nil, message: "Upload success!", type: .success)
+            self.alert.show()
+            self.progressRing.setProgress(value: 0, animationDuration: 0)
+            isUploading = false
+            
+            delay(1.2, execute: {
+                self.alert.hide(isPopupAnimated: true)
+            })
+            
+            DispatchQueue.main.async(execute: {
+                self.scrollToBottom(animated: true)
+            })
+        } else {
             galleryCollectionView.reloadData()
             galleryCollectionView.performBatchUpdates({ }, completion: { (finished) in
                 if finished {
                     self.scrollToBottom(animated: false)
                 }
             })
-        } else {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.progressRing.alpha = 0.0
-            }) { (finished) in
-                if finished {
-                    self.containerView.isHidden = true
-                    self.progressRing.setProgress(value: 0, animationDuration: 0)
-                    
-                    DispatchQueue.main.async(execute: {
-                        self.scrollToBottom(animated: true)
-                    })
-                }
-            }
         }
     }
     
@@ -408,17 +416,58 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     }
 
     func exportSuccess() {
-        let alertController = UIAlertController(title: nil, message: "Export success", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
         DispatchQueue.main.async {
-            self.present(alertController, animated: true, completion: nil)
+            self.alert = CDAlertView(title: nil, message: "Export images to Photo Library success!", type: .success)
+            self.alert.show()
+            
+            delay(1.0) {
+                self.alert.hide(isPopupAnimated: true)
+            }
         }
     }
     
     func sendEmail(emailVC: MFMailComposeViewController) {
         emailVC.mailComposeDelegate = self
         present(emailVC, animated: true, completion: nil)
+    }
+    
+    func copyImagesSuccess() {
+        alert = CDAlertView(title: nil, message: "Copy images success!", type: .success)
+        alert.show()
+        
+        delay(1.0) {
+            self.alert.hide(isPopupAnimated: true)
+        }
+        
+        if viewModel.numberOfItemInSection(section: 0) > 0 {
+            galleryCollectionView.deselectAllItems(section: 0, animated: false)
+            
+            for index in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
+                arraySelectedCell[index] = false
+                
+                if let cell = galleryCollectionView.cellForItem(at: IndexPath(row: index, section: 0))as? GalleryCell {
+                    cell.containerView.isHidden = true
+                    cell.selectedImageView.isHidden = true
+                }
+            }
+        }
+    }
+    
+    func pasteImagesSuccess() {
+        alert.hide(isPopupAnimated: false)
+        alert = CDAlertView(title: nil, message: "Paste images success!", type: .success)
+        alert.show()
+        
+        delay(1.2) {
+            self.alert.hide(isPopupAnimated: true)
+        }
+        
+        arraySelectedCell.removeAll()
+        if viewModel.numberOfItemInSection(section: 0) > 0 {
+            for _ in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
+                arraySelectedCell.append(false)
+            }
+        }
     }
 }
 
@@ -448,12 +497,13 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
     }
     
     func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage], imageAssets: [Image]) {
-        DispatchQueue.main.async {
-            controller.dismiss(animated: true, completion: nil)
-            self.gallery = nil
-            self.containerView.isHidden = false
-            self.progressRing.alpha = 1.0
-        }
+        controller.dismiss(animated: true, completion: nil)
+        gallery = nil
+        isUploading = true
+        progressRing.alpha = 1.0
+        alert = CDAlertView(title: nil, message: "Upload processing!", type: .warning)
+        alert.customView = containerView
+        alert.show()
         
         var assets = [PHAsset]()
         for image in imageAssets {
@@ -469,12 +519,13 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
     }
     
     func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
-        DispatchQueue.main.async {
-            controller.dismiss(animated: true, completion: nil)
-            self.gallery = nil
-            self.containerView.isHidden = false
-            self.progressRing.alpha = 1.0
-        }
+        controller.dismiss(animated: true, completion: nil)
+        gallery = nil
+        isUploading = true
+        progressRing.alpha = 1.0
+        alert = CDAlertView(title: nil, message: "Upload processing!", type: .warning)
+        alert.customView = containerView
+        alert.show()
         
         video.fetchAVAsset { (avasset) in
             self.viewModel.uploadVideoToCoreData(video: video, avasset: avasset!, collectionView: self.galleryCollectionView)

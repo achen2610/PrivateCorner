@@ -8,12 +8,22 @@
 
 import Foundation
 import UIKit
+import MessageUI
+
+public protocol PhotoViewViewModelDelegate: class {
+
+    func exportSuccess()
+    func sendEmail(emailVC: MFMailComposeViewController)
+    func copyImagesSuccess()
+    func deleteSuccess()
+}
 
 open class PhotoViewViewModel {
 
     fileprivate var album = Album()
     fileprivate var items = [Item]()
     var isEndTransition: Bool = false
+    weak var delegate: PhotoViewViewModelDelegate?
     
     public init(items: [Item], inAlbum album: Album) {
         self.items = items

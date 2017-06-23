@@ -19,6 +19,8 @@ public protocol GalleryPhotoViewModelDelegate: class {
     func updateProgressRing(value: CGFloat)
     func exportSuccess()
     func sendEmail(emailVC: MFMailComposeViewController)
+    func copyImagesSuccess()
+    func pasteImagesSuccess()
 }
 
 
@@ -328,6 +330,7 @@ open class GalleryPhotoViewModel {
             let data = NSKeyedArchiver.archivedData(withRootObject: info)
             UserDefaults.standard.set(data, forKey: "ItemCopy")
             UserDefaults.standard.synchronize()
+            delegate?.copyImagesSuccess()
             
             break
         }
@@ -350,7 +353,7 @@ open class GalleryPhotoViewModel {
                 thumbname = "thumbnail" + "_" + String.init(format: "%@_%i", type, currentIndex + Int32(index!)) + "." + "JPG"
             }
             
-            // Add image to DB
+            // Add image/video to DB
             var info: [String: Any] = ["filename": filename,
                                        "thumbname": thumbname,
                                        "type": Key.ItemType.ImageType]
@@ -362,7 +365,7 @@ open class GalleryPhotoViewModel {
             }
             ItemManager.sharedInstance.add(info: info, toAlbum: album)
             
-            // Copy image to folder album
+            // Copy image/video to folder album
             let imagePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.name!).appendingPathComponent(item.fileName!)
             let newImagePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
             if fileManager.fileExists(atPath: imagePath.path) {
@@ -397,9 +400,10 @@ open class GalleryPhotoViewModel {
         
         let oldItems = self.items
         items = ItemManager.sharedInstance.getItems(album: album)
-        delegate?.reloadGallery()
+        delegate?.pasteImagesSuccess()
         collectionView.animateItemChanges(oldData: oldItems, newData: items)
         updateSupplementaryElement(collectionView: collectionView)
+        
         
         print("===============")
         print("Copy success")

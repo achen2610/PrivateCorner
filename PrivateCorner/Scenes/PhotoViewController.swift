@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import MessageUI
+import CDAlertView
 
-class PhotoViewController: UIViewController {
+class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var toolBar: UIToolbar!
@@ -34,6 +36,8 @@ class PhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.delegate = self
         
         styleUI()
         configureCollectionViewOnLoad()
@@ -192,6 +196,23 @@ class PhotoViewController: UIViewController {
         }
     }
     
+    
+    // MARK: - PhotoViewViewModel Delegate
+    func exportSuccess() {
+        
+    }
+    
+    func sendEmail(emailVC: MFMailComposeViewController) {
+        
+    }
+    
+    func copyImagesSuccess() {
+        
+    }
+    
+    func deleteSuccess() {
+        
+    }
 }
 
 extension PhotoViewController: UIGestureRecognizerDelegate {

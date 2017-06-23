@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import CDAlertView
 
 class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
 
@@ -64,11 +65,24 @@ class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
         
         let saveAction = UIAlertAction.init(title: "Save", style: .default) { (action) in
             let textField = alert.textFields?.first
+            let alert = CDAlertView(title: nil, message: "Create album success!", type: .success)
+            
+            if let text = textField?.text, text != "" {
+                self.albumsCollectionView.performBatchUpdates({
+                    delay(0.2, execute: {
+                        alert.show()
+                    })
 
-            self.albumsCollectionView.performBatchUpdates({
-                self.viewModel.saveAlbumToCoreData(title: (textField?.text)!)
-                self.albumsCollectionView.insertItems(at: [IndexPath.init(row: 0, section: 0)])
-            }, completion: nil)
+                    self.viewModel.saveAlbumToCoreData(title: (textField?.text)!)
+                    self.albumsCollectionView.insertItems(at: [IndexPath.init(row: 0, section: 0)])
+                }) { (finished) in
+                    if finished {
+                        delay(0.7, execute: {
+                            alert.hide(isPopupAnimated: true)
+                        })
+                    }
+                }
+            }
         }
         alert.addAction(saveAction)
 
@@ -93,13 +107,23 @@ class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
     
     func clickDeleteAlbum(button: UIButton) {
         let index = button.tag
-
+        let alert = CDAlertView(title: nil, message: "Delete album success!", type: .success)
+        
         albumsCollectionView.performBatchUpdates({
+            delay(0.2, execute: {
+                alert.show()
+            })
+
             self.viewModel.deleteAlbumFromList(index: index)
             self.albumsCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
             self.albumsCollectionView.reloadData()
-        }, completion: nil)
-        
+        }) { (finished) in
+            if finished {
+                delay(0.7, execute: {
+                    alert.hide(isPopupAnimated: true)
+                })
+            }
+        }
     }
     
     // MARK: AlbumsViewModelDelegate

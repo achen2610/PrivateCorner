@@ -135,7 +135,7 @@ class AlbumManager {
                 try fileManager.removeItem(at: albumPath)
             } catch let error as NSError {
                 print("============")
-                print("Remove album error")
+                print("Remove album folder error")
                 print(error.debugDescription)
             }
         }

@@ -9,6 +9,7 @@ target 'PrivateCorner' do
   pod 'SDWebImage'
   pod 'DynamicColor', '~> 3.3'
   pod 'Diff'
+  pod 'CDAlertView'
 
   # Pods for PrivateCorner
 
