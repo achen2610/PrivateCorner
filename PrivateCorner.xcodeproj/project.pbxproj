@@ -115,6 +115,9 @@
 		008775F31EEF819E003C50AF /* MoveFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 008775F21EEF819E003C50AF /* MoveFileCell.xib */; };
 		008775F61EEFDDF6003C50AF /* GalleryCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775F51EEFDDF6003C50AF /* GalleryCollectionFooterView.swift */; };
 		008A8CCD1ED5209800FE7A86 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A8CCC1ED5209800FE7A86 /* PhotoCell.swift */; };
+		009049051EFD038400EBAEEB /* web@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 009049031EFD038400EBAEEB /* web@3x.png */; };
+		009049061EFD038400EBAEEB /* web-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 009049041EFD038400EBAEEB /* web-on@3x.png */; };
+		009049091EFD03EE00EBAEEB /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009049081EFD03EE00EBAEEB /* WebViewController.swift */; };
 		00915EFD1ED7E6A70003BECE /* PhotoViewCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00915EFC1ED7E6A70003BECE /* PhotoViewCollectionView.swift */; };
 		00915EFF1ED7E7150003BECE /* PhotoViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00915EFE1ED7E7150003BECE /* PhotoViewViewModel.swift */; };
 		00915F011ED808B00003BECE /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00915F001ED808B00003BECE /* PhotoCell.xib */; };
@@ -304,6 +307,9 @@
 		008775F21EEF819E003C50AF /* MoveFileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoveFileCell.xib; sourceTree = "<group>"; };
 		008775F51EEFDDF6003C50AF /* GalleryCollectionFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionFooterView.swift; sourceTree = "<group>"; };
 		008A8CCC1ED5209800FE7A86 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		009049031EFD038400EBAEEB /* web@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web@3x.png"; sourceTree = "<group>"; };
+		009049041EFD038400EBAEEB /* web-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web-on@3x.png"; sourceTree = "<group>"; };
+		009049081EFD03EE00EBAEEB /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		00915EFC1ED7E6A70003BECE /* PhotoViewCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewCollectionView.swift; sourceTree = "<group>"; };
 		00915EFE1ED7E7150003BECE /* PhotoViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewViewModel.swift; sourceTree = "<group>"; };
 		00915F001ED808B00003BECE /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
@@ -517,6 +523,8 @@
 		006486E51E70EFD500419C27 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				009049031EFD038400EBAEEB /* web@3x.png */,
+				009049041EFD038400EBAEEB /* web-on@3x.png */,
 				0035DEFC1EF0D0A9004581FF /* noimagefound.png */,
 				007718BD1EE951D8001211CB /* pause@3x.png */,
 				007718B91EE947CA001211CB /* move@3x.png */,
@@ -573,6 +581,7 @@
 				004B28E51E8C9EA6007C910A /* GalleryPhoto */,
 				00DDF9B51ED43D2B00093770 /* PhotoView */,
 				004B28F91E8CE55C007C910A /* Import */,
+				009049071EFD03D800EBAEEB /* Web */,
 				00E0B1B11E7943B40001DF8F /* Setting */,
 			);
 			path = Scenes;
@@ -839,6 +848,14 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		009049071EFD03D800EBAEEB /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				009049081EFD03EE00EBAEEB /* WebViewController.swift */,
+			);
+			name = Web;
+			sourceTree = "<group>";
+		};
 		00DDF9661ED436E800093770 /* Hero */ = {
 			isa = PBXGroup;
 			children = (
@@ -1101,6 +1118,7 @@
 				00E8A0A71E9CDCA900221112 /* upload@3x.png in Resources */,
 				00E0B1A11E79411E0001DF8F /* folder@3x.png in Resources */,
 				007718BB1EE947CA001211CB /* move@3x.png in Resources */,
+				009049051EFD038400EBAEEB /* web@3x.png in Resources */,
 				00915F011ED808B00003BECE /* PhotoCell.xib in Resources */,
 				0075F2081EDE61DE0006AB5F /* albums.png in Resources */,
 				007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */,
@@ -1111,6 +1129,7 @@
 				007718B71EE94694001211CB /* export@3x.png in Resources */,
 				0075F20C1EDEB5820006AB5F /* VideoCell.xib in Resources */,
 				004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */,
+				009049061EFD038400EBAEEB /* web-on@3x.png in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
 				0035DEFD1EF0D0A9004581FF /* noimagefound.png in Resources */,
 				008775F31EEF819E003C50AF /* MoveFileCell.xib in Resources */,
@@ -1367,6 +1386,7 @@
 				00DDF9B41ED436E800093770 /* SourcePreprocessor.swift in Sources */,
 				007980351EE696EF00C5E13D /* CameraView.swift in Sources */,
 				0079803C1EE696EF00C5E13D /* Image.swift in Sources */,
+				009049091EFD03EE00EBAEEB /* WebViewController.swift in Sources */,
 				006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */,
 				00DDF99C1ED436E800093770 /* DispatchQueue+Hero.swift in Sources */,
 				007B75491E91E01400483293 /* ConstantsSize.swift in Sources */,

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import MessageUI
+import Photos
 
 public protocol PhotoViewViewModelDelegate: class {
 
@@ -116,6 +117,58 @@ open class PhotoViewViewModel {
         let oldItems = items
         items.remove(at: index)
         collectionView.animateItemChanges(oldData: oldItems, newData: items)
+        
+        delegate?.deleteSuccess()
+    }
+    
+    func exportFile(index: Int, type: Key.ExportType) {
+        let item = items[index]
+        
+        switch type {
+        case .PhotoLibrary:
+            let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(item.fileName!)
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetChangeRequest.creationRequestForAsset(from: MediaLibrary.image(urlPath: urlPath))
+            }, completionHandler: { (success, error) in
+                if success {
+                    // Saved successfully!
+                    self.delegate?.exportSuccess()
+                    print("Export \(item.fileName!) success")
+                }
+                else if error != nil {
+                    // Save photo failed with error
+                    
+                    print("Export \(item.fileName!) error: \(error!)")
+                }
+                else {
+                    // Save photo failed with no error
+                }
+            })
+            break
+        case .Email:
+            let composeVC = MFMailComposeViewController()
+            let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(item.fileName!)
+            let ext = item.fileName!.components(separatedBy: ".").last?.lowercased()
+            do {
+                let fileData = try Data(contentsOf: urlPath)
+                composeVC.addAttachmentData(fileData, mimeType: String.init(format: "image/%@", ext!), fileName: item.fileName!)
+            }
+            catch {
+                print("\(error.localizedDescription)")
+            }
+            delegate?.sendEmail(emailVC: composeVC)
+            
+            break
+        case .Copy:
+            let info: [String: Any] = ["album": album.objectID.uriRepresentation(),
+                                       "items": [item.objectID.uriRepresentation()]]
+            let data = NSKeyedArchiver.archivedData(withRootObject: info)
+            UserDefaults.standard.set(data, forKey: "ItemCopy")
+            UserDefaults.standard.synchronize()
+            delegate?.copyImagesSuccess()
+            
+            break
+        }
     }
 }
 

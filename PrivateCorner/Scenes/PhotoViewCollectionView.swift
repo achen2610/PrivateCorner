@@ -52,6 +52,7 @@ extension PhotoViewController: UIScrollViewDelegate {
 
         let pageWidth = collectionView.frame.size.width
         let currentPage = collectionView.contentOffset.x / pageWidth
+        currentIndex = IndexPath(row: Int(currentPage), section: 0)
         
         let type = viewModel.getTypeItem(index: Int(currentPage))
         if type == "image" {

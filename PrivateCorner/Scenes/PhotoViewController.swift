@@ -20,8 +20,10 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
     
     var viewModel: PhotoViewViewModel!
     var selectedIndex: IndexPath?
+    var currentIndex: IndexPath!
     var panGR = UIPanGestureRecognizer()
     var isHiddenNav: Bool = false
+    var alert: CDAlertView!
     
     struct cellIdentifiers {
         static let photoCell = "PhotoCell"
@@ -43,6 +45,7 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
         configureCollectionViewOnLoad()
         
         if let selectedIndex = selectedIndex {
+            currentIndex = selectedIndex
             let title = viewModel.getUploadDate(index: selectedIndex.row)
             setupTitleView(topText: title.first ?? "", bottomText: title.last ?? "")
         }
@@ -64,7 +67,7 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
         tabBarController?.tabBar.alpha = 1.0
     }
     
-    // MARK: Event handling
+    // MARK: - Event handling
     func styleUI() {
         automaticallyAdjustsScrollViewInsets = false
         preferredContentSize = CGSize(width: view.bounds.width, height: view.bounds.width)
@@ -118,7 +121,28 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
         navigationItem.titleView = titleLabel
     }
     
-    // MARK: Selector Event
+    func alertExport() {
+        alert = CDAlertView(title: nil, message: "Do you want to export images to Photo Library?", type: .warning)
+        let alertAction = CDAlertViewAction(title: "Export", font: nil, textColor: nil, backgroundColor: nil) { (action) in
+            self.viewModel.exportFile(index: self.currentIndex.row, type: .PhotoLibrary)
+        }
+        alert.add(action: alertAction)
+        let cancelAction = CDAlertViewAction(title: "Cancel")
+        alert.add(action: cancelAction)
+        alert.show()
+    }
+    
+    func emailExport() {
+        if MFMailComposeViewController.canSendMail() {
+            viewModel.exportFile(index: currentIndex.row, type: .Email)
+        }
+    }
+    
+    func copyImages() {
+        viewModel.exportFile(index: currentIndex.row, type: .Copy)
+    }
+    
+    // MARK: - Selector Event
     func pan() {
         let translation = panGR.translation(in: nil)
         let progress = translation.y / 2 / collectionView!.bounds.height
@@ -160,13 +184,13 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
     @IBAction func clickExportButton(_ sender: Any) {
         let alertController = UIAlertController(title: nil, message: "Export to", preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Photo Library", style: .default) { (alertAction) in
-            
+            self.alertExport()
         }
         let emailAction = UIAlertAction(title: "Email", style: .default) { (alertAction) in
-            
+            self.emailExport()
         }
         let copyAction = UIAlertAction(title: "Copy", style: .default) { (alertAction) in
-            
+            self.copyImages()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cameraAction)
@@ -191,27 +215,46 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
     @IBAction func clickDeleteButton(_ sender: Any) {
         if let indexPath = collectionView.indexPathsForVisibleItems.first {
             viewModel.deleteItem(index: indexPath.row, collectionView: collectionView)
-            
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateCollectionView), object: nil)
         }
     }
     
     
     // MARK: - PhotoViewViewModel Delegate
     func exportSuccess() {
-        
+        DispatchQueue.main.async {
+            self.alert = CDAlertView(title: nil, message: "Export image to Photo Library success!", type: .success)
+            delay(0.3) {
+                self.alert.show()
+            }
+            delay(1.0) {
+                self.alert.hide(isPopupAnimated: true)
+            }
+        }
     }
     
     func sendEmail(emailVC: MFMailComposeViewController) {
-        
+        emailVC.mailComposeDelegate = self
+        present(emailVC, animated: true, completion: nil)
     }
     
     func copyImagesSuccess() {
+        alert = CDAlertView(title: nil, message: "Copy image success!", type: .success)
+        alert.show()
         
+        delay(0.7) {
+            self.alert.hide(isPopupAnimated: true)
+        }
     }
     
     func deleteSuccess() {
+        alert = CDAlertView(title: nil, message: "Delete image success!", type: .success)
+        alert.show()
         
+        delay(0.7) { 
+            self.alert.hide(isPopupAnimated: true)
+        }
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateCollectionView), object: nil)
     }
 }
 
@@ -293,5 +336,31 @@ extension PhotoViewController: PhotoCellDelegate {
             })
         }
         isHiddenNav = !isHiddenNav
+    }
+}
+
+extension PhotoViewController: MFMailComposeViewControllerDelegate {
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .sent:
+            alert = CDAlertView(title: nil, message: "Send email success!", type: .success)
+            alert.show()
+            
+            delay(0.7, execute: { 
+                self.alert.hide(isPopupAnimated: true)
+            })
+            break
+        case .cancelled, .saved:
+            controller.dismiss(animated: true, completion: nil)
+            break
+        case .failed:
+            alert = CDAlertView(title: nil, message: "Send email failed!", type: .success)
+            alert.show()
+            
+            delay(0.7, execute: {
+                self.alert.hide(isPopupAnimated: true)
+            })
+            break
+        }
     }
 }

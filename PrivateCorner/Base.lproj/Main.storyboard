@@ -263,7 +263,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KTW-Ka-NM1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2813" y="1178"/>
+            <point key="canvasLocation" x="1689" y="1143"/>
         </scene>
         <!--Albums View Controller-->
         <scene sceneID="8eu-zg-09A">
@@ -534,7 +534,8 @@
                     <connections>
                         <segue destination="7l3-8E-WRy" kind="relationship" relationship="viewControllers" id="Yfu-Lo-et9"/>
                         <segue destination="SJZ-kO-aXo" kind="relationship" relationship="viewControllers" id="CLj-nk-43M"/>
-                        <segue destination="adM-Fs-fM0" kind="relationship" relationship="viewControllers" id="ioe-4d-FTE"/>
+                        <segue destination="PIL-NT-0Xb" kind="relationship" relationship="viewControllers" id="S0C-l9-WGG"/>
+                        <segue destination="adM-Fs-fM0" kind="relationship" relationship="viewControllers" id="K1y-EI-tI8"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Pe-k3-f21" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -625,7 +626,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ryx-wi-0Ce" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="1178"/>
+            <point key="canvasLocation" x="834" y="1143"/>
         </scene>
         <!--Import-->
         <scene sceneID="FBj-87-hak">
@@ -648,6 +649,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ih4-a3-6PZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2955" y="452.11267605633805"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="i34-AH-22H">
+            <objects>
+                <viewController id="xMv-Xv-3Id" customClass="WebViewController" customModule="PrivateCorner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="k0c-uB-a1U"/>
+                        <viewControllerLayoutGuide type="bottom" id="QMB-dU-z7s"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SPP-oN-wyM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UZL-J4-j6G">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UZL-J4-j6G" firstAttribute="leading" secondItem="SPP-oN-wyM" secondAttribute="leading" id="9K3-Xh-rwN"/>
+                            <constraint firstItem="UZL-J4-j6G" firstAttribute="top" secondItem="SPP-oN-wyM" secondAttribute="top" id="O87-go-IxD"/>
+                            <constraint firstAttribute="trailing" secondItem="UZL-J4-j6G" secondAttribute="trailing" id="WKA-yC-k7d"/>
+                            <constraint firstAttribute="bottom" secondItem="UZL-J4-j6G" secondAttribute="bottom" id="daS-0s-aht"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="v8V-Fd-1Jx"/>
+                    <connections>
+                        <outlet property="webView" destination="UZL-J4-j6G" id="Xz9-Rh-keK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="daU-7W-dSE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3321" y="1143"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="p2O-Eh-W0D">
@@ -735,6 +770,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fvj-R9-lfr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4717.5" y="-887.32394366197184"/>
+        </scene>
+        <!--Web-->
+        <scene sceneID="PqC-14-OdR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PIL-NT-0Xb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Web" id="rbC-ew-IVx"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xJb-iJ-0vD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xMv-Xv-3Id" kind="relationship" relationship="rootViewController" id="3eW-Kh-h9h"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O1w-Di-idl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2522" y="1143"/>
         </scene>
     </scenes>
     <resources>
