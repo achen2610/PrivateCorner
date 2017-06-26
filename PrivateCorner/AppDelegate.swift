@@ -55,8 +55,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func backToLockScreen() {
         let naviController = window?.rootViewController as! UINavigationController
+        if let naviInTabbar = tabBarController.selectedViewController as? UINavigationController {
+            if let controller = naviInTabbar.topViewController as? GalleryPhotoViewController {
+                if controller.isRequestPermission {
+                    return
+                }
+            }
+        }
         _ = [naviController .popViewController(animated: false)]
-        
     }
 }
 

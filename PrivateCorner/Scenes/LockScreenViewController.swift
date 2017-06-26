@@ -107,7 +107,7 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     // MARK: Navigation
     func navigateToHomeScreen() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        self.navigationController?.pushViewController(appDelegate.tabBarController, animated: true)
+        navigationController?.pushViewController(appDelegate.tabBarController, animated: true)
     }
 
     // MARK: Display logic

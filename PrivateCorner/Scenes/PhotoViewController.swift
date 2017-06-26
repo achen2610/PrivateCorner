@@ -223,12 +223,12 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
     func exportSuccess() {
         DispatchQueue.main.async {
             self.alert = CDAlertView(title: nil, message: "Export image to Photo Library success!", type: .success)
-            delay(0.3) {
+            delay(0.3, execute: {
                 self.alert.show()
-            }
-            delay(1.0) {
+            })
+            delay(1.0, execute: {
                 self.alert.hide(isPopupAnimated: true)
-            }
+            })
         }
     }
     
@@ -241,18 +241,18 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
         alert = CDAlertView(title: nil, message: "Copy image success!", type: .success)
         alert.show()
         
-        delay(0.7) {
+        delay(0.7, execute: {
             self.alert.hide(isPopupAnimated: true)
-        }
+        })
     }
     
     func deleteSuccess() {
         alert = CDAlertView(title: nil, message: "Delete image success!", type: .success)
         alert.show()
         
-        delay(0.7) { 
+        delay(0.7, execute: { 
             self.alert.hide(isPopupAnimated: true)
-        }
+        })
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateCollectionView), object: nil)
     }

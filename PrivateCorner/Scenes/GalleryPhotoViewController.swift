@@ -24,6 +24,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     var alert: CDAlertView!
     var isEditMode: Bool = false
     var isUploading: Bool = false
+    var isRequestPermission: Bool = false
     var arraySelectedCell: [Bool] = []
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
@@ -110,9 +111,9 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         alert = CDAlertView(title: nil, message: "Move file success!", type: .success)
         alert.show()
         
-        delay(1.0) {
+        delay(1.0, execute: {
             self.alert.hide(isPopupAnimated: true)
-        }
+        })
     }
     
     func scrollToBottom(animated: Bool) {
@@ -181,10 +182,17 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     @IBAction func clickUploadButton(_ sender: Any) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-                self.gallery = GalleryController()
-                self.gallery.delegate = self
-                self.present(self.gallery, animated: true, completion: nil)
+            
+            if SPRequestPermission.isAllowPermissions([.camera, .photoLibrary]) {
+                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+                    self.gallery = GalleryController()
+                    self.gallery.delegate = self
+                    self.present(self.gallery, animated: true, completion: nil)
+                }
+            } else {
+                self.isRequestPermission = true
+                SPRequestPermission.dialog.interactive.present(on: self, with: [.camera, .photoLibrary], dataSource: CustomDataSource(), delegate: self)
+                
             }
         }
         let pasteAction = UIAlertAction(title: "Paste", style: .default) { (action) in
@@ -420,9 +428,9 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             self.alert = CDAlertView(title: nil, message: "Export images to Photo Library success!", type: .success)
             self.alert.show()
             
-            delay(1.0) {
+            delay(1.0, execute: {
                 self.alert.hide(isPopupAnimated: true)
-            }
+            })
         }
     }
     
@@ -435,9 +443,9 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         alert = CDAlertView(title: nil, message: "Copy images success!", type: .success)
         alert.show()
         
-        delay(1.0) {
+        delay(1.0, execute: {
             self.alert.hide(isPopupAnimated: true)
-        }
+        })
         
         if viewModel.numberOfItemInSection(section: 0) > 0 {
             galleryCollectionView.deselectAllItems(section: 0, animated: false)
@@ -458,9 +466,9 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         alert = CDAlertView(title: nil, message: "Paste images success!", type: .success)
         alert.show()
         
-        delay(1.2) {
+        delay(1.2, execute: {
             self.alert.hide(isPopupAnimated: true)
-        }
+        })
         
         arraySelectedCell.removeAll()
         if viewModel.numberOfItemInSection(section: 0) > 0 {
@@ -614,5 +622,39 @@ extension GalleryPhotoViewController: MFMailComposeViewControllerDelegate {
         }
     }
     
+}
+
+extension GalleryPhotoViewController: SPRequestPermissionEventsDelegate {
+    func didHide() {
+        isRequestPermission = false
+        
+        if SPRequestPermission.isAllowPermissions([.camera, .photoLibrary]) {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+                self.gallery = GalleryController()
+                self.gallery.delegate = self
+                self.present(self.gallery, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    func didAllowPermission(permission: SPRequestPermissionType) {
+        
+    }
+    
+    func didDeniedPermission(permission: SPRequestPermissionType) {
+        
+    }
+    
+    func didSelectedPermission(permission: SPRequestPermissionType) {
+        
+    }
+}
+
+class CustomDataSource: SPRequestPermissionDialogInteractiveDataSource {
+    
+    //override title in dialog view
+    override func headerTitle() -> String {
+        return "Request Permission!"
+    }
 }
 

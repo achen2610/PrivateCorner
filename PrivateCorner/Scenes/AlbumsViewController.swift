@@ -107,21 +107,13 @@ class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
     
     func clickDeleteAlbum(button: UIButton) {
         let index = button.tag
-        let alert = CDAlertView(title: nil, message: "Delete album success!", type: .success)
-        
-        albumsCollectionView.performBatchUpdates({
-            delay(0.2, execute: {
-                alert.show()
-            })
 
+        albumsCollectionView.performBatchUpdates({
             self.viewModel.deleteAlbumFromList(index: index)
             self.albumsCollectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
-            self.albumsCollectionView.reloadData()
         }) { (finished) in
             if finished {
-                delay(0.7, execute: {
-                    alert.hide(isPopupAnimated: true)
-                })
+                self.albumsCollectionView.reloadData()
             }
         }
     }

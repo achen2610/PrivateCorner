@@ -94,40 +94,40 @@ class AlbumManager {
         let items = ItemManager.sharedInstance.getItems(album: album)
         for item in items {
             
-//            if let filename = item.fileName {
-//                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
-//                if fileManager.fileExists(atPath: path.path) {
-//                    print("===========")
-//                    print("File Exists")
-//                    print("Delete file")
-//                    do {
-//                        try fileManager.removeItem(atPath: path.path)
-//                    } catch let error as NSError {
-//                        print("===========")
-//                        print("Delete error")
-//                        print(error.debugDescription)
-//                    }
-//                }
-//            }
-//            
-//            if let thumbname = item.thumbName {
-//                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
-//                if fileManager.fileExists(atPath: path.path) {
-//                    print("===========")
-//                    print("Thumbnail Exists")
-//                    print("Delete thumbnail")
-//                    do {
-//                        try fileManager.removeItem(atPath: path.path)
-//                    } catch let error as NSError {
-//                        print("===========")
-//                        print("Delete error")
-//                        print(error.debugDescription)
-//                    }
-//                }
-//            }
+            //            if let filename = item.fileName {
+            //                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(filename)
+            //                if fileManager.fileExists(atPath: path.path) {
+            //                    print("===========")
+            //                    print("File Exists")
+            //                    print("Delete file")
+            //                    do {
+            //                        try fileManager.removeItem(atPath: path.path)
+            //                    } catch let error as NSError {
+            //                        print("===========")
+            //                        print("Delete error")
+            //                        print(error.debugDescription)
+            //                    }
+            //                }
+            //            }
+            //
+            //            if let thumbname = item.thumbName {
+            //                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(thumbname)
+            //                if fileManager.fileExists(atPath: path.path) {
+            //                    print("===========")
+            //                    print("Thumbnail Exists")
+            //                    print("Delete thumbnail")
+            //                    do {
+            //                        try fileManager.removeItem(atPath: path.path)
+            //                    } catch let error as NSError {
+            //                        print("===========")
+            //                        print("Delete error")
+            //                        print(error.debugDescription)
+            //                    }
+            //                }
+            //            }
             managedContext.delete(item)
         }
-
+        
         //3
         let albumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!)
         if fileManager.fileExists(atPath: albumPath.path) {
@@ -144,6 +144,6 @@ class AlbumManager {
         managedContext.delete(album)
         
         //5
-       CoreDataManager.sharedInstance.saveContext()
+        CoreDataManager.sharedInstance.saveContext()
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 
-class WebViewController: UIViewController, UISearchBarDelegate {
+class WebViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
     
@@ -19,6 +19,7 @@ class WebViewController: UIViewController, UISearchBarDelegate {
         return bars
     }()
     
+    // MARK: - Object lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -27,12 +28,9 @@ class WebViewController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let leftNavBarButton = UIBarButtonItem(customView: searchBars)
-        navigationItem.leftBarButtonItem = leftNavBarButton
+        styleUI()
+        loadData()
         
-        let url = URL(string: "http://google.com")
-        let request = URLRequest(url: url!)
-        webView.loadRequest(request)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -41,10 +39,34 @@ class WebViewController: UIViewController, UISearchBarDelegate {
         
     }
     
+    // MARK: - Event handling
+    func styleUI() {
+        let leftNavBarButton = UIBarButtonItem(customView: searchBars)
+        navigationItem.leftBarButtonItem = leftNavBarButton
+    }
+    
+    func loadData() {
+        let url = URL(string: "http://google.com")
+        let request = URLRequest(url: url!)
+        webView.loadRequest(request)
+        
+        searchBars.text = "http://google.com"
+    }
+}
+
+extension WebViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBars.showsCancelButton = true
         
         return true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        if let string = searchBar.text {
+            let url = URL(string: string)
+            webView.loadRequest(URLRequest(url: url!))
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
