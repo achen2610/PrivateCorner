@@ -49,6 +49,27 @@ class AlbumManager {
         return album
     }
     
+    func getAlbum(title: String) -> Album? {
+        var album: Album?
+        //1
+        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        
+        //2
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Album")
+        
+        //3
+        let predicate = NSPredicate(format: "name = %@", title)
+        fetchRequest.predicate = predicate
+        
+        //3
+        do {
+            album = (try managedContext.fetch(fetchRequest) as! [Album]).first
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        return album
+    }
+    
     func addAlbum(title: String) -> Album {
         //1
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext

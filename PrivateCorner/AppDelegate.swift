@@ -11,7 +11,15 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    var customWindow: MyWindow?
+//    var window: UIWindow?
+    var window: UIWindow? {
+        get {
+            customWindow = customWindow ?? MyWindow(frame: UIScreen.main.bounds)
+            return customWindow
+        }
+        set { }
+    }
     var tabBarController: TabBarController!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

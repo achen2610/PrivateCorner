@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002681A31F29CB4D006F6CE4 /* WebViewCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002681A21F29CB4D006F6CE4 /* WebViewCollectionViewController.swift */; };
+		002681A61F29CC90006F6CE4 /* WebAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002681A51F29CC90006F6CE4 /* WebAlbumCell.swift */; };
+		002681A81F29CCA4006F6CE4 /* WebAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 002681A71F29CCA4006F6CE4 /* WebAlbumCell.xib */; };
 		0035DEFD1EF0D0A9004581FF /* noimagefound.png in Resources */ = {isa = PBXBuildFile; fileRef = 0035DEFC1EF0D0A9004581FF /* noimagefound.png */; };
 		0035DEFF1EF0DC59004581FF /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0035DEFE1EF0DC59004581FF /* UploadManager.swift */; };
 		00438D331EDFA51C0060EFA4 /* playvideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 00438D321EDFA51C0060EFA4 /* playvideo.png */; };
@@ -115,6 +118,10 @@
 		008775F31EEF819E003C50AF /* MoveFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 008775F21EEF819E003C50AF /* MoveFileCell.xib */; };
 		008775F61EEFDDF6003C50AF /* GalleryCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775F51EEFDDF6003C50AF /* GalleryCollectionFooterView.swift */; };
 		008A8CCD1ED5209800FE7A86 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008A8CCC1ED5209800FE7A86 /* PhotoCell.swift */; };
+		008B5E0C1F2843C60044EEF0 /* MyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B5E0B1F2843C60044EEF0 /* MyWindow.swift */; };
+		008B5E0E1F28529B0044EEF0 /* WebViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B5E0D1F28529A0044EEF0 /* WebViewExtension.swift */; };
+		008B5E101F2872130044EEF0 /* JSTools.js in Resources */ = {isa = PBXBuildFile; fileRef = 008B5E0F1F2872130044EEF0 /* JSTools.js */; };
+		008B5E121F289E1B0044EEF0 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B5E111F289E1B0044EEF0 /* WebViewModel.swift */; };
 		009049051EFD038400EBAEEB /* web@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 009049031EFD038400EBAEEB /* web@3x.png */; };
 		009049061EFD038400EBAEEB /* web-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 009049041EFD038400EBAEEB /* web-on@3x.png */; };
 		009049091EFD03EE00EBAEEB /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009049081EFD03EE00EBAEEB /* WebViewController.swift */; };
@@ -278,6 +285,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		002681A21F29CB4D006F6CE4 /* WebViewCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCollectionViewController.swift; sourceTree = "<group>"; };
+		002681A51F29CC90006F6CE4 /* WebAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebAlbumCell.swift; sourceTree = "<group>"; };
+		002681A71F29CCA4006F6CE4 /* WebAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebAlbumCell.xib; sourceTree = "<group>"; };
 		0035DEFC1EF0D0A9004581FF /* noimagefound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimagefound.png; sourceTree = "<group>"; };
 		0035DEFE1EF0DC59004581FF /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
 		00438D321EDFA51C0060EFA4 /* playvideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playvideo.png; sourceTree = "<group>"; };
@@ -392,6 +402,10 @@
 		008775F21EEF819E003C50AF /* MoveFileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoveFileCell.xib; sourceTree = "<group>"; };
 		008775F51EEFDDF6003C50AF /* GalleryCollectionFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionFooterView.swift; sourceTree = "<group>"; };
 		008A8CCC1ED5209800FE7A86 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		008B5E0B1F2843C60044EEF0 /* MyWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWindow.swift; sourceTree = "<group>"; };
+		008B5E0D1F28529A0044EEF0 /* WebViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewExtension.swift; sourceTree = "<group>"; };
+		008B5E0F1F2872130044EEF0 /* JSTools.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSTools.js; sourceTree = "<group>"; };
+		008B5E111F289E1B0044EEF0 /* WebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		009049031EFD038400EBAEEB /* web@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web@3x.png"; sourceTree = "<group>"; };
 		009049041EFD038400EBAEEB /* web-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web-on@3x.png"; sourceTree = "<group>"; };
 		009049081EFD03EE00EBAEEB /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -572,6 +586,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		002681A41F29CC7A006F6CE4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				002681A51F29CC90006F6CE4 /* WebAlbumCell.swift */,
+				002681A71F29CCA4006F6CE4 /* WebAlbumCell.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		004B28E51E8C9EA6007C910A /* GalleryPhoto */ = {
 			isa = PBXGroup;
 			children = (
@@ -686,6 +709,7 @@
 			isa = PBXGroup;
 			children = (
 				004F71C51EE14FB70026A907 /* CollectionViewExtension.swift */,
+				008B5E0D1F28529A0044EEF0 /* WebViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -738,6 +762,7 @@
 				0077770C1EDBC90F00233D0B /* MediaLibrary.swift */,
 				0035DEFE1EF0DC59004581FF /* UploadManager.swift */,
 				0075E4491EFA25A600E18B64 /* GlobalMethods.swift */,
+				008B5E0B1F2843C60044EEF0 /* MyWindow.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -762,6 +787,7 @@
 			isa = PBXGroup;
 			children = (
 				006486EC1E70EFE400419C27 /* Info.plist */,
+				008B5E0F1F2872130044EEF0 /* JSTools.js */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -1022,7 +1048,10 @@
 		009049071EFD03D800EBAEEB /* Web */ = {
 			isa = PBXGroup;
 			children = (
+				002681A41F29CC7A006F6CE4 /* UI */,
+				008B5E111F289E1B0044EEF0 /* WebViewModel.swift */,
 				009049081EFD03EE00EBAEEB /* WebViewController.swift */,
+				002681A21F29CB4D006F6CE4 /* WebViewCollectionViewController.swift */,
 			);
 			name = Web;
 			sourceTree = "<group>";
@@ -1834,8 +1863,10 @@
 				0086A9B41EC2F9B1000F5C01 /* Gallery.bundle in Resources */,
 				006486F41E70EFEB00419C27 /* Main.storyboard in Resources */,
 				00E0B1A01E79411E0001DF8F /* folder-on@3x.png in Resources */,
+				002681A81F29CCA4006F6CE4 /* WebAlbumCell.xib in Resources */,
 				007718B81EE94694001211CB /* play@3x.png in Resources */,
 				007718BC1EE947CA001211CB /* selectall@3x.png in Resources */,
+				008B5E101F2872130044EEF0 /* JSTools.js in Resources */,
 				0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */,
 				004B290B1E8CE96A007C910A /* import@3x.png in Resources */,
 				007718B61EE94694001211CB /* delete@3x.png in Resources */,
@@ -2009,6 +2040,7 @@
 				0090834A1F00C88E00EE6728 /* SPRequestPermission.swift in Sources */,
 				009083801F00E2D800EE6728 /* SPStrideableExtension.swift in Sources */,
 				004F71C61EE14FB70026A907 /* CollectionViewExtension.swift in Sources */,
+				008B5E0C1F2843C60044EEF0 /* MyWindow.swift in Sources */,
 				00DDF9931ED436E800093770 /* HeroDefaultAnimator.swift in Sources */,
 				0090834F1F00C88E00EE6728 /* SPGradientViewController.swift in Sources */,
 				009083611F00C88E00EE6728 /* SPAligmentView.swift in Sources */,
@@ -2019,10 +2051,12 @@
 				007E5AE01EE53DAA00FDC2EB /* UICircularProgressRingView.swift in Sources */,
 				009083241F00C88E00EE6728 /* SPDevice.swift in Sources */,
 				009083261F00C88E00EE6728 /* SPUIDeviceExtenshion.swift in Sources */,
+				008B5E0E1F28529B0044EEF0 /* WebViewExtension.swift in Sources */,
 				00DDF9B01ED436E800093770 /* CascadePreprocessor.swift in Sources */,
 				00DDF9A51ED436E800093770 /* HeroModifier.swift in Sources */,
 				00DDF9A11ED436E800093770 /* HeroBaseController.swift in Sources */,
 				007980511EE696EF00C5E13D /* Permission.swift in Sources */,
+				002681A61F29CC90006F6CE4 /* WebAlbumCell.swift in Sources */,
 				00DDF9921ED436E800093770 /* HeroCoreAnimationViewContext.swift in Sources */,
 				008775EC1EEF815F003C50AF /* MoveFileViewController.swift in Sources */,
 				0079803B1EE696EF00C5E13D /* Cart.swift in Sources */,
@@ -2055,6 +2089,7 @@
 				007980331EE696EF00C5E13D /* CameraController.swift in Sources */,
 				0090834D1F00C88E00EE6728 /* SPDialogSwipeController.swift in Sources */,
 				00DDF9981ED436E800093770 /* Array+HeroModifier.swift in Sources */,
+				008B5E121F289E1B0044EEF0 /* WebViewModel.swift in Sources */,
 				007980471EE696EF00C5E13D /* String+Extensions.swift in Sources */,
 				007980401EE696EF00C5E13D /* GBundle.swift in Sources */,
 				009083391F00C88E00EE6728 /* SPRequestPermissionDataTexts.swift in Sources */,
@@ -2186,6 +2221,7 @@
 				004B28F61E8CA624007C910A /* GalleryCell.swift in Sources */,
 				009083691F00C88E00EE6728 /* SPTitleWithSubtitleView.swift in Sources */,
 				009083841F00E2D800EE6728 /* SPUIScreenExtension.swift in Sources */,
+				002681A31F29CB4D006F6CE4 /* WebViewCollectionViewController.swift in Sources */,
 				00DDF9B21ED436E800093770 /* IgnoreSubviewModifiersPreprocessor.swift in Sources */,
 				007F06D01ED3CE3F0081EAAE /* ConstantColor.swift in Sources */,
 				009083811F00E2D800EE6728 /* SPUIButtonExtenshion.swift in Sources */,
