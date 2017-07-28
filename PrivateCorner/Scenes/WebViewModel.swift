@@ -127,6 +127,8 @@ open class WebViewModel {
 
         self.album.currentIndex = Int32(currentIndex + 1)
         CoreDataManager.sharedInstance.saveContext()
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateGallery), object: nil)
     
         print("===============")
         print("Upload image success")
@@ -174,6 +176,8 @@ open class WebViewModel {
             
             self.imageDownload = nil
             self.filename = nil
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateGallery), object: nil)
             
             print("===============")
             print("Upload image success")

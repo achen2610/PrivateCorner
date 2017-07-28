@@ -25,7 +25,7 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cell = cell as? GalleryCell {
-            if arraySelectedCell[indexPath.row] as Bool {
+            if viewModel.arraySelectedCell[indexPath.row] as Bool {
                 cell.containerView.isHidden = false
                 cell.selectedImageView.isHidden = false
             } else {
@@ -71,7 +71,7 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
         }
         
         collectionView.deselectItem(at: indexPath, animated: false)
-        arraySelectedCell[indexPath.row] = !arraySelectedCell[indexPath.row]
+        viewModel.arraySelectedCell[indexPath.row] = !viewModel.arraySelectedCell[indexPath.row]
         cell.containerView.isHidden = !cell.containerView.isHidden
         cell.selectedImageView.isHidden = !cell.selectedImageView.isHidden
     }

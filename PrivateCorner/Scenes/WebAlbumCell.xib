@@ -26,7 +26,7 @@
                             <constraint firstAttribute="width" secondItem="OIh-qS-A9N" secondAttribute="height" multiplier="1:1" id="pgv-Mb-mN4"/>
                         </constraints>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPH-0R-ciC">
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPH-0R-ciC">
                         <rect key="frame" x="8" y="218" width="234" height="24"/>
                         <color key="backgroundColor" red="0.17800068902117791" green="0.48531072272632342" blue="0.71241499352331605" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -47,17 +47,18 @@
             <constraints>
                 <constraint firstItem="OIh-qS-A9N" firstAttribute="leading" secondItem="FmH-Af-yy5" secondAttribute="leading" constant="8" id="3OQ-vN-lzq"/>
                 <constraint firstAttribute="trailing" secondItem="OIh-qS-A9N" secondAttribute="trailing" constant="8" id="O88-Gw-ZmQ"/>
-                <constraint firstItem="YPH-0R-ciC" firstAttribute="leading" secondItem="FmH-Af-yy5" secondAttribute="leading" constant="8" id="Tmt-6l-5He"/>
+                <constraint firstItem="YPH-0R-ciC" firstAttribute="trailing" secondItem="OIh-qS-A9N" secondAttribute="trailing" id="WCt-Am-xGG"/>
                 <constraint firstItem="1PD-dT-nXo" firstAttribute="bottom" secondItem="OIh-qS-A9N" secondAttribute="bottom" id="WcW-Ca-1dh"/>
                 <constraint firstItem="OIh-qS-A9N" firstAttribute="top" secondItem="FmH-Af-yy5" secondAttribute="top" constant="8" id="cve-Ei-hJw"/>
                 <constraint firstItem="1PD-dT-nXo" firstAttribute="leading" secondItem="FmH-Af-yy5" secondAttribute="leading" constant="12" id="d1S-qW-bXn"/>
                 <constraint firstAttribute="trailing" secondItem="1PD-dT-nXo" secondAttribute="trailing" constant="12" id="dht-SI-9eg"/>
-                <constraint firstAttribute="trailing" secondItem="YPH-0R-ciC" secondAttribute="trailing" constant="8" id="fo9-ct-a6w"/>
+                <constraint firstItem="YPH-0R-ciC" firstAttribute="leading" secondItem="OIh-qS-A9N" secondAttribute="leading" id="hor-Za-0vc"/>
                 <constraint firstItem="YPH-0R-ciC" firstAttribute="bottom" secondItem="OIh-qS-A9N" secondAttribute="bottom" id="vnh-3x-nJu"/>
             </constraints>
             <size key="customSize" width="268" height="272"/>
             <connections>
                 <outlet property="albumImageView" destination="OIh-qS-A9N" id="ec9-cD-r67"/>
+                <outlet property="backgroundName" destination="YPH-0R-ciC" id="8pU-rd-Amp"/>
                 <outlet property="nameLabel" destination="1PD-dT-nXo" id="JTq-my-Ikj"/>
             </connections>
             <point key="canvasLocation" x="-99" y="27"/>

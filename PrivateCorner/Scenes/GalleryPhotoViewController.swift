@@ -25,7 +25,6 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     var isEditMode: Bool = false
     var isUploading: Bool = false
     var isRequestPermission: Bool = false
-    var arraySelectedCell: [Bool] = []
     
     @IBOutlet weak var galleryCollectionView: UICollectionView!
     @IBOutlet weak var addPhotoButton: UIButton!
@@ -52,7 +51,8 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         configureCollectionViewOnLoad()
         getGalleryPhotoOnLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionViewWhenMoveFile), name: NSNotification.Name(rawValue: Key.String.notiUpdateCollectionView), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionViewWhenMoveFile), name: NSNotification.Name(rawValue: Key.String.notiUpdateGalleryWhenMoveFile), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionView), name: NSNotification.Name(rawValue: Key.String.notiUpdateGallery), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,15 +97,12 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         viewModel.getGallery()
     }
     
+    func updateCollectionView() {
+        viewModel.updateGallery(collectionView: galleryCollectionView)
+    }
+    
     func updateCollectionViewWhenMoveFile() {
         viewModel.updateGallery(collectionView: galleryCollectionView)
-        
-        arraySelectedCell.removeAll()
-        if viewModel.numberOfItemInSection(section: 0) > 0 {
-            for _ in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
-                arraySelectedCell.append(false)
-            }
-        }
         updateStateEditButton()
         
         alert = CDAlertView(title: nil, message: "Move file success!", type: .success)
@@ -142,7 +139,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         let alertAction = CDAlertViewAction(title: "Export", font: nil, textColor: nil, backgroundColor: nil) { (action) in
             var indexSelectedImage = [Int]()
             var index = 0
-            for check in self.arraySelectedCell {
+            for check in self.viewModel.arraySelectedCell {
                 if check {
                     indexSelectedImage.append(index)
                 }
@@ -164,7 +161,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     func copyImages() {
         var indexSelectedImage = [Int]()
         var index = 0
-        for check in self.arraySelectedCell {
+        for check in self.viewModel.arraySelectedCell {
             if check {
                 indexSelectedImage.append(index)
             }
@@ -258,7 +255,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
                 galleryCollectionView.deselectAllItems(section: 0, animated: false)
                 
                 for index in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
-                    arraySelectedCell[index] = false
+                    viewModel.arraySelectedCell[index] = false
                     
                     if let cell = galleryCollectionView.cellForItem(at: IndexPath(row: index, section: 0))as? GalleryCell {
                         cell.containerView.isHidden = true
@@ -273,7 +270,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         if isEditMode {
             if viewModel.numberOfItemInSection(section: 0) > 0 {
                 for index in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
-                    arraySelectedCell[index] = true
+                    viewModel.arraySelectedCell[index] = true
                     
                     if let cell = galleryCollectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? GalleryCell {
                         cell.containerView.isHidden = false
@@ -293,7 +290,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             if MFMailComposeViewController.canSendMail() {
                 var indexSelectedImage = [Int]()
                 var index = 0
-                for check in self.arraySelectedCell {
+                for check in self.viewModel.arraySelectedCell {
                     if check {
                         indexSelectedImage.append(index)
                     }
@@ -321,7 +318,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     @IBAction func clickMoveButton(_ sender: Any) {
         var indexSelectedImage = [Int]()
         var index = 0
-        for check in arraySelectedCell {
+        for check in viewModel.arraySelectedCell {
             if check {
                 indexSelectedImage.append(index)
             }
@@ -347,7 +344,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         let deleteAction = UIAlertAction(title: "Delete", style: .default) { (deleteAction) in
             var indexSelectedImage = [Int]()
             var index = 0
-            for check in self.arraySelectedCell {
+            for check in self.viewModel.arraySelectedCell {
                 if check {
                     indexSelectedImage.append(index)
                 }
@@ -359,7 +356,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             
             // Update array check select cell
             let indexesToRemove = Set(indexSelectedImage.flatMap { $0 })
-            self.arraySelectedCell = self.arraySelectedCell.enumerated().filter { !indexesToRemove.contains($0.offset) }.map { $0.element }
+            self.viewModel.arraySelectedCell = self.viewModel.arraySelectedCell.enumerated().filter { !indexesToRemove.contains($0.offset) }.map { $0.element }
     
             // Update state edit buttons
             self.updateStateEditButton()
@@ -375,13 +372,6 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
 
     // MARK: - GalleryPhotoViewModelDelegate
     func reloadGallery() {
-        arraySelectedCell.removeAll()
-        if viewModel.numberOfItemInSection(section: 0) > 0 {
-            for _ in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
-                arraySelectedCell.append(false)
-            }
-        }
-        
         if isUploading {
             self.alert.hide(isPopupAnimated: false)
             self.alert = CDAlertView(title: nil, message: "Upload success!", type: .success)
@@ -451,7 +441,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             galleryCollectionView.deselectAllItems(section: 0, animated: false)
             
             for index in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
-                arraySelectedCell[index] = false
+                viewModel.arraySelectedCell[index] = false
                 
                 if let cell = galleryCollectionView.cellForItem(at: IndexPath(row: index, section: 0))as? GalleryCell {
                     cell.containerView.isHidden = true
@@ -470,10 +460,10 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             self.alert.hide(isPopupAnimated: true)
         })
         
-        arraySelectedCell.removeAll()
+        viewModel.arraySelectedCell.removeAll()
         if viewModel.numberOfItemInSection(section: 0) > 0 {
             for _ in 0...viewModel.numberOfItemInSection(section: 0) - 1 {
-                arraySelectedCell.append(false)
+                viewModel.arraySelectedCell.append(false)
             }
         }
     }

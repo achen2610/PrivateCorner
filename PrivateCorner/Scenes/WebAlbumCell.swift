@@ -13,6 +13,7 @@ class WebAlbumCell: UICollectionViewCell {
 
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var backgroundName: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,7 +21,18 @@ class WebAlbumCell: UICollectionViewCell {
     }
     
     func styleLayout() {
+        self.layoutIfNeeded()
+        
         albumImageView.layer.cornerRadius = 5.0
+        
+        let path = UIBezierPath(roundedRect:backgroundName.bounds,
+                                byRoundingCorners: [.bottomRight, .bottomLeft],
+                                cornerRadii: CGSize(width: 5, height: 5))
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = backgroundName.bounds
+        maskLayer.path = path.cgPath
+        backgroundName.layer.mask = maskLayer
     }
     
     func configure(album: Album) {

@@ -254,7 +254,7 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
             self.alert.hide(isPopupAnimated: true)
         })
         
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateCollectionView), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateGallery), object: nil)
     }
 }
 

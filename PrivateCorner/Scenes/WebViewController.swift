@@ -12,23 +12,66 @@ import Photos
 class WebViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
+    var albumCollectionView: UICollectionView!
     lazy var containerView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: kScreenHeight, width: kScreenWidth, height: kScreenHeight))
         view.backgroundColor = UIColor.clear
         return view
     }()
     
-    var albumCollectionView: UICollectionView!
-    
+    lazy var titleLabel: UILabel = {
+       let label = UILabel()
+        label.textColor = UIColor.white
+        label.backgroundColor = UIColor.gray
+        label.font = UIFont.systemFont(ofSize: 14 * kScale)
+        label.text = "Download photo to album"
+        label.textAlignment = .center
+        return label
+    }()
+
     lazy var searchBars: UISearchBar = {
         let bars = UISearchBar(frame: CGRect(x: 0, y: 0, width: 288 * kScale, height: 44))
         bars.delegate = self
         return bars
     }()
     
+    lazy var activity: UIActivityIndicatorView = {
+        let act = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        act.frame = CGRect(x: 0, y: kNavigationView, width: kScreenWidth, height: kScreenHeight - kNavigationView - kTabBar)
+        act.layer.backgroundColor = UIColor(white: 0.0, alpha: 0.2).cgColor
+        return act
+    }()
+    
+    lazy var footerView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: kScreenHeight - kTabBar - 36 * kScale, width: kScreenWidth, height: 36 * kScale))
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
+    lazy var lineFooterView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 0.5))
+        view.backgroundColor = UIColor(hex: "#DDDDDD")
+        return view
+    }()
+    
+    lazy var backButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 8 * kScale, y: 3 * kScale, width: 30 * kScale, height: 30 * kScale))
+        button.backgroundColor = UIColor.cyan
+        button.addTarget(self, action: #selector(clickBackButton), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var nextButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 46 * kScale, y: 3 * kScale, width: 30 * kScale, height: 30 * kScale))
+        button.backgroundColor = UIColor.orange
+        button.addTarget(self, action: #selector(clickNextButton), for: .touchUpInside)
+        return button
+    }()
+    
     var viewModel: WebViewModel!
     var currentUrl: URL?
     var longPress: UILongPressGestureRecognizer?
+    var isShow = false
     
     // MARK: - Object lifecycle
     override func awakeFromNib() {
@@ -53,17 +96,28 @@ class WebViewController: UIViewController {
         
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        showCollectionView(show: false)
+    }
+    
     // MARK: - Event handling
     func styleUI() {
+        webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 36 * kScale, 0)
+        
         let leftNavBarButton = UIBarButtonItem(customView: searchBars)
         navigationItem.leftBarButtonItem = leftNavBarButton
         
         searchBars.keyboardType = .webSearch
         searchBars.autocapitalizationType = .none
         
+        view.addSubview(activity)
+        
         let gesture = UITapGestureRecognizer(target: self, action: #selector(clickContainerView))
         gesture.delegate = self
         containerView.addGestureRecognizer(gesture)
+        view.addSubview(containerView)
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = viewModel.cellSize()
@@ -80,10 +134,19 @@ class WebViewController: UIViewController {
         let nibName = UINib(nibName: "WebAlbumCell", bundle:Bundle.main)
         albumCollectionView.register(nibName, forCellWithReuseIdentifier: viewModel.cellIdentifier())
         containerView.addSubview(albumCollectionView)
-        view.addSubview(containerView)
+        
+        titleLabel.frame = CGRect(x: 0, y: albumCollectionView.frame.minY - 24 * kScale, width: kScreenWidth, height: 24 * kScale)
+        containerView.addSubview(titleLabel)
+        
+        footerView.addSubview(lineFooterView)
+        footerView.addSubview(backButton)
+        footerView.addSubview(nextButton)
+        view.addSubview(footerView)
     }
     
     func loadData() {
+        activity.startAnimating()
+        
         let url = URL(string: "http://google.com")
         currentUrl = url
         let request = URLRequest(url: url!)
@@ -175,6 +238,14 @@ class WebViewController: UIViewController {
     }
     
     func showCollectionView(show: Bool) {
+        if show && isShow {
+            return
+        } else if !show && !isShow {
+            return
+        }
+        
+        isShow = !isShow
+        
         UIView.animate(withDuration: 0.5) { 
             if show {
                 self.containerView.frame.origin = CGPoint(x: 0, y: 0)
@@ -184,20 +255,45 @@ class WebViewController: UIViewController {
         }
     }
     
+    func showFooterView(show: Bool) {
+        UIView.animate(withDuration: 0.5) { 
+            if show {
+                self.footerView.frame.origin = CGPoint(x: 0, y: kScreenHeight - kTabBar - 36 * kScale)
+            } else {
+                self.footerView.frame.origin = CGPoint(x: 0, y: kScreenHeight)
+            }
+        }
+    }
+    
+    // MARK: - Event selector
     func clickContainerView() {
         showCollectionView(show: false)
+    }
+    
+    func clickBackButton() {
+        if webView.canGoBack {
+            webView.goBack()
+        }
+    }
+    
+    func clickNextButton() {
+        if webView.canGoForward {
+            webView.goForward()
+        }
     }
 }
 
 extension WebViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBars.showsCancelButton = true
+        showCollectionView(show: false)
         
         return true
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+        searchBars.resignFirstResponder()
+        searchBars.showsCancelButton = false
         if let string = searchBar.text {
             var urlString = string
             if string.range(of: "http://") == nil || string.range(of: "https://") == nil {
@@ -219,29 +315,26 @@ extension WebViewController: UISearchBarDelegate {
 extension WebViewController: UIWebViewDelegate {
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         
-        if navigationType == .linkClicked {
-            searchBars.text = request.url?.absoluteString
-            return true
-        }
-        
-        if request.url?.absoluteString.range(of: currentUrl!.absoluteString) != nil {
-            searchBars.text = request.url?.absoluteString
-        }
-
+        activity.startAnimating()
         return true
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         webView.stringByEvaluatingJavaScript(from: "document.body.style.webkitTouchCallout='none';")
+        let currentURL = webView.stringByEvaluatingJavaScript(from: "window.location.href")
+        searchBars.text = currentURL
+        
+        activity.stopAnimating()
+        showFooterView(show: true)
     }
 }
 
 extension WebViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if (touch.view?.isDescendant(of: containerView))! {
-            return false
+        if touch.view == containerView {
+            return true
         }
-        return true
+        return false
     }
 }
 

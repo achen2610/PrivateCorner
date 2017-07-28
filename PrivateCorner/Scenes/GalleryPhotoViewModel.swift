@@ -29,6 +29,7 @@ open class GalleryPhotoViewModel {
     fileprivate var album: Album
     fileprivate var items = [Item]()
     var titleAlbum: String
+    var arraySelectedCell : [Bool] = []
     let kNumberOfSectionsInCollectionView = 1
     weak var delegate: GalleryPhotoViewModelDelegate?
     
@@ -50,12 +51,25 @@ open class GalleryPhotoViewModel {
     
     func getGallery() {
         items = ItemManager.sharedInstance.getItems(album: album)
+        arraySelectedCell.removeAll()
+        if items.count > 0 {
+            for _ in 0...items.count - 1 {
+                arraySelectedCell.append(false)
+            }
+        }
         delegate?.reloadGallery()
     }
     
     func updateGallery(collectionView: UICollectionView) {
         let oldItems = items
         items = ItemManager.sharedInstance.getItems(album: album)
+        
+        arraySelectedCell.removeAll()
+        if items.count > 0 {
+            for _ in 0...items.count - 1 {
+                arraySelectedCell.append(false)
+            }
+        }
         
         collectionView.animateItemChanges(oldData: oldItems, newData: items)
         updateSupplementaryElement(collectionView: collectionView)

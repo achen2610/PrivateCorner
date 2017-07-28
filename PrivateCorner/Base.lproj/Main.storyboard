@@ -33,8 +33,15 @@
                                 <color key="textColor" red="1" green="0.58598096324457916" blue="0.2693483566890511" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQn-Qs-ONH" customClass="PasscodeView" customModule="PrivateCorner" customModuleProvider="target">
+                                <rect key="frame" x="40" y="100" width="240" height="20"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="GUJ-1H-mD0"/>
+                                </constraints>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="UML-ZA-0wC">
-                                <rect key="frame" x="40" y="190.5" width="240" height="329.5"/>
+                                <rect key="frame" x="40" y="180" width="240" height="329.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="QgN-AD-C0N">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="60"/>
@@ -175,13 +182,6 @@
                                     <constraint firstItem="hJd-b0-3o5" firstAttribute="height" secondItem="QgN-AD-C0N" secondAttribute="height" id="shB-Eh-QFy"/>
                                 </constraints>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQn-Qs-ONH" customClass="PasscodeView" customModule="PrivateCorner" customModuleProvider="target">
-                                <rect key="frame" x="40" y="100" width="240" height="20"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="GUJ-1H-mD0"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -192,6 +192,7 @@
                             <constraint firstItem="QgN-AD-C0N" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="60:320" id="FH9-mp-f3V"/>
                             <constraint firstItem="V3e-d0-Ecl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="IcG-9V-x2N"/>
                             <constraint firstItem="V3e-d0-Ecl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Lvk-Yf-NbU"/>
+                            <constraint firstItem="UML-ZA-0wC" firstAttribute="top" secondItem="fQn-Qs-ONH" secondAttribute="bottom" constant="60" id="Omt-cZ-BYE"/>
                             <constraint firstAttribute="trailing" secondItem="V3e-d0-Ecl" secondAttribute="trailing" id="QdK-oc-8Bj"/>
                             <constraint firstItem="fQn-Qs-ONH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="40" id="RrH-ey-H9h"/>
                             <constraint firstAttribute="trailing" secondItem="fQn-Qs-ONH" secondAttribute="trailing" constant="40" id="anJ-aU-pgg"/>
@@ -200,7 +201,6 @@
                             <constraint firstItem="gkZ-XG-48l" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="eqf-jo-x6t"/>
                             <constraint firstItem="UML-ZA-0wC" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="58:100" id="hK0-Fe-eVk"/>
                             <constraint firstItem="fQn-Qs-ONH" firstAttribute="top" secondItem="gkZ-XG-48l" secondAttribute="bottom" constant="40" id="m4J-mC-Q9j"/>
-                            <constraint firstAttribute="bottom" secondItem="UML-ZA-0wC" secondAttribute="bottom" constant="48" id="tfD-U5-INs"/>
                             <constraint firstAttribute="trailing" secondItem="UML-ZA-0wC" secondAttribute="trailing" constant="40" id="vQR-ZH-PbQ"/>
                         </constraints>
                     </view>

@@ -23,21 +23,22 @@ struct Key {
     }
     
     struct Headers {
-        static let Authorization = "Authorization"
-        static let ContentType = "Content-Type"
+        static let Authorization        = "Authorization"
+        static let ContentType          = "Content-Type"
     }
     struct Google{
-        static let placesKey = "some key here"//for photos
-        static let serverKey = "some key here"
+        static let placesKey            = "some key here"//for photos
+        static let serverKey            = "some key here"
     }
     
     struct ErrorMessage{
-        static let listNotFound = "ERROR_LIST_NOT_FOUND"
-        static let validationError = "ERROR_VALIDATION"
+        static let listNotFound         = "ERROR_LIST_NOT_FOUND"
+        static let validationError      = "ERROR_VALIDATION"
     }
     
     struct String {
-        static let notiUpdateCollectionView = "UpdateCollectionView"
+        static let notiUpdateGalleryWhenMoveFile    = "notiUpdateGalleryWhenMoveFile"
+        static let notiUpdateGallery                = "notiUpdateGallery"
     }
     
     enum ItemType {
