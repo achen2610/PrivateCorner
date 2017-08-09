@@ -10,6 +10,7 @@ target 'PrivateCorner' do
   pod 'DynamicColor', '~> 3.3'
   pod 'Diff'
   pod 'CDAlertView'
+  pod 'Gifu'
 
   # Pods for PrivateCorner
 

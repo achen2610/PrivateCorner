@@ -60,7 +60,7 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
             self.tabBarController?.tabBar.alpha = 0.0
         })
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
@@ -213,11 +213,19 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
     }
 
     @IBAction func clickDeleteButton(_ sender: Any) {
-        if let indexPath = collectionView.indexPathsForVisibleItems.first {
-            viewModel.deleteItem(index: indexPath.row, collectionView: collectionView)
+        let alertController = UIAlertController(title: nil, message: "Do you want to delete this image?", preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: "Delete", style: .default) { (deleteAction) in
+            if let indexPath = self.collectionView.indexPathsForVisibleItems.first {
+                self.viewModel.deleteItem(index: indexPath.row, collectionView: self.collectionView)
+            }
         }
+        deleteAction.setValue(UIColor(hexString: "#F71700"), forKey: "titleTextColor")
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
     }
-    
     
     // MARK: - PhotoViewViewModel Delegate
     func exportSuccess() {

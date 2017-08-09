@@ -9,12 +9,18 @@
 import Foundation
 import UIKit
 
+public protocol WebViewModelDelegate: class {
+    func updateProgressRing(value: CGFloat)
+    func downloadComplete()
+}
+
 open class WebViewModel {
     
     fileprivate var album: Album
     fileprivate var listAlbum: [Album]
-    fileprivate var imageDownload: UIImage?
     fileprivate var filename: String?
+    fileprivate var dataImage: Data?
+    weak var delegate: WebViewModelDelegate?
     
     struct cellLayout {
         static let itemsPerRow: CGFloat = 3
@@ -63,11 +69,16 @@ open class WebViewModel {
     
     func selectCollectionViewCell(indexPath: IndexPath) {
         let selectedAlbum = listAlbum[indexPath.row]
-        uploadImageToAlbum(selectedAlbum: selectedAlbum)
+        let subtype = MediaLibrary.getSubTypeOfFile(filename: self.filename!)
+        if subtype == "gif" {
+            uploadGifImageToAlbum(data: self.dataImage!, filename: nil, album: selectedAlbum)
+        } else {
+            uploadImageToAlbum(selectedAlbum: selectedAlbum)
+        }
     }
     
-    func setImageDownload(image: UIImage, filename: String) {
-        self.imageDownload = image
+    func setImageDownload(data: Data, filename: String) {
+        self.dataImage = data
         self.filename = filename
     }
     
@@ -136,7 +147,9 @@ open class WebViewModel {
     
     func uploadImageToAlbum(selectedAlbum: Album) {
         
-        if let image = self.imageDownload, let name = self.filename {
+        if let data = self.dataImage, let name = self.filename {
+            let image = UIImage(data: data)!
+            
             let fileManager = FileManager.default
             let currentIndex = Int(selectedAlbum.currentIndex)
             
@@ -174,7 +187,7 @@ open class WebViewModel {
             selectedAlbum.currentIndex = Int32(currentIndex + 1)
             CoreDataManager.sharedInstance.saveContext()
             
-            self.imageDownload = nil
+            self.dataImage = nil
             self.filename = nil
             
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateGallery), object: nil)
@@ -182,6 +195,89 @@ open class WebViewModel {
             print("===============")
             print("Upload image success")
         }
+    }
+    
+    func uploadGifImageToAlbum(data: Data, filename: String?, album: Album?) {
+        if let selectedAlbum = album  {
+            let fileManager = FileManager.default
+            let currentIndex = Int(selectedAlbum.currentIndex)
+            
+            let subtype = MediaLibrary.getSubTypeOfFile(filename: self.filename!)
+            let filename = String.init(format: "IMAGE_%i", currentIndex) + "." + subtype
+            let thumbname = "thumbnail" + "_" + filename
+            
+            // Add image to DB
+            let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
+            ItemManager.sharedInstance.add(info: info, toAlbum: selectedAlbum)
+            
+            // Save original image
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(selectedAlbum.name!).appendingPathComponent(filename)
+            if fileManager.fileExists(atPath: path.path) {
+                print("===============")
+                print("Image \(filename) exists")
+            } else {
+                fileManager.createFile(atPath: path.path, contents: data, attributes: nil)
+            }
+            
+            // Save thumbnail image
+            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(selectedAlbum.name!).appendingPathComponent(thumbname)
+            let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: UIImage(data: data)!)
+            if fileManager.fileExists(atPath: thumbnailPath.path) {
+                print("===============")
+                print("Thumbnail \(thumbname) exists")
+            } else {
+                if let data = UIImagePNGRepresentation(thumbnailImage) {
+                    fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
+                }
+            }
+            
+            selectedAlbum.currentIndex = Int32(currentIndex + 1)
+            CoreDataManager.sharedInstance.saveContext()
+        } else {
+            let fileManager = FileManager.default
+            let currentIndex = Int(self.album.currentIndex)
+            
+            let subtype = MediaLibrary.getSubTypeOfFile(filename: filename!)
+            let filename = String.init(format: "IMAGE_%i", currentIndex) + "." + subtype
+            let thumbname = "thumbnail" + "_" + filename
+            
+            // Add image to DB
+            let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
+            ItemManager.sharedInstance.add(info: info, toAlbum: self.album)
+            
+            // Save original image
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(self.album.name!).appendingPathComponent(filename)
+            if fileManager.fileExists(atPath: path.path) {
+                print("===============")
+                print("Image \(filename) exists")
+            } else {
+                fileManager.createFile(atPath: path.path, contents: data, attributes: nil)
+            }
+            
+            // Save thumbnail image
+            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(self.album.name!).appendingPathComponent(thumbname)
+            let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: UIImage(data: data)!)
+            if fileManager.fileExists(atPath: thumbnailPath.path) {
+                print("===============")
+                print("Thumbnail \(thumbname) exists")
+            } else {
+                if let data = UIImagePNGRepresentation(thumbnailImage) {
+                    fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
+                }
+            }
+            
+            self.album.currentIndex = Int32(currentIndex + 1)
+            CoreDataManager.sharedInstance.saveContext()
+        }
+
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateGallery), object: nil)
+        
+        print("===============")
+        print("Upload image success")
+    }
+
+    func uploadVideoToAlbum(url: URL) {
+        
     }
     
 //    func uploadVideoToCoreData(video: Video, avasset: AVAsset, collectionView: UICollectionView) {
@@ -227,3 +323,4 @@ open class WebViewModel {
 //    }
     
 }
+

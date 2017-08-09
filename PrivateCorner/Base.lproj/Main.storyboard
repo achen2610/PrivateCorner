@@ -34,14 +34,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fQn-Qs-ONH" customClass="PasscodeView" customModule="PrivateCorner" customModuleProvider="target">
-                                <rect key="frame" x="40" y="100" width="240" height="20"/>
+                                <rect key="frame" x="40" y="100.5" width="240" height="20"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="GUJ-1H-mD0"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="UML-ZA-0wC">
-                                <rect key="frame" x="40" y="180" width="240" height="329.5"/>
+                                <rect key="frame" x="40" y="180.5" width="240" height="329"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="QgN-AD-C0N">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="60"/>
@@ -77,7 +77,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="hJd-b0-3o5">
-                                        <rect key="frame" x="0.0" y="90" width="240" height="60"/>
+                                        <rect key="frame" x="0.0" y="89.5" width="240" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rh2-BY-4kb">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -143,7 +143,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="vdA-4q-x8n">
-                                        <rect key="frame" x="0.0" y="269.5" width="240" height="60"/>
+                                        <rect key="frame" x="0.0" y="269" width="240" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FS4-d3-LaZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>

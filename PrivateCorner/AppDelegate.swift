@@ -21,6 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         set { }
     }
     var tabBarController: TabBarController!
+    
+    lazy var downloadButton: UIButton = {
+        let button = UIButton (frame: CGRect(x: kScreenWidth - 50 * kScale, y: kScreenHeight - 100 * kScale, width: 30 * kScale, height: 30 * kScale))
+        button.setTitle("Download", for: .normal)
+        button.backgroundColor = UIColor.blue
+        button.addTarget(self, action: #selector(clickDownloadButton), for: .touchUpInside)
+        return button
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -29,6 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController = mainStoryboard.instantiateViewController(withIdentifier: "tabBarController") as! TabBarController
 //        tabBarController.isHeroEnabled = true
         tabBarController.delegate = tabBarController
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(windowBecameHidden(notification:)), name: NSNotification.Name.UIWindowDidBecomeVisible, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(windowBecameVisible(notification:)), name: NSNotification.Name.UIWindowDidBecomeHidden, object: nil)
         
         return true
     }
@@ -59,7 +70,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         CoreDataManager.sharedInstance.saveContext()
     }
-
+    
+    func clickDownloadButton() {
+        print("Download button clicked!")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DownloadVideoNotification"), object: nil)
+    }
 
     func backToLockScreen() {
         let naviController = window?.rootViewController as! UINavigationController
@@ -71,6 +86,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         _ = [naviController .popViewController(animated: false)]
+    }
+    
+    func windowBecameHidden(notification: Notification) {
+        let newWindow = notification.object as! UIWindow
+        let name = NSStringFromClass(newWindow.classForCoder)
+        if name == "UIRemoteKeyboardWindow" || name == "UITextEffectsWindow" {
+            return
+        }
+        
+        if newWindow != window {
+            newWindow.addSubview(downloadButton)
+        }
+    }
+    
+    func windowBecameVisible(notification: Notification) {
+        let newWindow = notification.object as! UIWindow
+        if newWindow != window {
+            downloadButton.removeFromSuperview()
+        }
     }
 }
 

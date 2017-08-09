@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import MessageUI
 import Photos
+import Gifu
 
 public protocol PhotoViewViewModelDelegate: class {
 
@@ -40,8 +41,20 @@ open class PhotoViewViewModel {
         
         if item.type == "image" {
             if let photoCell = cell as? PhotoCell {
+                photoCell.imageView.prepareForReuse()
                 let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(item.fileName!)
+//                let ext = item.fileName!.components(separatedBy: ".").last
+//                if ext == "gif" {
+//                    do {
+//                        let data = try Data(contentsOf: urlPath)
+//                        photoCell.imageView.animate(withGIFData: data)
+//                        
+//                    } catch let error as NSError {
+//                        print("Error \(error)")
+//                    }
+//                } else {
                 photoCell.image = MediaLibrary.image(urlPath: urlPath)
+//                }
             }
         } else {
             if let videoCell = cell as? VideoCell {

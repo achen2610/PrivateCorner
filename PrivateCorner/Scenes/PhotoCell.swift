@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Gifu
 
 public protocol PhotoCellDelegate: class {
     func tapPhotoView()
@@ -14,7 +15,7 @@ public protocol PhotoCellDelegate: class {
 
 class PhotoCell: UICollectionViewCell {
 
-    var imageView: UIImageView!
+    var imageView: GIFImageView!
     var scrollView: UIScrollView!
     var dTapGR: UITapGestureRecognizer!
     var tapGR: UITapGestureRecognizer!
@@ -36,7 +37,7 @@ class PhotoCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         scrollView = UIScrollView(frame: bounds)
-        imageView = UIImageView(frame: bounds)
+        imageView = GIFImageView(frame: bounds)
         imageView.contentMode = .scaleAspectFill
         scrollView.addSubview(imageView)
         scrollView.maximumZoomScale = 3

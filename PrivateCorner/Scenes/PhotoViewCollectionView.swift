@@ -18,11 +18,11 @@ extension PhotoViewController: UICollectionViewDataSource {
         let type = viewModel.getTypeItem(index: indexPath.row)
         if type == "image" {
             if let photoCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.photoCell, for: indexPath) as? PhotoCell {
-                viewModel.configure(cell: photoCell, atIndex: indexPath.item)
                 photoCell.delegate = self
                 photoCell.imageView.heroID = "image_\(indexPath.row)"
                 photoCell.imageView.heroModifiers = [.position(CGPoint(x:view.bounds.width/2, y:view.bounds.height + view.bounds.width/2)), .scale(0.8), .fade]
                 photoCell.imageView.isOpaque = true
+                viewModel.configure(cell: photoCell, atIndex: indexPath.item)
                 
                 return photoCell
             }

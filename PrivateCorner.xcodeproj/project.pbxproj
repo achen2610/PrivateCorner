@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		002681A31F29CB4D006F6CE4 /* WebViewCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002681A21F29CB4D006F6CE4 /* WebViewCollectionViewController.swift */; };
+		002681A31F29CB4D006F6CE4 /* WebViewCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002681A21F29CB4D006F6CE4 /* WebViewCollectionView.swift */; };
 		002681A61F29CC90006F6CE4 /* WebAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002681A51F29CC90006F6CE4 /* WebAlbumCell.swift */; };
 		002681A81F29CCA4006F6CE4 /* WebAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 002681A71F29CCA4006F6CE4 /* WebAlbumCell.xib */; };
 		0035DEFD1EF0D0A9004581FF /* noimagefound.png in Resources */ = {isa = PBXBuildFile; fileRef = 0035DEFC1EF0D0A9004581FF /* noimagefound.png */; };
@@ -15,7 +15,7 @@
 		00438D331EDFA51C0060EFA4 /* playvideo.png in Resources */ = {isa = PBXBuildFile; fileRef = 00438D321EDFA51C0060EFA4 /* playvideo.png */; };
 		0047FB611E9B749300BDF919 /* remove@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0047FB601E9B749300BDF919 /* remove@3x.png */; };
 		004B28F11E8CA050007C910A /* GalleryPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28EB1E8CA050007C910A /* GalleryPhotoViewController.swift */; };
-		004B28F31E8CA555007C910A /* GalleryPhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28F21E8CA555007C910A /* GalleryPhotoCollectionViewController.swift */; };
+		004B28F31E8CA555007C910A /* GalleryPhotoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28F21E8CA555007C910A /* GalleryPhotoCollectionView.swift */; };
 		004B28F61E8CA624007C910A /* GalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28F51E8CA624007C910A /* GalleryCell.swift */; };
 		004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004B28F71E8CA62D007C910A /* GalleryCell.xib */; };
 		004B29051E8CE57F007C910A /* ImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004B28FF1E8CE57F007C910A /* ImportViewController.swift */; };
@@ -100,7 +100,7 @@
 		007980621EE696EF00C5E13D /* VideosLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980321EE696EF00C5E13D /* VideosLibrary.swift */; };
 		007B75491E91E01400483293 /* ConstantsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B75481E91E01400483293 /* ConstantsSize.swift */; };
 		007B754B1E91E08D00483293 /* ConstantsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B754A1E91E08D00483293 /* ConstantsKey.swift */; };
-		007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */; };
+		007D82CD1E8B74DD005CBBC2 /* SettingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CC1E8B74DD005CBBC2 /* SettingTableView.swift */; };
 		007D82D01E8B76A2005CBBC2 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */; };
 		007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007D82D11E8B76B0005CBBC2 /* SettingCell.xib */; };
 		007E5ADE1EE53DAA00FDC2EB /* UICircularProgressRingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007E5ADB1EE53DAA00FDC2EB /* UICircularProgressRingDelegate.swift */; };
@@ -285,7 +285,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		002681A21F29CB4D006F6CE4 /* WebViewCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCollectionViewController.swift; sourceTree = "<group>"; };
+		002681A21F29CB4D006F6CE4 /* WebViewCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCollectionView.swift; sourceTree = "<group>"; };
 		002681A51F29CC90006F6CE4 /* WebAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebAlbumCell.swift; sourceTree = "<group>"; };
 		002681A71F29CCA4006F6CE4 /* WebAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebAlbumCell.xib; sourceTree = "<group>"; };
 		0035DEFC1EF0D0A9004581FF /* noimagefound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noimagefound.png; sourceTree = "<group>"; };
@@ -293,7 +293,7 @@
 		00438D321EDFA51C0060EFA4 /* playvideo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playvideo.png; sourceTree = "<group>"; };
 		0047FB601E9B749300BDF919 /* remove@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remove@3x.png"; sourceTree = "<group>"; };
 		004B28EB1E8CA050007C910A /* GalleryPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoViewController.swift; sourceTree = "<group>"; };
-		004B28F21E8CA555007C910A /* GalleryPhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoCollectionViewController.swift; sourceTree = "<group>"; };
+		004B28F21E8CA555007C910A /* GalleryPhotoCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoCollectionView.swift; sourceTree = "<group>"; };
 		004B28F51E8CA624007C910A /* GalleryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCell.swift; sourceTree = "<group>"; };
 		004B28F71E8CA62D007C910A /* GalleryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GalleryCell.xib; sourceTree = "<group>"; };
 		004B28FF1E8CE57F007C910A /* ImportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportViewController.swift; sourceTree = "<group>"; };
@@ -384,7 +384,7 @@
 		007980321EE696EF00C5E13D /* VideosLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosLibrary.swift; sourceTree = "<group>"; };
 		007B75481E91E01400483293 /* ConstantsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsSize.swift; sourceTree = "<group>"; };
 		007B754A1E91E08D00483293 /* ConstantsKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsKey.swift; sourceTree = "<group>"; };
-		007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		007D82CC1E8B74DD005CBBC2 /* SettingTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableView.swift; sourceTree = "<group>"; };
 		007D82CF1E8B76A2005CBBC2 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		007D82D11E8B76B0005CBBC2 /* SettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
 		007E5ADB1EE53DAA00FDC2EB /* UICircularProgressRingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICircularProgressRingDelegate.swift; sourceTree = "<group>"; };
@@ -601,7 +601,7 @@
 				004B28F41E8CA617007C910A /* UI */,
 				00784CD61ED28D18004F3E95 /* GalleryPhotoViewModel.swift */,
 				004B28EB1E8CA050007C910A /* GalleryPhotoViewController.swift */,
-				004B28F21E8CA555007C910A /* GalleryPhotoCollectionViewController.swift */,
+				004B28F21E8CA555007C910A /* GalleryPhotoCollectionView.swift */,
 			);
 			name = GalleryPhoto;
 			sourceTree = "<group>";
@@ -1051,7 +1051,7 @@
 				002681A41F29CC7A006F6CE4 /* UI */,
 				008B5E111F289E1B0044EEF0 /* WebViewModel.swift */,
 				009049081EFD03EE00EBAEEB /* WebViewController.swift */,
-				002681A21F29CB4D006F6CE4 /* WebViewCollectionViewController.swift */,
+				002681A21F29CB4D006F6CE4 /* WebViewCollectionView.swift */,
 			);
 			name = Web;
 			sourceTree = "<group>";
@@ -1691,7 +1691,7 @@
 			children = (
 				007D82CE1E8B7679005CBBC2 /* UI */,
 				00E0B1CF1E7946AB0001DF8F /* SettingViewController.swift */,
-				007D82CC1E8B74DD005CBBC2 /* SettingTableViewController.swift */,
+				007D82CC1E8B74DD005CBBC2 /* SettingTableView.swift */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -2061,7 +2061,7 @@
 				008775EC1EEF815F003C50AF /* MoveFileViewController.swift in Sources */,
 				0079803B1EE696EF00C5E13D /* Cart.swift in Sources */,
 				00DDF9A91ED436E800093770 /* HeroTypes.swift in Sources */,
-				007D82CD1E8B74DD005CBBC2 /* SettingTableViewController.swift in Sources */,
+				007D82CD1E8B74DD005CBBC2 /* SettingTableView.swift in Sources */,
 				008775EA1EEF8151003C50AF /* MoveFileViewModel.swift in Sources */,
 				007980341EE696EF00C5E13D /* CameraMan.swift in Sources */,
 				007F62DC1ECD86BD00226B49 /* PasscodeView.swift in Sources */,
@@ -2213,7 +2213,7 @@
 				009083361F00C88E00EE6728 /* SPLayout.swift in Sources */,
 				009083661F00C88E00EE6728 /* SPGradientView.swift in Sources */,
 				0079803D1EE696EF00C5E13D /* ImageCell.swift in Sources */,
-				004B28F31E8CA555007C910A /* GalleryPhotoCollectionViewController.swift in Sources */,
+				004B28F31E8CA555007C910A /* GalleryPhotoCollectionView.swift in Sources */,
 				00DDF9AC1ED436E800093770 /* Nodes.swift in Sources */,
 				009083641F00C88E00EE6728 /* SPGradeWithBlurView.swift in Sources */,
 				007980621EE696EF00C5E13D /* VideosLibrary.swift in Sources */,
@@ -2221,7 +2221,7 @@
 				004B28F61E8CA624007C910A /* GalleryCell.swift in Sources */,
 				009083691F00C88E00EE6728 /* SPTitleWithSubtitleView.swift in Sources */,
 				009083841F00E2D800EE6728 /* SPUIScreenExtension.swift in Sources */,
-				002681A31F29CB4D006F6CE4 /* WebViewCollectionViewController.swift in Sources */,
+				002681A31F29CB4D006F6CE4 /* WebViewCollectionView.swift in Sources */,
 				00DDF9B21ED436E800093770 /* IgnoreSubviewModifiersPreprocessor.swift in Sources */,
 				007F06D01ED3CE3F0081EAAE /* ConstantColor.swift in Sources */,
 				009083811F00E2D800EE6728 /* SPUIButtonExtenshion.swift in Sources */,

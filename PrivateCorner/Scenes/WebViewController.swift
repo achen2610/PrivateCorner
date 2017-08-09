@@ -8,11 +8,16 @@
 
 import UIKit
 import Photos
+import CDAlertView
 
 class WebViewController: UIViewController {
     
     @IBOutlet weak var webView: UIWebView!
+    var progressView: UIView!
+    var progressRing: UICircularProgressRingView!
     var albumCollectionView: UICollectionView!
+    var alert: CDAlertView!
+    
     lazy var containerView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: kScreenHeight, width: kScreenWidth, height: kScreenHeight))
         view.backgroundColor = UIColor.clear
@@ -70,8 +75,10 @@ class WebViewController: UIViewController {
     
     var viewModel: WebViewModel!
     var currentUrl: URL?
+    var downloadUrl: URL?
     var longPress: UILongPressGestureRecognizer?
     var isShow = false
+    var isUploading: Bool = false
     
     // MARK: - Object lifecycle
     override func awakeFromNib() {
@@ -88,6 +95,8 @@ class WebViewController: UIViewController {
         loadData()
         
         NotificationCenter.default.addObserver(self, selector: #selector(contextualMenuAction(notification:)), name: NSNotification.Name(rawValue: "TapAndHoldNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDownloadVideo), name: NSNotification.Name(rawValue: "DownloadVideoNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerItemBecameCurrent(notification:)), name: NSNotification.Name("AVPlayerItemBecameCurrentNotification"), object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -100,6 +109,7 @@ class WebViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         showCollectionView(show: false)
+        showFooterView(show: true)
     }
     
     // MARK: - Event handling
@@ -142,6 +152,20 @@ class WebViewController: UIViewController {
         footerView.addSubview(backButton)
         footerView.addSubview(nextButton)
         view.addSubview(footerView)
+        
+        progressView = UIView()
+        progressView.backgroundColor = UIColor.clear
+        progressView.heightAnchor.constraint(equalToConstant: 153.0).isActive = true
+        
+        progressRing = UICircularProgressRingView(frame: CGRect(x: 35, y: 0, width: 153, height: 153))
+        // Change any of the properties you'd like
+        let blue = UIColor(hexString: "#3498db")
+        progressRing.outerRingColor = blue
+        progressRing.outerRingWidth = 8.0
+        progressRing.innerRingColor = blue.lighter()
+        progressRing.innerRingSpacing = 0
+        progressRing.fontColor = blue.darkened()
+        progressView.addSubview(progressRing)
     }
     
     func loadData() {
@@ -200,9 +224,14 @@ class WebViewController: UIViewController {
                     let data = try Data.init(contentsOf: urlSRC)
                     let image = UIImage(data: data)
                     let filename = src.components(separatedBy: "/").last
+                    let subtype = MediaLibrary.getSubTypeOfFile(filename: filename!)
                     
                     self.viewModel.getAlbumDownloads()
-                    self.viewModel.uploadImageToDownloadAlbum(image: image!, filename: filename!)
+                    if subtype == "gif" {
+                        self.viewModel.uploadGifImageToAlbum(data: data, filename: filename, album: nil)
+                    } else {
+                        self.viewModel.uploadImageToDownloadAlbum(image: image!, filename: filename!)
+                    }
                     
                 } catch let error as NSError {
                     print("Could not fetch. \(error), \(error.userInfo)")
@@ -214,14 +243,14 @@ class WebViewController: UIViewController {
                 let urlSRC = URL.init(string: src)!
                 do {
                     let data = try Data.init(contentsOf: urlSRC)
-                    let image = UIImage(data: data)
                     let filename = src.components(separatedBy: "/").last
-                    self.viewModel.setImageDownload(image: image!, filename: filename!)
+                    self.viewModel.setImageDownload(data: data, filename: filename!)
                     
                     self.viewModel.getListAlbum()
                     self.albumCollectionView.reloadData()
                     
                     self.showCollectionView(show: true)
+                    self.showFooterView(show: false)
 
                 } catch let error as NSError {
                     print("Could not fetch. \(error), \(error.userInfo)")
@@ -265,9 +294,37 @@ class WebViewController: UIViewController {
         }
     }
     
+    func playerItemBecameCurrent(notification: Notification) {
+        guard let playerItem = notification.object as? AVPlayerItem,
+            let asset = playerItem.asset as? AVURLAsset else {return}
+        let url = asset.url
+        print("url \(url)")
+        
+        downloadUrl = url
+    }
+    
+    func handleDownloadVideo() {
+        if let url = downloadUrl {
+            isUploading = true
+            progressRing.alpha = 1.0
+            alert = CDAlertView(title: nil, message: "Download processing!", type: .warning)
+            alert.customView = progressView
+            alert.show()
+            
+            let req = NSMutableURLRequest(url:url)
+            let config = URLSessionConfiguration.default
+            let session = URLSession(configuration: config, delegate: self, delegateQueue: OperationQueue.main)
+            
+            let task : URLSessionDownloadTask = session.downloadTask(with: req as URLRequest)
+            task.resume()
+//            viewModel.downloadVideo(url: url)
+        }
+    }
+    
     // MARK: - Event selector
     func clickContainerView() {
         showCollectionView(show: false)
+        showFooterView(show: true)
     }
     
     func clickBackButton() {
@@ -287,6 +344,7 @@ extension WebViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBars.showsCancelButton = true
         showCollectionView(show: false)
+        showFooterView(show: true)
         
         return true
     }
@@ -335,6 +393,21 @@ extension WebViewController: UIGestureRecognizerDelegate {
             return true
         }
         return false
+    }
+}
+
+extension WebViewController: URLSessionDownloadDelegate {
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+        let value = CGFloat(totalBytesWritten) / CGFloat(totalBytesExpectedToWrite)
+        self.progressRing.setProgress(value: value, animationDuration: 0.3)
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        
     }
 }
 

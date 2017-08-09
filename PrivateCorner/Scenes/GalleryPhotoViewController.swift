@@ -340,7 +340,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     }
     
     @IBAction func clickDeleteButton(_ sender: Any) {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: nil, message: "Do you want to delete images?", preferredStyle: .alert)
         let deleteAction = UIAlertAction(title: "Delete", style: .default) { (deleteAction) in
             var indexSelectedImage = [Int]()
             var index = 0
@@ -563,9 +563,6 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
         if (viewController as? GalleryPhotoViewController) != nil {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015), .delay(0.25)]
             navigationController?.heroNavigationAnimationType = .fade
-        } else if (viewController as? PhotoViewController) != nil {
-            navigationController?.heroNavigationAnimationType = .fade
-            addPhotoButton.heroModifiers = [.fade]
         } else {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
             navigationController?.heroNavigationAnimationType = .fade

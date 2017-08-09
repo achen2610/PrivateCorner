@@ -190,6 +190,14 @@ open class GalleryPhotoViewModel {
             
             let oldItems = self.items
             self.items = ItemManager.sharedInstance.getItems(album: self.album)
+            
+            self.arraySelectedCell.removeAll()
+            if self.items.count > 0 {
+                for _ in 0...self.items.count - 1 {
+                    self.arraySelectedCell.append(false)
+                }
+            }
+            
             self.delegate?.reloadGallery()
             collectionView.animateItemChanges(oldData: oldItems, newData: self.items)
             self.updateSupplementaryElement(collectionView: collectionView)
@@ -229,6 +237,14 @@ open class GalleryPhotoViewModel {
                         
                         let oldItems = self.items
                         self.items = ItemManager.sharedInstance.getItems(album: self.album)
+                        
+                        self.arraySelectedCell.removeAll()
+                        if self.items.count > 0 {
+                            for _ in 0...self.items.count - 1 {
+                                self.arraySelectedCell.append(false)
+                            }
+                        }
+                        
                         self.delegate?.reloadGallery()
                         collectionView.animateItemChanges(oldData: oldItems, newData: self.items)
                         self.updateSupplementaryElement(collectionView: collectionView)
