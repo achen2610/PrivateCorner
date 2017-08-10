@@ -309,6 +309,7 @@ class WebViewController: UIViewController {
             progressRing.alpha = 1.0
             alert = CDAlertView(title: nil, message: "Download processing!", type: .warning)
             alert.customView = progressView
+            alert.isUserInteractionEnabled = false
             alert.show()
             
             let req = NSMutableURLRequest(url:url)
@@ -398,16 +399,44 @@ extension WebViewController: UIGestureRecognizerDelegate {
 
 extension WebViewController: URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        
+        if isUploading {
+            isUploading = false
+            alert.hide(isPopupAnimated: false)
+            alert = CDAlertView(title: nil, message: "Download error! Please try again!", type: .success)
+            alert.isUserInteractionEnabled = true
+            alert.show()
+            progressRing.setProgress(value: 0, animationDuration: 0)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.downloadButton.isUserInteractionEnabled = true
+            
+            delay(1.2, execute: {
+                self.alert.hide(isPopupAnimated: true)
+            })
+        }
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        let value = CGFloat(totalBytesWritten) / CGFloat(totalBytesExpectedToWrite)
+        let value = CGFloat(totalBytesWritten) / CGFloat(totalBytesExpectedToWrite) * 100
         self.progressRing.setProgress(value: value, animationDuration: 0.3)
     }
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        
+        if isUploading {
+            isUploading = false
+            alert.hide(isPopupAnimated: false)
+            alert = CDAlertView(title: nil, message: "Download success!", type: .success)
+            alert.isUserInteractionEnabled = true
+            alert.show()
+            progressRing.setProgress(value: 0, animationDuration: 0)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.downloadButton.isUserInteractionEnabled = true
+            
+            delay(1.2, execute: {
+                self.alert.hide(isPopupAnimated: true)
+            })
+            
+            viewModel.uploadVideoToAlbum(url: location)
+        }
     }
 }
 

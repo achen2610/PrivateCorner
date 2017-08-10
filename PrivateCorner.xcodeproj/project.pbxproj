@@ -31,7 +31,6 @@
 		006486CB1E70EAD900419C27 /* PrivateCornerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486CA1E70EAD900419C27 /* PrivateCornerUITests.swift */; };
 		006486EA1E70EFD500419C27 /* ConstantsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 006486E31E70EFD500419C27 /* ConstantsAPI.swift */; };
 		006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 006486EB1E70EFE400419C27 /* Assets.xcassets */; };
-		006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006486EF1E70EFEB00419C27 /* LaunchScreen.storyboard */; };
 		006486F41E70EFEB00419C27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 006486F11E70EFEB00419C27 /* Main.storyboard */; };
 		0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0073A18A1E71162100490675 /* data-security-tips.jpg */; };
 		0075E44A1EFA25A600E18B64 /* GlobalMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0075E4491EFA25A600E18B64 /* GlobalMethods.swift */; };
@@ -313,9 +312,8 @@
 		006486CA1E70EAD900419C27 /* PrivateCornerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateCornerUITests.swift; sourceTree = "<group>"; };
 		006486CC1E70EAD900419C27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		006486E31E70EFD500419C27 /* ConstantsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsAPI.swift; sourceTree = "<group>"; };
-		006486EB1E70EFE400419C27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		006486EB1E70EFE400419C27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
 		006486EC1E70EFE400419C27 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
-		006486F01E70EFEB00419C27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		006486F21E70EFEB00419C27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0073A18A1E71162100490675 /* data-security-tips.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "data-security-tips.jpg"; sourceTree = "<group>"; };
 		0075E4491EFA25A600E18B64 /* GlobalMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalMethods.swift; sourceTree = "<group>"; };
@@ -667,9 +665,7 @@
 				006486E71E70EFD500419C27 /* Models */,
 				006486E81E70EFD500419C27 /* Scenes */,
 				006486AA1E70EAD900419C27 /* AppDelegate.swift */,
-				006486EF1E70EFEB00419C27 /* LaunchScreen.storyboard */,
 				006486F11E70EFEB00419C27 /* Main.storyboard */,
-				006486EB1E70EFE400419C27 /* Assets.xcassets */,
 				0094F6D11E8E3E56007BEFAE /* PrivateData.xcdatamodeld */,
 				006486E91E70EFD500419C27 /* Supporting Files */,
 			);
@@ -786,6 +782,7 @@
 		006486E91E70EFD500419C27 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				006486EB1E70EFE400419C27 /* Assets.xcassets */,
 				006486EC1E70EFE400419C27 /* Info.plist */,
 				008B5E0F1F2872130044EEF0 /* JSTools.js */,
 			);
@@ -1847,7 +1844,6 @@
 				0075F2081EDE61DE0006AB5F /* albums.png in Resources */,
 				007D82D21E8B76B0005CBBC2 /* SettingCell.xib in Resources */,
 				00438D331EDFA51C0060EFA4 /* playvideo.png in Resources */,
-				006486F31E70EFEB00419C27 /* LaunchScreen.storyboard in Resources */,
 				004B290A1E8CE96A007C910A /* import-on@3x.png in Resources */,
 				00815FAD1EE7DF050029FE02 /* selected.png in Resources */,
 				007718B71EE94694001211CB /* export@3x.png in Resources */,
@@ -2286,14 +2282,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		006486EF1E70EFEB00419C27 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				006486F01E70EFEB00419C27 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		006486F11E70EFEB00419C27 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2403,6 +2391,7 @@
 			baseConfigurationReference = 9DE26507F8B79544B49BFB24 /* Pods-PrivateCorner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = B5A39BBFXA;
 				INFOPLIST_FILE = PrivateCorner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -2418,6 +2407,7 @@
 			baseConfigurationReference = 2F9218FBAB4F8092F6091BF9 /* Pods-PrivateCorner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = B5A39BBFXA;
 				INFOPLIST_FILE = PrivateCorner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;

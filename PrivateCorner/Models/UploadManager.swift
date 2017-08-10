@@ -44,6 +44,30 @@ class UploadManager  {
         }
     }
     
+    public func uploadVideo(thumbImage: UIImage, videoPath: URL, destinationPath: URL, thumbPath: URL, completion: @escaping (Bool) -> Void) {
+        let fileManager = FileManager.default
+        
+        if fileManager.fileExists(atPath: destinationPath.path) {
+            print("===============")
+            print("Video \(destinationPath.lastPathComponent) exists")
+        } else {
+            self.saveVideoFile(videoUrl: videoPath, destinationPath: destinationPath, delegate: nil)
+        }
+        
+        if fileManager.fileExists(atPath: thumbPath.path) {
+            print("===============")
+            print("Thumbnail \(thumbPath.lastPathComponent) exists")
+            completion(true)
+        } else {
+            if let data = UIImagePNGRepresentation(thumbImage) {
+                let success = fileManager.createFile(atPath: thumbPath.path, contents: data, attributes: nil)
+                if success {
+                    completion(true)
+                }
+            }
+        }
+    }
+    
     private func saveVideoFile(videoUrl: URL, destinationPath urlPath: URL, delegate: GalleryPhotoViewModelDelegate?) {
         let fileManager = FileManager.default
         

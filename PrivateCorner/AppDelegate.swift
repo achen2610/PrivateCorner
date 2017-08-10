@@ -74,6 +74,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func clickDownloadButton() {
         print("Download button clicked!")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DownloadVideoNotification"), object: nil)
+        
+        downloadButton.isUserInteractionEnabled = false
     }
 
     func backToLockScreen() {
