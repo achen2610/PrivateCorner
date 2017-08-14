@@ -55,6 +55,9 @@
                                                 <state key="normal" title="1">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TLv-lX-kah"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0tp-aO-mgN">
                                                 <rect key="frame" x="90" y="0.0" width="60" height="60"/>
@@ -62,6 +65,9 @@
                                                 <state key="normal" title="2">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="r3k-xk-Hly"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wzk-kf-Azc">
                                                 <rect key="frame" x="180" y="0.0" width="60" height="60"/>
@@ -69,6 +75,9 @@
                                                 <state key="normal" title="3">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KoG-52-Qja"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -88,6 +97,9 @@
                                                 <state key="normal" title="4">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qyu-ba-PhL"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mlB-2N-m6R">
                                                 <rect key="frame" x="90" y="0.0" width="60" height="60"/>
@@ -95,6 +107,9 @@
                                                 <state key="normal" title="5">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gqY-Qg-RND"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZsC-Tf-MiC">
                                                 <rect key="frame" x="180" y="0.0" width="60" height="60"/>
@@ -102,6 +117,9 @@
                                                 <state key="normal" title="6">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h1f-Lp-dfy"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -121,6 +139,9 @@
                                                 <state key="normal" title="7">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2rF-uz-mTi"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2OM-5Q-cBm">
                                                 <rect key="frame" x="90" y="0.0" width="60" height="60"/>
@@ -128,6 +149,9 @@
                                                 <state key="normal" title="8">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tjk-Nn-FzX"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5a-1B-d4M">
                                                 <rect key="frame" x="180" y="0.0" width="60" height="60"/>
@@ -135,6 +159,9 @@
                                                 <state key="normal" title="9">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="diu-VN-Rho"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -151,9 +178,12 @@
                                                     <constraint firstAttribute="width" secondItem="FS4-d3-LaZ" secondAttribute="height" multiplier="1:1" id="PS4-0d-bKz"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                                <state key="normal" title="Private Corner">
+                                                <state key="normal" title="Touch ID">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedTouchIDButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cTv-WL-PX5"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuD-q4-KYy">
                                                 <rect key="frame" x="90" y="0.0" width="60" height="60"/>
@@ -161,6 +191,9 @@
                                                 <state key="normal" title="0">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fIu-TI-gzP"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsL-Oj-k81">
                                                 <rect key="frame" x="180" y="0.0" width="60" height="60"/>
@@ -168,6 +201,9 @@
                                                 <state key="normal" title="Delete">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clickedCancelButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CsY-gu-5gF"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -210,7 +246,6 @@
                         <outlet property="EightButton" destination="2OM-5Q-cBm" id="eGv-Bx-3YY"/>
                         <outlet property="FiveButton" destination="mlB-2N-m6R" id="bZE-wi-qav"/>
                         <outlet property="FourButton" destination="Rh2-BY-4kb" id="2g4-aX-MUD"/>
-                        <outlet property="LogoButton" destination="FS4-d3-LaZ" id="6cQ-2j-Ch2"/>
                         <outlet property="NineButton" destination="C5a-1B-d4M" id="UeG-pr-XSw"/>
                         <outlet property="OneButton" destination="DeG-Ae-Zd1" id="DHh-V6-5zQ"/>
                         <outlet property="PasscodeView" destination="fQn-Qs-ONH" id="Q4F-W0-ydL"/>
@@ -218,6 +253,7 @@
                         <outlet property="SixButton" destination="ZsC-Tf-MiC" id="Sh5-Cf-HHv"/>
                         <outlet property="ThreeButton" destination="wzk-kf-Azc" id="cUj-yE-cHm"/>
                         <outlet property="TitleLabel" destination="gkZ-XG-48l" id="aDl-jZ-Sw1"/>
+                        <outlet property="TouchIDButton" destination="FS4-d3-LaZ" id="nA4-2l-2M8"/>
                         <outlet property="TwoButton" destination="0tp-aO-mgN" id="eUn-9m-SmZ"/>
                         <outlet property="ZeroButton" destination="nuD-q4-KYy" id="bzC-cS-9jn"/>
                         <outlet property="backgroundImageView" destination="V3e-d0-Ecl" id="iFD-F4-tmV"/>

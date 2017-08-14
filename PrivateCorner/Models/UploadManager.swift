@@ -44,26 +44,20 @@ class UploadManager  {
         }
     }
     
-    public func uploadVideo(thumbImage: UIImage, videoPath: URL, destinationPath: URL, thumbPath: URL, completion: @escaping (Bool) -> Void) {
+    public func uploadVideo(videoPath: URL, destinationPath: URL, completion: @escaping (Bool) -> Void) {
         let fileManager = FileManager.default
         
         if fileManager.fileExists(atPath: destinationPath.path) {
             print("===============")
             print("Video \(destinationPath.lastPathComponent) exists")
-        } else {
-            self.saveVideoFile(videoUrl: videoPath, destinationPath: destinationPath, delegate: nil)
-        }
-        
-        if fileManager.fileExists(atPath: thumbPath.path) {
-            print("===============")
-            print("Thumbnail \(thumbPath.lastPathComponent) exists")
             completion(true)
         } else {
-            if let data = UIImagePNGRepresentation(thumbImage) {
-                let success = fileManager.createFile(atPath: thumbPath.path, contents: data, attributes: nil)
-                if success {
-                    completion(true)
-                }
+            do {
+                try fileManager.moveItem(at: videoPath, to: destinationPath)
+                completion(true)
+            } catch let error as NSError {
+                print("Error when move file \(error)")
+                completion(false)
             }
         }
     }

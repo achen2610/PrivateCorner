@@ -277,39 +277,52 @@ open class WebViewModel {
         print("Upload image success")
     }
 
-    func uploadVideoToAlbum(url: URL) {
-        let fileManager = FileManager.default
-        let currentIndex = Int(album.currentIndex)
-        let name = url.lastPathComponent
+    func uploadVideoToAlbum(url: URL, downloadUrl: URL) {
+        let currentIndex = album.currentIndex
+        let name = downloadUrl.lastPathComponent
         let subtype = MediaLibrary.getSubTypeOfFile(filename: name)
         let filename = String.init(format: "VIDEO_%i", currentIndex) + "." + subtype
-        let thumbname = "thumbnail_" + String.init(format: "VIDEO_%i", currentIndex) + ".JPG"
-        let asset : AVURLAsset = AVURLAsset(url: url, options: nil)
-        let duration : CMTime = asset.duration
         
-        //Get thumb image video
-        var thumbImage = UIImage()
-        let generator = AVAssetImageGenerator(asset: asset)
-        do {
-            let frameRef = try generator.copyCGImage(at: CMTimeMake(3, 1), actualTime: nil)
-            thumbImage = UIImage(cgImage: frameRef)
-        } catch let error as NSError {
-            print("Error : \(error)")
-        }
-        
-        // Add video to database
-        let info: [String: Any] = ["filename": filename,
-                                   "thumbname": thumbname,
-                                   "type": Key.ItemType.VideoType,
-                                   "duration": CMTimeGetSeconds(duration)]
-        ItemManager.sharedInstance.add(info: info, toAlbum: album)
-        
-        // Save original video & thumbnail
+        // Save original video
         let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
-        let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
         
-        UploadManager.sharedInstance.uploadVideo(thumbImage: thumbImage, videoPath: url, destinationPath: path, thumbPath: thumbPath) { (status) in
+        UploadManager.sharedInstance.uploadVideo(videoPath: url, destinationPath: path) { (status) in
             if status {
+                let thumbname = "thumbnail_" + String.init(format: "VIDEO_%i", currentIndex) + ".JPG"
+                let asset : AVURLAsset = AVURLAsset(url: path, options: nil)
+                let duration : CMTime = asset.duration
+                
+                // Get thumb image video
+                var thumbImage = UIImage()
+                let generator = AVAssetImageGenerator(asset: asset)
+                do {
+                    let frameRef = try generator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+                    thumbImage = UIImage(cgImage: frameRef)
+                } catch let error as NSError {
+                    print("Error : \(error)")
+                }
+                
+                // Thumbnail path
+                let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(self.album.name!).appendingPathComponent(thumbname)
+                
+                // Save thumbnail
+                let fileManager = FileManager.default
+                if fileManager.fileExists(atPath: thumbPath.path) {
+                    print("===============")
+                    print("Thumbnail \(thumbPath.lastPathComponent) exists")
+                } else {
+                    if let data = UIImagePNGRepresentation(thumbImage) {
+                        fileManager.createFile(atPath: thumbPath.path, contents: data, attributes: nil)
+                    }
+                }
+                
+                // Add video to database
+                let info: [String: Any] = ["filename": filename,
+                                           "thumbname": thumbname,
+                                           "type": Key.ItemType.VideoType,
+                                           "duration": CMTimeGetSeconds(duration)]
+                ItemManager.sharedInstance.add(info: info, toAlbum: self.album)
+                
                 DispatchQueue.main.async {
                     self.album.currentIndex = currentIndex + 1
                     CoreDataManager.sharedInstance.saveContext()
@@ -319,49 +332,6 @@ open class WebViewModel {
                 }
             }
         }
-    }
-    
-//    func uploadVideoToCoreData(video: Video, avasset: AVAsset, collectionView: UICollectionView) {
-//        
-//        if let avassetURL = avasset as? AVURLAsset {
-//            let videoUrl = avassetURL.url
-//            let name = avassetURL.url.lastPathComponent
-//            let currentIndex = album.currentIndex
-//            let subtype = MediaLibrary.getSubTypeOfFile(filename: name)
-//            let filename = String.init(format: "VIDEO_%i", currentIndex) + "." + subtype
-//            let thumbname = "thumbnail_" + String.init(format: "VIDEO_%i", currentIndex) + ".JPG"
-//            
-//            // Add video to database
-//            let info: [String: Any] = ["filename": filename,
-//                                       "thumbname": thumbname,
-//                                       "type": Key.ItemType.VideoType,
-//                                       "duration": video.duration]
-//            ItemManager.sharedInstance.add(info: info, toAlbum: album)
-//            
-//            // Save original video & thumbnail
-//            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
-//            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
-//            
-//            UploadManager.sharedInstance.uploadVideo(video: video, videoPath: videoUrl, destinationPath: path, thumbPath: thumbPath, delegate: delegate, completion: { (status) in
-//                if status {
-//                    
-//                    DispatchQueue.main.async {
-//                        self.album.currentIndex = currentIndex + 1
-//                        CoreDataManager.sharedInstance.saveContext()
-//                        
-//                        let oldItems = self.items
-//                        self.items = ItemManager.sharedInstance.getItems(album: self.album)
-//                        self.delegate?.reloadGallery()
-//                        collectionView.animateItemChanges(oldData: oldItems, newData: self.items)
-//                        self.updateSupplementaryElement(collectionView: collectionView)
-//                        
-//                        print("===============")
-//                        print("Upload video success")
-//                    }
-//                }
-//            })
-//        }
-//    }
-    
+    }    
 }
 

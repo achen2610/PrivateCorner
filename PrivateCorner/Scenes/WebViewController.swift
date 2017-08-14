@@ -307,7 +307,7 @@ class WebViewController: UIViewController {
         if let url = downloadUrl {
             isUploading = true
             progressRing.alpha = 1.0
-            alert = CDAlertView(title: nil, message: "Download processing!", type: .warning)
+            alert = CDAlertView(title: nil, message: "Downloading!", type: .warning)
             alert.customView = progressView
             alert.isUserInteractionEnabled = false
             alert.show()
@@ -318,7 +318,6 @@ class WebViewController: UIViewController {
             
             let task : URLSessionDownloadTask = session.downloadTask(with: req as URLRequest)
             task.resume()
-//            viewModel.downloadVideo(url: url)
         }
     }
     
@@ -435,7 +434,8 @@ extension WebViewController: URLSessionDownloadDelegate {
                 self.alert.hide(isPopupAnimated: true)
             })
             
-            viewModel.uploadVideoToAlbum(url: location)
+            viewModel.getAlbumDownloads()
+            viewModel.uploadVideoToAlbum(url: location, downloadUrl: downloadUrl!)
         }
     }
 }

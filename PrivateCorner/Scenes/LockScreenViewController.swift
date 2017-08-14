@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     var buttonArray = [UIButton]()
@@ -28,7 +29,7 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     @IBOutlet weak var ZeroButton: UIButton!
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var CancelButton: UIButton!
-    @IBOutlet weak var LogoButton: UIButton!
+    @IBOutlet weak var TouchIDButton: UIButton!
     
     // MARK: Object lifecycle
     
@@ -50,7 +51,6 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     // MARK: Event handling
     
     private func styleUI() {
-        
         backgroundImageView.image = UIImage.init(named: "data-security-tips.jpg")
         blurImage()
 
@@ -68,12 +68,9 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
         for button in buttonArray {
             self.styleButton(button: button)
             button.tag = buttonArray.index(of: button)!
-            button.addTarget(self, action: #selector(clickedNumberButton(sender:)), for: .touchUpInside)
         }
         self.styleButton(button: CancelButton)
-        self.styleButton(button: LogoButton)
-        CancelButton.addTarget(self, action: #selector(clickedCancelButton(sender:)), for: .touchUpInside)
-        LogoButton.titleLabel?.numberOfLines = 2;
+        self.styleButton(button: TouchIDButton)
     }
     
     private func blurImage() {
@@ -114,22 +111,82 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     
     
     // MARK: Selector logic
-    
-    func clickedNumberButton(sender: UIButton!) {
-        print("clicked \(sender.tag) Button")
-        
-        viewModel.appendInputString(string: "\(sender.tag)")
+    @IBAction func clickedNumberButton(_ sender: Any) {
+        let button = sender as! UIButton
+        print("clicked \(button.tag) Button")
+        viewModel.appendInputString(string: "\(button.tag)")
     }
     
-    func clickedCancelButton(sender: UIButton!) {
+    @IBAction func clickedCancelButton(_ sender: Any) {
         print("clicked Cancel Button")
-        
         if viewModel.passcodeState == .SecondInput && viewModel.inputDotCount == 0 {
             viewModel.resetInputString()
         } else {
             viewModel.deleteInputString(isFull: PasscodeView.isFull)
         }
     }
+    
+    @IBAction func clickedTouchIDButton(_ sender: Any) {
+        let context = LAContext()
+        var error: NSError?
+        let reasonString = "Authentication is needed to access your notes."
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { (success, evalPolicyError) in
+                if success {
+                    self.TitleLabel.text = "NHẬP MẬT KHẨU CỦA BẠN"
+                    self.viewModel.clearInput()
+                    self.navigateToHomeScreen()
+                } else {
+                    print("\(evalPolicyError?.localizedDescription ?? "")")
+                    
+                    var message : NSString
+                    var showAlert : Bool
+                    
+                    switch evalPolicyError!._code {
+                    case LAError.authenticationFailed.rawValue:
+                        print("Authentication has a problem verifying your identity.")
+                        message = "There was a problem verifying your identity."
+                        showAlert = true
+                        
+                    case LAError.systemCancel.rawValue:
+                        print("Authentication was cancelled by the system")
+                        message = "Authentication was cancelled by the system."
+                        showAlert = true
+                        
+                    case LAError.userCancel.rawValue:
+                        print("Authentication was cancelled by the user")
+                        message = "You pressed cancel."
+                        showAlert = true
+                        
+                    case LAError.userFallback.rawValue:
+                        print("User selected to enter custom password")
+                        message = "You pressed password."
+                        showAlert = true
+                        
+                    default:
+                        print("Authentication failed")
+                        message = "Touch ID may not be configured."
+                        showAlert = true
+                    }
+                    
+                    let alertView = UIAlertController(title: "Error", message: message as String, preferredStyle:.alert)
+                    let okAction = UIAlertAction(title: "Darn!", style: .default, handler: nil)
+                    alertView.addAction(okAction)
+                    if showAlert {
+                        self.present(alertView, animated: true, completion: nil)
+                    }
+                }
+            })
+        } else {
+            // 5.
+            let alertView = UIAlertController(title: "Error", message: "Touch ID not available" as String, preferredStyle:.alert)
+            let okAction = UIAlertAction(title: "Darn!", style: .default, handler: nil)
+            alertView.addAction(okAction)
+            present(alertView, animated: true, completion: nil)
+        }
+    }
+    
 
     // MARK: LockScreenViewModelDelegate
     func validationSuccess() {
