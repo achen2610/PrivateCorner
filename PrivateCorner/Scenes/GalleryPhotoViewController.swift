@@ -547,13 +547,14 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
         } else if (viewController as? PhotoViewController) != nil {
             if let cell = galleryCollectionView.cellForItem(at: galleryCollectionView.indexPathsForSelectedItems!.first!) {
                 galleryCollectionView.heroModifiers = [.cascade(delta: 0.015, direction: .radial(center: cell.center), delayMatchedViews: true)]
+                galleryCollectionView.deselectAllItems(section: 0, animated: false)
             }
             navigationController?.heroNavigationAnimationType = .fade
         } else {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015)]
             navigationController?.heroNavigationAnimationType = .fade
         }
-        
+
         if let vc = viewController as? PhotoViewController {
             vc.toolBar.heroModifiers = [.fade]
         }

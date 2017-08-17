@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func windowBecameHidden(notification: Notification) {
         let newWindow = notification.object as! UIWindow
         let name = NSStringFromClass(newWindow.classForCoder)
-        if name == "UIRemoteKeyboardWindow" || name == "UITextEffectsWindow" {
+        if name == "UIRemoteKeyboardWindow" || name == "UITextEffectsWindow" || name == "_UISnapshotWindow" {
             return
         }
         

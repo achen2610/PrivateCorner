@@ -69,7 +69,7 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
             cell.selectedImageView.isHidden = true
             return
         }
-        
+
         collectionView.deselectItem(at: indexPath, animated: false)
         viewModel.arraySelectedCell[indexPath.row] = !viewModel.arraySelectedCell[indexPath.row]
         cell.containerView.isHidden = !cell.containerView.isHidden

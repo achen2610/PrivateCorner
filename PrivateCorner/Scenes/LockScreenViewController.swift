@@ -53,6 +53,7 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     private func styleUI() {
         backgroundImageView.image = UIImage.init(named: "data-security-tips.jpg")
         blurImage()
+        TitleLabel.font = UIFont.boldSystemFont(ofSize: 17 * kScale)
 
         buttonArray.append(ZeroButton)
         buttonArray.append(OneButton)
@@ -66,11 +67,11 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
         buttonArray.append(NineButton)
 
         for button in buttonArray {
-            self.styleButton(button: button)
+            self.styleButton(button: button, isScaleFontSize: true)
             button.tag = buttonArray.index(of: button)!
         }
-        self.styleButton(button: CancelButton)
-        self.styleButton(button: TouchIDButton)
+        self.styleButton(button: CancelButton, isScaleFontSize: false)
+        self.styleButton(button: TouchIDButton, isScaleFontSize: false)
     }
     
     private func blurImage() {
@@ -87,7 +88,10 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
         }
     }
     
-    private func styleButton(button: UIButton) {
+    private func styleButton(button: UIButton, isScaleFontSize: Bool) {
+        if isScaleFontSize {
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20 * kScale)
+        }
         button.layer.cornerRadius = 5.0;
         button.layer.borderColor = UIColor.white.cgColor
         button.layer.borderWidth = 1.0;
@@ -129,7 +133,7 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     @IBAction func clickedTouchIDButton(_ sender: Any) {
         let context = LAContext()
         var error: NSError?
-        let reasonString = "Authentication is needed to access your notes."
+        let reasonString = "Authentication is needed to access your app."
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { (success, evalPolicyError) in
@@ -205,7 +209,7 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     
     func setTitleLabel(text: String) {
         TitleLabel.text = text
-    }
+    } 
     
     func setTitleButton(text: String) {
         CancelButton.setTitle(text, for: .normal)
