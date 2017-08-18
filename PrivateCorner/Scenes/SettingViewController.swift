@@ -16,9 +16,14 @@ class SettingViewController: UIViewController {
     // MARK: Object lifecycle
     
     struct cellIdentifiers {
-        static let settingCell = "settingCell"
+        static let settingDetailCell    = "SettingDetailCell"
+        static let settingIndicatorCell = "SettingIndicatorCell"
     }
     
+    var array = [["", ["Version", "1.0"]],
+                 ["", "Usability", "Passcode", "How to use"],
+                 ["", ["Author", "MrAchen"]]]
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -35,8 +40,10 @@ class SettingViewController: UIViewController {
     // MARK: Event handling
     
     func configureTableViewOnLoad() {
-        let nibName = UINib(nibName: "SettingCell", bundle:Bundle.main)
-        settingTable.register(nibName, forCellReuseIdentifier: cellIdentifiers.settingCell)
+        var nibName = UINib(nibName: "SettingDetailCell", bundle:Bundle.main)
+        settingTable.register(nibName, forCellReuseIdentifier: cellIdentifiers.settingDetailCell)
+        nibName = UINib(nibName: "SettingIndicatorCell", bundle:Bundle.main)
+        settingTable.register(nibName, forCellReuseIdentifier: cellIdentifiers.settingIndicatorCell)
     }
     
     func selectedSettingAtIndex(index: Int) {

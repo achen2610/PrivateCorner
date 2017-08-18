@@ -1,15 +1,15 @@
 //
-//  SettingCell.swift
+//  SettingIndicatorCell.swift
 //  PrivateCorner
 //
-//  Created by a on 3/29/17.
+//  Created by a on 8/18/17.
 //  Copyright © 2017 MrAChen. All rights reserved.
 //
 
 import UIKit
 
-class SettingCell: UITableViewCell {
-    
+class SettingIndicatorCell: UITableViewCell {
+
     @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {
@@ -17,4 +17,3 @@ class SettingCell: UITableViewCell {
         // Initialization code
     }
 }
-

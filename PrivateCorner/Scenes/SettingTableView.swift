@@ -11,27 +11,51 @@ import UIKit
 extension SettingViewController : UITableViewDataSource, UITableViewDelegate {
     
     // MARK: UITableView DataSource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return array.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return array[section].count - 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifiers.settingCell, for: indexPath) as? SettingCell {
-            cell.titleLabel.text = "Setting \(indexPath.row)"
+        
             
-            return cell
+        if let string = array[indexPath.section][indexPath.row + 1] as? String {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifiers.settingIndicatorCell, for: indexPath) as? SettingIndicatorCell {
+                cell.titleLabel.text = string
+                
+                if indexPath.section == 0 || indexPath.section == 2 {
+                    cell.selectionStyle = .none
+                }
+                
+                return cell
+            }
+        }
+        if let array = array[indexPath.section][indexPath.row + 1] as? [Any] {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifiers.settingDetailCell, for: indexPath) as? SettingDetailCell {
+                cell.titleLabel.text = array[0] as? String
+                cell.detailLabel.text = array[1] as? String
+                
+                if indexPath.section == 0 || indexPath.section == 2 {
+                    cell.selectionStyle = .none
+                }
+                
+                return cell
+            }
         }
         
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 61 * kScale
+        return 44 * kScale
     }
 
-    // MARK: UITableView Delegate
-    
+    // MARK: UITableView Delegate    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         selectedSettingAtIndex(index: indexPath.row)
     }
     
