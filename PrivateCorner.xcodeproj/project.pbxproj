@@ -51,6 +51,12 @@
 		0077770D1EDBC90F00233D0B /* MediaLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0077770C1EDBC90F00233D0B /* MediaLibrary.swift */; };
 		00784CD51ED28AF6004F3E95 /* AlbumsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00784CD41ED28AF6004F3E95 /* AlbumsViewModel.swift */; };
 		00784CD71ED28D18004F3E95 /* GalleryPhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00784CD61ED28D18004F3E95 /* GalleryPhotoViewModel.swift */; };
+		0078B8961F4BD5020079AB49 /* UsabilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078B8951F4BD5020079AB49 /* UsabilityViewController.swift */; };
+		0078B8981F4BD5160079AB49 /* UsabilityTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078B8971F4BD5160079AB49 /* UsabilityTableView.swift */; };
+		0078B89B1F4BD52E0079AB49 /* UsabilityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078B89A1F4BD52E0079AB49 /* UsabilityCell.swift */; };
+		0078B89D1F4BD5390079AB49 /* UsabilityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0078B89C1F4BD5390079AB49 /* UsabilityCell.xib */; };
+		0078B8A01F4BE28F0079AB49 /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078B89F1F4BE28F0079AB49 /* PasscodeViewController.swift */; };
+		0078B8A21F4BE29B0079AB49 /* PasscodeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078B8A11F4BE29B0079AB49 /* PasscodeTableView.swift */; };
 		007980331EE696EF00C5E13D /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00797FF91EE696EF00C5E13D /* CameraController.swift */; };
 		007980341EE696EF00C5E13D /* CameraMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00797FFA1EE696EF00C5E13D /* CameraMan.swift */; };
 		007980351EE696EF00C5E13D /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00797FFB1EE696EF00C5E13D /* CameraView.swift */; };
@@ -336,6 +342,12 @@
 		0077770C1EDBC90F00233D0B /* MediaLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaLibrary.swift; sourceTree = "<group>"; };
 		00784CD41ED28AF6004F3E95 /* AlbumsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumsViewModel.swift; sourceTree = "<group>"; };
 		00784CD61ED28D18004F3E95 /* GalleryPhotoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryPhotoViewModel.swift; sourceTree = "<group>"; };
+		0078B8951F4BD5020079AB49 /* UsabilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityViewController.swift; sourceTree = "<group>"; };
+		0078B8971F4BD5160079AB49 /* UsabilityTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityTableView.swift; sourceTree = "<group>"; };
+		0078B89A1F4BD52E0079AB49 /* UsabilityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityCell.swift; sourceTree = "<group>"; };
+		0078B89C1F4BD5390079AB49 /* UsabilityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsabilityCell.xib; sourceTree = "<group>"; };
+		0078B89F1F4BE28F0079AB49 /* PasscodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
+		0078B8A11F4BE29B0079AB49 /* PasscodeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeTableView.swift; sourceTree = "<group>"; };
 		00797FF91EE696EF00C5E13D /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		00797FFA1EE696EF00C5E13D /* CameraMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraMan.swift; sourceTree = "<group>"; };
 		00797FFB1EE696EF00C5E13D /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -771,14 +783,16 @@
 			isa = PBXGroup;
 			children = (
 				007F62DD1ECD91AD00226B49 /* TabBar */,
-				006486F51E70F2E800419C27 /* LockScreen */,
 				00E0B1A41E7942350001DF8F /* Albums */,
-				008775E81EEF80FF003C50AF /* MoveFile */,
 				004B28E51E8C9EA6007C910A /* GalleryPhoto */,
-				00DDF9B51ED43D2B00093770 /* PhotoView */,
 				004B28F91E8CE55C007C910A /* Import */,
-				009049071EFD03D800EBAEEB /* Web */,
+				006486F51E70F2E800419C27 /* LockScreen */,
+				008775E81EEF80FF003C50AF /* MoveFile */,
+				00DDF9B51ED43D2B00093770 /* PhotoView */,
 				00E0B1B11E7943B40001DF8F /* Setting */,
+				0078B89E1F4BE2530079AB49 /* Passcode */,
+				0078B8941F4BD4CC0079AB49 /* Usability */,
+				009049071EFD03D800EBAEEB /* Web */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -810,6 +824,34 @@
 				0075F19D1E7A36B7001DA471 /* AlbumsCell.swift */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		0078B8941F4BD4CC0079AB49 /* Usability */ = {
+			isa = PBXGroup;
+			children = (
+				0078B8991F4BD51C0079AB49 /* UI */,
+				0078B8951F4BD5020079AB49 /* UsabilityViewController.swift */,
+				0078B8971F4BD5160079AB49 /* UsabilityTableView.swift */,
+			);
+			name = Usability;
+			sourceTree = "<group>";
+		};
+		0078B8991F4BD51C0079AB49 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0078B89A1F4BD52E0079AB49 /* UsabilityCell.swift */,
+				0078B89C1F4BD5390079AB49 /* UsabilityCell.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		0078B89E1F4BE2530079AB49 /* Passcode */ = {
+			isa = PBXGroup;
+			children = (
+				0078B89F1F4BE28F0079AB49 /* PasscodeViewController.swift */,
+				0078B8A11F4BE29B0079AB49 /* PasscodeTableView.swift */,
+			);
+			name = Passcode;
 			sourceTree = "<group>";
 		};
 		00797FF71EE696EF00C5E13D /* Sources */ = {
@@ -1871,6 +1913,7 @@
 				007718BC1EE947CA001211CB /* selectall@3x.png in Resources */,
 				008B5E101F2872130044EEF0 /* JSTools.js in Resources */,
 				0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */,
+				0078B89D1F4BD5390079AB49 /* UsabilityCell.xib in Resources */,
 				004B290B1E8CE96A007C910A /* import@3x.png in Resources */,
 				007718B61EE94694001211CB /* delete@3x.png in Resources */,
 				00E0B1A21E79411E0001DF8F /* setting-on@3x.png in Resources */,
@@ -2043,6 +2086,7 @@
 				0090834A1F00C88E00EE6728 /* SPRequestPermission.swift in Sources */,
 				009083801F00E2D800EE6728 /* SPStrideableExtension.swift in Sources */,
 				004F71C61EE14FB70026A907 /* CollectionViewExtension.swift in Sources */,
+				0078B8A21F4BE29B0079AB49 /* PasscodeTableView.swift in Sources */,
 				008B5E0C1F2843C60044EEF0 /* MyWindow.swift in Sources */,
 				00DDF9931ED436E800093770 /* HeroDefaultAnimator.swift in Sources */,
 				0090834F1F00C88E00EE6728 /* SPGradientViewController.swift in Sources */,
@@ -2051,6 +2095,7 @@
 				0056D1C91F469DE100DCBDE2 /* SettingIndicatorCell.swift in Sources */,
 				007980421EE696EF00C5E13D /* Constraints.swift in Sources */,
 				00DDF99F1ED436E800093770 /* UIViewController+Hero.swift in Sources */,
+				0078B8981F4BD5160079AB49 /* UsabilityTableView.swift in Sources */,
 				0079804A1EE696EF00C5E13D /* UIView+Extensions.swift in Sources */,
 				007E5AE01EE53DAA00FDC2EB /* UICircularProgressRingView.swift in Sources */,
 				009083241F00C88E00EE6728 /* SPDevice.swift in Sources */,
@@ -2097,6 +2142,7 @@
 				007980471EE696EF00C5E13D /* String+Extensions.swift in Sources */,
 				007980401EE696EF00C5E13D /* GBundle.swift in Sources */,
 				009083391F00C88E00EE6728 /* SPRequestPermissionDataTexts.swift in Sources */,
+				0078B8961F4BD5020079AB49 /* UsabilityViewController.swift in Sources */,
 				0079803E1EE696EF00C5E13D /* ImagesController.swift in Sources */,
 				0090837D1F00E2D800EE6728 /* SPBezierPathExtension.swift in Sources */,
 				00DDF99B1ED436E800093770 /* CG+Hero.swift in Sources */,
@@ -2136,6 +2182,7 @@
 				009083341F00C88E00EE6728 /* SPLaunchAnimationSlideExtenshion.swift in Sources */,
 				004B29051E8CE57F007C910A /* ImportViewController.swift in Sources */,
 				008775F11EEF8193003C50AF /* MoveFileCell.swift in Sources */,
+				0078B89B1F4BD52E0079AB49 /* UsabilityCell.swift in Sources */,
 				009083831F00E2D800EE6728 /* SPUIImageExtension.swift in Sources */,
 				0079804C1EE696EF00C5E13D /* Fetcher.swift in Sources */,
 				00DDF99A1ED436E800093770 /* CAMediaTimingFunction+Hero.swift in Sources */,
@@ -2161,6 +2208,7 @@
 				009083211F00C88E00EE6728 /* NSLayoutConstraintExtenshion.swift in Sources */,
 				009083201F00C88E00EE6728 /* SPAudioPlayer.swift in Sources */,
 				00DDF9971ED436E800093770 /* DefaultAnimationPreprocessor.swift in Sources */,
+				0078B8A01F4BE28F0079AB49 /* PasscodeViewController.swift in Sources */,
 				00DDF9B41ED436E800093770 /* SourcePreprocessor.swift in Sources */,
 				007980351EE696EF00C5E13D /* CameraView.swift in Sources */,
 				009083451F00C88E00EE6728 /* SPRequestPermissionNativePresenter.swift in Sources */,

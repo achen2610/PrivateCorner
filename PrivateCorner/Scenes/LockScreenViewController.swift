@@ -70,8 +70,15 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
             self.styleButton(button: button, isScaleFontSize: true)
             button.tag = buttonArray.index(of: button)!
         }
-        self.styleButton(button: CancelButton, isScaleFontSize: false)
-        self.styleButton(button: TouchIDButton, isScaleFontSize: false)
+        styleButton(button: CancelButton, isScaleFontSize: false)
+        styleButton(button: TouchIDButton, isScaleFontSize: false)
+    }
+    
+    func styleChangePassState() {
+        viewModel.clearInput()
+        viewModel.changePassState()
+        TitleLabel.text = "NHẬP MẬT KHẨU MỚI!"
+        TouchIDButton.setTitle("Cancel", for: .normal)
     }
     
     private func blurImage() {
@@ -97,14 +104,13 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
         button.layer.borderWidth = 1.0;
     }
     
-    func wrongPasscode() {
+    private func wrongPasscode() {
         PasscodeView.shakeAnimationWithCompletion {
             self.viewModel.clearInput()
             self.TitleLabel.text = "MẬT KHẨU SAI. THỬ LẠI !"
         }
     }
     
-
     // MARK: Navigation
     func navigateToHomeScreen() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -122,7 +128,7 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     }
     
     @IBAction func clickedCancelButton(_ sender: Any) {
-        print("clicked Cancel Button")
+        print("clicked Delete Button")
         if viewModel.passcodeState == .SecondInput && viewModel.inputDotCount == 0 {
             viewModel.resetInputString()
         } else {
@@ -131,6 +137,14 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     }
     
     @IBAction func clickedTouchIDButton(_ sender: Any) {
+        if viewModel.passcodeState == .ChangePass {
+            TouchIDButton.setTitle("TouchID", for: .normal)
+            viewModel.resetInputString()
+            navigateToHomeScreen()
+            
+            return
+        }
+        
         let context = LAContext()
         var error: NSError?
         let reasonString = "Authentication is needed to access your app."

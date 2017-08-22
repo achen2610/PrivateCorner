@@ -21,7 +21,7 @@ class SettingViewController: UIViewController {
     }
     
     var array = [["", ["Version", "1.0"]],
-                 ["", "Usability", "Passcode", "How to use"],
+                 ["", "Passcode", "Usability","How to use"],
                  ["", ["Author", "MrAchen"]]]
 
     override func awakeFromNib() {
@@ -48,9 +48,16 @@ class SettingViewController: UIViewController {
     
     func selectedSettingAtIndex(index: Int) {
         
-//        if index == 0 {
-//            router.navigateToPasswordScreen()
-//        }
+        if index == 0 {
+            //Usability
+        } else if index == 1 {
+            //Passcode
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.backToLockScreenWhenChangePass()
+            
+        } else if index == 2 {
+            //How to use
+        }
     }
 
     

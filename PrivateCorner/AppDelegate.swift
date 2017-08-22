@@ -89,6 +89,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = [naviController .popViewController(animated: false)]
     }
     
+    func backToLockScreenWhenChangePass() {
+        let naviController = window?.rootViewController as! UINavigationController
+        _ = naviController.popViewController(animated: true)
+        
+        if let controller = naviController.topViewController as? LockScreenViewController {
+            controller.styleChangePassState()
+        }
+    }
+    
     func windowBecameHidden(notification: Notification) {
         let newWindow = notification.object as! UIWindow
         let name = NSStringFromClass(newWindow.classForCoder)
