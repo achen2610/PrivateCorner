@@ -47,6 +47,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         styleUI()
         configureCollectionViewOnLoad()
         getGalleryPhotoOnLoad()

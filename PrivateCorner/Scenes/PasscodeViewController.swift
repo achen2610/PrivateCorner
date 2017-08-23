@@ -12,7 +12,11 @@ class PasscodeViewController: UIViewController {
     
     @IBOutlet weak var passcodeTable: UITableView!
     
-    
+    struct cellIdentifiers {
+        static let passcodeCellA    = "PasscodeCellA"
+        static let passcodeCellB    = "PasscodeCellB"
+        static let passcodeCellC    = "PasscodeCellC"
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,7 +27,7 @@ class PasscodeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = Key.Screen.passcodeScreen
     }
     
 }

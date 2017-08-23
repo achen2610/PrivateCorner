@@ -41,6 +41,15 @@ struct Key {
         static let notiUpdateGallery                = "notiUpdateGallery"
     }
     
+    struct Screen {
+        static let albumScreen                      = "Albums"
+        static let importScreen                     = "Import"
+        static let settingScreen                    = "Setting"
+        static let passcodeScreen                   = "Passcode"
+        static let usabilityScreen                  = "Usability"
+        static let howToUseScreen                   = "How to use"
+    }
+    
     enum ItemType {
         case ImageType
         case VideoType

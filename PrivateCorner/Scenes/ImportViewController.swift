@@ -36,6 +36,7 @@ class ImportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = Key.Screen.importScreen
         configureCollecntionViewOnLoad()
     }
     

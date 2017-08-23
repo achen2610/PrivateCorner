@@ -20,8 +20,6 @@ extension SettingViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-            
         if let string = array[indexPath.section][indexPath.row + 1] as? String {
             if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifiers.settingIndicatorCell, for: indexPath) as? SettingIndicatorCell {
                 cell.titleLabel.text = string
@@ -56,6 +54,17 @@ extension SettingViewController : UITableViewDataSource, UITableViewDelegate {
     // MARK: UITableView Delegate    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 || indexPath.section == 2 {
+            return
+        }
+        
+        let cell = tableView.cellForRow(at: indexPath) as! SettingIndicatorCell
+        if cell.containerView.backgroundColor == UIColor(hex: "#2269AE") {
+            UIView.animate(withDuration: 1.0) {
+                cell.containerView.backgroundColor = UIColor(hex: "#3398FB")
+            }
+        }
+        
         selectedSettingAtIndex(index: indexPath.row)
     }
     

@@ -34,8 +34,11 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = Key.Screen.settingScreen
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         configureTableViewOnLoad()
     }
+    
     
     // MARK: Event handling
     
@@ -49,11 +52,14 @@ class SettingViewController: UIViewController {
     func selectedSettingAtIndex(index: Int) {
         
         if index == 0 {
-            //Usability
-        } else if index == 1 {
             //Passcode
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.backToLockScreenWhenChangePass()
+            self.performSegue(withIdentifier: "seguePasscodeViewController", sender: nil)
+            
+            
+        } else if index == 1 {
+            //Usability
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            appDelegate.backToLockScreenWhenChangePass()
             
         } else if index == 2 {
             //How to use
