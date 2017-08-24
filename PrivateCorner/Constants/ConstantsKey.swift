@@ -39,6 +39,8 @@ struct Key {
     struct String {
         static let notiUpdateGalleryWhenMoveFile    = "notiUpdateGalleryWhenMoveFile"
         static let notiUpdateGallery                = "notiUpdateGallery"
+        static let notiPerformSeguePasscodeView     = "notiPerformSeguePasscodeView"
+        static let notiAlertChangePassSuccess       = "notiAlertChangePassSuccess"
     }
     
     struct Screen {

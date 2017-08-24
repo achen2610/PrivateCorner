@@ -30,4 +30,15 @@ class PasscodeViewController: UIViewController {
         title = Key.Screen.passcodeScreen
     }
     
+    // MARK: Button Selectors
+    
+    func clickedChangePasscodeButton() {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let lockScreen  = mainStoryboard.instantiateViewController(withIdentifier: "LockScreen") as! LockScreenViewController
+        let viewModel = LockScreenViewModel(delegate: lockScreen, totalDotCount: 6)
+        viewModel.passcodeState = .ChangePass
+        viewModel.passcodeSaved = ""
+        lockScreen.viewModel = viewModel
+        present(lockScreen, animated: true, completion: nil)
+    }
 }

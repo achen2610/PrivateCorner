@@ -45,7 +45,19 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
         
         styleUI()
         PasscodeView.totalDotCount = 6
-        viewModel = LockScreenViewModel(delegate: self, totalDotCount: 6)
+
+        if viewModel.passcodeState == .FirstStart {
+            TitleLabel.text = "NHẬP MẬT KHẨU LẦN 1"
+            TouchIDButton.isEnabled = false
+        } else if viewModel.passcodeState == .NotFirst {
+            TitleLabel.text = "NHẬP MẬT KHẨU CỦA BẠN"
+        } else if viewModel.passcodeState == .RequirePass {
+            TitleLabel.text = "NHẬP MẬT KHẨU CỦA BẠN"
+            TouchIDButton.setTitle("Cancel", for: .normal)
+        } else if viewModel.passcodeState == .ChangePass {
+            TitleLabel.text = "NHẬP MẬT KHẨU MỚI!"
+            TouchIDButton.setTitle("Cancel", for: .normal)
+        }
     }
     
     // MARK: Event handling
@@ -113,8 +125,19 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     
     // MARK: Navigation
     func navigateToHomeScreen() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        navigationController?.pushViewController(appDelegate.tabBarController, animated: true)
+        if viewModel.passcodeState == .RequirePass {
+            dismiss(animated: true, completion: { 
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Key.String.notiPerformSeguePasscodeView), object: nil)
+            })
+        } else if viewModel.passcodeState == .ChangePass {
+            dismiss(animated: true, completion: {
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Key.String.notiAlertChangePassSuccess), object: nil)
+            })
+        
+        } else {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            navigationController?.pushViewController(appDelegate.tabBarController, animated: true)
+        }
     }
 
     // MARK: Display logic
@@ -137,11 +160,8 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     }
     
     @IBAction func clickedTouchIDButton(_ sender: Any) {
-        if viewModel.passcodeState == .ChangePass {
-            TouchIDButton.setTitle("TouchID", for: .normal)
-            viewModel.resetInputString()
-            navigateToHomeScreen()
-            
+        if viewModel.passcodeState == .ChangePass || viewModel.passcodeState == .RequirePass {
+            dismiss(animated: true, completion: nil)
             return
         }
         

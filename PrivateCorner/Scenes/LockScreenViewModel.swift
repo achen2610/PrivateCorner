@@ -19,6 +19,7 @@ struct LockScreenScene {
         case NotFirst
         case SecondInput
         case ChangePass
+        case RequirePass
     }
 }
 
@@ -32,10 +33,10 @@ public protocol LockScreenViewModelDelegate: class {
 
 open class LockScreenViewModel {
     
-    var passcodeState: LockScreenScene.PasscodeState
+    var passcodeState: LockScreenScene.PasscodeState?
     var inputDotCount: Int
     var totalDotCount: Int
-    var passcodeSaved: String
+    var passcodeSaved: String?
     weak var delegate: LockScreenViewModelDelegate?
     
     fileprivate var inputString: String = "" {
@@ -50,17 +51,6 @@ open class LockScreenViewModel {
         self.inputDotCount = 0
         self.totalDotCount = totalDotCount
         self.delegate = delegate
-        
-        let firstInstall = UserDefaults.standard.bool(forKey: "firstInstall")
-        if !firstInstall {
-            passcodeState = .FirstStart
-            passcodeSaved = ""
-            self.delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU LẦN 1")
-        } else {
-            passcodeState = .NotFirst
-            passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as! String
-            self.delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU CỦA BẠN")
-        }
     }
     
     public init(initWhenChangePass delegate: LockScreenViewModelDelegate, totalDotCount: Int) {
@@ -99,7 +89,7 @@ open class LockScreenViewModel {
     func resetInputString() {
         if passcodeState == .ChangePass {
             passcodeState = .NotFirst
-            passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as! String
+            passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as? String
             delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU CỦA BẠN")
         } else {
             passcodeState = .FirstStart
@@ -133,8 +123,6 @@ open class LockScreenViewModel {
                     if validation(inputString) {
                         UserDefaults.standard.set(passcodeSaved, forKey: "passcodeSaved")
                         UserDefaults.standard.synchronize()
-                        passcodeState = .NotFirst
-                        
                         delegate?.validationSuccess()
                     } else {
                         delegate?.setTitleLabel(text: "MẬT KHẨU SAI. NHẬP LẠI")

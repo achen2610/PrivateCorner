@@ -37,6 +37,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController = mainStoryboard.instantiateViewController(withIdentifier: "tabBarController") as! TabBarController
         tabBarController.delegate = tabBarController
         
+        let lockScreenNavi = mainStoryboard.instantiateViewController(withIdentifier: "LockScreenNavi") as! UINavigationController
+        let lockScreen = lockScreenNavi.topViewController as! LockScreenViewController
+        let viewModel = LockScreenViewModel(delegate: lockScreen, totalDotCount: 6)
+        let firstInstall = UserDefaults.standard.bool(forKey: "firstInstall")
+        if !firstInstall {
+            viewModel.passcodeState = .FirstStart
+            viewModel.passcodeSaved = ""
+        } else {
+            viewModel.passcodeState = .NotFirst
+            viewModel.passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as? String
+        }
+        lockScreen.viewModel = viewModel
+        window?.rootViewController = lockScreenNavi
+        
         NotificationCenter.default.addObserver(self, selector: #selector(windowBecameHidden(notification:)), name: NSNotification.Name.UIWindowDidBecomeVisible, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(windowBecameVisible(notification:)), name: NSNotification.Name.UIWindowDidBecomeHidden, object: nil)
         

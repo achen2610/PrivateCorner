@@ -24,6 +24,13 @@ extension PasscodeViewController : UITableViewDataSource, UITableViewDelegate {
 
         } else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifiers.passcodeCellC, for: indexPath)
+            
+            let button: PCButton = cell.viewWithTag(80) as! PCButton
+            button.highLightColor = UIColor(hex: "#2269AE")
+            button.notHighLightColor = UIColor(hex: "#3398FB")
+            button.setTitleColor(UIColor.white, for: [.normal, .highlighted, .selected])
+            button.addTarget(self, action: #selector(clickedChangePasscodeButton), for: .touchUpInside)
+            
             return cell
         }
         

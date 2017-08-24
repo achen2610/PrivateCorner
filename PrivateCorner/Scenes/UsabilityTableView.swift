@@ -18,7 +18,7 @@ extension UsabilityViewController : UITableViewDataSource, UITableViewDelegate {
             cell.titleLabel.text = ""
             cell.selectionStyle = .none
             return cell
-            }
+        }
         
         return UITableViewCell()
     }
