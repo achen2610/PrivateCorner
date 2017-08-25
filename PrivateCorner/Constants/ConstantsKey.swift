@@ -19,7 +19,9 @@ struct Key {
     }
     
     struct UserDefaults {
-        static let k_App_Running_FirstTime = "userRunningAppFirstTime"
+        static let k_App_Running_FirstTime          = "userRunningAppFirstTime"
+        static let enableTouchID                    = "enableTouchID"
+        static let enablePasswordRecovery           = "enablePasswordRecovery"
     }
     
     struct Headers {

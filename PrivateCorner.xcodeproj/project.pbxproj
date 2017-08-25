@@ -130,6 +130,8 @@
 		008B5E0E1F28529B0044EEF0 /* WebViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B5E0D1F28529A0044EEF0 /* WebViewExtension.swift */; };
 		008B5E101F2872130044EEF0 /* JSTools.js in Resources */ = {isa = PBXBuildFile; fileRef = 008B5E0F1F2872130044EEF0 /* JSTools.js */; };
 		008B5E121F289E1B0044EEF0 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B5E111F289E1B0044EEF0 /* WebViewModel.swift */; };
+		008E3E141F4FBE2400B69812 /* HowToUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E3E131F4FBE2400B69812 /* HowToUseViewController.swift */; };
+		008E3E161F4FBE7700B69812 /* HowToUseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E3E151F4FBE7700B69812 /* HowToUseTableView.swift */; };
 		009049051EFD038400EBAEEB /* web@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 009049031EFD038400EBAEEB /* web@3x.png */; };
 		009049061EFD038400EBAEEB /* web-on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 009049041EFD038400EBAEEB /* web-on@3x.png */; };
 		009049091EFD03EE00EBAEEB /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009049081EFD03EE00EBAEEB /* WebViewController.swift */; };
@@ -422,6 +424,8 @@
 		008B5E0D1F28529A0044EEF0 /* WebViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewExtension.swift; sourceTree = "<group>"; };
 		008B5E0F1F2872130044EEF0 /* JSTools.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSTools.js; sourceTree = "<group>"; };
 		008B5E111F289E1B0044EEF0 /* WebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		008E3E131F4FBE2400B69812 /* HowToUseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToUseViewController.swift; sourceTree = "<group>"; };
+		008E3E151F4FBE7700B69812 /* HowToUseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToUseTableView.swift; sourceTree = "<group>"; };
 		009049031EFD038400EBAEEB /* web@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web@3x.png"; sourceTree = "<group>"; };
 		009049041EFD038400EBAEEB /* web-on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web-on@3x.png"; sourceTree = "<group>"; };
 		009049081EFD03EE00EBAEEB /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -794,6 +798,7 @@
 				00E0B1B11E7943B40001DF8F /* Setting */,
 				0078B89E1F4BE2530079AB49 /* Passcode */,
 				0078B8941F4BD4CC0079AB49 /* Usability */,
+				008E3E121F4FBE0600B69812 /* HowToUse */,
 				009049071EFD03D800EBAEEB /* Web */,
 			);
 			path = Scenes;
@@ -1099,6 +1104,15 @@
 				008AC7A31F4E69320042047C /* PCButton.swift */,
 			);
 			name = "Custom Object";
+			sourceTree = "<group>";
+		};
+		008E3E121F4FBE0600B69812 /* HowToUse */ = {
+			isa = PBXGroup;
+			children = (
+				008E3E131F4FBE2400B69812 /* HowToUseViewController.swift */,
+				008E3E151F4FBE7700B69812 /* HowToUseTableView.swift */,
+			);
+			name = HowToUse;
 			sourceTree = "<group>";
 		};
 		009049071EFD03D800EBAEEB /* Web */ = {
@@ -2225,7 +2239,9 @@
 				007980351EE696EF00C5E13D /* CameraView.swift in Sources */,
 				009083451F00C88E00EE6728 /* SPRequestPermissionNativePresenter.swift in Sources */,
 				009083651F00C88E00EE6728 /* SPGradientGradeWithBlurView.swift in Sources */,
+				008E3E161F4FBE7700B69812 /* HowToUseTableView.swift in Sources */,
 				0079803C1EE696EF00C5E13D /* Image.swift in Sources */,
+				008E3E141F4FBE2400B69812 /* HowToUseViewController.swift in Sources */,
 				009049091EFD03EE00EBAEEB /* WebViewController.swift in Sources */,
 				0090835A1F00C88E00EE6728 /* SPCollectionViewCell.swift in Sources */,
 				009083491F00C88E00EE6728 /* plist_flags.swift in Sources */,

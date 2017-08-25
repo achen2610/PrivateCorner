@@ -41,4 +41,20 @@ class PasscodeViewController: UIViewController {
         lockScreen.viewModel = viewModel
         present(lockScreen, animated: true, completion: nil)
     }
+    
+    func switchChanged(sender: UISwitch) {
+        switch sender.tag {
+        case 81:
+            UserDefaults.standard.set(sender.isOn, forKey: Key.UserDefaults.enablePasswordRecovery)
+            UserDefaults.standard.synchronize()
+            break
+            
+        case 82:
+            UserDefaults.standard.set(sender.isOn, forKey: Key.UserDefaults.enableTouchID)
+            UserDefaults.standard.synchronize()
+            break
+        default:
+            break
+        }
+    }
 }

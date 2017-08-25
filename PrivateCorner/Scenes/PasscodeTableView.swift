@@ -16,10 +16,30 @@ extension PasscodeViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifiers.passcodeCellA, for: indexPath)
+            
+            let switchControl: UISwitch = cell.viewWithTag(81) as! UISwitch
+            switchControl.addTarget(self, action: #selector(switchChanged(sender:)), for: .valueChanged)
+            let enablePasswordRecovery = UserDefaults.standard.bool(forKey: Key.UserDefaults.enablePasswordRecovery)
+            if !enablePasswordRecovery {
+                switchControl.isOn = false
+            } else {
+                switchControl.isOn = true
+            }
+            
             return cell
 
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifiers.passcodeCellB, for: indexPath)
+            
+            let switchControl: UISwitch = cell.viewWithTag(82) as! UISwitch
+            switchControl.addTarget(self, action: #selector(switchChanged(sender:)), for: .valueChanged)
+            let enableTouchID = UserDefaults.standard.bool(forKey: Key.UserDefaults.enableTouchID)
+            if !enableTouchID {
+                switchControl.isOn = false
+            } else {
+                switchControl.isOn = true
+            }
+            
             return cell
 
         } else if indexPath.row == 2 {

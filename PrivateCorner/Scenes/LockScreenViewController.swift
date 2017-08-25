@@ -10,6 +10,7 @@
 
 import UIKit
 import LocalAuthentication
+import CDAlertView
 
 class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     var buttonArray = [UIButton]()
@@ -48,7 +49,6 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
 
         if viewModel.passcodeState == .FirstStart {
             TitleLabel.text = "NHẬP MẬT KHẨU LẦN 1"
-            TouchIDButton.isEnabled = false
         } else if viewModel.passcodeState == .NotFirst {
             TitleLabel.text = "NHẬP MẬT KHẨU CỦA BẠN"
         } else if viewModel.passcodeState == .RequirePass {
@@ -162,6 +162,19 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     @IBAction func clickedTouchIDButton(_ sender: Any) {
         if viewModel.passcodeState == .ChangePass || viewModel.passcodeState == .RequirePass {
             dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        if viewModel.passcodeState == .FirstStart {
+            let alert = CDAlertView(title: nil, message: "Please set passcode then go to Setting page and enable TouchID!", type: CDAlertViewType.warning)
+            alert.show()
+            return
+        }
+        
+        let enableTouchID = UserDefaults.standard.bool(forKey: Key.UserDefaults.enableTouchID)
+        if !enableTouchID {
+            let alert = CDAlertView(title: nil, message: "Please go to Setting page and enable TouchID!", type: CDAlertViewType.warning)
+            alert.show()
             return
         }
         
