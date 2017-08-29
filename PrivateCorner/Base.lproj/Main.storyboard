@@ -1140,6 +1140,75 @@
             </objects>
             <point key="canvasLocation" x="2522" y="1143"/>
         </scene>
+        <!--Choose Album View Controller-->
+        <scene sceneID="IiU-VA-mfD">
+            <objects>
+                <viewController id="rBh-tA-qop" customClass="ChooseAlbumViewController" customModule="PrivateCorner" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vJn-VJ-Sbo"/>
+                        <viewControllerLayoutGuide type="bottom" id="nEh-te-Zay"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3Xg-Hf-S9m">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rqv-ad-Bbc">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="xlo-QK-c7G">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="rBh-tA-qop" id="LJn-Rm-08t"/>
+                                    <outlet property="delegate" destination="rBh-tA-qop" id="aDQ-G2-3n9"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="rqv-ad-Bbc" secondAttribute="bottom" id="Fik-bM-mlE"/>
+                            <constraint firstItem="rqv-ad-Bbc" firstAttribute="top" secondItem="3Xg-Hf-S9m" secondAttribute="top" id="TmR-6a-ZOH"/>
+                            <constraint firstAttribute="trailing" secondItem="rqv-ad-Bbc" secondAttribute="trailing" id="W9z-nB-gr4"/>
+                            <constraint firstItem="rqv-ad-Bbc" firstAttribute="leading" secondItem="3Xg-Hf-S9m" secondAttribute="leading" id="xSm-QN-a5R"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="u8d-O7-2es">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="NIG-1G-3uI">
+                            <connections>
+                                <action selector="clickedCancelButton:" destination="rBh-tA-qop" id="gUe-Aw-Nrt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="albumsCollectionView" destination="rqv-ad-Bbc" id="hLZ-T6-sWi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UEd-Zh-o1s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5491" y="452"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Oa1-ND-2uG">
+            <objects>
+                <navigationController storyboardIdentifier="ChooseAlbum" automaticallyAdjustsScrollViewInsets="NO" id="U5S-LZ-Fr1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gVX-Is-Alv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rBh-tA-qop" kind="relationship" relationship="rootViewController" id="RlZ-qR-ODh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yv9-yS-Est" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4719" y="452"/>
+        </scene>
     </scenes>
     <resources>
         <image name="delete.png" width="25" height="25"/>

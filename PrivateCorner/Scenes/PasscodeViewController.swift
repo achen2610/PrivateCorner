@@ -27,7 +27,7 @@ class PasscodeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = Key.Screen.passcodeScreen
+        title = Key.Screen.passcode
     }
     
     // MARK: Button Selectors

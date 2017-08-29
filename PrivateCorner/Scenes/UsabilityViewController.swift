@@ -29,7 +29,7 @@ class UsabilityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = Key.Screen.usabilityScreen
+        title = Key.Screen.usability
         configureTableViewOnLoad()
     }
     

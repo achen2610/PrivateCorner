@@ -26,7 +26,7 @@ class MoveFileViewController: UIViewController, MoveFileViewModelDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Add Photos to Album"
+        self.title = Key.Screen.moveFile
         configureCollectionViewOnLoad()
         viewModel.delegate = self
         viewModel.getAlbumFromCoreData()
@@ -50,7 +50,7 @@ class MoveFileViewController: UIViewController, MoveFileViewModelDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: AlbumsViewModelDelegate
+    // MARK: MoveFileViewModelDelegate
     func moveFileToAlbum(onSuccess: Bool) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateGalleryWhenMoveFile), object: nil)
         

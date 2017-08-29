@@ -18,23 +18,30 @@
                 <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="szz-76-38q">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="juc-Zr-5J6">
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                        <color key="backgroundColor" red="0.3411764705882353" green="0.62352941176470589" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </imageView>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="80" maxX="100" maxY="0.0"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="20"/>
+                        <state key="normal" title="Button" image="data-security-tips.jpg">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="szz-76-38q" firstAttribute="top" secondItem="VXe-z5-oRf" secondAttribute="top" id="9Si-PL-3Wp"/>
-                <constraint firstAttribute="trailing" secondItem="szz-76-38q" secondAttribute="trailing" id="We7-Io-cD5"/>
-                <constraint firstAttribute="bottom" secondItem="szz-76-38q" secondAttribute="bottom" id="esb-k5-yoj"/>
-                <constraint firstItem="szz-76-38q" firstAttribute="leading" secondItem="VXe-z5-oRf" secondAttribute="leading" id="fOF-ef-H5F"/>
+                <constraint firstItem="juc-Zr-5J6" firstAttribute="top" secondItem="VXe-z5-oRf" secondAttribute="top" id="lNW-JK-klv"/>
+                <constraint firstAttribute="trailing" secondItem="juc-Zr-5J6" secondAttribute="trailing" id="mSI-E5-x37"/>
+                <constraint firstAttribute="bottom" secondItem="juc-Zr-5J6" secondAttribute="bottom" id="qxR-nF-l2Y"/>
+                <constraint firstItem="juc-Zr-5J6" firstAttribute="leading" secondItem="VXe-z5-oRf" secondAttribute="leading" id="rTN-Rj-Wpv"/>
             </constraints>
             <size key="customSize" width="127" height="133"/>
             <connections>
-                <outlet property="importImageView" destination="szz-76-38q" id="5Ql-Za-Vvs"/>
+                <outlet property="importBtn" destination="juc-Zr-5J6" id="io1-Dn-AYK"/>
             </connections>
             <point key="canvasLocation" x="-153" y="-252"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="data-security-tips.jpg" width="640" height="489"/>
+    </resources>
 </document>

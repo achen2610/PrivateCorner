@@ -21,7 +21,30 @@ extension ImportViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.importCell, for: indexPath) as? ImportCell {
-            cell.importImageView.layer.cornerRadius = 5.0
+            cell.importBtn.layer.cornerRadius = 5.0
+            switch indexPath.row {
+            case 0:
+                cell.importBtn.setTitle("Photo Library", for: .normal)
+                cell.importBtn.tag = 0
+                break
+            case 1:
+                cell.importBtn.setTitle("Camera", for: .normal)
+                cell.importBtn.tag = 1
+                break
+            case 2:
+                cell.importBtn.setTitle("iTunes Syncing", for: .normal)
+                cell.importBtn.tag = 2
+                break
+            case 3:
+                cell.importBtn.setTitle("Wireless Syncing", for: .normal)
+                cell.importBtn.tag = 3
+                break
+            default:
+                break
+            }
+            cell.importBtn.addTarget(self, action: #selector(selectedImportDetail(sender:)), for: .touchUpInside)
+            cell.centerButtonImageAndTitle()
+            
             return cell
         }
         

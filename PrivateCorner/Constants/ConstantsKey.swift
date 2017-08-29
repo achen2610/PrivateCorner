@@ -46,12 +46,14 @@ struct Key {
     }
     
     struct Screen {
-        static let albumScreen                      = "Albums"
-        static let importScreen                     = "Import"
-        static let settingScreen                    = "Setting"
-        static let passcodeScreen                   = "Passcode"
-        static let usabilityScreen                  = "Usability"
-        static let howToUseScreen                   = "How to use"
+        static let album                            = "Albums"
+        static let importPhoto                      = "Import"
+        static let setting                          = "Setting"
+        static let passcode                         = "Passcode"
+        static let usability                        = "Usability"
+        static let howToUse                         = "How to use"
+        static let moveFile                         = "Add photos to Album"
+        static let chooseAlbum                      = "Choose album for import"
     }
     
     enum ItemType {

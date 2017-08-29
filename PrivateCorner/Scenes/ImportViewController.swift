@@ -22,7 +22,7 @@ class ImportViewController: UIViewController {
     
     struct cellLayout {
         static let itemsPerRow: CGFloat = 2
-        static let widthPerItem: CGFloat = 80 * kScale
+        static let widthPerItem: CGFloat = 100 * kScale
         static let sectionInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
     
@@ -36,7 +36,7 @@ class ImportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = Key.Screen.importScreen
+        title = Key.Screen.importPhoto
         configureCollecntionViewOnLoad()
     }
     
@@ -48,7 +48,52 @@ class ImportViewController: UIViewController {
     }
     
     func selectedImportDetailAtIndex(index: Int) {
-
+        switch index {
+        case 0:
+            //Photo Library
+            break
+        case 1:
+            //Camera
+            break
+        case 2:
+            //iTunes Syncing
+            break
+        case 3:
+            //Wireless Syncing
+            break
+            
+        default:
+            break
+        }
+    }
+    
+    func selectedImportDetail(sender: UIButton) {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let navi  = mainStoryboard.instantiateViewController(withIdentifier: "ChooseAlbum") as! UINavigationController
+        let controller = navi.visibleViewController as! ChooseAlbumViewController
+        
+        let index = sender.tag
+        switch index {
+        case 0:
+            //Photo Library
+            controller.isPhotoLibrary = true
+            present(navi, animated: true, completion: nil)
+            break
+        case 1:
+            //Camera
+            controller.isPhotoLibrary = false
+            present(navi, animated: true, completion: nil)
+            break
+        case 2:
+            //iTunes Syncing
+            break
+        case 3:
+            //Wireless Syncing
+            break
+            
+        default:
+            break
+        }
     }
 
 }

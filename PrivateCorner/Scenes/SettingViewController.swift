@@ -35,7 +35,7 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = Key.Screen.settingScreen
+        title = Key.Screen.setting
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         configureTableViewOnLoad()
         

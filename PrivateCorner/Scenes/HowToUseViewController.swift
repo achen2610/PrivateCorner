@@ -20,7 +20,7 @@ class HowToUseViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = Key.Screen.howToUseScreen
+        title = Key.Screen.howToUse
     }
     
     // MARK: Event handling

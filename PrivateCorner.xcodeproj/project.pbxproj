@@ -105,6 +105,12 @@
 		007980601EE696EF00C5E13D /* GVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980301EE696EF00C5E13D /* GVideoCell.swift */; };
 		007980611EE696EF00C5E13D /* VideosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980311EE696EF00C5E13D /* VideosController.swift */; };
 		007980621EE696EF00C5E13D /* VideosLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980321EE696EF00C5E13D /* VideosLibrary.swift */; };
+		007AF60E1F5547A600DDF9CB /* ImportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AF60D1F5547A600DDF9CB /* ImportViewModel.swift */; };
+		007AF6111F55489300DDF9CB /* ChooseAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AF6101F55489300DDF9CB /* ChooseAlbumViewController.swift */; };
+		007AF6131F5548E300DDF9CB /* ChooseAlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AF6121F5548E300DDF9CB /* ChooseAlbumViewModel.swift */; };
+		007AF6151F55497200DDF9CB /* ChooseAlbumCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AF6141F55497200DDF9CB /* ChooseAlbumCollectionViewController.swift */; };
+		007AF6181F554B3400DDF9CB /* ChooseAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AF6171F554B3400DDF9CB /* ChooseAlbumCell.swift */; };
+		007AF61A1F554B3E00DDF9CB /* ChooseAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 007AF6191F554B3E00DDF9CB /* ChooseAlbumCell.xib */; };
 		007B75491E91E01400483293 /* ConstantsSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B75481E91E01400483293 /* ConstantsSize.swift */; };
 		007B754B1E91E08D00483293 /* ConstantsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B754A1E91E08D00483293 /* ConstantsKey.swift */; };
 		007D82CD1E8B74DD005CBBC2 /* SettingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007D82CC1E8B74DD005CBBC2 /* SettingTableView.swift */; };
@@ -399,6 +405,12 @@
 		007980301EE696EF00C5E13D /* GVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GVideoCell.swift; sourceTree = "<group>"; };
 		007980311EE696EF00C5E13D /* VideosController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosController.swift; sourceTree = "<group>"; };
 		007980321EE696EF00C5E13D /* VideosLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosLibrary.swift; sourceTree = "<group>"; };
+		007AF60D1F5547A600DDF9CB /* ImportViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportViewModel.swift; sourceTree = "<group>"; };
+		007AF6101F55489300DDF9CB /* ChooseAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAlbumViewController.swift; sourceTree = "<group>"; };
+		007AF6121F5548E300DDF9CB /* ChooseAlbumViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAlbumViewModel.swift; sourceTree = "<group>"; };
+		007AF6141F55497200DDF9CB /* ChooseAlbumCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAlbumCollectionViewController.swift; sourceTree = "<group>"; };
+		007AF6171F554B3400DDF9CB /* ChooseAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAlbumCell.swift; sourceTree = "<group>"; };
+		007AF6191F554B3E00DDF9CB /* ChooseAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseAlbumCell.xib; sourceTree = "<group>"; };
 		007B75481E91E01400483293 /* ConstantsSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsSize.swift; sourceTree = "<group>"; };
 		007B754A1E91E08D00483293 /* ConstantsKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsKey.swift; sourceTree = "<group>"; };
 		007D82CC1E8B74DD005CBBC2 /* SettingTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableView.swift; sourceTree = "<group>"; };
@@ -640,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				004B290C1E8CE9C6007C910A /* UI */,
+				007AF60D1F5547A600DDF9CB /* ImportViewModel.swift */,
 				004B28FF1E8CE57F007C910A /* ImportViewController.swift */,
 				0094F6CF1E8DF1E6007BEFAE /* ImportCollectionViewController.swift */,
 			);
@@ -792,6 +805,7 @@
 				00E0B1A41E7942350001DF8F /* Albums */,
 				004B28E51E8C9EA6007C910A /* GalleryPhoto */,
 				004B28F91E8CE55C007C910A /* Import */,
+				007AF60F1F55487A00DDF9CB /* ChooseAlbum */,
 				006486F51E70F2E800419C27 /* LockScreen */,
 				008775E81EEF80FF003C50AF /* MoveFile */,
 				00DDF9B51ED43D2B00093770 /* PhotoView */,
@@ -1002,6 +1016,26 @@
 				007980321EE696EF00C5E13D /* VideosLibrary.swift */,
 			);
 			path = Videos;
+			sourceTree = "<group>";
+		};
+		007AF60F1F55487A00DDF9CB /* ChooseAlbum */ = {
+			isa = PBXGroup;
+			children = (
+				007AF6161F554B2400DDF9CB /* UI */,
+				007AF6121F5548E300DDF9CB /* ChooseAlbumViewModel.swift */,
+				007AF6101F55489300DDF9CB /* ChooseAlbumViewController.swift */,
+				007AF6141F55497200DDF9CB /* ChooseAlbumCollectionViewController.swift */,
+			);
+			name = ChooseAlbum;
+			sourceTree = "<group>";
+		};
+		007AF6161F554B2400DDF9CB /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				007AF6171F554B3400DDF9CB /* ChooseAlbumCell.swift */,
+				007AF6191F554B3E00DDF9CB /* ChooseAlbumCell.xib */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		007D82CE1E8B7679005CBBC2 /* UI */ = {
@@ -1921,6 +1955,7 @@
 				00815FAD1EE7DF050029FE02 /* selected.png in Resources */,
 				007718B71EE94694001211CB /* export@3x.png in Resources */,
 				0075F20C1EDEB5820006AB5F /* VideoCell.xib in Resources */,
+				007AF61A1F554B3E00DDF9CB /* ChooseAlbumCell.xib in Resources */,
 				004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */,
 				009049061EFD038400EBAEEB /* web-on@3x.png in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
@@ -2122,6 +2157,7 @@
 				00DDF99F1ED436E800093770 /* UIViewController+Hero.swift in Sources */,
 				0078B8981F4BD5160079AB49 /* UsabilityTableView.swift in Sources */,
 				0079804A1EE696EF00C5E13D /* UIView+Extensions.swift in Sources */,
+				007AF6181F554B3400DDF9CB /* ChooseAlbumCell.swift in Sources */,
 				007E5AE01EE53DAA00FDC2EB /* UICircularProgressRingView.swift in Sources */,
 				009083241F00C88E00EE6728 /* SPDevice.swift in Sources */,
 				009083261F00C88E00EE6728 /* SPUIDeviceExtenshion.swift in Sources */,
@@ -2139,6 +2175,7 @@
 				007D82CD1E8B74DD005CBBC2 /* SettingTableView.swift in Sources */,
 				008775EA1EEF8151003C50AF /* MoveFileViewModel.swift in Sources */,
 				007980341EE696EF00C5E13D /* CameraMan.swift in Sources */,
+				007AF60E1F5547A600DDF9CB /* ImportViewModel.swift in Sources */,
 				007F62DC1ECD86BD00226B49 /* PasscodeView.swift in Sources */,
 				007980361EE696EF00C5E13D /* ShutterButton.swift in Sources */,
 				009083431F00C88E00EE6728 /* SPRequestPermissionDialogInteractiveViewControllerInterface.swift in Sources */,
@@ -2209,6 +2246,7 @@
 				004B29051E8CE57F007C910A /* ImportViewController.swift in Sources */,
 				008775F11EEF8193003C50AF /* MoveFileCell.swift in Sources */,
 				0078B89B1F4BD52E0079AB49 /* UsabilityCell.swift in Sources */,
+				007AF6151F55497200DDF9CB /* ChooseAlbumCollectionViewController.swift in Sources */,
 				009083831F00E2D800EE6728 /* SPUIImageExtension.swift in Sources */,
 				0079804C1EE696EF00C5E13D /* Fetcher.swift in Sources */,
 				00DDF99A1ED436E800093770 /* CAMediaTimingFunction+Hero.swift in Sources */,
@@ -2252,8 +2290,10 @@
 				007B75491E91E01400483293 /* ConstantsSize.swift in Sources */,
 				0079805D1EE696EF00C5E13D /* GridView.swift in Sources */,
 				0094F6D51E8E46F8007BEFAE /* CoreDataManager.swift in Sources */,
+				007AF6131F5548E300DDF9CB /* ChooseAlbumViewModel.swift in Sources */,
 				0090835F1F00C88E00EE6728 /* SPRhombusPatternView.swift in Sources */,
 				009083411F00C88E00EE6728 /* SPRequestPermissionDialogInteractiveDataSourceInterface.swift in Sources */,
+				007AF6111F55489300DDF9CB /* ChooseAlbumViewController.swift in Sources */,
 				00DDF9A21ED436E800093770 /* HeroContext.swift in Sources */,
 				0094F6D71E8E5AF3007BEFAE /* AlbumManager.swift in Sources */,
 				0090833B1F00C88E00EE6728 /* SPRequestPermissionLocationHandler.swift in Sources */,
