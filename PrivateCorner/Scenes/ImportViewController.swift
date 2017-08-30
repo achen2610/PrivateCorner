@@ -89,6 +89,8 @@ class ImportViewController: UIViewController {
             break
         case 3:
             //Wireless Syncing
+            let importWeb = mainStoryboard.instantiateViewController(withIdentifier: "ImportWeb") as! ImportWebViewController
+            navigationController?.pushViewController(importWeb, animated: true)
             break
             
         default:

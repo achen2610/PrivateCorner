@@ -123,6 +123,8 @@
 		007F62DC1ECD86BD00226B49 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F62DB1ECD86BD00226B49 /* PasscodeView.swift */; };
 		007F62DF1ECD91CF00226B49 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F62DE1ECD91CF00226B49 /* TabBarController.swift */; };
 		00815FAD1EE7DF050029FE02 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 00815FAC1EE7DF050029FE02 /* selected.png */; };
+		008473A51F56688500A3FF47 /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008473A41F56688500A3FF47 /* WebServer.swift */; };
+		008473A81F569EA500A3FF47 /* ImportWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008473A71F569EA500A3FF47 /* ImportWebViewController.swift */; };
 		0086A9B41EC2F9B1000F5C01 /* Gallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */; };
 		008775EA1EEF8151003C50AF /* MoveFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775E91EEF8151003C50AF /* MoveFileViewModel.swift */; };
 		008775EC1EEF815F003C50AF /* MoveFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775EB1EEF815F003C50AF /* MoveFileViewController.swift */; };
@@ -423,6 +425,9 @@
 		007F62DB1ECD86BD00226B49 /* PasscodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
 		007F62DE1ECD91CF00226B49 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		00815FAC1EE7DF050029FE02 /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
+		008473A31F56620F00A3FF47 /* WebServer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebServer-Bridging-Header.h"; sourceTree = "<group>"; };
+		008473A41F56688500A3FF47 /* WebServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServer.swift; sourceTree = "<group>"; };
+		008473A71F569EA500A3FF47 /* ImportWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportWebViewController.swift; sourceTree = "<group>"; };
 		0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Gallery.bundle; sourceTree = "<group>"; };
 		008775E91EEF8151003C50AF /* MoveFileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveFileViewModel.swift; sourceTree = "<group>"; };
 		008775EB1EEF815F003C50AF /* MoveFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveFileViewController.swift; sourceTree = "<group>"; };
@@ -794,6 +799,7 @@
 				0077770C1EDBC90F00233D0B /* MediaLibrary.swift */,
 				0035DEFE1EF0DC59004581FF /* UploadManager.swift */,
 				0075E4491EFA25A600E18B64 /* GlobalMethods.swift */,
+				008473A41F56688500A3FF47 /* WebServer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -805,6 +811,7 @@
 				00E0B1A41E7942350001DF8F /* Albums */,
 				004B28E51E8C9EA6007C910A /* GalleryPhoto */,
 				004B28F91E8CE55C007C910A /* Import */,
+				008473A61F569E8D00A3FF47 /* ImportWeb */,
 				007AF60F1F55487A00DDF9CB /* ChooseAlbum */,
 				006486F51E70F2E800419C27 /* LockScreen */,
 				008775E81EEF80FF003C50AF /* MoveFile */,
@@ -824,6 +831,7 @@
 				006486EB1E70EFE400419C27 /* Assets.xcassets */,
 				006486EC1E70EFE400419C27 /* Info.plist */,
 				008B5E0F1F2872130044EEF0 /* JSTools.js */,
+				008473A31F56620F00A3FF47 /* WebServer-Bridging-Header.h */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -1073,6 +1081,14 @@
 				007F62DE1ECD91CF00226B49 /* TabBarController.swift */,
 			);
 			name = TabBar;
+			sourceTree = "<group>";
+		};
+		008473A61F569E8D00A3FF47 /* ImportWeb */ = {
+			isa = PBXGroup;
+			children = (
+				008473A71F569EA500A3FF47 /* ImportWebViewController.swift */,
+			);
+			name = ImportWeb;
 			sourceTree = "<group>";
 		};
 		0086A9411EC2F98F000F5C01 /* Gallery */ = {
@@ -2271,6 +2287,7 @@
 				004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */,
 				009083211F00C88E00EE6728 /* NSLayoutConstraintExtenshion.swift in Sources */,
 				009083201F00C88E00EE6728 /* SPAudioPlayer.swift in Sources */,
+				008473A81F569EA500A3FF47 /* ImportWebViewController.swift in Sources */,
 				00DDF9971ED436E800093770 /* DefaultAnimationPreprocessor.swift in Sources */,
 				0078B8A01F4BE28F0079AB49 /* PasscodeViewController.swift in Sources */,
 				00DDF9B41ED436E800093770 /* SourcePreprocessor.swift in Sources */,
@@ -2343,6 +2360,7 @@
 				009083841F00E2D800EE6728 /* SPUIScreenExtension.swift in Sources */,
 				002681A31F29CB4D006F6CE4 /* WebViewCollectionView.swift in Sources */,
 				00DDF9B21ED436E800093770 /* IgnoreSubviewModifiersPreprocessor.swift in Sources */,
+				008473A51F56688500A3FF47 /* WebServer.swift in Sources */,
 				007F06D01ED3CE3F0081EAAE /* ConstantColor.swift in Sources */,
 				009083811F00E2D800EE6728 /* SPUIButtonExtenshion.swift in Sources */,
 				0079803F1EE696EF00C5E13D /* ImagesLibrary.swift in Sources */,
@@ -2522,6 +2540,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mrachen.PrivateCorner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/DATA/Pro/PrivateCorner/PrivateCorner/Supporting Files/WebServer-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -2538,6 +2557,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mrachen.PrivateCorner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/DATA/Pro/PrivateCorner/PrivateCorner/Supporting Files/WebServer-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

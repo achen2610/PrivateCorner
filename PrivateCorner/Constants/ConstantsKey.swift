@@ -48,6 +48,7 @@ struct Key {
     struct Screen {
         static let album                            = "Albums"
         static let importPhoto                      = "Import"
+        static let importWeb                        = "Web Server"
         static let setting                          = "Setting"
         static let passcode                         = "Passcode"
         static let usability                        = "Usability"
