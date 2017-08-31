@@ -33,7 +33,9 @@ public class WebServer: NSObject  {
             urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!)
         }
 
+        let fileExtensions = ["mov", "mp4", "gif", "jpg", "jpeg", "png"]
         webServer = GCDWebUploader(uploadDirectory: urlPath.path)
+        webServer.allowedFileExtensions = fileExtensions
         currentDirectory = urlPath.absoluteString
     }
 

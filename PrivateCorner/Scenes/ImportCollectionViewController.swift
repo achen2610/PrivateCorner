@@ -61,16 +61,12 @@ extension ImportViewController: UICollectionViewDataSource, UICollectionViewDele
         let size = CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height - kNavigationView - kTabBar)
         let insets = UIEdgeInsetsMake((size.height - cellLayout.widthPerItem * 2) / 3, (size.width - cellLayout.widthPerItem * 2) / 4, (size.height - cellLayout.widthPerItem * 2) / 3, (size.width - cellLayout.widthPerItem * 2) / 4)
         return insets
-        
-//        return cellLayout.sectionInsets
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
         let height: CGFloat = collectionView.frame.size.height - kNavigationView - kTabBar
         return (height - cellLayout.widthPerItem * 2) / 3
-
-//        return cellLayout.sectionInsets.left
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

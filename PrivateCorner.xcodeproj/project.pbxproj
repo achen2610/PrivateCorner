@@ -138,6 +138,7 @@
 		008B5E0E1F28529B0044EEF0 /* WebViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B5E0D1F28529A0044EEF0 /* WebViewExtension.swift */; };
 		008B5E101F2872130044EEF0 /* JSTools.js in Resources */ = {isa = PBXBuildFile; fileRef = 008B5E0F1F2872130044EEF0 /* JSTools.js */; };
 		008B5E121F289E1B0044EEF0 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B5E111F289E1B0044EEF0 /* WebViewModel.swift */; };
+		008D58941F57A32200B81CB1 /* ImportWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008D58931F57A32200B81CB1 /* ImportWebViewModel.swift */; };
 		008E3E141F4FBE2400B69812 /* HowToUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E3E131F4FBE2400B69812 /* HowToUseViewController.swift */; };
 		008E3E161F4FBE7700B69812 /* HowToUseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E3E151F4FBE7700B69812 /* HowToUseTableView.swift */; };
 		009049051EFD038400EBAEEB /* web@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 009049031EFD038400EBAEEB /* web@3x.png */; };
@@ -441,6 +442,7 @@
 		008B5E0D1F28529A0044EEF0 /* WebViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewExtension.swift; sourceTree = "<group>"; };
 		008B5E0F1F2872130044EEF0 /* JSTools.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSTools.js; sourceTree = "<group>"; };
 		008B5E111F289E1B0044EEF0 /* WebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		008D58931F57A32200B81CB1 /* ImportWebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportWebViewModel.swift; sourceTree = "<group>"; };
 		008E3E131F4FBE2400B69812 /* HowToUseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToUseViewController.swift; sourceTree = "<group>"; };
 		008E3E151F4FBE7700B69812 /* HowToUseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToUseTableView.swift; sourceTree = "<group>"; };
 		009049031EFD038400EBAEEB /* web@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web@3x.png"; sourceTree = "<group>"; };
@@ -657,8 +659,8 @@
 			isa = PBXGroup;
 			children = (
 				004B290C1E8CE9C6007C910A /* UI */,
-				007AF60D1F5547A600DDF9CB /* ImportViewModel.swift */,
 				004B28FF1E8CE57F007C910A /* ImportViewController.swift */,
+				007AF60D1F5547A600DDF9CB /* ImportViewModel.swift */,
 				0094F6CF1E8DF1E6007BEFAE /* ImportCollectionViewController.swift */,
 			);
 			name = Import;
@@ -1087,6 +1089,7 @@
 			isa = PBXGroup;
 			children = (
 				008473A71F569EA500A3FF47 /* ImportWebViewController.swift */,
+				008D58931F57A32200B81CB1 /* ImportWebViewModel.swift */,
 			);
 			name = ImportWeb;
 			sourceTree = "<group>";
@@ -2185,6 +2188,7 @@
 				007980511EE696EF00C5E13D /* Permission.swift in Sources */,
 				002681A61F29CC90006F6CE4 /* WebAlbumCell.swift in Sources */,
 				00DDF9921ED436E800093770 /* HeroCoreAnimationViewContext.swift in Sources */,
+				008D58941F57A32200B81CB1 /* ImportWebViewModel.swift in Sources */,
 				008775EC1EEF815F003C50AF /* MoveFileViewController.swift in Sources */,
 				0079803B1EE696EF00C5E13D /* Cart.swift in Sources */,
 				00DDF9A91ED436E800093770 /* HeroTypes.swift in Sources */,

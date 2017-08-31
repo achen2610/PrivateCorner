@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
-class ImportWebViewController: UIViewController {
+class ImportWebViewController: UIViewController, ImportWebViewModelDelegate {
     
     @IBOutlet weak var addressTextField: UITextField!
+    var viewModel: ImportWebViewModel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,6 +23,8 @@ class ImportWebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Key.Screen.importWeb
+        
+        viewModel = ImportWebViewModel(delegate: self)
         
         WebServer.sharedInstance.delegate = self
         WebServer.sharedInstance.setDelegate()
@@ -34,6 +37,9 @@ class ImportWebViewController: UIViewController {
         
         WebServer.sharedInstance.stopServer()
     }
+    
+    // MARK: View Model Delegate
+    
 }
 
 extension ImportWebViewController: WebServerDelegate {
@@ -42,7 +48,15 @@ extension ImportWebViewController: WebServerDelegate {
     }
     
     func webServerDidUploadFile(webServer: WebServer, atPath path: String) {
-        
+        viewModel.saveFile(path: path) { (status) in
+            if status {
+                let alert = GlobalMethods.alertController(title: nil, message: "Save file to app success!", cancelTitle: "Ok")
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                let alert = GlobalMethods.alertController(title: nil, message: "Save file error!", cancelTitle: "Ok")
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
     
     func webServerDidDownloadFile(webServer: WebServer, atPath path: String) {
