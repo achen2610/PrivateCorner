@@ -11,7 +11,7 @@
 import UIKit
 import CDAlertView
 
-class SettingViewController: UIViewController {
+class SettingViewController: UITableViewController {
 
     @IBOutlet weak var settingTable: UITableView!
     // MARK: Object lifecycle

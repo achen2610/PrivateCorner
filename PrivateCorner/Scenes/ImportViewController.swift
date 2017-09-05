@@ -12,18 +12,12 @@ import UIKit
 
 class ImportViewController: UIViewController {
 
-    @IBOutlet weak var importCollectionView: UICollectionView!
+    @IBOutlet weak var importTable: UITableView!
 
     // MARK: Object lifecycle
     
     struct cellIdentifiers {
-        static let importCell = "importCell"
-    }
-    
-    struct cellLayout {
-        static let itemsPerRow: CGFloat = 2
-        static let widthPerItem: CGFloat = 100 * kScale
-        static let sectionInsets: UIEdgeInsets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        static let importCell = "ImportCell"
     }
     
     override func awakeFromNib() {
@@ -37,29 +31,45 @@ class ImportViewController: UIViewController {
         super.viewDidLoad()
         
         title = Key.Screen.importPhoto
-        configureCollecntionViewOnLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        configureTableViewOnLoad()
     }
     
     // MARK: Event handling
     
-    func configureCollecntionViewOnLoad() {
+    func configureTableViewOnLoad() {
         let nibName = UINib(nibName: "ImportCell", bundle:Bundle.main)
-        importCollectionView.register(nibName, forCellWithReuseIdentifier: cellIdentifiers.importCell)
+        importTable.register(nibName, forCellReuseIdentifier: cellIdentifiers.importCell)
+        importTable.tableFooterView = UIView()
     }
     
     func selectedImportDetailAtIndex(index: Int) {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let navi  = mainStoryboard.instantiateViewController(withIdentifier: "ChooseAlbum") as! UINavigationController
+        let controller = navi.visibleViewController as! ChooseAlbumViewController
+
         switch index {
         case 0:
             //Photo Library
+            controller.isPhotoLibrary = true
+            present(navi, animated: true, completion: nil)
             break
         case 1:
             //Camera
+            controller.isPhotoLibrary = false
+            present(navi, animated: true, completion: nil)
             break
         case 2:
             //iTunes Syncing
+            let title = "iTunes Syncing"
+            let message = "To sync your device:\n1. Connect your iPhone to your computer.\n2. In iTunes, select your iPhone, and then click the apps tab.\n3. Below file sharing, select\"PrivateCorner\" from the list.\n4. Now add, remove, or save photos."
+            let alert = GlobalMethods.alertController(title: title, message: message, cancelTitle: "OK")
+            present(alert, animated: true, completion: nil)
             break
         case 3:
             //Wireless Syncing
+            let importWeb = mainStoryboard.instantiateViewController(withIdentifier: "ImportWeb") as! ImportWebViewController
+            navigationController?.pushViewController(importWeb, animated: true)
             break
             
         default:
@@ -86,6 +96,10 @@ class ImportViewController: UIViewController {
             break
         case 2:
             //iTunes Syncing
+            let title = "iTunes Syncing"
+            let message = "To sync your device:\n1. Connect your iPhone to your computer.\n2. In iTunes, select your iPhone, and then click the apps tab.\n3. Below file sharing, select\"PrivateCorner\" from the list.\n4. Now add, remove, or save photos."
+            let alert = GlobalMethods.alertController(title: title, message: message, cancelTitle: "OK")
+            present(alert, animated: true, completion: nil)
             break
         case 3:
             //Wireless Syncing

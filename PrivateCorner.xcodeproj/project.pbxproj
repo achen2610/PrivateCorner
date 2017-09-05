@@ -122,6 +122,10 @@
 		007F06D01ED3CE3F0081EAAE /* ConstantColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F06CF1ED3CE3F0081EAAE /* ConstantColor.swift */; };
 		007F62DC1ECD86BD00226B49 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F62DB1ECD86BD00226B49 /* PasscodeView.swift */; };
 		007F62DF1ECD91CF00226B49 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007F62DE1ECD91CF00226B49 /* TabBarController.swift */; };
+		007F6FE61F5E990700F9B2A8 /* itunes@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 007F6FE21F5E990700F9B2A8 /* itunes@3x.png */; };
+		007F6FE71F5E990700F9B2A8 /* camera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 007F6FE31F5E990700F9B2A8 /* camera@3x.png */; };
+		007F6FE81F5E990700F9B2A8 /* photolibrary@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 007F6FE41F5E990700F9B2A8 /* photolibrary@3x.png */; };
+		007F6FE91F5E990700F9B2A8 /* wireless@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 007F6FE51F5E990700F9B2A8 /* wireless@3x.png */; };
 		00815FAD1EE7DF050029FE02 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 00815FAC1EE7DF050029FE02 /* selected.png */; };
 		008473A51F56688500A3FF47 /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008473A41F56688500A3FF47 /* WebServer.swift */; };
 		008473A81F569EA500A3FF47 /* ImportWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008473A71F569EA500A3FF47 /* ImportWebViewController.swift */; };
@@ -425,6 +429,10 @@
 		007F06CF1ED3CE3F0081EAAE /* ConstantColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantColor.swift; sourceTree = "<group>"; };
 		007F62DB1ECD86BD00226B49 /* PasscodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
 		007F62DE1ECD91CF00226B49 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		007F6FE21F5E990700F9B2A8 /* itunes@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "itunes@3x.png"; sourceTree = "<group>"; };
+		007F6FE31F5E990700F9B2A8 /* camera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@3x.png"; sourceTree = "<group>"; };
+		007F6FE41F5E990700F9B2A8 /* photolibrary@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photolibrary@3x.png"; sourceTree = "<group>"; };
+		007F6FE51F5E990700F9B2A8 /* wireless@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wireless@3x.png"; sourceTree = "<group>"; };
 		00815FAC1EE7DF050029FE02 /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
 		008473A31F56620F00A3FF47 /* WebServer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebServer-Bridging-Header.h"; sourceTree = "<group>"; };
 		008473A41F56688500A3FF47 /* WebServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServer.swift; sourceTree = "<group>"; };
@@ -755,6 +763,10 @@
 		006486E51E70EFD500419C27 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				007F6FE21F5E990700F9B2A8 /* itunes@3x.png */,
+				007F6FE31F5E990700F9B2A8 /* camera@3x.png */,
+				007F6FE41F5E990700F9B2A8 /* photolibrary@3x.png */,
+				007F6FE51F5E990700F9B2A8 /* wireless@3x.png */,
 				009049031EFD038400EBAEEB /* web@3x.png */,
 				009049041EFD038400EBAEEB /* web-on@3x.png */,
 				0035DEFC1EF0D0A9004581FF /* noimagefound.png */,
@@ -812,12 +824,12 @@
 				007F62DD1ECD91AD00226B49 /* TabBar */,
 				00E0B1A41E7942350001DF8F /* Albums */,
 				004B28E51E8C9EA6007C910A /* GalleryPhoto */,
+				00DDF9B51ED43D2B00093770 /* PhotoView */,
 				004B28F91E8CE55C007C910A /* Import */,
 				008473A61F569E8D00A3FF47 /* ImportWeb */,
 				007AF60F1F55487A00DDF9CB /* ChooseAlbum */,
 				006486F51E70F2E800419C27 /* LockScreen */,
 				008775E81EEF80FF003C50AF /* MoveFile */,
-				00DDF9B51ED43D2B00093770 /* PhotoView */,
 				00E0B1B11E7943B40001DF8F /* Setting */,
 				0078B89E1F4BE2530079AB49 /* Passcode */,
 				0078B8941F4BD4CC0079AB49 /* Usability */,
@@ -1967,15 +1979,18 @@
 				007718BB1EE947CA001211CB /* move@3x.png in Resources */,
 				009049051EFD038400EBAEEB /* web@3x.png in Resources */,
 				00915F011ED808B00003BECE /* PhotoCell.xib in Resources */,
+				007F6FE81F5E990700F9B2A8 /* photolibrary@3x.png in Resources */,
 				0075F2081EDE61DE0006AB5F /* albums.png in Resources */,
 				007D82D21E8B76B0005CBBC2 /* SettingDetailCell.xib in Resources */,
 				00438D331EDFA51C0060EFA4 /* playvideo.png in Resources */,
+				007F6FE71F5E990700F9B2A8 /* camera@3x.png in Resources */,
 				004B290A1E8CE96A007C910A /* import-on@3x.png in Resources */,
 				00815FAD1EE7DF050029FE02 /* selected.png in Resources */,
 				007718B71EE94694001211CB /* export@3x.png in Resources */,
 				0075F20C1EDEB5820006AB5F /* VideoCell.xib in Resources */,
 				007AF61A1F554B3E00DDF9CB /* ChooseAlbumCell.xib in Resources */,
 				004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */,
+				007F6FE91F5E990700F9B2A8 /* wireless@3x.png in Resources */,
 				009049061EFD038400EBAEEB /* web-on@3x.png in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
 				0035DEFD1EF0D0A9004581FF /* noimagefound.png in Resources */,
@@ -1996,6 +2011,7 @@
 				004B290B1E8CE96A007C910A /* import@3x.png in Resources */,
 				007718B61EE94694001211CB /* delete@3x.png in Resources */,
 				00E0B1A21E79411E0001DF8F /* setting-on@3x.png in Resources */,
+				007F6FE61F5E990700F9B2A8 /* itunes@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

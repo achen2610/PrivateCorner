@@ -97,9 +97,9 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
     }
     
     func setupTitleView(topText: String, bottomText: String) {
-        let titleParameters = [NSForegroundColorAttributeName : UIColor.black,
+        let titleParameters = [NSForegroundColorAttributeName : UIColor.white,
                                NSFontAttributeName : UIFont.systemFont(ofSize: 16)]
-        let subtitleParameters = [NSForegroundColorAttributeName : UIColor.black,
+        let subtitleParameters = [NSForegroundColorAttributeName : UIColor.white,
                                   NSFontAttributeName : UIFont.systemFont(ofSize: 12)]
         
         let title:NSMutableAttributedString = NSMutableAttributedString(string: topText, attributes: titleParameters)
