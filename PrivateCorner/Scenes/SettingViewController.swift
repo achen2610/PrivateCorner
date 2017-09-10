@@ -9,8 +9,9 @@
 //
 
 import UIKit
+import CDAlertView
 
-class SettingViewController: UIViewController {
+class SettingViewController: UITableViewController {
 
     @IBOutlet weak var settingTable: UITableView!
     // MARK: Object lifecycle
@@ -21,7 +22,7 @@ class SettingViewController: UIViewController {
     }
     
     var array = [["", ["Version", "1.0"]],
-                 ["", "Usability", "Passcode", "How to use"],
+                 ["", "Passcode", "Usability","How to use"],
                  ["", ["Author", "MrAchen"]]]
 
     override func awakeFromNib() {
@@ -34,8 +35,14 @@ class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = Key.Screen.setting
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         configureTableViewOnLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(performSeguePasscodeViewWithNotification(noti:)), name: Notification.Name(rawValue: Key.String.notiPerformSeguePasscodeView), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showAlertWhenChangePassSuccess(noti:)), name: Notification.Name(rawValue: Key.String.notiAlertChangePassSuccess), object: nil)
     }
+    
     
     // MARK: Event handling
     
@@ -47,12 +54,43 @@ class SettingViewController: UIViewController {
     }
     
     func selectedSettingAtIndex(index: Int) {
-        
-//        if index == 0 {
-//            router.navigateToPasswordScreen()
-//        }
+        switch index {
+        case 0:
+            //Passcode
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let lockScreen  = mainStoryboard.instantiateViewController(withIdentifier: "LockScreen") as! LockScreenViewController
+            let viewModel = LockScreenViewModel(delegate: lockScreen, totalDotCount: 6)
+            viewModel.passcodeState = .RequirePass
+            viewModel.passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as? String
+            lockScreen.viewModel = viewModel
+            lockScreen.isHeroEnabled = true
+            lockScreen.heroModalAnimationType = .fade
+            present(lockScreen, animated: true, completion: nil)
+            break
+        case 1:
+            //Usability
+            self.performSegue(withIdentifier: "segueUsabilityViewController", sender: nil)
+            break
+        case 2:
+            //How to use
+            self.performSegue(withIdentifier: "segueHowToUseViewController", sender: nil)
+            break
+        default:
+            break
+        }
     }
 
+    func performSeguePasscodeViewWithNotification(noti: Notification) {
+        self.performSegue(withIdentifier: "seguePasscodeViewController", sender: nil)
+    }
     
+    func showAlertWhenChangePassSuccess(noti: Notification) {
+        let alert = CDAlertView(title: nil, message: "Change passcode success!", type: .success)
+        alert.show()
+        
+        delay(1.0, execute: { 
+            alert.hide(isPopupAnimated: true)
+        })
+    }
 }
 

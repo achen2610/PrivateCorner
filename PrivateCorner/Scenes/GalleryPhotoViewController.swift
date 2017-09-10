@@ -47,6 +47,7 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         styleUI()
         configureCollectionViewOnLoad()
         getGalleryPhotoOnLoad()
@@ -182,6 +183,9 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
             
             if SPRequestPermission.isAllowPermissions([.camera, .photoLibrary]) {
                 if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+                    Config.showsPhotoLibraryTab = true
+                    Config.showsCameraTab = true
+                    Config.showsVideoTab = true
                     self.gallery = GalleryController()
                     self.gallery.delegate = self
                     self.present(self.gallery, animated: true, completion: nil)
@@ -618,6 +622,9 @@ extension GalleryPhotoViewController: SPRequestPermissionEventsDelegate {
         
         if SPRequestPermission.isAllowPermissions([.camera, .photoLibrary]) {
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+                Config.showsPhotoLibraryTab = true
+                Config.showsCameraTab = true
+                Config.showsVideoTab = true
                 self.gallery = GalleryController()
                 self.gallery.delegate = self
                 self.present(self.gallery, animated: true, completion: nil)

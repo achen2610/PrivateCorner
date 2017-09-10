@@ -6,35 +6,49 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="importCell" id="VXe-z5-oRf" customClass="ImportCell" customModule="PrivateCorner" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ImportCell" id="Q6d-cb-6Cm" customClass="ImportCell" customModule="PrivateCorner" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Q6d-cb-6Cm" id="Qha-KB-IDD">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="szz-76-38q">
-                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                        <color key="backgroundColor" red="0.3411764705882353" green="0.62352941176470589" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kVQ-nv-hxZ">
+                        <rect key="frame" x="8" y="8" width="43.5" height="43.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="kVQ-nv-hxZ" secondAttribute="height" multiplier="1:1" id="weE-lm-Mhq"/>
+                        </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6m-ef-uzB">
+                        <rect key="frame" x="59" y="14.5" width="308" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="WQY-Gf-OOT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
-            </view>
-            <constraints>
-                <constraint firstItem="szz-76-38q" firstAttribute="top" secondItem="VXe-z5-oRf" secondAttribute="top" id="9Si-PL-3Wp"/>
-                <constraint firstAttribute="trailing" secondItem="szz-76-38q" secondAttribute="trailing" id="We7-Io-cD5"/>
-                <constraint firstAttribute="bottom" secondItem="szz-76-38q" secondAttribute="bottom" id="esb-k5-yoj"/>
-                <constraint firstItem="szz-76-38q" firstAttribute="leading" secondItem="VXe-z5-oRf" secondAttribute="leading" id="fOF-ef-H5F"/>
-            </constraints>
-            <size key="customSize" width="127" height="133"/>
+                <constraints>
+                    <constraint firstItem="kVQ-nv-hxZ" firstAttribute="top" secondItem="Qha-KB-IDD" secondAttribute="top" constant="8" id="HXG-Ts-Zmx"/>
+                    <constraint firstAttribute="bottom" secondItem="kVQ-nv-hxZ" secondAttribute="bottom" constant="8" id="Mco-Ty-024"/>
+                    <constraint firstItem="T6m-ef-uzB" firstAttribute="leading" secondItem="kVQ-nv-hxZ" secondAttribute="trailing" constant="8" id="P4U-PI-Oqb"/>
+                    <constraint firstItem="T6m-ef-uzB" firstAttribute="centerY" secondItem="Qha-KB-IDD" secondAttribute="centerY" id="i9o-YR-ui2"/>
+                    <constraint firstItem="kVQ-nv-hxZ" firstAttribute="leading" secondItem="Qha-KB-IDD" secondAttribute="leading" constant="8" id="iqX-dA-UVJ"/>
+                    <constraint firstAttribute="trailing" secondItem="T6m-ef-uzB" secondAttribute="trailing" constant="8" id="lQO-9C-5ba"/>
+                </constraints>
+            </tableViewCellContentView>
             <connections>
-                <outlet property="importImageView" destination="szz-76-38q" id="5Ql-Za-Vvs"/>
+                <outlet property="photoView" destination="kVQ-nv-hxZ" id="z4f-n2-Wbf"/>
+                <outlet property="titleLabel" destination="T6m-ef-uzB" id="cgk-BT-o9n"/>
             </connections>
-            <point key="canvasLocation" x="-153" y="-252"/>
-        </collectionViewCell>
+            <point key="canvasLocation" x="-188.5" y="-317"/>
+        </tableViewCell>
     </objects>
 </document>

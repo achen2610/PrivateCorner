@@ -19,8 +19,8 @@ struct LockScreenScene {
         case NotFirst
         case SecondInput
         case ChangePass
+        case RequirePass
     }
-    
 }
 
 public protocol LockScreenViewModelDelegate: class {
@@ -33,10 +33,10 @@ public protocol LockScreenViewModelDelegate: class {
 
 open class LockScreenViewModel {
     
-    var passcodeState: LockScreenScene.PasscodeState
+    var passcodeState: LockScreenScene.PasscodeState?
     var inputDotCount: Int
     var totalDotCount: Int
-    var passcodeSaved: String
+    var passcodeSaved: String?
     weak var delegate: LockScreenViewModelDelegate?
     
     fileprivate var inputString: String = "" {
@@ -51,17 +51,14 @@ open class LockScreenViewModel {
         self.inputDotCount = 0
         self.totalDotCount = totalDotCount
         self.delegate = delegate
-        
-        let firstInstall = UserDefaults.standard.bool(forKey: "firstInstall")
-        if !firstInstall {
-            passcodeState = .FirstStart
-            passcodeSaved = ""
-            self.delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU LẦN 1")
-        } else {
-            passcodeState = .NotFirst
-            passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as! String
-            self.delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU CỦA BẠN")
-        }
+    }
+    
+    public init(initWhenChangePass delegate: LockScreenViewModelDelegate, totalDotCount: Int) {
+        self.inputDotCount = 0
+        self.totalDotCount = totalDotCount
+        self.delegate = delegate
+        passcodeSaved = ""
+        passcodeState = .ChangePass
     }
 
     func appendInputString(string: String) {
@@ -90,9 +87,15 @@ open class LockScreenViewModel {
     }
     
     func resetInputString() {
-        passcodeState = .FirstStart
-        passcodeSaved = ""
-        self.delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU LẦN 1")
+        if passcodeState == .ChangePass {
+            passcodeState = .NotFirst
+            passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as? String
+            delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU CỦA BẠN")
+        } else {
+            passcodeState = .FirstStart
+            passcodeSaved = ""
+            delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU LẦN 1")
+        }
     }
     
     func checkInputComplete() {
@@ -103,7 +106,7 @@ open class LockScreenViewModel {
 
                 delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU LẦN 2")
             } else if passcodeState == .SecondInput {
-                if inputString == passcodeSaved {
+                if validation(inputString) {
                     UserDefaults.standard.set(passcodeSaved, forKey: "passcodeSaved")
                     UserDefaults.standard.set(true, forKey: "firstInstall")
                     UserDefaults.standard.synchronize()
@@ -111,6 +114,19 @@ open class LockScreenViewModel {
                     delegate?.validationSuccess()
                 } else {
                     delegate?.setTitleLabel(text: "MẬT KHẨU SAI. NHẬP LẠI")
+                }
+            } else if passcodeState == .ChangePass {
+                if passcodeSaved == "" {
+                    passcodeSaved = inputString
+                    delegate?.setTitleLabel(text: "NHẬP LẠI MẬT KHẨU MỚI!")
+                } else {
+                    if validation(inputString) {
+                        UserDefaults.standard.set(passcodeSaved, forKey: "passcodeSaved")
+                        UserDefaults.standard.synchronize()
+                        delegate?.validationSuccess()
+                    } else {
+                        delegate?.setTitleLabel(text: "MẬT KHẨU SAI. NHẬP LẠI")
+                    }
                 }
             } else {
                 if validation(inputString) {
@@ -128,6 +144,11 @@ open class LockScreenViewModel {
     func clearInput() {
         inputString = ""
         delegate?.setInputDotCount(inputDotCount: 0)
+    }
+    
+    func changePassState() {
+        passcodeState = .ChangePass
+        passcodeSaved = ""
     }
     
     func validation(_ input: String) -> Bool {

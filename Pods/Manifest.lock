@@ -2,6 +2,11 @@ PODS:
   - CDAlertView (0.6.0)
   - Diff (0.5.3)
   - DynamicColor (3.3)
+  - GCDWebServer/Core (3.4.1)
+  - GCDWebServer/WebUploader (3.4.1):
+    - GCDWebServer/WebUploader/Core (= 3.4.1)
+  - GCDWebServer/WebUploader/Core (3.4.1):
+    - GCDWebServer/Core
   - Gifu (2.0.1)
   - ImagePicker (2.1.1)
   - SDWebImage (4.1.0):
@@ -12,6 +17,7 @@ DEPENDENCIES:
   - CDAlertView
   - Diff
   - DynamicColor (~> 3.3)
+  - GCDWebServer/WebUploader (~> 3.0)
   - Gifu
   - ImagePicker
   - SDWebImage
@@ -20,10 +26,11 @@ SPEC CHECKSUMS:
   CDAlertView: e6f365fa0fac7349197e7ea4bd7810c069215cf4
   Diff: befa1d19c32726b2b36ce915d98793e2fbde8dcc
   DynamicColor: 3cdaa1e01c16e93ba744e0630f768373e0fc7a7d
+  GCDWebServer: 1db60034fe0e78a4a8524bd6c7cd97cd3c589870
   Gifu: 90bd26ea4d65f8322c4cca8cbb0ca1418f5457ad
   ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
 
-PODFILE CHECKSUM: b4d97582bbc1f6d3004461db8d252372ad6d8b32
+PODFILE CHECKSUM: 37e67c5a9bc72c669eb979538103e2f81b9f267b
 
 COCOAPODS: 1.2.0

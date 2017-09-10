@@ -30,7 +30,8 @@ class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Album"
+        title = Key.Screen.album
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         viewModel = AlbumsViewModel(delegate: self)
         configureCollectionViewOnLoad()
         

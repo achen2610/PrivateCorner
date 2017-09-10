@@ -19,7 +19,9 @@ struct Key {
     }
     
     struct UserDefaults {
-        static let k_App_Running_FirstTime = "userRunningAppFirstTime"
+        static let k_App_Running_FirstTime          = "userRunningAppFirstTime"
+        static let enableTouchID                    = "enableTouchID"
+        static let enablePasswordRecovery           = "enablePasswordRecovery"
     }
     
     struct Headers {
@@ -39,6 +41,20 @@ struct Key {
     struct String {
         static let notiUpdateGalleryWhenMoveFile    = "notiUpdateGalleryWhenMoveFile"
         static let notiUpdateGallery                = "notiUpdateGallery"
+        static let notiPerformSeguePasscodeView     = "notiPerformSeguePasscodeView"
+        static let notiAlertChangePassSuccess       = "notiAlertChangePassSuccess"
+    }
+    
+    struct Screen {
+        static let album                            = "Albums"
+        static let importPhoto                      = "Import"
+        static let importWeb                        = "Web Server"
+        static let setting                          = "Setting"
+        static let passcode                         = "Passcode"
+        static let usability                        = "Usability"
+        static let howToUse                         = "How to use"
+        static let moveFile                         = "Add photos to Album"
+        static let chooseAlbum                      = "Choose album for import"
     }
     
     enum ItemType {

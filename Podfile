@@ -11,6 +11,7 @@ target 'PrivateCorner' do
   pod 'Diff'
   pod 'CDAlertView'
   pod 'Gifu'
+  pod 'GCDWebServer/WebUploader', '~> 3.0'
 
   # Pods for PrivateCorner
 

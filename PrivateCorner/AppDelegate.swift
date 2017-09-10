@@ -32,10 +32,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        UINavigationBar.appearance().barTintColor = UIColor(hex: "#3398FB")
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+        
+        UITabBar.appearance().barTintColor = UIColor(hex: "#3398FB")
+        UITabBar.appearance().tintColor = UIColor.white
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for:.normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.red], for:.selected)
         
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         tabBarController = mainStoryboard.instantiateViewController(withIdentifier: "tabBarController") as! TabBarController
         tabBarController.delegate = tabBarController
+        
+        let lockScreenNavi = mainStoryboard.instantiateViewController(withIdentifier: "LockScreenNavi") as! UINavigationController
+        let lockScreen = lockScreenNavi.topViewController as! LockScreenViewController
+        let viewModel = LockScreenViewModel(delegate: lockScreen, totalDotCount: 6)
+        let firstInstall = UserDefaults.standard.bool(forKey: "firstInstall")
+        if !firstInstall {
+            viewModel.passcodeState = .FirstStart
+            viewModel.passcodeSaved = ""
+        } else {
+            viewModel.passcodeState = .NotFirst
+            viewModel.passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as? String
+        }
+        lockScreen.viewModel = viewModel
+        window?.rootViewController = lockScreenNavi
         
         NotificationCenter.default.addObserver(self, selector: #selector(windowBecameHidden(notification:)), name: NSNotification.Name.UIWindowDidBecomeVisible, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(windowBecameVisible(notification:)), name: NSNotification.Name.UIWindowDidBecomeHidden, object: nil)
@@ -87,6 +112,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         _ = [naviController .popViewController(animated: false)]
+    }
+    
+    func backToLockScreenWhenChangePass() {
+        let naviController = window?.rootViewController as! UINavigationController
+        _ = naviController.popViewController(animated: true)
+        
+        if let controller = naviController.topViewController as? LockScreenViewController {
+            controller.styleChangePassState()
+        }
     }
     
     func windowBecameHidden(notification: Notification) {

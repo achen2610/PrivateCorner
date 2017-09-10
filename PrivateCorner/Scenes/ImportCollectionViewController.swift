@@ -8,55 +8,32 @@
 
 import UIKit
 
-extension ImportViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-
-    // MARK: UICollectionView DataSource
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+extension ImportViewController: UITableViewDataSource, UITableViewDelegate {
+    // MARK: UITableView DataSource
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifiers.importCell, for: indexPath) as? ImportCell {
-            cell.importImageView.layer.cornerRadius = 5.0
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifiers.importCell, for: indexPath) as? ImportCell {
+            cell.configureCell(indexPath: indexPath)
             return cell
         }
         
-        return UICollectionViewCell()
+        return UITableViewCell()
     }
     
-    // MARK: UICollectionView FlowLayout
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: cellLayout.widthPerItem, height: cellLayout.widthPerItem)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        let size = CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.height - kNavigationView - kTabBar)
-        let insets = UIEdgeInsetsMake((size.height - cellLayout.widthPerItem * 2) / 3, (size.width - cellLayout.widthPerItem * 2) / 4, (size.height - cellLayout.widthPerItem * 2) / 3, (size.width - cellLayout.widthPerItem * 2) / 4)
-        return insets
-        
-//        return cellLayout.sectionInsets
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
-        let height: CGFloat = collectionView.frame.size.height - kNavigationView - kTabBar
-        return (height - cellLayout.widthPerItem * 2) / 3
-
-//        return cellLayout.sectionInsets.left
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        let width: CGFloat = collectionView.frame.size.width
-        return (width - cellLayout.widthPerItem * 2) / 4
-    }
-    
-    // MARK: UICollectionView Delegate
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    // MARK: UITableView Delegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         selectedImportDetailAtIndex(index: indexPath.row)
     }
 }
