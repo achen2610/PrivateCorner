@@ -35,12 +35,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UIApplication.shared.statusBarStyle = .lightContent
         
-        UINavigationBar.appearance().barTintColor = UIColor(hex: "#3398FB")
-        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().barTintColor = AppColor.blue.getColor()
+        UINavigationBar.appearance().tintColor = AppColor.title.getColor()
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         
-        UITabBar.appearance().barTintColor = UIColor(hex: "#3398FB")
-        UITabBar.appearance().tintColor = UIColor.white
+        UITabBar.appearance().barTintColor = AppColor.blue.getColor()
+        UITabBar.appearance().tintColor = AppColor.title.getColor()
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for:.normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.red], for:.selected)
         

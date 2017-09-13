@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import GCDWebServer
+//import GCDWebServer
 
 public protocol WebServerDelegate: class {
     func webServerDidConnect(webServer: WebServer)

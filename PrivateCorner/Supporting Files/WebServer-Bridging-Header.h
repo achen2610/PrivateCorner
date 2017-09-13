@@ -9,9 +9,13 @@
 #ifndef WebServer_Bridging_Header_h
 #define WebServer_Bridging_Header_h
 
-#import <GCDWebServer/GCDWebServer.h>
-#import <GCDWebServer/GCDWebUploader.h>
-#import <GCDWebServer/GCDWebServerDataResponse.h>
+#import "GCDWebServer.h"
+#import "GCDWebUploader.h"
+#import "GCDWebServerDataResponse.h"
+
+//#import <GCDWebServer/GCDWebServer.h>
+//#import <GCDWebServer/GCDWebUploader.h>
+//#import <GCDWebServer/GCDWebServerDataResponse.h>
 
 
 #endif /* WebServer_Bridging_Header_h */
