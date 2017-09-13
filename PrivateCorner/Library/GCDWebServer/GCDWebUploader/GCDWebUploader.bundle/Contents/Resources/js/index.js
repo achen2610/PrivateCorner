@@ -230,6 +230,7 @@ $(document).ready(function() {
     
     done: function(e, data) {
       _reload(_path);
+      $("#upload-modal").modal("show");
     },
     
     fail: function(e, data) {

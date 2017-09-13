@@ -10,20 +10,12 @@
 
 import UIKit
 import CDAlertView
+import MessageUI
 
-class SettingViewController: UITableViewController {
+class SettingViewController: UITableViewController, MFMailComposeViewControllerDelegate {
 
     @IBOutlet weak var settingTable: UITableView!
     // MARK: Object lifecycle
-    
-    struct cellIdentifiers {
-        static let settingDetailCell    = "SettingDetailCell"
-        static let settingIndicatorCell = "SettingIndicatorCell"
-    }
-    
-    var array = [["", ["Version", "1.0"]],
-                 ["", "Passcode", "Usability","How to use"],
-                 ["", ["Author", "MrAchen"]]]
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,49 +29,19 @@ class SettingViewController: UITableViewController {
         
         title = Key.Screen.setting
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        configureTableViewOnLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(performSeguePasscodeViewWithNotification(noti:)), name: Notification.Name(rawValue: Key.String.notiPerformSeguePasscodeView), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showAlertWhenChangePassSuccess(noti:)), name: Notification.Name(rawValue: Key.String.notiAlertChangePassSuccess), object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(performSeguePasscodeViewWithNotification(noti:)),
+                                               name: Notification.Name(rawValue: Key.String.notiPerformSeguePasscodeView),
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showAlertWhenChangePassSuccess(noti:)),
+                                               name: Notification.Name(rawValue: Key.String.notiAlertChangePassSuccess),
+                                               object: nil)
     }
     
     
     // MARK: Event handling
-    
-    func configureTableViewOnLoad() {
-        var nibName = UINib(nibName: "SettingDetailCell", bundle:Bundle.main)
-        settingTable.register(nibName, forCellReuseIdentifier: cellIdentifiers.settingDetailCell)
-        nibName = UINib(nibName: "SettingIndicatorCell", bundle:Bundle.main)
-        settingTable.register(nibName, forCellReuseIdentifier: cellIdentifiers.settingIndicatorCell)
-    }
-    
-    func selectedSettingAtIndex(index: Int) {
-        switch index {
-        case 0:
-            //Passcode
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            let lockScreen  = mainStoryboard.instantiateViewController(withIdentifier: "LockScreen") as! LockScreenViewController
-            let viewModel = LockScreenViewModel(delegate: lockScreen, totalDotCount: 6)
-            viewModel.passcodeState = .RequirePass
-            viewModel.passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as? String
-            lockScreen.viewModel = viewModel
-            lockScreen.isHeroEnabled = true
-            lockScreen.heroModalAnimationType = .fade
-            present(lockScreen, animated: true, completion: nil)
-            break
-        case 1:
-            //Usability
-            self.performSegue(withIdentifier: "segueUsabilityViewController", sender: nil)
-            break
-        case 2:
-            //How to use
-            self.performSegue(withIdentifier: "segueHowToUseViewController", sender: nil)
-            break
-        default:
-            break
-        }
-    }
-
     func performSeguePasscodeViewWithNotification(noti: Notification) {
         self.performSegue(withIdentifier: "seguePasscodeViewController", sender: nil)
     }
@@ -92,5 +54,52 @@ class SettingViewController: UITableViewController {
             alert.hide(isPopupAnimated: true)
         })
     }
+    
+    // MARK: - TableView Delegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = indexPath.section
+        
+        switch section {
+        case 1:
+            if indexPath.row == 0 {
+                //Passcode
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let lockScreen  = mainStoryboard.instantiateViewController(withIdentifier: "LockScreen") as! LockScreenViewController
+                let viewModel = LockScreenViewModel(delegate: lockScreen, totalDotCount: 6)
+                viewModel.passcodeState = .RequirePass
+                viewModel.passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as? String
+                lockScreen.viewModel = viewModel
+                lockScreen.isHeroEnabled = true
+                lockScreen.heroModalAnimationType = .fade
+                present(lockScreen, animated: true, completion: nil)
+            }
+            break
+        case 2:
+            if indexPath.row == 0 && MFMailComposeViewController.canSendMail() {
+                let composeVC = MFMailComposeViewController()
+                composeVC.mailComposeDelegate = self
+                // Configure the fields of the interface.
+                composeVC.setToRecipients(["address@example.com"])
+                composeVC.setSubject("Hello!")
+                composeVC.setMessageBody("Hello this is my message body!", isHTML: false)
+                // Present the view controller modally.
+                self.present(composeVC, animated: true, completion: nil)
+            }
+            break
+        default:
+            return
+        }
+    }
+    
+    // MARK: - Mail Delegate
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        if let err = error {
+            print("Error when send mail : \(err)")
+        }
+        
+        controller.dismiss(animated: true, completion: nil)
+    }
+
 }
 
