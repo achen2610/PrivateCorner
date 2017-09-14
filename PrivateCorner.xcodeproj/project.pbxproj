@@ -54,7 +54,6 @@
 		0078B89B1F4BD52E0079AB49 /* UsabilityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078B89A1F4BD52E0079AB49 /* UsabilityCell.swift */; };
 		0078B89D1F4BD5390079AB49 /* UsabilityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0078B89C1F4BD5390079AB49 /* UsabilityCell.xib */; };
 		0078B8A01F4BE28F0079AB49 /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078B89F1F4BE28F0079AB49 /* PasscodeViewController.swift */; };
-		0078B8A21F4BE29B0079AB49 /* PasscodeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078B8A11F4BE29B0079AB49 /* PasscodeTableView.swift */; };
 		007980331EE696EF00C5E13D /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00797FF91EE696EF00C5E13D /* CameraController.swift */; };
 		007980341EE696EF00C5E13D /* CameraMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00797FFA1EE696EF00C5E13D /* CameraMan.swift */; };
 		007980351EE696EF00C5E13D /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00797FFB1EE696EF00C5E13D /* CameraView.swift */; };
@@ -376,7 +375,6 @@
 		0078B89A1F4BD52E0079AB49 /* UsabilityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityCell.swift; sourceTree = "<group>"; };
 		0078B89C1F4BD5390079AB49 /* UsabilityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsabilityCell.xib; sourceTree = "<group>"; };
 		0078B89F1F4BE28F0079AB49 /* PasscodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
-		0078B8A11F4BE29B0079AB49 /* PasscodeTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeTableView.swift; sourceTree = "<group>"; };
 		00797FF91EE696EF00C5E13D /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		00797FFA1EE696EF00C5E13D /* CameraMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraMan.swift; sourceTree = "<group>"; };
 		00797FFB1EE696EF00C5E13D /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -944,7 +942,6 @@
 			isa = PBXGroup;
 			children = (
 				0078B89F1F4BE28F0079AB49 /* PasscodeViewController.swift */,
-				0078B8A11F4BE29B0079AB49 /* PasscodeTableView.swift */,
 			);
 			name = Passcode;
 			sourceTree = "<group>";
@@ -2302,7 +2299,6 @@
 				0090834A1F00C88E00EE6728 /* SPRequestPermission.swift in Sources */,
 				009083801F00E2D800EE6728 /* SPStrideableExtension.swift in Sources */,
 				004F71C61EE14FB70026A907 /* CollectionViewExtension.swift in Sources */,
-				0078B8A21F4BE29B0079AB49 /* PasscodeTableView.swift in Sources */,
 				008B5E0C1F2843C60044EEF0 /* MyWindow.swift in Sources */,
 				00DDF9931ED436E800093770 /* HeroDefaultAnimator.swift in Sources */,
 				0090834F1F00C88E00EE6728 /* SPGradientViewController.swift in Sources */,

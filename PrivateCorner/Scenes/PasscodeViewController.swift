@@ -8,15 +8,12 @@
 
 import UIKit
 
-class PasscodeViewController: UIViewController {
+class PasscodeViewController: UITableViewController {
     
     @IBOutlet weak var passcodeTable: UITableView!
-    
-    struct cellIdentifiers {
-        static let passcodeCellA    = "PasscodeCellA"
-        static let passcodeCellB    = "PasscodeCellB"
-        static let passcodeCellC    = "PasscodeCellC"
-    }
+    @IBOutlet weak var recoverySwitch: UISwitch!
+    @IBOutlet weak var touchIDSwitch: UISwitch!
+    @IBOutlet weak var changePasscodeButton: PCButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,11 +25,13 @@ class PasscodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Key.Screen.passcode
+        
+        loadData()
     }
     
     // MARK: Button Selectors
-    
-    func clickedChangePasscodeButton() {
+
+    @IBAction func clickChangePasscode(_ sender: Any) {
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let lockScreen  = mainStoryboard.instantiateViewController(withIdentifier: "LockScreen") as! LockScreenViewController
         let viewModel = LockScreenViewModel(delegate: lockScreen, totalDotCount: 6)
@@ -42,19 +41,34 @@ class PasscodeViewController: UIViewController {
         present(lockScreen, animated: true, completion: nil)
     }
     
-    func switchChanged(sender: UISwitch) {
-        switch sender.tag {
-        case 81:
+    @IBAction func switchChanged(sender: UISwitch) {
+        if sender == recoverySwitch {
             UserDefaults.standard.set(sender.isOn, forKey: Key.UserDefaults.enablePasswordRecovery)
             UserDefaults.standard.synchronize()
-            break
-            
-        case 82:
+        } else if sender == touchIDSwitch {
             UserDefaults.standard.set(sender.isOn, forKey: Key.UserDefaults.enableTouchID)
             UserDefaults.standard.synchronize()
-            break
-        default:
-            break
         }
+    }
+    
+    // MARK: Event Handling
+    func loadData() {
+        let enablePasswordRecovery = UserDefaults.standard.bool(forKey: Key.UserDefaults.enablePasswordRecovery)
+        if !enablePasswordRecovery {
+            recoverySwitch.isOn = false
+        } else {
+            recoverySwitch.isOn = true
+        }
+        
+        let enableTouchID = UserDefaults.standard.bool(forKey: Key.UserDefaults.enableTouchID)
+        if !enableTouchID {
+            touchIDSwitch.isOn = false
+        } else {
+            touchIDSwitch.isOn = true
+        }
+        
+        changePasscodeButton.highLightColor = UIColor(hex: "#2269AE")
+        changePasscodeButton.notHighLightColor = UIColor(hex: "#3398FB")
+        changePasscodeButton.setTitleColor(UIColor.white, for: [.normal, .highlighted, .selected])
     }
 }
