@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  PrivateCorner
+
+  Created by a on 9/15/17.
+  Copyright © 2017 MrAChen. All rights reserved.
+*/
+
+
+/* Lock Screen */
+/*=============*/
+
+"Delete" = "Xoá";
+"Reset" = "Đặt lại";
+"Cancel" = "Huỷ";
+"OK" = "OK";
+"Enter your password" = "Nhập mật khẩu của bạn";
+"Enter the first password" = "Nhập mật khẩu lần 1";
+"Enter the second password" = "Nhập mật khẩu lần 2";
+"Enter new password" = "Nhập mật khẩu mới";
+"Wrong password. Try again" = "Sai mật khẩu. Nhập lại!";
+"Set passcode and enable TouchID" = "Hãy đặt mật khẩu, sau đó vào màn hình Setting và bật TouchID!";
+"Go Setting page and enable TouchID" = "Hãy vào màn hình Setting và bật TouchID!";
+"Authentication is needed" = "Đây là chứng thực cần thiết để vào app của bạn.";
+"Problem verifying identity" = "Có vấn đề khi xác minh danh tính của bạn.";
+"Cancelled by the system" = "Chứng thực bị huỷ bởi hệ thống.";
+"Cancelled by user" = "Chứng thực bị huỷ bởi bạn.";
+"User pressed password" = "Bạn đã lựa chọn nhập mật khẩu.";
+"TouchID not be configured" = "TouchID không được cài đặt.";
+"TouchID not available" = "TouchID không tương thích trên thiết bị.";
+"Error" = "Lỗi!";

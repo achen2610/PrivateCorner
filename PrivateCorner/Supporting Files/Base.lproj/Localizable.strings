@@ -1,0 +1,31 @@
+/* 
+  Localizable.strings
+  PrivateCorner
+
+  Created by a on 9/15/17.
+  Copyright © 2017 MrAChen. All rights reserved.
+*/
+
+
+/* Lock Screen */
+/*=============*/
+
+"Delete" = "Delete";
+"Reset" = "Reset";
+"Cancel" = "Cancel";
+"OK" = "OK";
+"Enter your password" = "Enter your password";
+"Enter the first password" = "Enter the first password";
+"Enter the second password" = "Enter the second password";
+"Enter new password" = "Enter new password";
+"Wrong password. Try again" = "Wrong password. Please try again!";
+"Set passcode and enable TouchID" = "Please set passcode then go to Setting page and enable TouchID!";
+"Go Setting page and enable TouchID" = "Please go to Setting page and enable TouchID!";
+"Authentication is needed" = "Authentication is needed to access your app.";
+"Problem verifying identity" = "There was a problem verifying your identity.";
+"Cancelled by the system" = "Authentication was cancelled by the system.";
+"Cancelled by user" = "Authentication was cancelled by you.";
+"User pressed password" = "You pressed password.";
+"TouchID not be configured" = "Touch ID may not be configured.";
+"TouchID not available" = "Touch ID not available.";
+"Error" = "Error!";

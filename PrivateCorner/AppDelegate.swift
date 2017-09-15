@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         set { }
     }
     var tabBarController: TabBarController!
+    /// set orientations you want to be allowed in this property by default
+    var orientationLock = UIInterfaceOrientationMask.allButUpsideDown
     
     lazy var downloadButton: UIButton = {
         let button = UIButton (frame: CGRect(x: kScreenWidth - 50 * kScale, y: kScreenHeight - 100 * kScale, width: 30 * kScale, height: 30 * kScale))
@@ -93,6 +95,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
         CoreDataManager.sharedInstance.saveContext()
+    }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return self.orientationLock
     }
     
     func clickDownloadButton() {

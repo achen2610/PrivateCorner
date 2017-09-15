@@ -69,7 +69,7 @@ open class LockScreenViewModel {
         inputString += string
         
         if inputString.characters.count > 0 {
-            delegate?.setTitleButton(text: "Delete")
+            delegate?.setTitleButton(text: NSLocalizedString("Delete", comment: ""))
         }
     }
     
@@ -80,9 +80,9 @@ open class LockScreenViewModel {
         inputString = String(inputString.characters.dropLast())
         
         if inputString.characters.count == 0 && passcodeState == .SecondInput {
-            delegate?.setTitleButton(text: "Reset")
+            delegate?.setTitleButton(text: NSLocalizedString("Reset", comment: ""))
         } else {
-            delegate?.setTitleButton(text: "Delete")
+            delegate?.setTitleButton(text: NSLocalizedString("Delete", comment: ""))
         }
     }
     
@@ -90,11 +90,11 @@ open class LockScreenViewModel {
         if passcodeState == .ChangePass {
             passcodeState = .NotFirst
             passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as? String
-            delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU CỦA BẠN")
+            delegate?.setTitleLabel(text: NSLocalizedString("Enter your password", comment: ""))
         } else {
             passcodeState = .FirstStart
             passcodeSaved = ""
-            delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU LẦN 1")
+            delegate?.setTitleLabel(text: NSLocalizedString("Enter the first password", comment: ""))
         }
     }
     
@@ -104,7 +104,7 @@ open class LockScreenViewModel {
                 passcodeSaved = inputString
                 passcodeState = .SecondInput
 
-                delegate?.setTitleLabel(text: "NHẬP MẬT KHẨU LẦN 2")
+                delegate?.setTitleLabel(text: NSLocalizedString("Enter the second password", comment: ""))
             } else if passcodeState == .SecondInput {
                 if validation(inputString) {
                     UserDefaults.standard.set(passcodeSaved, forKey: "passcodeSaved")
@@ -113,19 +113,19 @@ open class LockScreenViewModel {
 
                     delegate?.validationSuccess()
                 } else {
-                    delegate?.setTitleLabel(text: "MẬT KHẨU SAI. NHẬP LẠI")
+                    delegate?.setTitleLabel(text: NSLocalizedString("Wrong password. Try again", comment: ""))
                 }
             } else if passcodeState == .ChangePass {
                 if passcodeSaved == "" {
                     passcodeSaved = inputString
-                    delegate?.setTitleLabel(text: "NHẬP LẠI MẬT KHẨU MỚI!")
+                    delegate?.setTitleLabel(text: NSLocalizedString("Enter new password", comment: ""))
                 } else {
                     if validation(inputString) {
                         UserDefaults.standard.set(passcodeSaved, forKey: "passcodeSaved")
                         UserDefaults.standard.synchronize()
                         delegate?.validationSuccess()
                     } else {
-                        delegate?.setTitleLabel(text: "MẬT KHẨU SAI. NHẬP LẠI")
+                        delegate?.setTitleLabel(text: NSLocalizedString("Wrong password. Try again", comment: ""))
                     }
                 }
             } else {

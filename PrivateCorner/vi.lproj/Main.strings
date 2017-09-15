@@ -1,0 +1,111 @@
+
+/* Class = "UILabel"; text = "Sort Order"; ObjectID = "0B9-hz-BHA"; */
+"0B9-hz-BHA.text" = "Thứ tự sắp xếp";
+
+/* Class = "UILabel"; text = "How To Use"; ObjectID = "0h3-X2-9Ty"; */
+"0h3-X2-9Ty.text" = "How To Use";
+
+/* Class = "UIButton"; normalTitle = "2"; ObjectID = "0tp-aO-mgN"; */
+"0tp-aO-mgN.normalTitle" = "2";
+
+/* Class = "UILabel"; text = "TouchID"; ObjectID = "1NK-69-ls3"; */
+"1NK-69-ls3.text" = "TouchID";
+
+/* Class = "UIButton"; normalTitle = "8"; ObjectID = "2OM-5Q-cBm"; */
+"2OM-5Q-cBm.normalTitle" = "8";
+
+/* Class = "UILabel"; text = "How to use 2"; ObjectID = "4fU-8j-n6G"; */
+"4fU-8j-n6G.text" = "How to use 2";
+
+/* Class = "UILabel"; text = "Send Feedback & Support"; ObjectID = "7CT-ns-JTN"; */
+"7CT-ns-JTN.text" = "Send Feedback & Support";
+
+/* Class = "UILabel"; text = "Password Recovery"; ObjectID = "8Dd-nY-FgP"; */
+"8Dd-nY-FgP.text" = "Phục hồi mật khẩu";
+
+/* Class = "UIButton"; normalTitle = "Change Passcode"; ObjectID = "8S8-ds-33g"; */
+"8S8-ds-33g.normalTitle" = "Thay đổi mật khẩu";
+
+/* Class = "UITableViewSection"; headerTitle = "Setting"; ObjectID = "B8h-fn-Spz"; */
+"B8h-fn-Spz.headerTitle" = "Cài đặt";
+
+/* Class = "UIButton"; normalTitle = "9"; ObjectID = "C5a-1B-d4M"; */
+"C5a-1B-d4M.normalTitle" = "9";
+
+/* Class = "UITabBarItem"; title = "Albums"; ObjectID = "DaN-A5-A2w"; */
+"DaN-A5-A2w.title" = "Albums";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "DeG-Ae-Zd1"; */
+"DeG-Ae-Zd1.normalTitle" = "1";
+
+/* Class = "UIButton"; normalTitle = "TouchID"; ObjectID = "FS4-d3-LaZ"; */
+"FS4-d3-LaZ.normalTitle" = "TouchID";
+
+/* Class = "UITableViewSection"; headerTitle = "Feedback & Support"; ObjectID = "Gvh-F3-nFU"; */
+"Gvh-F3-nFU.headerTitle" = "Feedback & Support";
+
+/* Class = "UITableViewSection"; headerTitle = "Sort"; ObjectID = "I3W-jL-Rxz"; */
+"I3W-jL-Rxz.headerTitle" = "Sắp xếp";
+
+/* Class = "UILabel"; text = "1.0"; ObjectID = "JHq-BJ-DUp"; */
+"JHq-BJ-DUp.text" = "1.0";
+
+/* Class = "UITableViewSection"; headerTitle = "Setting passcode"; ObjectID = "KCb-zg-Aa3"; */
+"KCb-zg-Aa3.headerTitle" = "Cài đặt mật khẩu";
+
+/* Class = "UITabBarItem"; title = "Import"; ObjectID = "NNu-3p-mdT"; */
+"NNu-3p-mdT.title" = "Import";
+
+/* Class = "UILabel"; text = "Privacy"; ObjectID = "Pgs-DI-Wy5"; */
+"Pgs-DI-Wy5.text" = "Bảo mật";
+
+/* Class = "UITableViewSection"; headerTitle = "How to use app"; ObjectID = "Rcp-Qu-bMK"; */
+"Rcp-Qu-bMK.headerTitle" = "How to use app";
+
+/* Class = "UIButton"; normalTitle = "4"; ObjectID = "Rh2-BY-4kb"; */
+"Rh2-BY-4kb.normalTitle" = "4";
+
+/* Class = "UITextField"; placeholder = "Address server"; ObjectID = "Sbe-zB-VhB"; */
+"Sbe-zB-VhB.placeholder" = "Address server";
+
+/* Class = "UIButton"; normalTitle = "7"; ObjectID = "TRk-y4-TGf"; */
+"TRk-y4-TGf.normalTitle" = "7";
+
+/* Class = "UILabel"; text = "How to use 1"; ObjectID = "VIm-Wk-Dyq"; */
+"VIm-Wk-Dyq.text" = "How to use 1";
+
+/* Class = "UIButton"; normalTitle = "6"; ObjectID = "ZsC-Tf-MiC"; */
+"ZsC-Tf-MiC.normalTitle" = "6";
+
+/* Class = "UILabel"; text = "Usability"; ObjectID = "fU8-Hl-dVk"; */
+"fU8-Hl-dVk.text" = "Usability";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "fi5-NK-V7S"; */
+"fi5-NK-V7S.text" = "Phiên bản";
+
+/* Class = "UILabel"; text = "NHẬP MẬT MÃ ĐI"; ObjectID = "gkZ-XG-48l"; */
+"gkZ-XG-48l.text" = "NHẬP MẬT MÃ ĐI";
+
+/* Class = "UIButton"; normalTitle = "5"; ObjectID = "mlB-2N-m6R"; */
+"mlB-2N-m6R.normalTitle" = "5";
+
+/* Class = "UIButton"; normalTitle = "0"; ObjectID = "nuD-q4-KYy"; */
+"nuD-q4-KYy.normalTitle" = "0";
+
+/* Class = "UITabBarItem"; title = "Setting"; ObjectID = "pua-UE-xrC"; */
+"pua-UE-xrC.title" = "Cài đặt";
+
+/* Class = "UILabel"; text = "How to use 3"; ObjectID = "qrK-4O-gmQ"; */
+"qrK-4O-gmQ.text" = "How to use 3";
+
+/* Class = "UITabBarItem"; title = "Web"; ObjectID = "rbC-ew-IVx"; */
+"rbC-ew-IVx.title" = "Web";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "rwU-o4-OoU"; */
+"rwU-o4-OoU.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "vsL-Oj-k81"; */
+"vsL-Oj-k81.normalTitle" = "Xoá";
+
+/* Class = "UIButton"; normalTitle = "3"; ObjectID = "wzk-kf-Azc"; */
+"wzk-kf-Azc.normalTitle" = "3";

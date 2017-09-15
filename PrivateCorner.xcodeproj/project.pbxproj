@@ -144,6 +144,7 @@
 		008473A51F56688500A3FF47 /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008473A41F56688500A3FF47 /* WebServer.swift */; };
 		008473A81F569EA500A3FF47 /* ImportWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008473A71F569EA500A3FF47 /* ImportWebViewController.swift */; };
 		0086A9B41EC2F9B1000F5C01 /* Gallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */; };
+		00870BA41F6A7E7E001821A0 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00870BA31F6A7E7D001821A0 /* AppUtility.swift */; };
 		008775EA1EEF8151003C50AF /* MoveFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775E91EEF8151003C50AF /* MoveFileViewModel.swift */; };
 		008775EC1EEF815F003C50AF /* MoveFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775EB1EEF815F003C50AF /* MoveFileViewController.swift */; };
 		008775EE1EEF8185003C50AF /* MoveFileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775ED1EEF8185003C50AF /* MoveFileCollectionViewController.swift */; };
@@ -157,6 +158,7 @@
 		008B5E101F2872130044EEF0 /* JSTools.js in Resources */ = {isa = PBXBuildFile; fileRef = 008B5E0F1F2872130044EEF0 /* JSTools.js */; };
 		008B5E121F289E1B0044EEF0 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008B5E111F289E1B0044EEF0 /* WebViewModel.swift */; };
 		008D58941F57A32200B81CB1 /* ImportWebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008D58931F57A32200B81CB1 /* ImportWebViewModel.swift */; };
+		008D69F21F6B76AC00CB66FF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 008D69F41F6B76AC00CB66FF /* Localizable.strings */; };
 		008E3E141F4FBE2400B69812 /* HowToUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E3E131F4FBE2400B69812 /* HowToUseViewController.swift */; };
 		008E3E161F4FBE7700B69812 /* HowToUseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008E3E151F4FBE7700B69812 /* HowToUseTableView.swift */; };
 		009049051EFD038400EBAEEB /* web@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 009049031EFD038400EBAEEB /* web@3x.png */; };
@@ -482,6 +484,7 @@
 		008473A41F56688500A3FF47 /* WebServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServer.swift; sourceTree = "<group>"; };
 		008473A71F569EA500A3FF47 /* ImportWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportWebViewController.swift; sourceTree = "<group>"; };
 		0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Gallery.bundle; sourceTree = "<group>"; };
+		00870BA31F6A7E7D001821A0 /* AppUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 		008775E91EEF8151003C50AF /* MoveFileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveFileViewModel.swift; sourceTree = "<group>"; };
 		008775EB1EEF815F003C50AF /* MoveFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveFileViewController.swift; sourceTree = "<group>"; };
 		008775ED1EEF8185003C50AF /* MoveFileCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveFileCollectionViewController.swift; sourceTree = "<group>"; };
@@ -495,6 +498,9 @@
 		008B5E0F1F2872130044EEF0 /* JSTools.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSTools.js; sourceTree = "<group>"; };
 		008B5E111F289E1B0044EEF0 /* WebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		008D58931F57A32200B81CB1 /* ImportWebViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportWebViewModel.swift; sourceTree = "<group>"; };
+		008D69F31F6B76AC00CB66FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		008D69F51F6B76D100CB66FF /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Main.strings; sourceTree = "<group>"; };
+		008D69F61F6B76D100CB66FF /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		008E3E131F4FBE2400B69812 /* HowToUseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToUseViewController.swift; sourceTree = "<group>"; };
 		008E3E151F4FBE7700B69812 /* HowToUseTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToUseTableView.swift; sourceTree = "<group>"; };
 		009049031EFD038400EBAEEB /* web@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "web@3x.png"; sourceTree = "<group>"; };
@@ -796,6 +802,7 @@
 				007B75481E91E01400483293 /* ConstantsSize.swift */,
 				007B754A1E91E08D00483293 /* ConstantsKey.swift */,
 				007F06CF1ED3CE3F0081EAAE /* ConstantColor.swift */,
+				00870BA31F6A7E7D001821A0 /* AppUtility.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -896,6 +903,7 @@
 				006486EC1E70EFE400419C27 /* Info.plist */,
 				008B5E0F1F2872130044EEF0 /* JSTools.js */,
 				008473A31F56620F00A3FF47 /* WebServer-Bridging-Header.h */,
+				008D69F41F6B76AC00CB66FF /* Localizable.strings */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -2072,6 +2080,7 @@
 			knownRegions = (
 				en,
 				Base,
+				vi,
 			);
 			mainGroup = 0064869E1E70EAD900419C27;
 			productRefGroup = 006486A81E70EAD900419C27 /* Products */;
@@ -2122,6 +2131,7 @@
 				00E0B1A01E79411E0001DF8F /* folder-on@3x.png in Resources */,
 				002681A81F29CCA4006F6CE4 /* WebAlbumCell.xib in Resources */,
 				007718B81EE94694001211CB /* play@3x.png in Resources */,
+				008D69F21F6B76AC00CB66FF /* Localizable.strings in Resources */,
 				007718BC1EE947CA001211CB /* selectall@3x.png in Resources */,
 				008B5E101F2872130044EEF0 /* JSTools.js in Resources */,
 				0073A18B1E71162100490675 /* data-security-tips.jpg in Resources */,
@@ -2426,6 +2436,7 @@
 				009083671F00C88E00EE6728 /* SPPatternView.swift in Sources */,
 				009083531F00C88E00EE6728 /* SPIconsButton.swift in Sources */,
 				004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */,
+				00870BA41F6A7E7E001821A0 /* AppUtility.swift in Sources */,
 				009083211F00C88E00EE6728 /* NSLayoutConstraintExtenshion.swift in Sources */,
 				009083201F00C88E00EE6728 /* SPAudioPlayer.swift in Sources */,
 				008473A81F569EA500A3FF47 /* ImportWebViewController.swift in Sources */,
@@ -2576,8 +2587,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				006486F21E70EFEB00419C27 /* Base */,
+				008D69F51F6B76D100CB66FF /* vi */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		008D69F41F6B76AC00CB66FF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				008D69F31F6B76AC00CB66FF /* Base */,
+				008D69F61F6B76D100CB66FF /* vi */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -2587,6 +2608,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -2637,6 +2659,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -2686,7 +2709,7 @@
 				INFOPLIST_FILE = PrivateCorner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mrachen.PrivateCorner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mrachen.privatecorner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/DATA/Pro/PrivateCorner/PrivateCorner/Supporting Files/WebServer-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -2703,7 +2726,7 @@
 				INFOPLIST_FILE = PrivateCorner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mrachen.PrivateCorner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mrachen.privatecorner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/DATA/Pro/PrivateCorner/PrivateCorner/Supporting Files/WebServer-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

@@ -48,15 +48,15 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
         PasscodeView.totalDotCount = 6
 
         if viewModel.passcodeState == .FirstStart {
-            TitleLabel.text = "NHẬP MẬT KHẨU LẦN 1"
+            TitleLabel.text = NSLocalizedString("Enter the first password", comment: "")
         } else if viewModel.passcodeState == .NotFirst {
-            TitleLabel.text = "NHẬP MẬT KHẨU CỦA BẠN"
+            TitleLabel.text = NSLocalizedString("Enter your password", comment: "")
         } else if viewModel.passcodeState == .RequirePass {
-            TitleLabel.text = "NHẬP MẬT KHẨU CỦA BẠN"
-            TouchIDButton.setTitle("Cancel", for: .normal)
+            TitleLabel.text = NSLocalizedString("Enter your password", comment: "")
+            TouchIDButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
         } else if viewModel.passcodeState == .ChangePass {
-            TitleLabel.text = "NHẬP MẬT KHẨU MỚI!"
-            TouchIDButton.setTitle("Cancel", for: .normal)
+            TitleLabel.text = NSLocalizedString("Enter new password", comment: "")
+            TouchIDButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
         }
     }
     
@@ -89,8 +89,8 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     func styleChangePassState() {
         viewModel.clearInput()
         viewModel.changePassState()
-        TitleLabel.text = "NHẬP MẬT KHẨU MỚI!"
-        TouchIDButton.setTitle("Cancel", for: .normal)
+        TitleLabel.text = NSLocalizedString("Enter new password", comment: "")
+        TouchIDButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
     }
     
     private func blurImage() {
@@ -119,7 +119,7 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
     private func wrongPasscode() {
         PasscodeView.shakeAnimationWithCompletion {
             self.viewModel.clearInput()
-            self.TitleLabel.text = "MẬT KHẨU SAI. THỬ LẠI !"
+            self.TitleLabel.text = NSLocalizedString("Wrong password. Try again", comment: "")
         }
     }
     
@@ -166,63 +166,63 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
         }
         
         if viewModel.passcodeState == .FirstStart {
-            let alert = CDAlertView(title: nil, message: "Please set passcode then go to Setting page and enable TouchID!", type: CDAlertViewType.warning)
+            let alert = CDAlertView(title: nil, message: NSLocalizedString("Set passcode and enable TouchID", comment: ""), type: CDAlertViewType.warning)
             alert.show()
             return
         }
         
         let enableTouchID = UserDefaults.standard.bool(forKey: Key.UserDefaults.enableTouchID)
         if !enableTouchID {
-            let alert = CDAlertView(title: nil, message: "Please go to Setting page and enable TouchID!", type: CDAlertViewType.warning)
+            let alert = CDAlertView(title: nil, message: NSLocalizedString("Go Setting page and enable TouchID", comment: ""), type: CDAlertViewType.warning)
             alert.show()
             return
         }
         
         let context = LAContext()
         var error: NSError?
-        let reasonString = "Authentication is needed to access your app."
+        let reasonString = NSLocalizedString("Authentication is needed", comment: "")
         
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { (success, evalPolicyError) in
                 if success {
-                    self.TitleLabel.text = "NHẬP MẬT KHẨU CỦA BẠN"
+                    self.TitleLabel.text = NSLocalizedString("Enter your password", comment: "")
                     self.viewModel.clearInput()
                     self.navigateToHomeScreen()
                 } else {
                     print("\(evalPolicyError?.localizedDescription ?? "")")
                     
-                    var message : NSString
+                    var message : String
                     var showAlert : Bool
                     
                     switch evalPolicyError!._code {
                     case LAError.authenticationFailed.rawValue:
                         print("Authentication has a problem verifying your identity.")
-                        message = "There was a problem verifying your identity."
+                        message = NSLocalizedString("Problem verifying identity", comment: "")
                         showAlert = true
                         
                     case LAError.systemCancel.rawValue:
                         print("Authentication was cancelled by the system")
-                        message = "Authentication was cancelled by the system."
+                        message = NSLocalizedString("Cancelled by the system", comment: "")
                         showAlert = true
                         
                     case LAError.userCancel.rawValue:
                         print("Authentication was cancelled by the user")
-                        message = "You pressed cancel."
+                        message = NSLocalizedString("Cancelled by user", comment: "")
                         showAlert = true
                         
                     case LAError.userFallback.rawValue:
                         print("User selected to enter custom password")
-                        message = "You pressed password."
+                        message = NSLocalizedString("User pressed password", comment: "")
                         showAlert = true
                         
                     default:
                         print("Authentication failed")
-                        message = "Touch ID may not be configured."
+                        message = NSLocalizedString("TouchID not be configured", comment: "")
                         showAlert = true
                     }
                     
-                    let alertView = UIAlertController(title: "Error", message: message as String, preferredStyle:.alert)
-                    let okAction = UIAlertAction(title: "Darn!", style: .default, handler: nil)
+                    let alertView = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: message, preferredStyle:.alert)
+                    let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
                     alertView.addAction(okAction)
                     if showAlert {
                         self.present(alertView, animated: true, completion: nil)
@@ -231,8 +231,8 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
             })
         } else {
             // 5.
-            let alertView = UIAlertController(title: "Error", message: "Touch ID not available" as String, preferredStyle:.alert)
-            let okAction = UIAlertAction(title: "Darn!", style: .default, handler: nil)
+            let alertView = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("TouchID not available", comment: ""), preferredStyle:.alert)
+            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil)
             alertView.addAction(okAction)
             present(alertView, animated: true, completion: nil)
         }
@@ -241,7 +241,7 @@ class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
 
     // MARK: LockScreenViewModelDelegate
     func validationSuccess() {
-        TitleLabel.text = "NHẬP MẬT KHẨU CỦA BẠN"
+        TitleLabel.text = NSLocalizedString("Enter your password", comment: "")
         viewModel.clearInput()
         navigateToHomeScreen()
     }
