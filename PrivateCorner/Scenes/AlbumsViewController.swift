@@ -11,7 +11,7 @@
 import UIKit
 import CDAlertView
 
-class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
+class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
 
     var viewModel: AlbumsViewModel!
     var isEditMode: Bool = false
@@ -66,23 +66,9 @@ class AlbumsViewController: UIViewController, AlbumsViewModelDelegate {
         
         let saveAction = UIAlertAction.init(title: "Save", style: .default) { (action) in
             let textField = alert.textFields?.first
-            let alert = CDAlertView(title: nil, message: "Create album success!", type: .success)
-            
             if let text = textField?.text, text != "" {
-                self.albumsCollectionView.performBatchUpdates({
-                    delay(0.2, execute: {
-                        alert.show()
-                    })
-
-                    self.viewModel.saveAlbumToCoreData(title: (textField?.text)!)
-                    self.albumsCollectionView.insertItems(at: [IndexPath.init(row: 0, section: 0)])
-                }) { (finished) in
-                    if finished {
-                        delay(0.7, execute: {
-                            alert.hide(isPopupAnimated: true)
-                        })
-                    }
-                }
+                self.viewModel.saveAlbumToCoreData(title: (textField?.text)!)
+                self.albumsCollectionView.insertItems(at: [IndexPath.init(row: 0, section: 0)])
             }
         }
         alert.addAction(saveAction)

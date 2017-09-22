@@ -29,6 +29,12 @@ class PasscodeViewController: UITableViewController {
         loadData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AppUtility.lockOrientation(.portrait)
+    }
+    
     // MARK: Button Selectors
 
     @IBAction func clickChangePasscode(_ sender: Any) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UsabilityViewController: UIViewController {
+class UsabilityViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     // MARK: Object lifecycle

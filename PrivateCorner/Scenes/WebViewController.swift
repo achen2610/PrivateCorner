@@ -10,7 +10,7 @@ import UIKit
 import Photos
 import CDAlertView
 
-class WebViewController: UIViewController {
+class WebViewController: BaseViewController {
     
     @IBOutlet weak var webView: UIWebView!
     var progressView: UIView!
@@ -49,7 +49,7 @@ class WebViewController: UIViewController {
     
     lazy var footerView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: kScreenHeight - kTabBar - 36 * kScale, width: kScreenWidth, height: 36 * kScale))
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
         return view
     }()
     
@@ -61,14 +61,14 @@ class WebViewController: UIViewController {
     
     lazy var backButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 8 * kScale, y: 3 * kScale, width: 30 * kScale, height: 30 * kScale))
-        button.backgroundColor = UIColor.cyan
+        button.setImage(UIImage(named: "back"), for: .normal)
         button.addTarget(self, action: #selector(clickBackButton), for: .touchUpInside)
         return button
     }()
     
     lazy var nextButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 46 * kScale, y: 3 * kScale, width: 30 * kScale, height: 30 * kScale))
-        button.backgroundColor = UIColor.orange
+        button.setImage(UIImage(named: "next"), for: .normal)
         button.addTarget(self, action: #selector(clickNextButton), for: .touchUpInside)
         return button
     }()
@@ -372,9 +372,11 @@ extension WebViewController: UISearchBarDelegate {
 
 extension WebViewController: UIWebViewDelegate {
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        
-        activity.startAnimating()
         return true
+    }
+    
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        activity.stopAnimating()
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {

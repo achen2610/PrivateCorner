@@ -10,7 +10,7 @@
 
 import UIKit
 
-class ImportViewController: UIViewController {
+class ImportViewController: BaseViewController {
 
     @IBOutlet weak var importTable: UITableView!
 

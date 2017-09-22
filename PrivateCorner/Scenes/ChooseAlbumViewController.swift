@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ChooseAlbumViewController: UIViewController, ChooseAlbumViewModelDelegate {
+class ChooseAlbumViewController: BaseViewController, ChooseAlbumViewModelDelegate {
     
     @IBOutlet weak var albumsCollectionView: UICollectionView!
     var viewModel: ChooseAlbumViewModel!

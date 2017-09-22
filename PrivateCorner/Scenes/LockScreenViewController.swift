@@ -12,7 +12,7 @@ import UIKit
 import LocalAuthentication
 import CDAlertView
 
-class LockScreenViewController: UIViewController, LockScreenViewModelDelegate  {
+class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate  {
     var buttonArray = [UIButton]()
     var viewModel: LockScreenViewModel!
     

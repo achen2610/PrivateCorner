@@ -60,11 +60,49 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
             self.tabBarController?.tabBar.alpha = 0.0
         })
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AppUtility.lockOrientation(.allButUpsideDown)
+    }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
         tabBarController?.tabBar.alpha = 1.0
+        AppUtility.lockOrientation(.portrait)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        guard let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        
+        if collectionView.visibleCells.count > 0 {
+            if let cell = collectionView?.visibleCells[0] as? PhotoCell {
+                
+            }
+            
+            if let cell = collectionView?.visibleCells[0] as? VideoCell {
+                cell.containerView.frame = cell.bounds
+                cell.playButton.frame = cell.bounds
+                cell.playerLayer.frame = cell.containerView.bounds
+            }
+        }
+        
+        
+        
+        if UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) {
+            //here you can do the logic for the cell size if phone is in landscape
+            
+        } else {
+            //logic if not landscape
+        }
+        
+        flowLayout.invalidateLayout()
     }
     
     // MARK: - Event handling
@@ -73,6 +111,14 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
         preferredContentSize = CGSize(width: view.bounds.width, height: view.bounds.width)
         toolBar.frame.origin.y += toolBar.frame.size.height
         toolBar.barTintColor = navigationController?.navigationBar.barTintColor
+    }
+    
+    func rotateUI(isLandscape: Bool) {
+        if isLandscape {
+            
+        } else {
+            
+        }
     }
     
     func configureCollectionViewOnLoad() {

@@ -1017,11 +1017,14 @@
             </objects>
             <point key="canvasLocation" x="1938.75" y="120.4225352112676"/>
         </scene>
-        <!--Albums-->
+        <!--Navigation Controller-->
         <scene sceneID="Cyv-6H-bOR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7l3-8E-WRy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Albums" id="DaN-A5-A2w"/>
+                    <tabBarItem key="tabBarItem" title="" image="album.png" id="DaN-A5-A2w">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="100"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Mfb-Ru-jnk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1078,11 +1081,14 @@
             </objects>
             <point key="canvasLocation" x="3810" y="451.05633802816902"/>
         </scene>
-        <!--Setting-->
+        <!--Navigation Controller-->
         <scene sceneID="1hW-nQ-12C">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="adM-Fs-fM0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Setting" id="pua-UE-xrC"/>
+                    <tabBarItem key="tabBarItem" title="" image="setting.png" id="pua-UE-xrC">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="100"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ADi-vV-tVZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1097,11 +1103,14 @@
             </objects>
             <point key="canvasLocation" x="834" y="1143"/>
         </scene>
-        <!--Import-->
+        <!--Navigation Controller-->
         <scene sceneID="FBj-87-hak">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SJZ-kO-aXo" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Import" id="NNu-3p-mdT"/>
+                    <tabBarItem key="tabBarItem" title="" image="import.png" id="NNu-3p-mdT">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="100"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="NQ3-IZ-RKo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1243,11 +1252,14 @@
             </objects>
             <point key="canvasLocation" x="4717.5" y="-887.32394366197184"/>
         </scene>
-        <!--Web-->
+        <!--Navigation Controller-->
         <scene sceneID="PqC-14-OdR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PIL-NT-0Xb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Web" id="rbC-ew-IVx"/>
+                    <tabBarItem key="tabBarItem" title="" image="web.png" id="rbC-ew-IVx">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="100"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xJb-iJ-0vD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1368,11 +1380,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="album.png" width="25" height="25"/>
         <image name="delete.png" width="25" height="25"/>
         <image name="export.png" width="25" height="25"/>
+        <image name="import.png" width="25" height="25"/>
         <image name="move.png" width="25" height="25"/>
         <image name="play.png" width="25" height="25"/>
         <image name="selectall.png" width="25" height="25"/>
+        <image name="setting.png" width="25" height="25"/>
         <image name="upload.png" width="48" height="48"/>
+        <image name="web.png" width="25" height="25"/>
     </resources>
 </document>

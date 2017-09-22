@@ -40,6 +40,11 @@ class SettingViewController: UITableViewController, MFMailComposeViewControllerD
                                                object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AppUtility.lockOrientation(.portrait)
+    }
     
     // MARK: Event handling
     func performSeguePasscodeViewWithNotification(noti: Notification) {

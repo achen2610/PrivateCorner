@@ -15,7 +15,7 @@ import DynamicColor
 import CoreData
 import CDAlertView
 
-class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegate {
+class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDelegate {
 
     var gallery: GalleryController!
     var viewModel: GalleryPhotoViewModel!
@@ -60,22 +60,6 @@ class GalleryPhotoViewController: UIViewController, GalleryPhotoViewModelDelegat
         super.viewWillAppear(animated)
         
         navigationController?.isHeroEnabled = false
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        AppUtility.lockOrientation(.portrait)
-        // Or to rotate and lock
-        // AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // Don't forget to reset when view is being removed
-        AppUtility.lockOrientation(.allButUpsideDown)
     }
     
     // MARK: - Event handling

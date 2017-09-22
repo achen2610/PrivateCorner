@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoveFileViewController: UIViewController, MoveFileViewModelDelegate {
+class MoveFileViewController: BaseViewController, MoveFileViewModelDelegate {
 
     var viewModel: MoveFileViewModel!
 

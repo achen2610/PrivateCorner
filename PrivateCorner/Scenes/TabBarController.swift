@@ -18,13 +18,15 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let tabBarImportItem = tabBar.items?[1]
         let tabBarWebItem = tabBar.items?[2]
         let tabBarSettingItem = tabBar.items?[3]
-        
-        tabBarAlbumItem?.image = UIImage.init(named: "folder.png")?.withRenderingMode(.alwaysOriginal)
-        tabBarAlbumItem?.selectedImage = UIImage.init(named: "folder-on.png")?.withRenderingMode(.alwaysOriginal)
-        
+
+//        tabBarAlbumItem?.title = nil
+        tabBarAlbumItem?.image = UIImage.init(named: "album.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarAlbumItem?.selectedImage = UIImage.init(named: "album-on.png")?.withRenderingMode(.alwaysOriginal)
+//        tabBarAlbumItem?.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+
         tabBarImportItem?.image = UIImage.init(named: "import.png")?.withRenderingMode(.alwaysOriginal)
         tabBarImportItem?.selectedImage = UIImage.init(named: "import-on.png")?.withRenderingMode(.alwaysOriginal)
-        
+
         tabBarWebItem?.image = UIImage.init(named: "web.png")?.withRenderingMode(.alwaysOriginal)
         tabBarWebItem?.selectedImage = UIImage.init(named: "web-on.png")?.withRenderingMode(.alwaysOriginal)
         

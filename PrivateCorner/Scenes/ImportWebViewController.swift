@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ImportWebViewController: UIViewController, ImportWebViewModelDelegate {
+class ImportWebViewController: BaseViewController, ImportWebViewModelDelegate {
     
     @IBOutlet weak var addressTextField: UITextField!
     var viewModel: ImportWebViewModel!

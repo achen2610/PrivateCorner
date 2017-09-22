@@ -25,9 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var orientationLock = UIInterfaceOrientationMask.allButUpsideDown
     
     lazy var downloadButton: UIButton = {
-        let button = UIButton (frame: CGRect(x: kScreenWidth - 50 * kScale, y: kScreenHeight - 100 * kScale, width: 30 * kScale, height: 30 * kScale))
-        button.setTitle("Download", for: .normal)
-        button.backgroundColor = UIColor.blue
+        let button = UIButton (frame: CGRect(x: kScreenWidth - 50 * kScale, y: kScreenHeight - 100 * kScale, width: 40 * kScale, height: 40 * kScale))
+        button.setImage(UIImage(named: "button-download"), for: .normal)
         button.addTarget(self, action: #selector(clickDownloadButton), for: .touchUpInside)
         return button
     }()
@@ -42,9 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         
         UITabBar.appearance().barTintColor = AppColor.blue.getColor()
-        UITabBar.appearance().tintColor = AppColor.title.getColor()
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for:.normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.red], for:.selected)
+//        UITabBar.appearance().tintColor = AppColor.title.getColor()
+//        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for:.normal)
+//        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.red], for:.selected)
         
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         tabBarController = mainStoryboard.instantiateViewController(withIdentifier: "tabBarController") as! TabBarController
