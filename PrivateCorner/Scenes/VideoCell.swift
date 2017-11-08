@@ -103,11 +103,11 @@ class VideoCell: UICollectionViewCell {
     }
     
     //MARK: - Selector Event
-    func tap(gr: UITapGestureRecognizer) {
+    @objc func tap(gr: UITapGestureRecognizer) {
         delegate?.tapOverVideoView()
     }
     
-    func clickPlayButton(sender: UIButton) {
+    @objc func clickPlayButton(sender: UIButton) {
         playVideo()
     }
     
@@ -128,7 +128,7 @@ class VideoCell: UICollectionViewCell {
     
     func videoRect(containerRect: CGRect) -> CGRect {
 
-        guard let track = player.currentItem?.asset.tracks(withMediaType: AVMediaTypeVideo)[0] else {
+        guard let track = player.currentItem?.asset.tracks(withMediaType: AVMediaType.video)[0] else {
             return CGRect.zero
         }
         
@@ -158,7 +158,7 @@ class VideoCell: UICollectionViewCell {
     }
     
     //MARK: - Notification
-    func playerDidFinishPlaying(note: NSNotification) {
+    @objc func playerDidFinishPlaying(note: NSNotification) {
         print("Video Finished")
         isEnd = true
         delegate?.videoPlayFinished()

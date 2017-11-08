@@ -68,7 +68,7 @@ class PhotoCell: UICollectionViewCell {
         return zoomRect
     }
     
-    func doubleTap(gr: UITapGestureRecognizer) {
+    @objc func doubleTap(gr: UITapGestureRecognizer) {
         if scrollView.zoomScale == 1 {
             scrollView.zoom(to: zoomRectForScale(scale: scrollView.maximumZoomScale, center: gr.location(in: gr.view)), animated: true)
         } else {
@@ -76,7 +76,7 @@ class PhotoCell: UICollectionViewCell {
         }
     }
     
-    func tap(gr: UITapGestureRecognizer) {
+    @objc func tap(gr: UITapGestureRecognizer) {
         delegate?.tapPhotoView()
     }
     

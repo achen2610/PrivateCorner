@@ -57,7 +57,7 @@ class PermissionController: UIViewController {
 
   // MARK: - Action
 
-  func settingButtonTouched(_ button: UIButton) {
+  @objc func settingButtonTouched(_ button: UIButton) {
     DispatchQueue.main.async {
       if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
         UIApplication.shared.openURL(settingsURL)
@@ -65,7 +65,7 @@ class PermissionController: UIViewController {
     }
   }
 
-  func closeButtonTouched(_ button: UIButton) {
+  @objc func closeButtonTouched(_ button: UIButton) {
     EventHub.shared.close?()
   }
 

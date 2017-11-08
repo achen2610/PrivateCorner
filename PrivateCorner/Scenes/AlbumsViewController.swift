@@ -92,7 +92,7 @@ class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
         }
     }
     
-    func clickDeleteAlbum(button: UIButton) {
+    @objc func clickDeleteAlbum(button: UIButton) {
         let index = button.tag
 
         albumsCollectionView.performBatchUpdates({
@@ -121,7 +121,7 @@ class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
     }
     
     // MARK: Keyboard Function
-    func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         let userInfo = notification.userInfo ?? [:]
         let keyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         let adjustmentHeight = keyboardFrame.height
@@ -132,7 +132,7 @@ class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
         albumsCollectionView.scrollIndicatorInsets = contentInset
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
         var contentInset:UIEdgeInsets = albumsCollectionView.contentInset
         contentInset.bottom = 49.0
 

@@ -80,10 +80,10 @@ class SPTitleWithSubtitleView: UIView {
         
         let textWidth = self.frame.width * self.maxTextWidthFactor
         
-        self.titleLabel.setWidthView(textWidth)
+        self.titleLabel.setWidth(textWidth)
         self.titleLabel.sizeToFit()
         
-        self.subtitleLabel.setWidthView(textWidth)
+        self.subtitleLabel.setWidth(textWidth)
         self.subtitleLabel.sizeToFit()
         
         let spaceBetweenText = self.spaceBetweenText

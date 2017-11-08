@@ -14,7 +14,7 @@ class MyWindow: UIWindow {
     var tapLocation: CGPoint = CGPoint.zero
     var contextualMenuTimer: Timer? = Timer()
     
-    func tapAndHoldAction(timer: Timer) {
+    @objc func tapAndHoldAction(timer: Timer) {
         contextualMenuTimer = nil
         var clickedView = self.hitTest(tapLocation, with: nil)
         while clickedView != nil {

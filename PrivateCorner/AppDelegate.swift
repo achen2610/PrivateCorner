@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UINavigationBar.appearance().barTintColor = AppColor.blue.getColor()
         UINavigationBar.appearance().tintColor = AppColor.title.getColor()
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         
         UITabBar.appearance().barTintColor = AppColor.blue.getColor()
 //        UITabBar.appearance().tintColor = AppColor.title.getColor()
@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return self.orientationLock
     }
     
-    func clickDownloadButton() {
+    @objc func clickDownloadButton() {
         print("Download button clicked!")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DownloadVideoNotification"), object: nil)
         
@@ -128,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func windowBecameHidden(notification: Notification) {
+    @objc func windowBecameHidden(notification: Notification) {
         let newWindow = notification.object as! UIWindow
         let name = NSStringFromClass(newWindow.classForCoder)
         if name == "UIRemoteKeyboardWindow" || name == "UITextEffectsWindow" || name == "_UISnapshotWindow" {
@@ -140,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func windowBecameVisible(notification: Notification) {
+    @objc func windowBecameVisible(notification: Notification) {
         let newWindow = notification.object as! UIWindow
         if newWindow != window {
             downloadButton.removeFromSuperview()

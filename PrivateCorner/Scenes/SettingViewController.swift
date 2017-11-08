@@ -47,11 +47,11 @@ class SettingViewController: UITableViewController, MFMailComposeViewControllerD
     }
     
     // MARK: Event handling
-    func performSeguePasscodeViewWithNotification(noti: Notification) {
+    @objc func performSeguePasscodeViewWithNotification(noti: Notification) {
         self.performSegue(withIdentifier: "seguePasscodeViewController", sender: nil)
     }
     
-    func showAlertWhenChangePassSuccess(noti: Notification) {
+    @objc func showAlertWhenChangePassSuccess(noti: Notification) {
         let alert = CDAlertView(title: nil, message: "Change passcode success!", type: .success)
         alert.show()
         

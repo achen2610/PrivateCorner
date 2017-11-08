@@ -179,7 +179,7 @@ class WebViewController: BaseViewController {
         searchBars.text = "http://google.com"
     }
     
-    func contextualMenuAction(notification: Notification) {
+    @objc func contextualMenuAction(notification: Notification) {
         var pt: CGPoint = CGPoint.zero
         let coord = notification.object as! [String: CGFloat]
         pt.x = coord["x"]!
@@ -294,7 +294,7 @@ class WebViewController: BaseViewController {
         }
     }
     
-    func playerItemBecameCurrent(notification: Notification) {
+    @objc func playerItemBecameCurrent(notification: Notification) {
         guard let playerItem = notification.object as? AVPlayerItem,
             let asset = playerItem.asset as? AVURLAsset else {return}
         let url = asset.url
@@ -303,7 +303,7 @@ class WebViewController: BaseViewController {
         downloadUrl = url
     }
     
-    func handleDownloadVideo() {
+    @objc func handleDownloadVideo() {
         if let url = downloadUrl {
             isUploading = true
             progressRing.alpha = 1.0
@@ -322,18 +322,18 @@ class WebViewController: BaseViewController {
     }
     
     // MARK: - Event selector
-    func clickContainerView() {
+    @objc func clickContainerView() {
         showCollectionView(show: false)
         showFooterView(show: true)
     }
     
-    func clickBackButton() {
+    @objc func clickBackButton() {
         if webView.canGoBack {
             webView.goBack()
         }
     }
     
-    func clickNextButton() {
+    @objc func clickNextButton() {
         if webView.canGoForward {
             webView.goForward()
         }

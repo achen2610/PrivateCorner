@@ -60,7 +60,7 @@ class ItemManager {
         let item = NSEntityDescription.insertNewObject(forEntityName: "Item", into: managedContext) as! Item
         item.fileName = info["filename"] as? String
         item.thumbName = info["thumbname"] as? String
-        item.uploadDate = Date() as NSDate?
+        item.uploadDate = Date()
         switch info["type"] as! Key.ItemType {
         case .ImageType:
             item.type = "image"
@@ -104,7 +104,7 @@ class ItemManager {
         let fileManager = FileManager.default
         let currentIndex = toAlbum.currentIndex
         for item in items {
-            item.uploadDate = Date() as NSDate?
+            item.uploadDate = Date()
             let index = items.index(of: item)
             var subtype = MediaLibrary.getSubTypeOfFile(filename: item.fileName!)
             let type: String = item.type!.uppercased()

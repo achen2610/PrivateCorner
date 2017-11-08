@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Photos
 import MessageUI
-import Diff
+import Differ
 
 public protocol GalleryPhotoViewModelDelegate: class {
 

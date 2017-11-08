@@ -82,19 +82,13 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
         }
         
         if collectionView.visibleCells.count > 0 {
-            if let cell = collectionView?.visibleCells[0] as? PhotoCell {
-                
-            }
-            
             if let cell = collectionView?.visibleCells[0] as? VideoCell {
                 cell.containerView.frame = cell.bounds
                 cell.playButton.frame = cell.bounds
                 cell.playerLayer.frame = cell.containerView.bounds
             }
         }
-        
-        
-        
+
         if UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) {
             //here you can do the logic for the cell size if phone is in landscape
             
@@ -143,10 +137,10 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
     }
     
     func setupTitleView(topText: String, bottomText: String) {
-        let titleParameters = [NSForegroundColorAttributeName : UIColor.white,
-                               NSFontAttributeName : UIFont.systemFont(ofSize: 16)]
-        let subtitleParameters = [NSForegroundColorAttributeName : UIColor.white,
-                                  NSFontAttributeName : UIFont.systemFont(ofSize: 12)]
+        let titleParameters = [NSAttributedStringKey.foregroundColor : UIColor.white,
+                               NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)]
+        let subtitleParameters = [NSAttributedStringKey.foregroundColor : UIColor.white,
+                                  NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12)]
         
         let title:NSMutableAttributedString = NSMutableAttributedString(string: topText, attributes: titleParameters)
         let subtitle:NSAttributedString = NSAttributedString(string: bottomText, attributes: subtitleParameters)
@@ -189,7 +183,7 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
     }
     
     // MARK: - Selector Event
-    func pan() {
+    @objc func pan() {
         let translation = panGR.translation(in: nil)
         let progress = translation.y / 2 / collectionView!.bounds.height
         switch panGR.state {
@@ -206,7 +200,7 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
 
             hero_dismissViewController()
         case .changed:
-            Hero.shared.update(progress: Double(progress))
+            Hero.shared.updateProgress(progress: Double(progress))
             if let cell = collectionView?.visibleCells[0]  as? PhotoCell {
                 let currentPos = CGPoint(x: translation.x + view.center.x, y: translation.y + view.center.y)
                 Hero.shared.apply(modifiers: [.position(currentPos)], to: cell.imageView)
@@ -217,7 +211,7 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
             }
         default:
             if progress + panGR.velocity(in: nil).y / collectionView!.bounds.height > 0.3 {
-                Hero.shared.end()
+                Hero.shared.finish()
             } else {
                 Hero.shared.cancel()
                 if let cell = collectionView?.visibleCells[0] as? VideoCell {

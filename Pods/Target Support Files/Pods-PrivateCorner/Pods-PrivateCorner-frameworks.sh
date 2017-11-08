@@ -90,7 +90,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/CDAlertView/CDAlertView.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Diff/Diff.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Differ/Differ.framework"
   install_framework "$BUILT_PRODUCTS_DIR/DynamicColor/DynamicColor.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Gifu/Gifu.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ImagePicker/ImagePicker.framework"
@@ -98,7 +98,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/CDAlertView/CDAlertView.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Diff/Diff.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Differ/Differ.framework"
   install_framework "$BUILT_PRODUCTS_DIR/DynamicColor/DynamicColor.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Gifu/Gifu.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ImagePicker/ImagePicker.framework"

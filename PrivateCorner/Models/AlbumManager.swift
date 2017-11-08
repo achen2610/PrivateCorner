@@ -77,7 +77,7 @@ class AlbumManager {
         //2
         let album = NSEntityDescription.insertNewObject(forEntityName: "Album", into: managedContext) as! Album
         album.name = title
-        album.createdDate = Date() as NSDate?
+        album.createdDate = Date()
         album.currentIndex = 0
         
         //3

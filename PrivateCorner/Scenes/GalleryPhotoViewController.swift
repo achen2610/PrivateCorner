@@ -98,11 +98,11 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
         viewModel.getGallery()
     }
     
-    func updateCollectionView() {
+    @objc func updateCollectionView() {
         viewModel.updateGallery(collectionView: galleryCollectionView)
     }
     
-    func updateCollectionViewWhenMoveFile() {
+    @objc func updateCollectionViewWhenMoveFile() {
         viewModel.updateGallery(collectionView: galleryCollectionView)
         updateStateEditButton()
         
