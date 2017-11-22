@@ -107,7 +107,7 @@ open class GalleryPhotoViewModel {
             
             cell.styleUI()
             let item = items[indexPath.row]
-            cell.setupData(item: item, albumName: album.name!)
+            cell.setupData(item: item, albumName: album.directoryName!)
             
             cell.photoImageView.heroID = "image_\(indexPath.row)"
             cell.photoImageView.heroModifiers = [.fade, .scale(0.8)]
@@ -149,7 +149,7 @@ open class GalleryPhotoViewModel {
             ItemManager.sharedInstance.add(info: info, toAlbum: album)
             
             // Save original image
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(filename)
             if fileManager.fileExists(atPath: path.path) {
                 print("===============")
                 print("Image \(filename) exists")
@@ -166,7 +166,7 @@ open class GalleryPhotoViewModel {
             }
             
             // Save thumbnail image
-            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
+            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(thumbname)
             let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: image)
             if fileManager.fileExists(atPath: thumbnailPath.path) {
                 print("===============")
@@ -225,8 +225,8 @@ open class GalleryPhotoViewModel {
             ItemManager.sharedInstance.add(info: info, toAlbum: album)
         
             // Save original video & thumbnail
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
-            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(filename)
+            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(thumbname)
             
             UploadManager.sharedInstance.uploadVideo(video: video, videoPath: videoUrl, destinationPath: path, thumbPath: thumbPath, delegate: delegate, completion: { (status) in
                 if status {
@@ -265,7 +265,7 @@ open class GalleryPhotoViewModel {
             
             // Delete file of item in documents
             if let filename = item.fileName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(filename)
                 do {
                     if fileManager.fileExists(atPath: path.path) {
                         try fileManager.removeItem(at: path)
@@ -281,7 +281,7 @@ open class GalleryPhotoViewModel {
             }
             
             if let thumbname = item.thumbName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(thumbname)
                 do {
                     if fileManager.fileExists(atPath: path.path) {
                         try fileManager.removeItem(at: path)
@@ -316,7 +316,7 @@ open class GalleryPhotoViewModel {
         switch type {
         case .PhotoLibrary:
             for item in exportItems {
-                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(item.fileName!)
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(item.fileName!)
                 PHPhotoLibrary.shared().performChanges({
                     PHAssetChangeRequest.creationRequestForAsset(from: MediaLibrary.image(urlPath: urlPath))
                 }, completionHandler: { (success, error) in
@@ -341,7 +341,7 @@ open class GalleryPhotoViewModel {
         case .Email:
             let composeVC = MFMailComposeViewController()
             for item in exportItems {
-                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(item.fileName!)
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(item.fileName!)
                 let ext = item.fileName!.components(separatedBy: ".").last?.lowercased()
                 do {
                     let fileData = try Data(contentsOf: urlPath)
@@ -396,28 +396,28 @@ open class GalleryPhotoViewModel {
             ItemManager.sharedInstance.add(info: info, toAlbum: album)
             
             // Copy image/video to folder album
-            let imagePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.name!).appendingPathComponent(item.fileName!)
-            let newImagePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
+            let imagePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.directoryName!).appendingPathComponent(item.fileName!)
+            let newImagePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(filename)
             if fileManager.fileExists(atPath: imagePath.path) {
                 do {
                     try fileManager.copyItem(at: imagePath, to: newImagePath)
                 } catch let error as NSError {
                     print("=============")
-                    print("Copy \(item.fileName!) to \(album.name!) error : \(error.debugDescription)")
+                    print("Copy \(item.fileName!) to \(album.directoryName!) error : \(error.debugDescription)")
                 }
                 currentPercent += percent
                 delegate?.updateProgressRing(value: currentPercent)
             }
             
             // Copy thumbnail to folder album
-            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.name!).appendingPathComponent(item.thumbName!)
-            let newThumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
+            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.directoryName!).appendingPathComponent(item.thumbName!)
+            let newThumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(thumbname)
             if fileManager.fileExists(atPath: thumbPath.path) {
                 do {
                     try fileManager.copyItem(at: thumbPath, to: newThumbPath)
                 } catch let error as NSError {
                     print("=============")
-                    print("Copy \(item.thumbName!) to \(album.name!) error : \(error.debugDescription)")
+                    print("Copy \(item.thumbName!) to \(album.directoryName!) error : \(error.debugDescription)")
                 }
                 currentPercent += percent
                 delegate?.updateProgressRing(value: currentPercent)

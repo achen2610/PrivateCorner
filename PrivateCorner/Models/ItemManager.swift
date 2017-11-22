@@ -110,11 +110,11 @@ class ItemManager {
             let type: String = item.type!.uppercased()
             
             //large image
-            let filePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.name!).appendingPathComponent(item.fileName!)
+            let filePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.directoryName!).appendingPathComponent(item.fileName!)
             if fileManager.fileExists(atPath: filePath.path) {
                 let filename = String.init(format: "%@_%i", type, currentIndex + Int32(index!)) + "." + subtype
                 item.fileName = filename
-                let newPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(toAlbum.name!).appendingPathComponent(filename)
+                let newPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(toAlbum.directoryName!).appendingPathComponent(filename)
                 do {
                     try fileManager.moveItem(at: filePath, to: newPath)
                 } catch let error as NSError {
@@ -126,14 +126,14 @@ class ItemManager {
             }
             
             //thumb image
-            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.name!).appendingPathComponent(item.thumbName!)
+            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromAlbum.directoryName!).appendingPathComponent(item.thumbName!)
             if fileManager.fileExists(atPath: thumbPath.path) {
                 if type == "VIDEO" {
                     subtype = "JPG"
                 }
                 let filename = "thumbnail" + "_" + String.init(format: "%@_%i", type, currentIndex + Int32(index!)) + "." + subtype
                 item.thumbName = filename
-                let newPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(toAlbum.name!).appendingPathComponent(filename)
+                let newPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(toAlbum.directoryName!).appendingPathComponent(filename)
                 do {
                     try fileManager.moveItem(at: thumbPath, to: newPath)
                 } catch let error as NSError {

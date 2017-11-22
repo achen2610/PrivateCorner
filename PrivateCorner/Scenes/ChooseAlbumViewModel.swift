@@ -57,7 +57,7 @@ open class ChooseAlbumViewModel {
             let lastItem = array.last
             
             if let thumbname = lastItem?.thumbName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(thumbname)
                 cell.photoImageView.image = MediaLibrary.image(urlPath: path)
             }
             

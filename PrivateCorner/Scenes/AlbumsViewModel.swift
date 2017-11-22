@@ -63,7 +63,7 @@ open class AlbumsViewModel {
             let lastItem = array.last
             
             if let thumbname = lastItem?.thumbName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(thumbname)
                 cell.photoImageView.image = MediaLibrary.image(urlPath: path)
             }
             
@@ -88,7 +88,16 @@ open class AlbumsViewModel {
     
     func editAlbum(title: String, atIndex index: Int) {
         let album = albums[index]
+        
+        //Get old name and new name album
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy-hh-mm-ss"
+        let oldDirectoryName = album.directoryName!
+        let newDirectoryName = title + "_" + dateFormatter.string(from: album.createdDate!)
+        
+        //Save name to core data
         album.name = title
+        album.directoryName = newDirectoryName
         albums[index] = album
         
         //1
@@ -101,6 +110,26 @@ open class AlbumsViewModel {
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
         }
+        
+        //3 Change name folder physical
+        let fileManager = FileManager.default
+        let albumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(oldDirectoryName)
+        let newAlbumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!)
+        var isDir: ObjCBool = false
+        if fileManager.fileExists(atPath: albumPath.path, isDirectory: &isDir) {
+            if isDir.boolValue {
+                do {
+                    try fileManager.moveItem(at: albumPath, to: newAlbumPath)
+                } catch let error as NSError {
+                    print("==============")
+                    print("Rename album path")
+                    print("Error : \(error.description)")
+                }
+            } else {
+                print("Album path not a directory")
+            }
+        }
+        
     }
     
     func deleteAlbumFromList(index: Int) {

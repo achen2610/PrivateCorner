@@ -34,7 +34,7 @@ class MoveFileCell: UICollectionViewCell {
         let lastImage = array.first
         
         if let filename = lastImage?.fileName {
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(filename)
             
             photoImageView.sd_setImage(with: path, placeholderImage: UIImage(), options: [], completed: { (image, error, cacheType, imageURL) in
                 

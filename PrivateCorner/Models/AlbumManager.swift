@@ -80,13 +80,19 @@ class AlbumManager {
         album.createdDate = Date()
         album.currentIndex = 0
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy-hh-mm-ss"
+        let directoryName = title + "_" + dateFormatter.string(from: album.createdDate!)
+        album.directoryName = directoryName
+        
         //3
         CoreDataManager.sharedInstance.saveContext()
         
         //4
         let fileManager = FileManager.default
         var isDir : ObjCBool = false
-        let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(title)
+        
+        let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!)
         if !fileManager.fileExists(atPath: urlPath.path, isDirectory: &isDir) {
             do {
                 try fileManager.createDirectory(at: urlPath, withIntermediateDirectories: false, attributes: nil)
@@ -110,6 +116,7 @@ class AlbumManager {
         //1
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         let fileManager = FileManager.default
+        let directoryName = album.directoryName!
         
         //2
         let items = ItemManager.sharedInstance.getItems(album: album)
@@ -150,7 +157,7 @@ class AlbumManager {
         }
         
         //3
-        let albumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!)
+        let albumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName)
         if fileManager.fileExists(atPath: albumPath.path) {
             do {
                 try fileManager.removeItem(at: albumPath)
