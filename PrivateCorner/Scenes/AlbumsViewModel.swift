@@ -62,8 +62,8 @@ open class AlbumsViewModel {
         if array.count > 0 {
             let lastItem = array.last
             
-            if let thumbname = lastItem?.thumbName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(thumbname)
+            if let thumbname = lastItem?.thumbName, let directoryName = album.directoryName {
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
                 cell.photoImageView.image = MediaLibrary.image(urlPath: path)
             }
             
@@ -92,7 +92,9 @@ open class AlbumsViewModel {
         //Get old name and new name album
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy-hh-mm-ss"
-        let oldDirectoryName = album.directoryName!
+        guard let oldDirectoryName = album.directoryName else {
+            return
+        }
         let newDirectoryName = title + "_" + dateFormatter.string(from: album.createdDate!)
         
         //Save name to core data
@@ -114,7 +116,7 @@ open class AlbumsViewModel {
         //3 Change name folder physical
         let fileManager = FileManager.default
         let albumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(oldDirectoryName)
-        let newAlbumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!)
+        let newAlbumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(newDirectoryName)
         var isDir: ObjCBool = false
         if fileManager.fileExists(atPath: albumPath.path, isDirectory: &isDir) {
             if isDir.boolValue {

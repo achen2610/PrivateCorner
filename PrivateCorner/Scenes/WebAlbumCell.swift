@@ -42,8 +42,8 @@ class WebAlbumCell: UICollectionViewCell {
         if array.count > 0 {
             let lastItem = array.last
             
-            if let thumbname = lastItem?.thumbName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(thumbname)
+            if let thumbname = lastItem?.thumbName, let directoryName = album.directoryName {
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
                 albumImageView.image = MediaLibrary.image(urlPath: path)
             }
         } else {

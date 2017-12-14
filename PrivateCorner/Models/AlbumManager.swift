@@ -116,7 +116,9 @@ class AlbumManager {
         //1
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         let fileManager = FileManager.default
-        let directoryName = album.directoryName!
+        guard let directoryName = album.directoryName else {
+            return
+        }
         
         //2
         let items = ItemManager.sharedInstance.getItems(album: album)

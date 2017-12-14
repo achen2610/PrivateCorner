@@ -8,12 +8,17 @@
 
 import Foundation
 import UIKit
+import CDAlertView
 
 class ChooseAlbumViewController: BaseViewController, ChooseAlbumViewModelDelegate {
     
     @IBOutlet weak var albumsCollectionView: UICollectionView!
     var viewModel: ChooseAlbumViewModel!
     var gallery: GalleryController!
+    var containerView: UIView!
+    var progressRing: UICircularProgressRingView!
+    var alert: CDAlertView!
+    var isUploading: Bool = false
     var isRequestPermission: Bool = false
     var isPhotoLibrary: Bool = true
     
@@ -36,6 +41,22 @@ class ChooseAlbumViewController: BaseViewController, ChooseAlbumViewModelDelegat
     }
 
     // MARK: Event handling
+    
+    func styleUI() {
+        containerView = UIView()
+        containerView.backgroundColor = UIColor.clear
+        containerView.heightAnchor.constraint(equalToConstant: 153.0).isActive = true
+        
+        progressRing = UICircularProgressRingView(frame: CGRect(x: 35, y: 0, width: 153, height: 153))
+        // Change any of the properties you'd like
+        let blue = UIColor(hexString: "#3498db")
+        progressRing.outerRingColor = blue
+        progressRing.outerRingWidth = 8.0
+        progressRing.innerRingColor = blue.lighter()
+        progressRing.innerRingSpacing = 0
+        progressRing.fontColor = blue.darkened()
+        containerView.addSubview(progressRing)
+    }
     
     func configureCollectionViewOnLoad() {
         let nibName = UINib(nibName: "ChooseAlbumCell", bundle:Bundle.main)

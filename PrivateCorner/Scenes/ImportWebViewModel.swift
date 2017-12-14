@@ -84,8 +84,12 @@ open class ImportWebViewModel {
         let filename = String.init(format: "VIDEO_%i", currentIndex) + "." + subtype
         let thumbname = "thumbnail_" + String.init(format: "VIDEO_%i", currentIndex) + ".JPG"
         
+        guard let directoryName = album.directoryName else {
+            return
+        }
+        
         // Rename file
-        let filePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(self.album.directoryName!).appendingPathComponent(filename)
+        let filePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
         do {
             try FileManager.default.moveItem(at: videoUrl, to: filePath)
         } catch {
@@ -108,7 +112,7 @@ open class ImportWebViewModel {
         }
         
         // Thumbnail path
-        let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(self.album.directoryName!).appendingPathComponent(thumbname)
+        let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
         
         // Save thumbnail
         let fileManager = FileManager.default
@@ -147,12 +151,16 @@ open class ImportWebViewModel {
         let filename = String.init(format: "IMAGE_%i", currentIndex) + "." + subtype
         let thumbname = "thumbnail" + "_" + filename
         
+        guard let directoryName = album.directoryName else {
+            return
+        }
+        
         // Add image to DB
         let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
         ItemManager.sharedInstance.add(info: info, toAlbum: album)
 
         // Rename file
-        let filePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(self.album.directoryName!).appendingPathComponent(filename)
+        let filePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
         do {
             try fileManager.moveItem(at: imageUrl, to: filePath)
         } catch {
@@ -162,7 +170,7 @@ open class ImportWebViewModel {
         
         // Save thumbnail image
         let image = UIImage(contentsOfFile: filePath.path)!
-        let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(thumbname)
+        let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
         let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: image)
         if fileManager.fileExists(atPath: thumbnailPath.path) {
             print("===============")

@@ -42,7 +42,12 @@ open class PhotoViewViewModel {
         if item.type == "image" {
             if let photoCell = cell as? PhotoCell {
                 photoCell.imageView.prepareForReuse()
-                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(item.fileName!)
+                
+                guard let directoryName = album.directoryName else {
+                    return
+                }
+                
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName!)
 //                let ext = item.fileName!.components(separatedBy: ".").last
 //                if ext == "gif" {
 //                    do {
@@ -58,7 +63,11 @@ open class PhotoViewViewModel {
             }
         } else {
             if let videoCell = cell as? VideoCell {
-                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(item.fileName!)
+                guard let directoryName = album.directoryName else {
+                    return
+                }
+                
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName!)
                 videoCell.configureVideo(url: urlPath, isEndTransition: isEndTransition)
             }
         }
@@ -91,12 +100,16 @@ open class PhotoViewViewModel {
         let fileManager = FileManager.default
         let item = items[index]
         
+        guard let directoryName = album.directoryName else {
+            return
+        }
+        
         // Delete item from database
         ItemManager.sharedInstance.deleteItem(item: item, atAlbum: album)
         
         // Delete file of item in documents
         if let filename = item.fileName {
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(filename)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
             do {
                 if fileManager.fileExists(atPath: path.path) {
                     try fileManager.removeItem(at: path)
@@ -112,7 +125,7 @@ open class PhotoViewViewModel {
         }
         
         if let thumbname = item.thumbName {
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(thumbname)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
             do {
                 if fileManager.fileExists(atPath: path.path) {
                     try fileManager.removeItem(at: path)
@@ -137,9 +150,13 @@ open class PhotoViewViewModel {
     func exportFile(index: Int, type: Key.ExportType) {
         let item = items[index]
         
+        guard let directoryName = album.directoryName else {
+            return
+        }
+        
         switch type {
         case .PhotoLibrary:
-            let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(item.fileName!)
+            let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName!)
             PHPhotoLibrary.shared().performChanges({
                 PHAssetChangeRequest.creationRequestForAsset(from: MediaLibrary.image(urlPath: urlPath))
             }, completionHandler: { (success, error) in
@@ -160,7 +177,7 @@ open class PhotoViewViewModel {
             break
         case .Email:
             let composeVC = MFMailComposeViewController()
-            let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(item.fileName!)
+            let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName!)
             let ext = item.fileName!.components(separatedBy: ".").last?.lowercased()
             do {
                 let fileData = try Data(contentsOf: urlPath)

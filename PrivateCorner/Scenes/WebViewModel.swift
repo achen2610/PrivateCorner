@@ -110,12 +110,16 @@ open class WebViewModel {
         let filename = String.init(format: "IMAGE_%i", currentIndex) + "." + subtype
         let thumbname = "thumbnail" + "_" + filename
         
+        guard let directoryName = album.directoryName else {
+            return
+        }
+        
         // Add image to DB
         let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
         ItemManager.sharedInstance.add(info: info, toAlbum: album)
         
         // Save original image
-        let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(filename)
+        let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
         if fileManager.fileExists(atPath: path.path) {
             print("===============")
             print("Image \(filename) exists")
@@ -126,7 +130,7 @@ open class WebViewModel {
         }
         
         // Save thumbnail image
-        let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(thumbname)
+        let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
         let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: image)
         if fileManager.fileExists(atPath: thumbnailPath.path) {
             print("===============")
@@ -158,12 +162,16 @@ open class WebViewModel {
             let filename = String.init(format: "IMAGE_%i", currentIndex) + "." + subtype
             let thumbname = "thumbnail" + "_" + filename
             
+            guard let directoryName = selectedAlbum.directoryName else {
+                return
+            }
+            
             // Add image to DB
             let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
             ItemManager.sharedInstance.add(info: info, toAlbum: selectedAlbum)
             
             // Save original image
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(selectedAlbum.directoryName!).appendingPathComponent(filename)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
             if fileManager.fileExists(atPath: path.path) {
                 print("===============")
                 print("Image \(filename) exists")
@@ -174,7 +182,7 @@ open class WebViewModel {
             }
             
             // Save thumbnail image
-            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(selectedAlbum.directoryName!).appendingPathComponent(thumbname)
+            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
             let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: image)
             if fileManager.fileExists(atPath: thumbnailPath.path) {
                 print("===============")
@@ -207,12 +215,16 @@ open class WebViewModel {
             let filename = String.init(format: "IMAGE_%i", currentIndex) + "." + subtype
             let thumbname = "thumbnail" + "_" + filename
             
+            guard let directoryName = album.directoryName else {
+                return
+            }
+            
             // Add image to DB
             let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
             ItemManager.sharedInstance.add(info: info, toAlbum: selectedAlbum)
             
             // Save original image
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(selectedAlbum.directoryName!).appendingPathComponent(filename)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
             if fileManager.fileExists(atPath: path.path) {
                 print("===============")
                 print("Image \(filename) exists")
@@ -221,7 +233,7 @@ open class WebViewModel {
             }
             
             // Save thumbnail image
-            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(selectedAlbum.directoryName!).appendingPathComponent(thumbname)
+            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
             let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: UIImage(data: data)!)
             if fileManager.fileExists(atPath: thumbnailPath.path) {
                 print("===============")
@@ -242,12 +254,16 @@ open class WebViewModel {
             let filename = String.init(format: "IMAGE_%i", currentIndex) + "." + subtype
             let thumbname = "thumbnail" + "_" + filename
             
+            guard let directoryName = album.directoryName else {
+                return
+            }
+            
             // Add image to DB
             let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
             ItemManager.sharedInstance.add(info: info, toAlbum: self.album)
             
             // Save original image
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(self.album.directoryName!).appendingPathComponent(filename)
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
             if fileManager.fileExists(atPath: path.path) {
                 print("===============")
                 print("Image \(filename) exists")
@@ -256,7 +272,7 @@ open class WebViewModel {
             }
             
             // Save thumbnail image
-            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(self.album.directoryName!).appendingPathComponent(thumbname)
+            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
             let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: UIImage(data: data)!)
             if fileManager.fileExists(atPath: thumbnailPath.path) {
                 print("===============")
@@ -283,8 +299,12 @@ open class WebViewModel {
         let subtype = MediaLibrary.getSubTypeOfFile(filename: name)
         let filename = String.init(format: "VIDEO_%i", currentIndex) + "." + subtype
         
+        guard let directoryName = album.directoryName else {
+            return
+        }
+        
         // Save original video
-        let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(filename)
+        let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
         
         UploadManager.sharedInstance.uploadVideo(videoPath: url, destinationPath: path) { (status) in
             if status {
@@ -303,7 +323,7 @@ open class WebViewModel {
                 }
                 
                 // Thumbnail path
-                let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(self.album.directoryName!).appendingPathComponent(thumbname)
+                let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
                 
                 // Save thumbnail
                 let fileManager = FileManager.default

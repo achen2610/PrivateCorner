@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Photos
 
 public protocol ChooseAlbumViewModelDelegate: class {
     func chooseAlbumSuccess(onSuccess: Bool)
@@ -56,8 +57,8 @@ open class ChooseAlbumViewModel {
         if array.count > 0 {
             let lastItem = array.last
             
-            if let thumbname = lastItem?.thumbName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!).appendingPathComponent(thumbname)
+            if let thumbname = lastItem?.thumbName, let directoryName = album.directoryName {
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
                 cell.photoImageView.image = MediaLibrary.image(urlPath: path)
             }
             
@@ -75,5 +76,121 @@ open class ChooseAlbumViewModel {
         delegate?.chooseAlbumSuccess(onSuccess: true)
     }
     
+    // Upload
+    func uploadImageToCoreData(images: [UIImage], assets: [PHAsset], collectionView: UICollectionView) {
+        
+        guard let selectedAlbum = selectedAlbum else {
+            return
+        }
+        
+        guard let directoryName = selectedAlbum.directoryName else {
+            return
+        }
+        
+        let filenames = fetchImages(assets)
+        
+        let group = DispatchGroup()
+        let percent: CGFloat = 100 / CGFloat(images.count * 2)
+        var currentPercent: CGFloat = 0
+        let fileManager = FileManager.default
+        let currentIndex = Int(selectedAlbum.currentIndex)
+        
+        for image in images {
+            let index = images.index(of: image)
+            let name = filenames[index!]
+            let subtype = MediaLibrary.getSubTypeOfFile(filename: name)
+            let filename = String.init(format: "IMAGE_%i", currentIndex + index!) + "." + subtype
+            let thumbname = "thumbnail" + "_" + filename
+            
+            // Add image to DB
+            let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
+            ItemManager.sharedInstance.add(info: info, toAlbum: selectedAlbum)
+            
+            // Save original image
+            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
+            if fileManager.fileExists(atPath: path.path) {
+                print("===============")
+                print("Image \(filename) exists")
+            } else {
+                group.enter()
+                
+                let data = autoreleasepool(invoking: { () -> Data? in
+                    return UIImagePNGRepresentation(image)
+                })
+                
+                if let data = data {
+                    let success = fileManager.createFile(atPath: path.path, contents: data, attributes: nil)
+                    if success {
+                        currentPercent += percent
+//                        delegate?.updateProgressRing(value: currentPercent)
+                        group.leave()
+                    }
+                }
+            }
+            
+            // Save thumbnail image
+            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
+            let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: image)
+            if fileManager.fileExists(atPath: thumbnailPath.path) {
+                print("===============")
+                print("Thumbnail \(thumbname) exists")
+            } else {
+                group.enter()
+                
+                let data = autoreleasepool(invoking: { () -> Data? in
+                    return UIImagePNGRepresentation(thumbnailImage)
+                })
+                if let data = data {
+                    let success = fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
+                    if success {
+                        currentPercent += percent
+//                        delegate?.updateProgressRing(value: currentPercent)
+                        group.leave()
+                    }
+                }
+            }
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            selectedAlbum.currentIndex = Int32(currentIndex + images.count)
+            CoreDataManager.sharedInstance.saveContext()
+     
+            print("===============")
+            print("Upload images success")
+        }
+    }
     
+    //MARK: - Private Method
+    
+    private func fetchImages(_ assets: [PHAsset]) -> [String] {
+        var filenames = [String]()
+        let imageManager = PHImageManager.default()
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
+        let size: CGSize = CGSize(width: 720, height: 1280)
+        
+        for asset in assets {
+            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
+                if let info = info {
+                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
+                        //do sth with file name
+                        filenames.append(filename)
+                    } else {
+                        var name: String
+                        if let indexString = UserDefaults.standard.value(forKey: "IndexForImage") {
+                            let index = Int(indexString as! String)
+                            name = "IMAGE_\(index! + 1).JPG"
+                            UserDefaults.standard.set("\(index! + 1)", forKey: "IndexForImage")
+                        } else {
+                            name = "IMAGE_0.JPG"
+                            UserDefaults.standard.set("0", forKey: "IndexForImage")
+                        }
+                        filenames.append(name)
+                        UserDefaults.standard.synchronize()
+                    }
+                }
+            }
+        }
+        return filenames
+    }
 }
