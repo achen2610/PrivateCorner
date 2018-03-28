@@ -33,12 +33,20 @@ class MoveFileCell: UICollectionViewCell {
         let array = ItemManager.sharedInstance.getItems(album: album)
         let lastImage = array.first
         
-        if let filename = lastImage?.fileName, let directoryName = album.directoryName {
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
-            
-            photoImageView.sd_setImage(with: path, placeholderImage: UIImage(), options: [], completed: { (image, error, cacheType, imageURL) in
+        if let filename = lastImage?.fileName {
+            if let directoryName = album.directoryName {
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
                 
-            })
+                photoImageView.sd_setImage(with: path, placeholderImage: UIImage(), options: [], completed: { (image, error, cacheType, imageURL) in
+                    
+                })
+            } else {
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(filename)
+                
+                photoImageView.sd_setImage(with: path, placeholderImage: UIImage(), options: [], completed: { (image, error, cacheType, imageURL) in
+                    
+                })
+            }
         }
         
         totalItem.text = "\(array.count)"

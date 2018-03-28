@@ -116,8 +116,11 @@ class AlbumManager {
         //1
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         let fileManager = FileManager.default
-        guard let directoryName = album.directoryName else {
-            return
+        var albumPath:URL
+        if let directoryName = album.directoryName {
+            albumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName)
+        } else {
+            albumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!)
         }
         
         //2
@@ -159,7 +162,6 @@ class AlbumManager {
         }
         
         //3
-        let albumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName)
         if fileManager.fileExists(atPath: albumPath.path) {
             do {
                 try fileManager.removeItem(at: albumPath)

@@ -110,6 +110,8 @@ open class GalleryPhotoViewModel {
             
             if let directoryName = album.directoryName {
                 cell.setupData(item: item, albumName: directoryName)
+            } else {
+                cell.setupData(item: item, albumName: album.name!)
             }
             
             cell.photoImageView.heroID = "image_\(indexPath.row)"

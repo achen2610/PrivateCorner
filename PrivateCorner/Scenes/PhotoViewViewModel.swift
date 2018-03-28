@@ -43,23 +43,13 @@ open class PhotoViewViewModel {
             if let photoCell = cell as? PhotoCell {
                 photoCell.imageView.prepareForReuse()
                 
-                guard let directoryName = album.directoryName else {
-                    return
+                if let directoryName = album.directoryName {
+                    let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName!)
+                    photoCell.image = MediaLibrary.image(urlPath: urlPath)
+                } else {
+                    let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(item.fileName!)
+                    photoCell.image = MediaLibrary.image(urlPath: urlPath)
                 }
-                
-                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName!)
-//                let ext = item.fileName!.components(separatedBy: ".").last
-//                if ext == "gif" {
-//                    do {
-//                        let data = try Data(contentsOf: urlPath)
-//                        photoCell.imageView.animate(withGIFData: data)
-//                        
-//                    } catch let error as NSError {
-//                        print("Error \(error)")
-//                    }
-//                } else {
-                photoCell.image = MediaLibrary.image(urlPath: urlPath)
-//                }
             }
         } else {
             if let videoCell = cell as? VideoCell {

@@ -57,9 +57,14 @@ open class ChooseAlbumViewModel {
         if array.count > 0 {
             let lastItem = array.last
             
-            if let thumbname = lastItem?.thumbName, let directoryName = album.directoryName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
-                cell.photoImageView.image = MediaLibrary.image(urlPath: path)
+            if let thumbname = lastItem?.thumbName {
+                if let directoryName = album.directoryName {
+                    let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
+                    cell.photoImageView.image = MediaLibrary.image(urlPath: path)
+                } else {
+                    let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
+                    cell.photoImageView.image = MediaLibrary.image(urlPath: path)
+                }
             }
             
             cell.totalItem.text = "\(array.count)"

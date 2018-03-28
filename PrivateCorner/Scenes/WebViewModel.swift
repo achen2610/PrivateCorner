@@ -215,7 +215,7 @@ open class WebViewModel {
             let filename = String.init(format: "IMAGE_%i", currentIndex) + "." + subtype
             let thumbname = "thumbnail" + "_" + filename
             
-            guard let directoryName = album.directoryName else {
+            guard let directoryName = selectedAlbum.directoryName else {
                 return
             }
             
@@ -254,7 +254,7 @@ open class WebViewModel {
             let filename = String.init(format: "IMAGE_%i", currentIndex) + "." + subtype
             let thumbname = "thumbnail" + "_" + filename
             
-            guard let directoryName = album.directoryName else {
+            guard let directoryName = self.album.directoryName else {
                 return
             }
             
