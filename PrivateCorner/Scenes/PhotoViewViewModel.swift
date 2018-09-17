@@ -17,7 +17,7 @@ public protocol PhotoViewViewModelDelegate: class {
     func exportSuccess()
     func sendEmail(emailVC: MFMailComposeViewController)
     func copyImagesSuccess()
-    func deleteSuccess()
+    func deleteSuccess(popView: Bool)
 }
 
 open class PhotoViewViewModel {
@@ -134,7 +134,7 @@ open class PhotoViewViewModel {
         items.remove(at: index)
         collectionView.animateItemChanges(oldData: oldItems, newData: items)
         
-        delegate?.deleteSuccess()
+        delegate?.deleteSuccess(popView: items.count > 0 ? false : true)
     }
     
     func exportFile(index: Int, type: Key.ExportType) {

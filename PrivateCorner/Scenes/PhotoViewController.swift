@@ -81,12 +81,10 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
             return
         }
         
-        if collectionView.visibleCells.count > 0 {
-            if let cell = collectionView?.visibleCells[0] as? VideoCell {
-                cell.containerView.frame = cell.bounds
-                cell.playButton.frame = cell.bounds
-                cell.playerLayer.frame = cell.containerView.bounds
-            }
+        if collectionView.visibleCells.count > 0, let cell = collectionView?.visibleCells[0] as? VideoCell {
+            cell.containerView.frame = cell.bounds
+            cell.playButton.frame = cell.bounds
+            cell.playerLayer.frame = cell.containerView.bounds
         }
 
         if UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) {
@@ -103,7 +101,7 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
     func styleUI() {
         automaticallyAdjustsScrollViewInsets = false
         preferredContentSize = CGSize(width: view.bounds.width, height: view.bounds.width)
-        toolBar.frame.origin.y += toolBar.frame.size.height
+//        toolBar.frame.origin.y += toolBar.frame.size.height
         toolBar.barTintColor = navigationController?.navigationBar.barTintColor
     }
     
@@ -163,8 +161,9 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
     
     func alertExport() {
         alert = CDAlertView(title: nil, message: "Do you want to export images to Photo Library?", type: .warning)
-        let alertAction = CDAlertViewAction(title: "Export", font: nil, textColor: nil, backgroundColor: nil) { (action) in
+        let alertAction = CDAlertViewAction(title: "Export", font: nil, textColor: nil, backgroundColor: nil) { (action) -> Bool in
             self.viewModel.exportFile(index: self.currentIndex.row, type: .PhotoLibrary)
+            return true
         }
         alert.add(action: alertAction)
         let cancelAction = CDAlertViewAction(title: "Cancel")
@@ -294,7 +293,7 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
         })
     }
     
-    func deleteSuccess() {
+    func deleteSuccess(popView: Bool) {
         alert = CDAlertView(title: nil, message: "Delete image success!", type: .success)
         alert.show()
         
@@ -303,6 +302,10 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
         })
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateGallery), object: nil)
+
+        if popView {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 
@@ -324,13 +327,18 @@ extension PhotoViewController: HeroViewControllerDelegate {
     
     func heroDidEndTransition() {
         viewModel.isEndTransition = true
-        if let cell = collectionView?.visibleCells[0] as? VideoCell {
+        if let collectionView = collectionView,
+            collectionView.visibleCells.count > 0,
+            let cell = collectionView.visibleCells[0] as? VideoCell {
             cell.playButton.isHidden = false
         }
         
+//        toolBar.isHidden = false
+        toolBar.alpha = 0.0
         toolBar.isHidden = false
         UIView.animate(withDuration: 0.1) {
-            self.toolBar.frame.origin.y -= self.toolBar.frame.size.height
+            self.toolBar.alpha = 1.0
+//            self.toolBar.frame.origin.y -= self.toolBar.frame.size.height
         }
     }
 }

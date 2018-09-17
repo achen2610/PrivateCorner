@@ -12,7 +12,7 @@ import SDWebImage
 class ChooseAlbumCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImageView: UIImageView!
-    @IBOutlet weak var albumName: UITextField!
+    @IBOutlet weak var albumName: UILabel!
     @IBOutlet weak var totalItem: UILabel!
     @IBOutlet weak var transparentView: UIView!
 

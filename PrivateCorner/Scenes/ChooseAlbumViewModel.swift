@@ -81,6 +81,11 @@ open class ChooseAlbumViewModel {
         delegate?.chooseAlbumSuccess(onSuccess: true)
     }
     
+    func saveAlbumToCoreData(title: String) {
+        let album = AlbumManager.sharedInstance.addAlbum(title: title)
+        self.albums.insert(album, at: 0)
+    }
+    
     // Upload
     func uploadImageToCoreData(images: [UIImage], assets: [PHAsset], collectionView: UICollectionView) {
         

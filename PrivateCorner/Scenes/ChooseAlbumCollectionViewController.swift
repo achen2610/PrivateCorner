@@ -12,20 +12,30 @@ extension ChooseAlbumViewController: UICollectionViewDataSource, UICollectionVie
 
     // MARK: UICollectionView DataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfItemInSection(section: section)
+        if section == 0 {
+            return 1
+        } else {
+            return viewModel.numberOfItemInSection(section: section)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.cellIdentifier(), for: indexPath) as? ChooseAlbumCell {
             cell.configureLayout()
             
-            let index = indexPath.row
-            viewModel.fillUI(cell: cell, atIndex: index)
-            
+            if indexPath.section == 0 {
+                cell.albumName.text = "Add new album"
+                cell.photoImageView.image = UIImage(named: "albums.png")
+                cell.totalItem.text = ""
+            } else {
+                let index = indexPath.row
+                viewModel.fillUI(cell: cell, atIndex: index)
+            }
+
             return cell
         }
         
@@ -51,6 +61,32 @@ extension ChooseAlbumViewController: UICollectionViewDataSource, UICollectionVie
     
     // MARK: UICollectionView Delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.selectAlbumAtIndex(index: indexPath.row)
+        if indexPath.section == 0 {
+            let alert = UIAlertController.init(title: "New Album", message: "Enter a name for this album", preferredStyle: .alert)
+            alert.addTextField { (textField) in
+                textField.keyboardType = .alphabet
+                textField.placeholder = "Title"
+            }
+            
+            let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            
+            let saveAction = UIAlertAction.init(title: "Save", style: .default) { (action) in
+                let textField = alert.textFields?.first
+                if let text = textField?.text, text != "" {
+                    self.albumsCollectionView.performBatchUpdates({
+                        self.viewModel.saveAlbumToCoreData(title: (textField?.text)!)
+                        self.albumsCollectionView.insertItems(at: [IndexPath.init(row: 0, section: 1)])
+                    }) { (finished) in
+                        
+                    }
+                }
+            }
+            alert.addAction(saveAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            viewModel.selectAlbumAtIndex(index: indexPath.row)
+        }
     }
 }

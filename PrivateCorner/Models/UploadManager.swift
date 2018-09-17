@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Photos
+import Gallery
 
 class UploadManager  {
     
@@ -18,7 +19,7 @@ class UploadManager  {
     public func uploadVideo(video: Video, videoPath: URL, destinationPath: URL, thumbPath: URL, delegate: GalleryPhotoViewModelDelegate?, completion: @escaping (Bool) -> Void) {
         
         let fileManager = FileManager.default
-        video.fetchThumbnail(CGSize(width: 256, height: 256)) { (image) in
+        video.fetchThumbnail(size: CGSize(width: 256, height: 256)) { (image) in
 
             if fileManager.fileExists(atPath: destinationPath.path) {
                 print("===============")

@@ -48,14 +48,14 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
         PasscodeView.totalDotCount = 6
 
         if viewModel.passcodeState == .FirstStart {
-            TitleLabel.text = NSLocalizedString("Enter the first password", comment: "")
+            TitleLabel.text = NSLocalizedString("Create passcode for app", comment: "")
         } else if viewModel.passcodeState == .NotFirst {
-            TitleLabel.text = NSLocalizedString("Enter your password", comment: "")
+            TitleLabel.text = NSLocalizedString("Enter passcode", comment: "")
         } else if viewModel.passcodeState == .RequirePass {
-            TitleLabel.text = NSLocalizedString("Enter your password", comment: "")
+            TitleLabel.text = NSLocalizedString("Enter passcode", comment: "")
             TouchIDButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
         } else if viewModel.passcodeState == .ChangePass {
-            TitleLabel.text = NSLocalizedString("Enter new password", comment: "")
+            TitleLabel.text = NSLocalizedString("Enter new passcode", comment: "")
             TouchIDButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
         }
     }
@@ -82,14 +82,14 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
             self.styleButton(button: button, isScaleFontSize: true)
             button.tag = buttonArray.index(of: button)!
         }
-        styleButton(button: CancelButton, isScaleFontSize: false)
-        styleButton(button: TouchIDButton, isScaleFontSize: false)
+//        styleButton(button: CancelButton, isScaleFontSize: false)
+//        styleButton(button: TouchIDButton, isScaleFontSize: false)
     }
     
     func styleChangePassState() {
         viewModel.clearInput()
         viewModel.changePassState()
-        TitleLabel.text = NSLocalizedString("Enter new password", comment: "")
+        TitleLabel.text = NSLocalizedString("Enter new passcode", comment: "")
         TouchIDButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
     }
     
@@ -119,7 +119,7 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
     private func wrongPasscode() {
         PasscodeView.shakeAnimationWithCompletion {
             self.viewModel.clearInput()
-            self.TitleLabel.text = NSLocalizedString("Wrong password. Try again", comment: "")
+            self.TitleLabel.text = NSLocalizedString("Wrong passcode. Try again", comment: "")
         }
     }
     
@@ -185,7 +185,7 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { (success, evalPolicyError) in
                 if success {
-                    self.TitleLabel.text = NSLocalizedString("Enter your password", comment: "")
+                    self.TitleLabel.text = NSLocalizedString("Enter passcode", comment: "")
                     self.viewModel.clearInput()
                     self.navigateToHomeScreen()
                 } else {
@@ -211,8 +211,8 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
                         showAlert = true
                         
                     case LAError.userFallback.rawValue:
-                        print("User selected to enter custom password")
-                        message = NSLocalizedString("User pressed password", comment: "")
+                        print("User selected to enter custom passcode")
+                        message = NSLocalizedString("User pressed passcode", comment: "")
                         showAlert = true
                         
                     default:
@@ -241,7 +241,7 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
 
     // MARK: LockScreenViewModelDelegate
     func validationSuccess() {
-        TitleLabel.text = NSLocalizedString("Enter your password", comment: "")
+        TitleLabel.text = NSLocalizedString("Enter passcode", comment: "")
         viewModel.clearInput()
         navigateToHomeScreen()
     }

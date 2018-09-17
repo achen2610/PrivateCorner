@@ -1,29 +1,32 @@
 PODS:
-  - CDAlertView (0.6.1)
-  - Diff (0.5.3)
-  - DynamicColor (3.3)
-  - Gifu (2.0.1)
-  - ImagePicker (2.1.1)
-  - SDWebImage (4.1.0):
-    - SDWebImage/Core (= 4.1.0)
-  - SDWebImage/Core (4.1.0)
+  - CDAlertView (0.8.3)
+  - Differ (1.2.3)
+  - DynamicColor (4.0.2)
+  - Gallery (2.0.6)
+  - Gifu (3.1.0)
+  - ImagePicker (3.1.0)
+  - SDWebImage (4.4.2):
+    - SDWebImage/Core (= 4.4.2)
+  - SDWebImage/Core (4.4.2)
 
 DEPENDENCIES:
   - CDAlertView
-  - Diff
-  - DynamicColor (~> 3.3)
+  - Differ
+  - DynamicColor
+  - Gallery
   - Gifu
   - ImagePicker
   - SDWebImage
 
 SPEC CHECKSUMS:
-  CDAlertView: cbb016e839ea49cddba06a78eebc2ac7978fba06
-  Diff: befa1d19c32726b2b36ce915d98793e2fbde8dcc
-  DynamicColor: 3cdaa1e01c16e93ba744e0630f768373e0fc7a7d
-  Gifu: 90bd26ea4d65f8322c4cca8cbb0ca1418f5457ad
-  ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
-  SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
+  CDAlertView: 7ec9ce91ccd800a66a18f7fd92a9dea20c5326a2
+  Differ: 061f3298ea9408494c43b530c44583e555884daf
+  DynamicColor: c7adcfe871781a2b39877a5774e452ba51b79eb3
+  Gallery: 5489ae11d8010a3cc163030f6e92d618afbdf4df
+  Gifu: fd1e9e3a15ac5d90bae0a510e4ed9f94b485ab03
+  ImagePicker: db1fd7626337b2577c523bef5f499bbbe5a37079
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
 
-PODFILE CHECKSUM: 812a6fc660012ea548e115d5fdee3659cb8f196f
+PODFILE CHECKSUM: c183cbba9428a364cbde6ac5aa5c33873dccb79a
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.4.0

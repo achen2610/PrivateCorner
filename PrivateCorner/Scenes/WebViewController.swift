@@ -18,6 +18,10 @@ class WebViewController: BaseViewController {
     var albumCollectionView: UICollectionView!
     var alert: CDAlertView!
     
+    lazy var tabBarHeight: CGFloat = {
+        return self.tabBarController?.tabBar.frame.height ?? kTabBar
+    }()
+    
     lazy var containerView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: kScreenHeight, width: kScreenWidth, height: kScreenHeight))
         view.backgroundColor = UIColor.clear
@@ -37,18 +41,19 @@ class WebViewController: BaseViewController {
     lazy var searchBars: UISearchBar = {
         let bars = UISearchBar(frame: CGRect(x: 0, y: 0, width: 288 * kScale, height: 44))
         bars.delegate = self
+        bars.setPositionAdjustment(UIOffsetMake(5, 0), for: UISearchBarIcon.search)
         return bars
     }()
     
     lazy var activity: UIActivityIndicatorView = {
         let act = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
-        act.frame = CGRect(x: 0, y: kNavigationView, width: kScreenWidth, height: kScreenHeight - kNavigationView - kTabBar)
+        act.frame = CGRect(x: 0, y: kNavigationView, width: kScreenWidth, height: kScreenHeight - kNavigationView - tabBarHeight)
         act.layer.backgroundColor = UIColor(white: 0.0, alpha: 0.2).cgColor
         return act
     }()
     
     lazy var footerView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: kScreenHeight - kTabBar - 36 * kScale, width: kScreenWidth, height: 36 * kScale))
+        let view = UIView(frame: CGRect(x: 0, y: kScreenHeight - tabBarHeight - 36 * kScale, width: kScreenWidth, height: 36 * kScale))
         view.backgroundColor = UIColor(white: 1.0, alpha: 0.9)
         return view
     }()
@@ -105,6 +110,12 @@ class WebViewController: BaseViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        styleTextFieldInSearchBar()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -135,7 +146,7 @@ class WebViewController: BaseViewController {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         
-        albumCollectionView = UICollectionView(frame: CGRect(x: 0, y: kScreenHeight - viewModel.cellSize().height - kTabBar, width: kScreenWidth, height: viewModel.cellSize().height), collectionViewLayout: layout)
+        albumCollectionView = UICollectionView(frame: CGRect(x: 0, y: kScreenHeight - viewModel.cellSize().height - tabBarHeight, width: kScreenWidth, height: viewModel.cellSize().height), collectionViewLayout: layout)
         albumCollectionView.delegate = self
         albumCollectionView.dataSource = self
         albumCollectionView.backgroundColor = UIColor.white
@@ -166,6 +177,20 @@ class WebViewController: BaseViewController {
         progressRing.innerRingSpacing = 0
         progressRing.fontColor = blue.darkened()
         progressView.addSubview(progressRing)
+    }
+    
+    func styleTextFieldInSearchBar() {
+        for subView in searchBars.subviews  {
+            for subsubView in subView.subviews  {
+                if let textField = subsubView as? UITextField {
+                    var bounds: CGRect
+                    bounds = textField.frame
+                    bounds.size.height = 30
+                    textField.bounds = bounds
+                    textField.font = UIFont.systemFont(ofSize: 12)
+                }
+            }
+        }
     }
     
     func loadData() {
@@ -287,7 +312,7 @@ class WebViewController: BaseViewController {
     func showFooterView(show: Bool) {
         UIView.animate(withDuration: 0.5) { 
             if show {
-                self.footerView.frame.origin = CGPoint(x: 0, y: kScreenHeight - kTabBar - 36 * kScale)
+                self.footerView.frame.origin = CGPoint(x: 0, y: kScreenHeight - self.tabBarHeight - 36 * kScale)
             } else {
                 self.footerView.frame.origin = CGPoint(x: 0, y: kScreenHeight)
             }

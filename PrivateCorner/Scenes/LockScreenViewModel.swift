@@ -41,7 +41,7 @@ open class LockScreenViewModel {
     
     fileprivate var inputString: String = "" {
         didSet {
-            inputDotCount = inputString.characters.count
+            inputDotCount = inputString.count
             delegate?.setInputDotCount(inputDotCount: inputDotCount)
             checkInputComplete()
         }
@@ -62,24 +62,24 @@ open class LockScreenViewModel {
     }
 
     func appendInputString(string: String) {
-        guard inputString.characters.count < totalDotCount else {
+        guard inputString.count < totalDotCount else {
             return
         }
         
         inputString += string
         
-        if inputString.characters.count > 0 {
+        if inputString.count > 0 {
             delegate?.setTitleButton(text: NSLocalizedString("Delete", comment: ""))
         }
     }
     
     func deleteInputString(isFull: Bool) {
-        guard inputString.characters.count > 0 && !isFull else {
+        guard inputString.count > 0 && !isFull else {
             return
         }
-        inputString = String(inputString.characters.dropLast())
+        inputString = String(inputString.dropLast())
         
-        if inputString.characters.count == 0 && passcodeState == .SecondInput {
+        if inputString.count == 0 && passcodeState == .SecondInput {
             delegate?.setTitleButton(text: NSLocalizedString("Reset", comment: ""))
         } else {
             delegate?.setTitleButton(text: NSLocalizedString("Delete", comment: ""))
@@ -90,45 +90,53 @@ open class LockScreenViewModel {
         if passcodeState == .ChangePass {
             passcodeState = .NotFirst
             passcodeSaved = UserDefaults.standard.value(forKey: "passcodeSaved") as? String
-            delegate?.setTitleLabel(text: NSLocalizedString("Enter your password", comment: ""))
+            delegate?.setTitleLabel(text: NSLocalizedString("Enter passcode", comment: ""))
         } else {
             passcodeState = .FirstStart
             passcodeSaved = ""
-            delegate?.setTitleLabel(text: NSLocalizedString("Enter the first password", comment: ""))
+            delegate?.setTitleLabel(text: NSLocalizedString("Enter the passcode", comment: ""))
         }
     }
     
     func checkInputComplete() {
-        if inputString.characters.count == totalDotCount {
-            if passcodeState == .FirstStart {
+        if inputString.count == totalDotCount {
+            guard let passcodeState = passcodeState else {
+                return
+            }
+            
+            switch passcodeState {
+            case .FirstStart:
                 passcodeSaved = inputString
-                passcodeState = .SecondInput
-
-                delegate?.setTitleLabel(text: NSLocalizedString("Enter the second password", comment: ""))
-            } else if passcodeState == .SecondInput {
+                self.passcodeState = .SecondInput
+                
+                delegate?.setTitleLabel(text: NSLocalizedString("Enter again the passcode", comment: ""))
+                break
+            case .SecondInput:
                 if validation(inputString) {
                     UserDefaults.standard.set(passcodeSaved, forKey: "passcodeSaved")
                     UserDefaults.standard.set(true, forKey: "firstInstall")
                     UserDefaults.standard.synchronize()
-
+                    
                     delegate?.validationSuccess()
                 } else {
-                    delegate?.setTitleLabel(text: NSLocalizedString("Wrong password. Try again", comment: ""))
+                    delegate?.setTitleLabel(text: NSLocalizedString("Wrong passcode. Try again", comment: ""))
                 }
-            } else if passcodeState == .ChangePass {
+                break
+            case .ChangePass:
                 if passcodeSaved == "" {
                     passcodeSaved = inputString
-                    delegate?.setTitleLabel(text: NSLocalizedString("Enter new password", comment: ""))
+                    delegate?.setTitleLabel(text: NSLocalizedString("Enter new passcode", comment: ""))
                 } else {
                     if validation(inputString) {
                         UserDefaults.standard.set(passcodeSaved, forKey: "passcodeSaved")
                         UserDefaults.standard.synchronize()
                         delegate?.validationSuccess()
                     } else {
-                        delegate?.setTitleLabel(text: NSLocalizedString("Wrong password. Try again", comment: ""))
+                        delegate?.setTitleLabel(text: NSLocalizedString("Wrong passcode. Try again", comment: ""))
                     }
                 }
-            } else {
+                break
+            case .NotFirst, .RequirePass:
                 if validation(inputString) {
                     print("*️⃣ success!")
                     delegate?.validationSuccess()
@@ -136,6 +144,7 @@ open class LockScreenViewModel {
                     print("*️⃣ failure!")
                     delegate?.validationFail()
                 }
+                break
             }
             clearInput()
         }

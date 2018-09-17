@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CDAlertView
+import Gallery
 
 class ChooseAlbumViewController: BaseViewController, ChooseAlbumViewModelDelegate {
     
@@ -73,9 +74,7 @@ class ChooseAlbumViewController: BaseViewController, ChooseAlbumViewModelDelegat
         if isPhotoLibrary {
             if SPRequestPermission.isAllowPermissions([.photoLibrary]) {
                 if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-                    Config.showsPhotoLibraryTab = true
-                    Config.showsCameraTab = false
-                    Config.showsVideoTab = true
+                    Config.tabsToShow = [.imageTab, .videoTab]
                     self.gallery = GalleryController()
                     self.gallery.delegate = self
                     self.navigationController?.pushViewController(self.gallery, animated: true)
@@ -87,9 +86,7 @@ class ChooseAlbumViewController: BaseViewController, ChooseAlbumViewModelDelegat
         } else {
             if SPRequestPermission.isAllowPermissions([.camera]) {
                 if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-                    Config.showsPhotoLibraryTab = false
-                    Config.showsCameraTab = true
-                    Config.showsVideoTab = false
+                    Config.tabsToShow = [.cameraTab]
                     self.gallery = GalleryController()
                     self.gallery.delegate = self
                     self.navigationController?.pushViewController(self.gallery, animated: true)
@@ -135,26 +132,19 @@ extension ChooseAlbumViewController: SPRequestPermissionEventsDelegate {
 }
 
 extension ChooseAlbumViewController: GalleryControllerDelegate {
-    func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
+    func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
         DispatchQueue.main.async {
             controller.dismiss(animated: true, completion: nil)
             self.gallery = nil
         }
     }
     
-    func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage], imageAssets: [Image]) {
-        controller.dismiss(animated: true, completion: nil)
-        gallery = nil
-        
-    }
-    
     func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
         controller.dismiss(animated: true, completion: nil)
         gallery = nil
-        
     }
     
-    func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage]) {
+    func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
         
     }
     

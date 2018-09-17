@@ -14,6 +14,7 @@ import MessageUI
 import DynamicColor
 import CoreData
 import CDAlertView
+import Gallery
 
 class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDelegate {
 
@@ -124,7 +125,7 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
     }
     
     func updateStateEditButton() {
-        if viewModel.numberOfItemInSection(section: 0) > 0 {
+        if (viewModel.arraySelectedCell.filter{ $0 == true }).count > 0 {
             exportButton.isEnabled = true
             moveButton.isEnabled = true
             deleteButton.isEnabled = true
@@ -135,9 +136,18 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
         }
     }
     
+    func updateTitlePhotoSelected() {
+        let count = (viewModel.arraySelectedCell.filter{ $0 == true }).count
+        if count > 0 {
+            title = "\(count) " + (count == 1 ? "Photo" : "Photos") + " Selected"
+        } else {
+            title = "Select Items"
+        }
+    }
+    
     func alertExport() {
         alert = CDAlertView(title: nil, message: "Do you want to export images to Photo Library?", type: .warning)
-        let alertAction = CDAlertViewAction(title: "Export", font: nil, textColor: nil, backgroundColor: nil) { (action) in
+        let alertAction = CDAlertViewAction(title: "Export", font: nil, textColor: nil, backgroundColor: nil) { (action) -> Bool in
             var indexSelectedImage = [Int]()
             var index = 0
             for check in self.viewModel.arraySelectedCell {
@@ -147,11 +157,10 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
                 index += 1
             }
             
-            if indexSelectedImage.count <= 0 {
-                return
+            if indexSelectedImage.count > 0 {
+                self.viewModel.exportFile(indexes: indexSelectedImage, type: .PhotoLibrary)
             }
-            
-            self.viewModel.exportFile(indexes: indexSelectedImage, type: .PhotoLibrary)
+            return true
         }
         alert.add(action: alertAction)
         let cancelAction = CDAlertViewAction(title: "Cancel")
@@ -183,9 +192,6 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
             
             if SPRequestPermission.isAllowPermissions([.camera, .photoLibrary]) {
                 if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-                    Config.showsPhotoLibraryTab = true
-                    Config.showsCameraTab = true
-                    Config.showsVideoTab = true
                     self.gallery = GalleryController()
                     self.gallery.delegate = self
                     self.present(self.gallery, animated: true, completion: nil)
@@ -241,10 +247,10 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
         }
         
         if isEditMode {
-            title = "Select Photos"
+            title = "Select Items"
             navigationItem.setHidesBackButton(true, animated: false)
             
-            let barButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(clickEditMode(_:)))
+            let barButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(clickEditMode(_:)))
             navigationItem.rightBarButtonItem = barButton
             
             updateStateEditButton()
@@ -252,7 +258,7 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
             title = viewModel.titleAlbum
             navigationItem.setHidesBackButton(false, animated: false)
             
-            let barButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(clickEditMode(_:)))
+            let barButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(clickEditMode(_:)))
             navigationItem.rightBarButtonItem = barButton
             
             if viewModel.numberOfItemInSection(section: 0) > 0 {
@@ -282,6 +288,10 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
                     }
                 }
             }
+            
+            exportButton.isEnabled = true
+            moveButton.isEnabled = true
+            deleteButton.isEnabled = true
         }
     }
     
@@ -359,7 +369,7 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
             self.viewModel.deleteItem(indexes: indexSelectedImage, collectionView: self.galleryCollectionView)
             
             // Update array check select cell
-            let indexesToRemove = Set(indexSelectedImage.flatMap { $0 })
+            let indexesToRemove = Set(indexSelectedImage.compactMap { $0 })
             self.viewModel.arraySelectedCell = self.viewModel.arraySelectedCell.enumerated().filter { !indexesToRemove.contains($0.offset) }.map { $0.element }
     
             // Update state edit buttons
@@ -475,30 +485,7 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
 
 
 extension GalleryPhotoViewController: GalleryControllerDelegate {
-    func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage]) {
-        DispatchQueue.main.async { 
-            controller.dismiss(animated: true, completion: nil)
-            self.gallery = nil
-            self.containerView.isHidden = false
-            self.progressRing.alpha = 1.0
-        }
-
-//        autoreleasepool {
-//            var assets = [PHAsset]()
-//            for image in Cart.images {
-//                let asset = image.asset
-//                assets.append(asset);
-//            }
-//            
-//            let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
-//            DispatchQueue.global().asyncAfter(deadline: when) {
-//                // Your code with delay
-//                self.viewModel.uploadImageToCoreData(images: images, assets: assets)
-//            }
-//        }
-    }
-    
-    func galleryController(_ controller: GalleryController, didSelectImages images: [UIImage], imageAssets: [Image]) {
+    func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
         controller.dismiss(animated: true, completion: nil)
         gallery = nil
         isUploading = true
@@ -508,16 +495,22 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
         alert.show()
         
         var assets = [PHAsset]()
-        for image in imageAssets {
+        for image in images {
             let asset = image.asset
             assets.append(asset);
         }
         
-        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
-        DispatchQueue.global().asyncAfter(deadline: when) {
-            // Your code with delay
-            self.viewModel.uploadImageToCoreData(images: images, assets: assets, collectionView: self.galleryCollectionView)
-        }
+        Image.resolve(images: images, completion: { [weak self] resolvedImages in
+            if let collectionView = self?.galleryCollectionView {
+                self?.viewModel.uploadImageToCoreData(images: resolvedImages as! [UIImage], assets: assets, collectionView: collectionView)
+            }
+        })
+        
+//        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+//        DispatchQueue.global().asyncAfter(deadline: when) {
+//            // Your code with delay
+//            self.viewModel.uploadImageToCoreData(images: images, assets: assets, collectionView: self.galleryCollectionView)
+//        }
     }
     
     func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
@@ -528,13 +521,15 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
         alert = CDAlertView(title: nil, message: "Upload processing!", type: .warning)
         alert.customView = containerView
         alert.show()
-        
+
         video.fetchAVAsset { (avasset) in
-            self.viewModel.uploadVideoToCoreData(video: video, avasset: avasset!, collectionView: self.galleryCollectionView)
+            video.fetchDurationEx({ (duration) in
+                self.viewModel.uploadVideoToCoreData(video: video, avasset: avasset!, duration: duration, collectionView: self.galleryCollectionView)
+            })
         }
     }
     
-    func galleryController(_ controller: GalleryController, requestLightbox images: [UIImage]) {
+    func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
         
     }
     
@@ -574,7 +569,9 @@ extension GalleryPhotoViewController: HeroViewControllerDelegate {
             addPhotoButton.heroModifiers = [.fade]
         }
         if let vc = viewController as? PhotoViewController,
+            let collectionView = vc.collectionView,
             let originalCellIndex = vc.selectedIndex,
+            collectionView.indexPathsForVisibleItems.count > 0,
             let currentCellIndex = vc.collectionView?.indexPathsForVisibleItems[0],
             let targetAttribute = galleryCollectionView.layoutAttributesForItem(at: currentCellIndex) {
             galleryCollectionView.heroModifiers = [.cascade(delta:0.015, direction:.inverseRadial(center:targetAttribute.center))]
@@ -622,9 +619,6 @@ extension GalleryPhotoViewController: SPRequestPermissionEventsDelegate {
         
         if SPRequestPermission.isAllowPermissions([.camera, .photoLibrary]) {
             if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-                Config.showsPhotoLibraryTab = true
-                Config.showsCameraTab = true
-                Config.showsVideoTab = true
                 self.gallery = GalleryController()
                 self.gallery.delegate = self
                 self.present(self.gallery, animated: true, completion: nil)

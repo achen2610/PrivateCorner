@@ -49,7 +49,7 @@ class AlbumManager {
         return album
     }
     
-    func getAlbum(title: String) -> Album? {
+    func getAlbum(title: String, isSpecial: Bool = false) -> Album? {
         var album: Album?
         //1
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext
@@ -59,7 +59,8 @@ class AlbumManager {
         
         //3
         let predicate = NSPredicate(format: "name = %@", title)
-        fetchRequest.predicate = predicate
+        let predicate2 = NSPredicate(format: "isSpecial = %@", NSNumber(value: isSpecial))
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, predicate2])
         
         //3
         do {
@@ -70,7 +71,7 @@ class AlbumManager {
         return album
     }
     
-    func addAlbum(title: String) -> Album {
+    func addAlbum(title: String, isSpecial: Bool = false) -> Album {
         //1
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         
@@ -79,6 +80,7 @@ class AlbumManager {
         album.name = title
         album.createdDate = Date()
         album.currentIndex = 0
+        album.isSpecial = isSpecial
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy-hh-mm-ss"

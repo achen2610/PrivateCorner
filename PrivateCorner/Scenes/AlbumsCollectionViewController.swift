@@ -14,12 +14,11 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
     
     // MARK: UICollectionView DataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return viewModel.numberSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return 10
-        return viewModel.numberOfItemInSection(section: section)
+        return viewModel.numberItemInSection(section: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -30,10 +29,17 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
             cell.albumName.tag = indexPath.row
             cell.deleteButton.tag = indexPath.row
             cell.deleteButton.addTarget(self, action: #selector(clickDeleteAlbum), for: .touchUpInside)
-            cell.setEditMode(isEdit: isEditMode)
+            if indexPath.section == 0 {
+                cell.setEditMode(isEdit: isEditMode)
+            } else {
+                cell.deleteButton.isHidden = true
+                cell.albumName.isEnabled = false
+                cell.totalItem.isUserInteractionEnabled = false
+                cell.photoImageView.isUserInteractionEnabled = false
+            }
             
             let index = indexPath.row
-            viewModel.fillUI(cell: cell, atIndex: index)
+            viewModel.fillUI(cell: cell, inSection: indexPath.section, atIndex: index)
             
             return cell
         }
@@ -64,6 +70,6 @@ extension AlbumsViewController: UICollectionViewDataSource, UICollectionViewDele
             return
         }
         
-        viewModel.selectedGalleryAtIndex(index: indexPath.row)
+        viewModel.selectedGalleryAtIndex(index: indexPath.row, section: indexPath.section)
     }
 }

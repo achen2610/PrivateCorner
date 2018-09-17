@@ -26,11 +26,11 @@ public class WebServer: NSObject  {
     // MARK: - Init
     private override init() {
         var urlPath: URL
-        if let importAlbum = AlbumManager.sharedInstance.getAlbum(title: "Import") {
-            urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(importAlbum.name!)
+        if let importAlbum = AlbumManager.sharedInstance.getAlbum(title: "Import", isSpecial: true) {
+            urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(importAlbum.directoryName!)
         } else {
-            let album = AlbumManager.sharedInstance.addAlbum(title: "Import")
-            urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!)
+            let album = AlbumManager.sharedInstance.addAlbum(title: "Import", isSpecial: true)
+            urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!)
         }
 
         let fileExtensions = ["mov", "mp4", "gif", "jpg", "jpeg", "png"]

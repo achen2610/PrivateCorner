@@ -58,7 +58,7 @@ class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
         let alert = UIAlertController.init(title: "New Album", message: "Enter a name for this album", preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.keyboardType = .alphabet
-            textField.placeholder = "Title"
+            textField.placeholder = "Name"
         }
         
         let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil)
@@ -67,8 +67,12 @@ class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
         let saveAction = UIAlertAction.init(title: "Save", style: .default) { (action) in
             let textField = alert.textFields?.first
             if let text = textField?.text, text != "" {
-                self.viewModel.saveAlbumToCoreData(title: (textField?.text)!)
-                self.albumsCollectionView.insertItems(at: [IndexPath.init(row: 0, section: 0)])
+                self.albumsCollectionView.performBatchUpdates({
+                    self.viewModel.saveAlbumToCoreData(title: (textField?.text)!)
+                    self.albumsCollectionView.insertItems(at: [IndexPath.init(row: 0, section: 0)])
+                }) { (finished) in
+                    
+                }
             }
         }
         alert.addAction(saveAction)
@@ -142,6 +146,12 @@ class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
 }
 
 extension AlbumsViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        
+        return true
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let index = textField.tag
         let indexPath = IndexPath(row: index, section: 0)

@@ -7,10 +7,11 @@ target 'PrivateCorner' do
 
   pod 'ImagePicker'
   pod 'SDWebImage'
-  pod 'DynamicColor', '~> 3.3'
+  pod 'DynamicColor'
   pod 'Differ'
   pod 'CDAlertView'
   pod 'Gifu'
+  pod 'Gallery'
 #  pod 'GCDWebServer/WebUploader', '~> 3.0'
 
   # Pods for PrivateCorner

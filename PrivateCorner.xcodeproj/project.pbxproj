@@ -208,54 +208,6 @@
 		0078B89B1F4BD52E0079AB49 /* UsabilityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078B89A1F4BD52E0079AB49 /* UsabilityCell.swift */; };
 		0078B89D1F4BD5390079AB49 /* UsabilityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0078B89C1F4BD5390079AB49 /* UsabilityCell.xib */; };
 		0078B8A01F4BE28F0079AB49 /* PasscodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0078B89F1F4BE28F0079AB49 /* PasscodeViewController.swift */; };
-		007980331EE696EF00C5E13D /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00797FF91EE696EF00C5E13D /* CameraController.swift */; };
-		007980341EE696EF00C5E13D /* CameraMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00797FFA1EE696EF00C5E13D /* CameraMan.swift */; };
-		007980351EE696EF00C5E13D /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00797FFB1EE696EF00C5E13D /* CameraView.swift */; };
-		007980361EE696EF00C5E13D /* ShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00797FFC1EE696EF00C5E13D /* ShutterButton.swift */; };
-		007980371EE696EF00C5E13D /* StackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00797FFD1EE696EF00C5E13D /* StackView.swift */; };
-		007980381EE696EF00C5E13D /* TripleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00797FFE1EE696EF00C5E13D /* TripleButton.swift */; };
-		007980391EE696EF00C5E13D /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980001EE696EF00C5E13D /* GalleryController.swift */; };
-		0079803A1EE696EF00C5E13D /* GAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980021EE696EF00C5E13D /* GAlbum.swift */; };
-		0079803B1EE696EF00C5E13D /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980031EE696EF00C5E13D /* Cart.swift */; };
-		0079803C1EE696EF00C5E13D /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980041EE696EF00C5E13D /* Image.swift */; };
-		0079803D1EE696EF00C5E13D /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980051EE696EF00C5E13D /* ImageCell.swift */; };
-		0079803E1EE696EF00C5E13D /* ImagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980061EE696EF00C5E13D /* ImagesController.swift */; };
-		0079803F1EE696EF00C5E13D /* ImagesLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980071EE696EF00C5E13D /* ImagesLibrary.swift */; };
-		007980401EE696EF00C5E13D /* GBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980091EE696EF00C5E13D /* GBundle.swift */; };
-		007980411EE696EF00C5E13D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079800A1EE696EF00C5E13D /* Config.swift */; };
-		007980421EE696EF00C5E13D /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079800B1EE696EF00C5E13D /* Constraints.swift */; };
-		007980431EE696EF00C5E13D /* DropdownController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079800D1EE696EF00C5E13D /* DropdownController.swift */; };
-		007980441EE696EF00C5E13D /* EventHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079800E1EE696EF00C5E13D /* EventHub.swift */; };
-		007980451EE696EF00C5E13D /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980101EE696EF00C5E13D /* Array+Extensions.swift */; };
-		007980461EE696EF00C5E13D /* AVAsset+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980111EE696EF00C5E13D /* AVAsset+Extensions.swift */; };
-		007980471EE696EF00C5E13D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980121EE696EF00C5E13D /* String+Extensions.swift */; };
-		007980481EE696EF00C5E13D /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980131EE696EF00C5E13D /* UIImageView+Extensions.swift */; };
-		007980491EE696EF00C5E13D /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980141EE696EF00C5E13D /* UIScrollView+Extensions.swift */; };
-		0079804A1EE696EF00C5E13D /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980151EE696EF00C5E13D /* UIView+Extensions.swift */; };
-		0079804B1EE696EF00C5E13D /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980161EE696EF00C5E13D /* UIViewController+Extensions.swift */; };
-		0079804C1EE696EF00C5E13D /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980171EE696EF00C5E13D /* Fetcher.swift */; };
-		0079804D1EE696EF00C5E13D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980181EE696EF00C5E13D /* LocationManager.swift */; };
-		0079804E1EE696EF00C5E13D /* Once.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980191EE696EF00C5E13D /* Once.swift */; };
-		0079804F1EE696EF00C5E13D /* PageIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079801B1EE696EF00C5E13D /* PageIndicator.swift */; };
-		007980501EE696EF00C5E13D /* PagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079801C1EE696EF00C5E13D /* PagesController.swift */; };
-		007980511EE696EF00C5E13D /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079801E1EE696EF00C5E13D /* Permission.swift */; };
-		007980521EE696EF00C5E13D /* PermissionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079801F1EE696EF00C5E13D /* PermissionController.swift */; };
-		007980531EE696EF00C5E13D /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980201EE696EF00C5E13D /* PermissionView.swift */; };
-		007980541EE696EF00C5E13D /* GUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980211EE696EF00C5E13D /* GUtils.swift */; };
-		007980551EE696EF00C5E13D /* AdvancedVideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980231EE696EF00C5E13D /* AdvancedVideoEditor.swift */; };
-		007980561EE696EF00C5E13D /* EditInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980241EE696EF00C5E13D /* EditInfo.swift */; };
-		007980571EE696EF00C5E13D /* VideoEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980251EE696EF00C5E13D /* VideoEditing.swift */; };
-		007980581EE696EF00C5E13D /* VideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980261EE696EF00C5E13D /* VideoEditor.swift */; };
-		007980591EE696EF00C5E13D /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980281EE696EF00C5E13D /* AlbumCell.swift */; };
-		0079805A1EE696EF00C5E13D /* ArrowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980291EE696EF00C5E13D /* ArrowButton.swift */; };
-		0079805B1EE696EF00C5E13D /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079802A1EE696EF00C5E13D /* EmptyView.swift */; };
-		0079805C1EE696EF00C5E13D /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079802B1EE696EF00C5E13D /* FrameView.swift */; };
-		0079805D1EE696EF00C5E13D /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079802C1EE696EF00C5E13D /* GridView.swift */; };
-		0079805E1EE696EF00C5E13D /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079802E1EE696EF00C5E13D /* Video.swift */; };
-		0079805F1EE696EF00C5E13D /* VideoBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079802F1EE696EF00C5E13D /* VideoBox.swift */; };
-		007980601EE696EF00C5E13D /* GVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980301EE696EF00C5E13D /* GVideoCell.swift */; };
-		007980611EE696EF00C5E13D /* VideosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980311EE696EF00C5E13D /* VideosController.swift */; };
-		007980621EE696EF00C5E13D /* VideosLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007980321EE696EF00C5E13D /* VideosLibrary.swift */; };
 		007AF60E1F5547A600DDF9CB /* ImportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AF60D1F5547A600DDF9CB /* ImportViewModel.swift */; };
 		007AF6111F55489300DDF9CB /* ChooseAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AF6101F55489300DDF9CB /* ChooseAlbumViewController.swift */; };
 		007AF6131F5548E300DDF9CB /* ChooseAlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007AF6121F5548E300DDF9CB /* ChooseAlbumViewModel.swift */; };
@@ -305,7 +257,6 @@
 		00815FAD1EE7DF050029FE02 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 00815FAC1EE7DF050029FE02 /* selected.png */; };
 		008473A51F56688500A3FF47 /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008473A41F56688500A3FF47 /* WebServer.swift */; };
 		008473A81F569EA500A3FF47 /* ImportWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008473A71F569EA500A3FF47 /* ImportWebViewController.swift */; };
-		0086A9B41EC2F9B1000F5C01 /* Gallery.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */; };
 		00870BA41F6A7E7E001821A0 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00870BA31F6A7E7D001821A0 /* AppUtility.swift */; };
 		008775EA1EEF8151003C50AF /* MoveFileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775E91EEF8151003C50AF /* MoveFileViewModel.swift */; };
 		008775EC1EEF815F003C50AF /* MoveFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 008775EB1EEF815F003C50AF /* MoveFileViewController.swift */; };
@@ -340,6 +291,9 @@
 		00E0B1C91E7946590001DF8F /* AlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1C31E7946590001DF8F /* AlbumsViewController.swift */; };
 		00E0B1D51E7946AB0001DF8F /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E0B1CF1E7946AB0001DF8F /* SettingViewController.swift */; };
 		00E8A0A71E9CDCA900221112 /* upload@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00E8A0A61E9CDCA900221112 /* upload@3x.png */; };
+		0A866F8B2142323D000631D4 /* delete-left@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A866F8A2142323D000631D4 /* delete-left@3x.png */; };
+		0A866F8D2142361E000631D4 /* touch-id@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A866F8C2142361D000631D4 /* touch-id@3x.png */; };
+		0AC0EE1C214F590400FFBC21 /* GalleryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC0EE1B214F590400FFBC21 /* GalleryExtension.swift */; };
 		3BDA5CF4460EBA013AE4FE92 /* Pods_PrivateCornerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C06F73CC27CAC70E020FE11 /* Pods_PrivateCornerUITests.framework */; };
 		51A430BEC1DFD8D853AD37A1 /* Pods_PrivateCorner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2295D4151DC8A71375D1CE7 /* Pods_PrivateCorner.framework */; };
 		B0FA8B76A20178173E37DC7E /* Pods_PrivateCornerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85E18DB94157DFD790BF4C43 /* Pods_PrivateCornerTests.framework */; };
@@ -571,54 +525,6 @@
 		0078B89A1F4BD52E0079AB49 /* UsabilityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsabilityCell.swift; sourceTree = "<group>"; };
 		0078B89C1F4BD5390079AB49 /* UsabilityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UsabilityCell.xib; sourceTree = "<group>"; };
 		0078B89F1F4BE28F0079AB49 /* PasscodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
-		00797FF91EE696EF00C5E13D /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
-		00797FFA1EE696EF00C5E13D /* CameraMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraMan.swift; sourceTree = "<group>"; };
-		00797FFB1EE696EF00C5E13D /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		00797FFC1EE696EF00C5E13D /* ShutterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShutterButton.swift; sourceTree = "<group>"; };
-		00797FFD1EE696EF00C5E13D /* StackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackView.swift; sourceTree = "<group>"; };
-		00797FFE1EE696EF00C5E13D /* TripleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripleButton.swift; sourceTree = "<group>"; };
-		007980001EE696EF00C5E13D /* GalleryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
-		007980021EE696EF00C5E13D /* GAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GAlbum.swift; sourceTree = "<group>"; };
-		007980031EE696EF00C5E13D /* Cart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
-		007980041EE696EF00C5E13D /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		007980051EE696EF00C5E13D /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
-		007980061EE696EF00C5E13D /* ImagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesController.swift; sourceTree = "<group>"; };
-		007980071EE696EF00C5E13D /* ImagesLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesLibrary.swift; sourceTree = "<group>"; };
-		007980091EE696EF00C5E13D /* GBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GBundle.swift; sourceTree = "<group>"; };
-		0079800A1EE696EF00C5E13D /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		0079800B1EE696EF00C5E13D /* Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
-		0079800D1EE696EF00C5E13D /* DropdownController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownController.swift; sourceTree = "<group>"; };
-		0079800E1EE696EF00C5E13D /* EventHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHub.swift; sourceTree = "<group>"; };
-		007980101EE696EF00C5E13D /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
-		007980111EE696EF00C5E13D /* AVAsset+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AVAsset+Extensions.swift"; sourceTree = "<group>"; };
-		007980121EE696EF00C5E13D /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
-		007980131EE696EF00C5E13D /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
-		007980141EE696EF00C5E13D /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
-		007980151EE696EF00C5E13D /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
-		007980161EE696EF00C5E13D /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
-		007980171EE696EF00C5E13D /* Fetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
-		007980181EE696EF00C5E13D /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		007980191EE696EF00C5E13D /* Once.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Once.swift; sourceTree = "<group>"; };
-		0079801B1EE696EF00C5E13D /* PageIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIndicator.swift; sourceTree = "<group>"; };
-		0079801C1EE696EF00C5E13D /* PagesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagesController.swift; sourceTree = "<group>"; };
-		0079801E1EE696EF00C5E13D /* Permission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
-		0079801F1EE696EF00C5E13D /* PermissionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionController.swift; sourceTree = "<group>"; };
-		007980201EE696EF00C5E13D /* PermissionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
-		007980211EE696EF00C5E13D /* GUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUtils.swift; sourceTree = "<group>"; };
-		007980231EE696EF00C5E13D /* AdvancedVideoEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedVideoEditor.swift; sourceTree = "<group>"; };
-		007980241EE696EF00C5E13D /* EditInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditInfo.swift; sourceTree = "<group>"; };
-		007980251EE696EF00C5E13D /* VideoEditing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoEditing.swift; sourceTree = "<group>"; };
-		007980261EE696EF00C5E13D /* VideoEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoEditor.swift; sourceTree = "<group>"; };
-		007980281EE696EF00C5E13D /* AlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
-		007980291EE696EF00C5E13D /* ArrowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowButton.swift; sourceTree = "<group>"; };
-		0079802A1EE696EF00C5E13D /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
-		0079802B1EE696EF00C5E13D /* FrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
-		0079802C1EE696EF00C5E13D /* GridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
-		0079802E1EE696EF00C5E13D /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
-		0079802F1EE696EF00C5E13D /* VideoBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBox.swift; sourceTree = "<group>"; };
-		007980301EE696EF00C5E13D /* GVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GVideoCell.swift; sourceTree = "<group>"; };
-		007980311EE696EF00C5E13D /* VideosController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosController.swift; sourceTree = "<group>"; };
-		007980321EE696EF00C5E13D /* VideosLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosLibrary.swift; sourceTree = "<group>"; };
 		007AF60D1F5547A600DDF9CB /* ImportViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportViewModel.swift; sourceTree = "<group>"; };
 		007AF6101F55489300DDF9CB /* ChooseAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAlbumViewController.swift; sourceTree = "<group>"; };
 		007AF6121F5548E300DDF9CB /* ChooseAlbumViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseAlbumViewModel.swift; sourceTree = "<group>"; };
@@ -686,7 +592,6 @@
 		008473A31F56620F00A3FF47 /* WebServer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WebServer-Bridging-Header.h"; sourceTree = "<group>"; };
 		008473A41F56688500A3FF47 /* WebServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServer.swift; sourceTree = "<group>"; };
 		008473A71F569EA500A3FF47 /* ImportWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportWebViewController.swift; sourceTree = "<group>"; };
-		0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Gallery.bundle; sourceTree = "<group>"; };
 		00870BA31F6A7E7D001821A0 /* AppUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 		008775E91EEF8151003C50AF /* MoveFileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveFileViewModel.swift; sourceTree = "<group>"; };
 		008775EB1EEF815F003C50AF /* MoveFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveFileViewController.swift; sourceTree = "<group>"; };
@@ -723,6 +628,9 @@
 		00E0B1C31E7946590001DF8F /* AlbumsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AlbumsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		00E0B1CF1E7946AB0001DF8F /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		00E8A0A61E9CDCA900221112 /* upload@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload@3x.png"; sourceTree = "<group>"; };
+		0A866F8A2142323D000631D4 /* delete-left@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-left@3x.png"; sourceTree = "<group>"; };
+		0A866F8C2142361D000631D4 /* touch-id@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "touch-id@3x.png"; sourceTree = "<group>"; };
+		0AC0EE1B214F590400FFBC21 /* GalleryExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryExtension.swift; sourceTree = "<group>"; };
 		2F9218FBAB4F8092F6091BF9 /* Pods-PrivateCorner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrivateCorner.release.xcconfig"; path = "Pods/Target Support Files/Pods-PrivateCorner/Pods-PrivateCorner.release.xcconfig"; sourceTree = "<group>"; };
 		4264DA568CE4E380C5A8A146 /* Pods-PrivateCornerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrivateCornerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PrivateCornerTests/Pods-PrivateCornerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		469FAC4C44B44A8B1D3200C8 /* Pods-PrivateCornerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PrivateCornerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PrivateCornerTests/Pods-PrivateCornerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -892,6 +800,7 @@
 			children = (
 				004F71C51EE14FB70026A907 /* CollectionViewExtension.swift */,
 				008B5E0D1F28529A0044EEF0 /* WebViewExtension.swift */,
+				0AC0EE1B214F590400FFBC21 /* GalleryExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -899,6 +808,8 @@
 		006486E51E70EFD500419C27 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0A866F8C2142361D000631D4 /* touch-id@3x.png */,
+				0A866F8A2142323D000631D4 /* delete-left@3x.png */,
 				0087A75E1F7354910029691D /* back@3x.png */,
 				0087A75F1F7354910029691D /* next@3x.png */,
 				0087A75C1F734EFB0029691D /* button-download@3x.png */,
@@ -938,7 +849,6 @@
 				006BC3C61FB2A7E300B8288E /* sparrow */,
 				00807F041F6925FA0053C8CA /* GCDWebServer */,
 				007E5ADA1EE53DAA00FDC2EB /* UICircularProgressRing */,
-				0086A9411EC2F98F000F5C01 /* Gallery */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1808,149 +1718,6 @@
 			name = Passcode;
 			sourceTree = "<group>";
 		};
-		00797FF71EE696EF00C5E13D /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				00797FF81EE696EF00C5E13D /* Camera */,
-				00797FFF1EE696EF00C5E13D /* Gallery */,
-				007980011EE696EF00C5E13D /* Images */,
-				007980081EE696EF00C5E13D /* Utils */,
-				0079802D1EE696EF00C5E13D /* Videos */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		00797FF81EE696EF00C5E13D /* Camera */ = {
-			isa = PBXGroup;
-			children = (
-				00797FF91EE696EF00C5E13D /* CameraController.swift */,
-				00797FFA1EE696EF00C5E13D /* CameraMan.swift */,
-				00797FFB1EE696EF00C5E13D /* CameraView.swift */,
-				00797FFC1EE696EF00C5E13D /* ShutterButton.swift */,
-				00797FFD1EE696EF00C5E13D /* StackView.swift */,
-				00797FFE1EE696EF00C5E13D /* TripleButton.swift */,
-			);
-			path = Camera;
-			sourceTree = "<group>";
-		};
-		00797FFF1EE696EF00C5E13D /* Gallery */ = {
-			isa = PBXGroup;
-			children = (
-				007980001EE696EF00C5E13D /* GalleryController.swift */,
-			);
-			path = Gallery;
-			sourceTree = "<group>";
-		};
-		007980011EE696EF00C5E13D /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				007980021EE696EF00C5E13D /* GAlbum.swift */,
-				007980031EE696EF00C5E13D /* Cart.swift */,
-				007980041EE696EF00C5E13D /* Image.swift */,
-				007980051EE696EF00C5E13D /* ImageCell.swift */,
-				007980061EE696EF00C5E13D /* ImagesController.swift */,
-				007980071EE696EF00C5E13D /* ImagesLibrary.swift */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
-		007980081EE696EF00C5E13D /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				007980091EE696EF00C5E13D /* GBundle.swift */,
-				0079800A1EE696EF00C5E13D /* Config.swift */,
-				0079800B1EE696EF00C5E13D /* Constraints.swift */,
-				0079800C1EE696EF00C5E13D /* Dropdown */,
-				0079800E1EE696EF00C5E13D /* EventHub.swift */,
-				0079800F1EE696EF00C5E13D /* Extensions */,
-				007980171EE696EF00C5E13D /* Fetcher.swift */,
-				007980181EE696EF00C5E13D /* LocationManager.swift */,
-				007980191EE696EF00C5E13D /* Once.swift */,
-				0079801A1EE696EF00C5E13D /* Pages */,
-				0079801D1EE696EF00C5E13D /* Permission */,
-				007980211EE696EF00C5E13D /* GUtils.swift */,
-				007980221EE696EF00C5E13D /* VideoEditor */,
-				007980271EE696EF00C5E13D /* View */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		0079800C1EE696EF00C5E13D /* Dropdown */ = {
-			isa = PBXGroup;
-			children = (
-				0079800D1EE696EF00C5E13D /* DropdownController.swift */,
-			);
-			path = Dropdown;
-			sourceTree = "<group>";
-		};
-		0079800F1EE696EF00C5E13D /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				007980101EE696EF00C5E13D /* Array+Extensions.swift */,
-				007980111EE696EF00C5E13D /* AVAsset+Extensions.swift */,
-				007980121EE696EF00C5E13D /* String+Extensions.swift */,
-				007980131EE696EF00C5E13D /* UIImageView+Extensions.swift */,
-				007980141EE696EF00C5E13D /* UIScrollView+Extensions.swift */,
-				007980151EE696EF00C5E13D /* UIView+Extensions.swift */,
-				007980161EE696EF00C5E13D /* UIViewController+Extensions.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		0079801A1EE696EF00C5E13D /* Pages */ = {
-			isa = PBXGroup;
-			children = (
-				0079801B1EE696EF00C5E13D /* PageIndicator.swift */,
-				0079801C1EE696EF00C5E13D /* PagesController.swift */,
-			);
-			path = Pages;
-			sourceTree = "<group>";
-		};
-		0079801D1EE696EF00C5E13D /* Permission */ = {
-			isa = PBXGroup;
-			children = (
-				0079801E1EE696EF00C5E13D /* Permission.swift */,
-				0079801F1EE696EF00C5E13D /* PermissionController.swift */,
-				007980201EE696EF00C5E13D /* PermissionView.swift */,
-			);
-			path = Permission;
-			sourceTree = "<group>";
-		};
-		007980221EE696EF00C5E13D /* VideoEditor */ = {
-			isa = PBXGroup;
-			children = (
-				007980231EE696EF00C5E13D /* AdvancedVideoEditor.swift */,
-				007980241EE696EF00C5E13D /* EditInfo.swift */,
-				007980251EE696EF00C5E13D /* VideoEditing.swift */,
-				007980261EE696EF00C5E13D /* VideoEditor.swift */,
-			);
-			path = VideoEditor;
-			sourceTree = "<group>";
-		};
-		007980271EE696EF00C5E13D /* View */ = {
-			isa = PBXGroup;
-			children = (
-				007980281EE696EF00C5E13D /* AlbumCell.swift */,
-				007980291EE696EF00C5E13D /* ArrowButton.swift */,
-				0079802A1EE696EF00C5E13D /* EmptyView.swift */,
-				0079802B1EE696EF00C5E13D /* FrameView.swift */,
-				0079802C1EE696EF00C5E13D /* GridView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		0079802D1EE696EF00C5E13D /* Videos */ = {
-			isa = PBXGroup;
-			children = (
-				0079802E1EE696EF00C5E13D /* Video.swift */,
-				0079802F1EE696EF00C5E13D /* VideoBox.swift */,
-				007980301EE696EF00C5E13D /* GVideoCell.swift */,
-				007980311EE696EF00C5E13D /* VideosController.swift */,
-				007980321EE696EF00C5E13D /* VideosLibrary.swift */,
-			);
-			path = Videos;
-			sourceTree = "<group>";
-		};
 		007AF60F1F55487A00DDF9CB /* ChooseAlbum */ = {
 			isa = PBXGroup;
 			children = (
@@ -2082,31 +1849,6 @@
 				008D58931F57A32200B81CB1 /* ImportWebViewModel.swift */,
 			);
 			name = ImportWeb;
-			sourceTree = "<group>";
-		};
-		0086A9411EC2F98F000F5C01 /* Gallery */ = {
-			isa = PBXGroup;
-			children = (
-				00797FF71EE696EF00C5E13D /* Sources */,
-				0086A9B11EC2F9B1000F5C01 /* Resources */,
-			);
-			path = Gallery;
-			sourceTree = "<group>";
-		};
-		0086A9B11EC2F9B1000F5C01 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				0086A9B21EC2F9B1000F5C01 /* Resources */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		0086A9B21EC2F9B1000F5C01 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				0086A9B31EC2F9B1000F5C01 /* Gallery.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		008775E81EEF80FF003C50AF /* MoveFile */ = {
@@ -2307,14 +2049,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = MrAChen;
 				TargetAttributes = {
 					006486A61E70EAD900419C27 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = B5A39BBFXA;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					006486BA1E70EAD900419C27 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -2378,6 +2119,7 @@
 				0075F20C1EDEB5820006AB5F /* VideoCell.xib in Resources */,
 				007AF61A1F554B3E00DDF9CB /* ChooseAlbumCell.xib in Resources */,
 				004B28F81E8CA62D007C910A /* GalleryCell.xib in Resources */,
+				0A866F8D2142361E000631D4 /* touch-id@3x.png in Resources */,
 				007BADB81F727E1000AA2829 /* wireless@3x.png in Resources */,
 				006486ED1E70EFE400419C27 /* Assets.xcassets in Resources */,
 				007BADA91F7264BE00AA2829 /* setting@3x.png in Resources */,
@@ -2387,7 +2129,6 @@
 				008775F31EEF819E003C50AF /* MoveFileCell.xib in Resources */,
 				0047FB611E9B749300BDF919 /* remove@3x.png in Resources */,
 				0075F19C1E7A3698001DA471 /* AlbumsCell.xib in Resources */,
-				0086A9B41EC2F9B1000F5C01 /* Gallery.bundle in Resources */,
 				006486F41E70EFEB00419C27 /* Main.storyboard in Resources */,
 				002681A81F29CCA4006F6CE4 /* WebAlbumCell.xib in Resources */,
 				007718B81EE94694001211CB /* play@3x.png in Resources */,
@@ -2400,6 +2141,7 @@
 				0087A75D1F734EFB0029691D /* button-download@3x.png in Resources */,
 				0078B89D1F4BD5390079AB49 /* UsabilityCell.xib in Resources */,
 				007718B61EE94694001211CB /* delete@3x.png in Resources */,
+				0A866F8B2142323D000631D4 /* delete-left@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2426,9 +2168,24 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PrivateCorner/Pods-PrivateCorner-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CDAlertView/CDAlertView.framework",
+				"${BUILT_PRODUCTS_DIR}/Differ/Differ.framework",
+				"${BUILT_PRODUCTS_DIR}/DynamicColor/DynamicColor.framework",
+				"${BUILT_PRODUCTS_DIR}/Gallery/Gallery.framework",
+				"${BUILT_PRODUCTS_DIR}/Gifu/Gifu.framework",
+				"${BUILT_PRODUCTS_DIR}/ImagePicker/ImagePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CDAlertView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differ.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicColor.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gallery.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gifu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImagePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2486,13 +2243,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PrivateCorner-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		84E4D2D637C8DD5583C6751C /* [CP] Check Pods Manifest.lock */ = {
@@ -2501,13 +2261,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PrivateCornerUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CC98466444DF39EFC2206C30 /* [CP] Check Pods Manifest.lock */ = {
@@ -2516,13 +2279,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PrivateCornerTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E8C2D0049F86EE80A99D6175 /* [CP] Embed Pods Frameworks */ = {
@@ -2565,17 +2331,14 @@
 				006BC5411FB2AA7500B8288E /* HeroProgressRunner.swift in Sources */,
 				006BC5431FB2AA7500B8288E /* HeroTransition+Complete.swift in Sources */,
 				006BC4E11FB2A7E300B8288E /* SPBezierPathFigureDraw.swift in Sources */,
-				007980371EE696EF00C5E13D /* StackView.swift in Sources */,
 				006BC4E71FB2A7E300B8288E /* SPShadow.swift in Sources */,
 				006BC48B1FB2A7E300B8288E /* SPCGRectExtension.swift in Sources */,
-				0079804E1EE696EF00C5E13D /* Once.swift in Sources */,
 				004F71C61EE14FB70026A907 /* CollectionViewExtension.swift in Sources */,
 				008B5E0C1F2843C60044EEF0 /* MyWindow.swift in Sources */,
 				006BC51F1FB2AA7500B8288E /* HeroAnimatorViewContext.swift in Sources */,
 				006BC4931FB2A7E300B8288E /* SPUIScreenExtension.swift in Sources */,
 				006BC4951FB2A7E300B8288E /* SPUIViewControllerExtenshion.swift in Sources */,
 				00807F321F6925FA0053C8CA /* GCDWebServerDataResponse.m in Sources */,
-				007980421EE696EF00C5E13D /* Constraints.swift in Sources */,
 				006BC4801FB2A7E300B8288E /* SPAudioPlayer.swift in Sources */,
 				006BC4CE1FB2A7E300B8288E /* SPPageItemsScalingCollectionView.swift in Sources */,
 				0078B8981F4BD5160079AB49 /* UsabilityTableView.swift in Sources */,
@@ -2583,7 +2346,6 @@
 				006BC5481FB2AA7500B8288E /* HeroTransition+UITabBarControllerDelegate.swift in Sources */,
 				006BC4C51FB2A7E300B8288E /* SPIconsButton.swift in Sources */,
 				006BC47E1FB2A7E300B8288E /* SPAnimationUpward.swift in Sources */,
-				0079804A1EE696EF00C5E13D /* UIView+Extensions.swift in Sources */,
 				006BC5371FB2AA7500B8288E /* Nodes.swift in Sources */,
 				00807F351F6925FA0053C8CA /* GCDWebServerStreamedResponse.m in Sources */,
 				006BC4CA1FB2A7E300B8288E /* SPSegmentControlStyleProtocol.swift in Sources */,
@@ -2601,16 +2363,13 @@
 				00807F2A1F6925FA0053C8CA /* GCDWebServerConnection.m in Sources */,
 				006BC4DA1FB2A7E300B8288E /* SPGradientGradeWithBlurView.swift in Sources */,
 				006BC4961FB2A7E300B8288E /* SPUIFontExtenshion.swift in Sources */,
-				007980511EE696EF00C5E13D /* Permission.swift in Sources */,
 				002681A61F29CC90006F6CE4 /* WebAlbumCell.swift in Sources */,
 				006BC4C91FB2A7E300B8288E /* SPSegmentControlProtocol.swift in Sources */,
 				008D58941F57A32200B81CB1 /* ImportWebViewModel.swift in Sources */,
 				008775EC1EEF815F003C50AF /* MoveFileViewController.swift in Sources */,
 				006BC5461FB2AA7500B8288E /* HeroTransition+Start.swift in Sources */,
 				006BC48F1FB2A7E300B8288E /* SPUIButtonExtenshion.swift in Sources */,
-				0079803B1EE696EF00C5E13D /* Cart.swift in Sources */,
 				008775EA1EEF8151003C50AF /* MoveFileViewModel.swift in Sources */,
-				007980341EE696EF00C5E13D /* CameraMan.swift in Sources */,
 				007AF60E1F5547A600DDF9CB /* ImportViewModel.swift in Sources */,
 				006BC5321FB2AA7500B8288E /* HeroTypes.swift in Sources */,
 				006BC5231FB2AA7500B8288E /* HeroDebugPlugin.swift in Sources */,
@@ -2618,19 +2377,15 @@
 				006BC4941FB2A7E300B8288E /* SPUITableViewControllerExtenshion.swift in Sources */,
 				006BC5471FB2AA7500B8288E /* HeroTransition+UINavigationControllerDelegate.swift in Sources */,
 				006BC4E41FB2A7E300B8288E /* SPBezierPathFigurePatterns.swift in Sources */,
-				007980361EE696EF00C5E13D /* ShutterButton.swift in Sources */,
 				0087A7641F735EF40029691D /* BaseUI.swift in Sources */,
 				005330F11E70F572002890A8 /* LockScreenViewController.swift in Sources */,
 				00915EFD1ED7E6A70003BECE /* PhotoViewCollectionView.swift in Sources */,
 				006BC4BC1FB2A7E300B8288E /* SPConfirmActionViewController.swift in Sources */,
 				0075F19E1E7A36B7001DA471 /* AlbumsCell.swift in Sources */,
-				0079805E1EE696EF00C5E13D /* Video.swift in Sources */,
 				006BC4AB1FB2A7E300B8288E /* SPRequestPermissionDialogInteractiveDataSource.swift in Sources */,
 				006BC49F1FB2A7E300B8288E /* SPRateAppBannerWithIndicatorDataSource.swift in Sources */,
 				006BC4D71FB2A7E300B8288E /* SPDeepButton.swift in Sources */,
 				006BC4BF1FB2A7E300B8288E /* SPGradientViewController.swift in Sources */,
-				0079805B1EE696EF00C5E13D /* EmptyView.swift in Sources */,
-				007980581EE696EF00C5E13D /* VideoEditor.swift in Sources */,
 				008775F61EEFDDF6003C50AF /* GalleryCollectionFooterView.swift in Sources */,
 				006BC5391FB2AA7500B8288E /* Regex.swift in Sources */,
 				0035DEFF1EF0DC59004581FF /* UploadManager.swift in Sources */,
@@ -2644,24 +2399,18 @@
 				00DDF9B71ED43D4F00093770 /* PhotoViewController.swift in Sources */,
 				006BC4AE1FB2A7E300B8288E /* SPRequestPermissionDialogInteractivePresenterInterface.swift in Sources */,
 				00915EFF1ED7E7150003BECE /* PhotoViewViewModel.swift in Sources */,
-				007980571EE696EF00C5E13D /* VideoEditing.swift in Sources */,
-				007980331EE696EF00C5E13D /* CameraController.swift in Sources */,
 				006BC5331FB2AA7500B8288E /* HeroViewControllerDelegate.swift in Sources */,
 				006BC4AD1FB2A7E300B8288E /* SPRequestPermissionDialogInteractiveDataSourceInterface.swift in Sources */,
 				008B5E121F289E1B0044EEF0 /* WebViewModel.swift in Sources */,
-				007980471EE696EF00C5E13D /* String+Extensions.swift in Sources */,
-				007980401EE696EF00C5E13D /* GBundle.swift in Sources */,
 				0078B8961F4BD5020079AB49 /* UsabilityViewController.swift in Sources */,
 				006BC5441FB2AA7500B8288E /* HeroTransition+CustomTransition.swift in Sources */,
 				006BC4C71FB2A7E300B8288E /* SPRoundButton.swift in Sources */,
 				006BC4D01FB2A7E300B8288E /* SPPageItemsScalingCollectionLayout.swift in Sources */,
 				006BC4851FB2A7E300B8288E /* SPDevice.swift in Sources */,
 				006BC54A1FB2AA7500B8288E /* HeroTransition.swift in Sources */,
-				0079803E1EE696EF00C5E13D /* ImagesController.swift in Sources */,
 				006BC4DC1FB2A7E300B8288E /* SPPatternView.swift in Sources */,
 				006BC4CB1FB2A7E300B8288E /* SPSegmentedControl.swift in Sources */,
 				005330EE1E70F572002890A8 /* LockScreenViewModel.swift in Sources */,
-				0079805F1EE696EF00C5E13D /* VideoBox.swift in Sources */,
 				006BC4871FB2A7E300B8288E /* SPUIDeviceExtenshion.swift in Sources */,
 				006BC4CD1FB2A7E300B8288E /* SPCollectionView.swift in Sources */,
 				0094F6D01E8DF1E6007BEFAE /* ImportCollectionViewController.swift in Sources */,
@@ -2669,24 +2418,18 @@
 				006BC48C1FB2A7E300B8288E /* SPCGSizeExtenshion.swift in Sources */,
 				00784CD51ED28AF6004F3E95 /* AlbumsViewModel.swift in Sources */,
 				006BC5361FB2AA7500B8288E /* Lexer.swift in Sources */,
-				007980481EE696EF00C5E13D /* UIImageView+Extensions.swift in Sources */,
 				006BC4901FB2A7E300B8288E /* SPUIColorExtension.swift in Sources */,
-				007980491EE696EF00C5E13D /* UIScrollView+Extensions.swift in Sources */,
 				0094F6D91E8E6331007BEFAE /* ItemManager.swift in Sources */,
 				006BC5281FB2AA7500B8288E /* CG+Hero.swift in Sources */,
 				006BC4B01FB2A7E300B8288E /* SPRequestPermissionDialogInteractiveView.swift in Sources */,
 				0077770D1EDBC90F00233D0B /* MediaLibrary.swift in Sources */,
-				0079805C1EE696EF00C5E13D /* FrameView.swift in Sources */,
 				006BC4B41FB2A7E300B8288E /* SPRequestPermissionEventsDelegate.swift in Sources */,
 				006BC5301FB2AA7500B8288E /* HeroPlugin.swift in Sources */,
 				00807F2B1F6925FA0053C8CA /* GCDWebServerFunctions.m in Sources */,
 				007B754B1E91E08D00483293 /* ConstantsKey.swift in Sources */,
 				00784CD71ED28D18004F3E95 /* GalleryPhotoViewModel.swift in Sources */,
 				006BC4C21FB2A7E300B8288E /* SPParalaxTableViewController.swift in Sources */,
-				007980601EE696EF00C5E13D /* GVideoCell.swift in Sources */,
 				00807F291F6925FA0053C8CA /* GCDWebServer.m in Sources */,
-				0079805A1EE696EF00C5E13D /* ArrowButton.swift in Sources */,
-				0079803A1EE696EF00C5E13D /* GAlbum.swift in Sources */,
 				00807F331F6925FA0053C8CA /* GCDWebServerErrorResponse.m in Sources */,
 				006BC52D1FB2AA7500B8288E /* HeroContext.swift in Sources */,
 				00807F371F6925FA0053C8CA /* GCDWebUploader.m in Sources */,
@@ -2701,7 +2444,6 @@
 				006BC4BA1FB2A7E300B8288E /* SPTypes.swift in Sources */,
 				006BC47D1FB2A7E300B8288E /* SPAnimationSpring.swift in Sources */,
 				006BC4A61FB2A7E300B8288E /* SPRequestPermissionDataViews.swift in Sources */,
-				0079804C1EE696EF00C5E13D /* Fetcher.swift in Sources */,
 				0075E44A1EFA25A600E18B64 /* GlobalMethods.swift in Sources */,
 				006BC4AC1FB2A7E300B8288E /* SPRequestPermissionDialogInteractivePresenter.swift in Sources */,
 				006BC52C1FB2AA7500B8288E /* UIViewController+Hero.swift in Sources */,
@@ -2709,7 +2451,6 @@
 				007E5ADF1EE53DAA00FDC2EB /* UICircularProgressRingLayer.swift in Sources */,
 				006BC4CC1FB2A7E300B8288E /* SPCollectionViewCell.swift in Sources */,
 				006BC4BD1FB2A7E300B8288E /* SPDialogSwipeController.swift in Sources */,
-				007980521EE696EF00C5E13D /* PermissionController.swift in Sources */,
 				006BC5271FB2AA7500B8288E /* CAMediaTimingFunction+Hero.swift in Sources */,
 				0094F6D31E8E3E56007BEFAE /* PrivateData.xcdatamodeld in Sources */,
 				004B290E1E8CE9D1007C910A /* ImportCell.swift in Sources */,
@@ -2726,7 +2467,6 @@
 				00807F2D1F6925FA0053C8CA /* GCDWebServerResponse.m in Sources */,
 				006BC4A21FB2A7E300B8288E /* SPRateAppBannerWithIndicatorTwiceButton.swift in Sources */,
 				006BC4D61FB2A7E300B8288E /* SPBlurView.swift in Sources */,
-				007980351EE696EF00C5E13D /* CameraView.swift in Sources */,
 				00807F301F6925FA0053C8CA /* GCDWebServerMultiPartFormRequest.m in Sources */,
 				006BC52A1FB2AA7500B8288E /* UIKit+Hero.swift in Sources */,
 				006BC4921FB2A7E300B8288E /* SPUIImageViewExtenshion.swift in Sources */,
@@ -2736,8 +2476,8 @@
 				006BC4E91FB2A7E300B8288E /* SPSpotlight.swift in Sources */,
 				006BC4E01FB2A7E300B8288E /* SPUIViewExtenshion.swift in Sources */,
 				008E3E161F4FBE7700B69812 /* HowToUseTableView.swift in Sources */,
-				0079803C1EE696EF00C5E13D /* Image.swift in Sources */,
 				008E3E141F4FBE2400B69812 /* HowToUseViewController.swift in Sources */,
+				0AC0EE1C214F590400FFBC21 /* GalleryExtension.swift in Sources */,
 				006BC4CF1FB2A7E300B8288E /* SPCollectionViewLayout.swift in Sources */,
 				006BC4AA1FB2A7E300B8288E /* SPRequestPermissionDialogInteractiveViewController.swift in Sources */,
 				009049091EFD03EE00EBAEEB /* WebViewController.swift in Sources */,
@@ -2749,7 +2489,6 @@
 				006486AB1E70EAD900419C27 /* AppDelegate.swift in Sources */,
 				006BC4811FB2A7E300B8288E /* SPBadge.swift in Sources */,
 				007B75491E91E01400483293 /* ConstantsSize.swift in Sources */,
-				0079805D1EE696EF00C5E13D /* GridView.swift in Sources */,
 				006BC4D81FB2A7E300B8288E /* SPDownloadingUIImageView.swift in Sources */,
 				006BC4A91FB2A7E300B8288E /* SPPermissionsManager.swift in Sources */,
 				006BC54B1FB2AA7500B8288E /* HeroTransitionState.swift in Sources */,
@@ -2763,42 +2502,31 @@
 				0094F6D71E8E5AF3007BEFAE /* AlbumManager.swift in Sources */,
 				00807F2F1F6925FA0053C8CA /* GCDWebServerFileRequest.m in Sources */,
 				006BC4E81FB2A7E300B8288E /* SPShadowDeep.swift in Sources */,
-				007980551EE696EF00C5E13D /* AdvancedVideoEditor.swift in Sources */,
 				004B28F11E8CA050007C910A /* GalleryPhotoViewController.swift in Sources */,
 				006BC4D11FB2A7E300B8288E /* SPRhombusPatternView.swift in Sources */,
-				007980431EE696EF00C5E13D /* DropdownController.swift in Sources */,
-				007980561EE696EF00C5E13D /* EditInfo.swift in Sources */,
-				007980441EE696EF00C5E13D /* EventHub.swift in Sources */,
 				006BC4DE1FB2A7E300B8288E /* SPTitleWithSubtitleView.swift in Sources */,
 				006BC4B71FB2A7E300B8288E /* SPRandom.swift in Sources */,
-				007980531EE696EF00C5E13D /* PermissionView.swift in Sources */,
-				007980591EE696EF00C5E13D /* AlbumCell.swift in Sources */,
 				00807F2C1F6925FA0053C8CA /* GCDWebServerRequest.m in Sources */,
-				0079804B1EE696EF00C5E13D /* UIViewController+Extensions.swift in Sources */,
 				006BC5381FB2AA7500B8288E /* Parser.swift in Sources */,
 				0075F20A1EDE82CC0006AB5F /* VideoCell.swift in Sources */,
 				006BC5291FB2AA7500B8288E /* DispatchQueue+Hero.swift in Sources */,
 				00807F2E1F6925FA0053C8CA /* GCDWebServerDataRequest.m in Sources */,
 				00E0B1D51E7946AB0001DF8F /* SettingViewController.swift in Sources */,
 				006BC53F1FB2AA7500B8288E /* MatchPreprocessor.swift in Sources */,
-				007980391EE696EF00C5E13D /* GalleryController.swift in Sources */,
 				008A8CCD1ED5209800FE7A86 /* PhotoCell.swift in Sources */,
 				006BC4991FB2A7E300B8288E /* SPLaunchAnimationSlideExtenshion.swift in Sources */,
 				00807F341F6925FA0053C8CA /* GCDWebServerFileResponse.m in Sources */,
 				00E0B1C91E7946590001DF8F /* AlbumsViewController.swift in Sources */,
-				0079804D1EE696EF00C5E13D /* LocationManager.swift in Sources */,
 				006BC5241FB2AA7500B8288E /* HeroDebugView.swift in Sources */,
 				00807F311F6925FA0053C8CA /* GCDWebServerURLEncodedFormRequest.m in Sources */,
 				006BC48A1FB2A7E300B8288E /* SPBezierPathExtension.swift in Sources */,
 				006BC4DF1FB2A7E300B8288E /* SPUILabelExtenshion.swift in Sources */,
-				0079803D1EE696EF00C5E13D /* ImageCell.swift in Sources */,
 				006BC52F1FB2AA7500B8288E /* HeroModifier.swift in Sources */,
 				006BC5401FB2AA7500B8288E /* SourcePreprocessor.swift in Sources */,
 				006BC4B91FB2A7E300B8288E /* SPStyleKit.swift in Sources */,
 				006BC4A81FB2A7E300B8288E /* SPPermissions.swift in Sources */,
 				004B28F31E8CA555007C910A /* GalleryPhotoCollectionView.swift in Sources */,
 				006BC4AF1FB2A7E300B8288E /* SPRequestPermissionDialogInteractiveViewControllerInterface.swift in Sources */,
-				007980621EE696EF00C5E13D /* VideosLibrary.swift in Sources */,
 				006BC53E1FB2AA7500B8288E /* IgnoreSubviewModifiersPreprocessor.swift in Sources */,
 				006BC4C61FB2A7E300B8288E /* SPLinesCircleButtonsView.swift in Sources */,
 				006BC5451FB2AA7500B8288E /* HeroTransition+Interactive.swift in Sources */,
@@ -2812,36 +2540,27 @@
 				006BC49B1FB2A7E300B8288E /* SPLayout.swift in Sources */,
 				008473A51F56688500A3FF47 /* WebServer.swift in Sources */,
 				007F06D01ED3CE3F0081EAAE /* ConstantColor.swift in Sources */,
-				0079803F1EE696EF00C5E13D /* ImagesLibrary.swift in Sources */,
 				008775EE1EEF8185003C50AF /* MoveFileCollectionViewController.swift in Sources */,
 				006BC4A51FB2A7E300B8288E /* SPRequestPermissionDataTexts.swift in Sources */,
-				007980411EE696EF00C5E13D /* Config.swift in Sources */,
 				006BC53A1FB2AA7500B8288E /* BasePreprocessor.swift in Sources */,
 				006BC4D91FB2A7E300B8288E /* SPGradeWithBlurView.swift in Sources */,
-				007980541EE696EF00C5E13D /* GUtils.swift in Sources */,
-				007980501EE696EF00C5E13D /* PagesController.swift in Sources */,
 				006BC53D1FB2AA7500B8288E /* DefaultAnimationPreprocessor.swift in Sources */,
 				006BC4A71FB2A7E300B8288E /* SPRequestPermissionLocationHandler.swift in Sources */,
 				006BC5311FB2AA7500B8288E /* HeroTargetState.swift in Sources */,
 				006BC4BB1FB2A7E300B8288E /* SPAlertController.swift in Sources */,
 				007F62DF1ECD91CF00226B49 /* TabBarController.swift in Sources */,
-				007980451EE696EF00C5E13D /* Array+Extensions.swift in Sources */,
 				006BC4E21FB2A7E300B8288E /* SPBezierPathFigureIcons.swift in Sources */,
 				006BC4B11FB2A7E300B8288E /* SPRequestPermissionNativePresenter.swift in Sources */,
 				0075F1991E7A3169001DA471 /* AlbumsCollectionViewController.swift in Sources */,
 				006BC4A11FB2A7E300B8288E /* SPRateAppBannerWithIndicatorAlertView.swift in Sources */,
 				006BC5491FB2AA7500B8288E /* HeroTransition+UIViewControllerTransitioningDelegate.swift in Sources */,
 				006BC4B81FB2A7E300B8288E /* SPNativeStyleKit.swift in Sources */,
-				0079804F1EE696EF00C5E13D /* PageIndicator.swift in Sources */,
-				007980461EE696EF00C5E13D /* AVAsset+Extensions.swift in Sources */,
 				006BC4981FB2A7E300B8288E /* SPLaunchAnimationTwitterExtenshion.swift in Sources */,
 				006BC4D31FB2A7E300B8288E /* SPTableViewCell.swift in Sources */,
 				006BC5351FB2AA7500B8288E /* HeroStringConvertible.swift in Sources */,
 				006BC4971FB2A7E300B8288E /* SPInternetConnection.swift in Sources */,
-				007980381EE696EF00C5E13D /* TripleButton.swift in Sources */,
 				006BC49A1FB2A7E300B8288E /* SPLaunchAnimation.swift in Sources */,
 				006BC4B21FB2A7E300B8288E /* SPRequestPermissionTwiceControl.swift in Sources */,
-				007980611EE696EF00C5E13D /* VideosController.swift in Sources */,
 				006BC4861FB2A7E300B8288E /* SPDeviceOrientation.swift in Sources */,
 				006BC4881FB2A7E300B8288E /* SPDownloader.swift in Sources */,
 			);
@@ -2911,15 +2630,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2962,15 +2689,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -3002,14 +2737,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = B5A39BBFXA;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PrivateCorner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mrachen.privatecorner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/DATA/Work/iOS/Project/PrivateCorner/PrivateCorner/Supporting Files/WebServer-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/Supporting Files/WebServer-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -3020,14 +2758,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = B5A39BBFXA;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PrivateCorner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mrachen.privatecorner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Volumes/DATA/Work/iOS/Project/PrivateCorner/PrivateCorner/Supporting Files/WebServer-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/Supporting Files/WebServer-Bridging-Header.h";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

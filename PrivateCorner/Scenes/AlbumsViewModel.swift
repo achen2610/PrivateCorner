@@ -17,6 +17,7 @@ public protocol AlbumsViewModelDelegate: class {
 open class AlbumsViewModel {
     
     fileprivate var albums: [Album] = []
+    fileprivate var specialAlbums: [Album] = []
     weak var delegate: AlbumsViewModelDelegate?
     
     struct cellIdentifiers {
@@ -34,7 +35,9 @@ open class AlbumsViewModel {
     }
     
     func getAlbumFromCoreData() {
-        albums = AlbumManager.sharedInstance.getAlbums()
+        let totalAlbums = AlbumManager.sharedInstance.getAlbums()
+        albums = totalAlbums.filter{ $0.isSpecial == false }
+        specialAlbums = totalAlbums.filter{ $0.isSpecial == true }
         delegate?.reloadAlbum()
     }
     
@@ -50,12 +53,24 @@ open class AlbumsViewModel {
         return cellIdentifiers.albumsCell
     }
     
-    func numberOfItemInSection(section: Int) -> Int {
-        return albums.count
+    func numberSection() -> Int {
+        if specialAlbums.count > 0 {
+            return 2
+        } else {
+            return 1
+        }
     }
     
-    func fillUI(cell: AlbumsCell, atIndex index: Int) {
-        let album = albums[index]
+    func numberItemInSection(section: Int) -> Int {
+        if section == 0 {
+            return albums.count
+        } else {
+            return specialAlbums.count
+        }
+    }
+    
+    func fillUI(cell: AlbumsCell, inSection section: Int, atIndex index: Int) {
+        let album = section == 0 ? albums[index] : specialAlbums[index]
         cell.albumName.text = album.name
 
         let array = ItemManager.sharedInstance.getItems(album: album)
@@ -80,8 +95,8 @@ open class AlbumsViewModel {
         
     }
     
-    func selectedGalleryAtIndex(index: Int) {
-        let album = albums[index]
+    func selectedGalleryAtIndex(index: Int, section: Int) {
+        let album = section == 0 ? albums[index] : specialAlbums[index]
         let galleryModel = GalleryPhotoViewModel(album: album)
         delegate?.navigationToAlbumDetail(viewModel: galleryModel)
     }
@@ -109,7 +124,7 @@ open class AlbumsViewModel {
         album.name = title
         album.directoryName = newDirectoryName
         albums[index] = album
-        
+
         //1
         let managedContext = CoreDataManager.sharedInstance.managedObjectContext
         
@@ -145,6 +160,6 @@ open class AlbumsViewModel {
     func deleteAlbumFromList(index: Int) {
         let album = albums[index]
         AlbumManager.sharedInstance.deleteAlbum(album: album)
-        self.albums.remove(at: index)
+        albums.remove(at: index)
     }
 }

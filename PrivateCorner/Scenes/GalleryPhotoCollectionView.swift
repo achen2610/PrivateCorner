@@ -74,5 +74,8 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
         viewModel.arraySelectedCell[indexPath.row] = !viewModel.arraySelectedCell[indexPath.row]
         cell.containerView.isHidden = !cell.containerView.isHidden
         cell.selectedImageView.isHidden = !cell.selectedImageView.isHidden
+        
+        updateStateEditButton()
+        updateTitlePhotoSelected()
     }
 }

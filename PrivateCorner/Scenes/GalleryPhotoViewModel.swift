@@ -11,6 +11,7 @@ import UIKit
 import Photos
 import MessageUI
 import Differ
+import Gallery
 
 public protocol GalleryPhotoViewModelDelegate: class {
 
@@ -72,6 +73,7 @@ open class GalleryPhotoViewModel {
         }
         
         collectionView.animateItemChanges(oldData: oldItems, newData: items)
+        updateDataCell(collectionView: collectionView)
         updateSupplementaryElement(collectionView: collectionView)
     }
 
@@ -80,7 +82,7 @@ open class GalleryPhotoViewModel {
     }
     
     func moveFileModel(indexes: [Int]) -> MoveFileViewModel {
-        let indexesToMove = Set(indexes.flatMap { $0 })
+        let indexesToMove = Set(indexes.compactMap { $0 })
         let moveItems = items.enumerated().filter { indexesToMove.contains($0.offset) }.map { $0.element }
         
         return MoveFileViewModel(items: moveItems, album: album)
@@ -225,7 +227,7 @@ open class GalleryPhotoViewModel {
         }
     }
     
-    func uploadVideoToCoreData(video: Video, avasset: AVAsset, collectionView: UICollectionView) {
+    func uploadVideoToCoreData(video: Video, avasset: AVAsset, duration: Double = 0, collectionView: UICollectionView) {
         
         if let avassetURL = avasset as? AVURLAsset {
             let videoUrl = avassetURL.url
@@ -243,7 +245,7 @@ open class GalleryPhotoViewModel {
             let info: [String: Any] = ["filename": filename,
                                        "thumbname": thumbname,
                                        "type": Key.ItemType.VideoType,
-                                       "duration": video.duration]
+                                       "duration": duration]
             ItemManager.sharedInstance.add(info: info, toAlbum: album)
         
             // Save original video & thumbnail
@@ -326,12 +328,13 @@ open class GalleryPhotoViewModel {
             ItemManager.sharedInstance.deleteItem(item: item, atAlbum: album)
         }
         
-        let indexesToRemove = Set(indexes.flatMap { $0 })
+        let indexesToRemove = Set(indexes.compactMap { $0 })
         let newItems = items.enumerated().filter { !indexesToRemove.contains($0.offset) }.map { $0.element }
         let oldItems = items
         
         items = newItems
         collectionView.animateItemChanges(oldData: oldItems, newData: newItems)
+        updateDataCell(collectionView: collectionView)
         updateSupplementaryElement(collectionView: collectionView)
     }
     
@@ -340,7 +343,7 @@ open class GalleryPhotoViewModel {
             return
         }
         
-        let indexesToExport = Set(indexes.flatMap { $0 })
+        let indexesToExport = Set(indexes.compactMap { $0 })
         let exportItems = items.enumerated().filter { indexesToExport.contains($0.offset) }.map { $0.element }
         
         switch type {
@@ -582,4 +585,15 @@ open class GalleryPhotoViewModel {
         
         fileWriteHandle?.closeFile()
     }
+    
+    private func updateDataCell(collectionView: UICollectionView) {
+        for i in 0..<items.count {
+            let indexPath = IndexPath(row: i, section: 0)
+            if let cell = collectionView.cellForItem(at: indexPath) as? GalleryCell {
+                cell.photoImageView.heroID = "image_\(indexPath.row)"
+            }
+        }
+    }
 }
+
+

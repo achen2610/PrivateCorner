@@ -13,7 +13,7 @@ class PasscodeViewController: UITableViewController {
     @IBOutlet weak var passcodeTable: UITableView!
     @IBOutlet weak var recoverySwitch: UISwitch!
     @IBOutlet weak var touchIDSwitch: UISwitch!
-    @IBOutlet weak var changePasscodeButton: PCButton!
+    @IBOutlet weak var changePasscodeButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +25,8 @@ class PasscodeViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Key.Screen.passcode
-        
+        tableView.delaysContentTouches = false
+
         loadData()
     }
     
@@ -72,9 +73,5 @@ class PasscodeViewController: UITableViewController {
         } else {
             touchIDSwitch.isOn = true
         }
-        
-        changePasscodeButton.highLightColor = UIColor(hex: "#2269AE")
-        changePasscodeButton.notHighLightColor = UIColor(hex: "#3398FB")
-        changePasscodeButton.setTitleColor(UIColor.white, for: [.normal, .highlighted, .selected])
     }
 }

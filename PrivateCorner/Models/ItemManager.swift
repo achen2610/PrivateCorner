@@ -67,8 +67,8 @@ class ItemManager {
             break;
         case .VideoType:
             item.type = "video"
-            if let duration = info["duration"] {
-                item.duration = duration as! Double
+            if let duration = info["duration"] as? Double {
+                item.duration = duration
             }
             break;
         }

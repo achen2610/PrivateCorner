@@ -29,10 +29,10 @@ open class ImportWebViewModel {
     public init(delegate: ImportWebViewModelDelegate) {
         self.delegate = delegate
         
-        if let importAlbum = AlbumManager.sharedInstance.getAlbum(title: "Import") {
+        if let importAlbum = AlbumManager.sharedInstance.getAlbum(title: "Import", isSpecial: true) {
             album = importAlbum
         } else {
-            album = AlbumManager.sharedInstance.addAlbum(title: "Import")
+            album = AlbumManager.sharedInstance.addAlbum(title: "Import", isSpecial: true)
         }
     }
     

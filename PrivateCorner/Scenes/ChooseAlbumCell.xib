@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,12 +26,12 @@
                             <constraint firstAttribute="width" secondItem="FIu-Qg-S5S" secondAttribute="height" multiplier="1:1" id="5EC-FV-Fxp"/>
                         </constraints>
                     </imageView>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Label" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yfo-pw-UES">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TwJ-rD-Ldb">
                         <rect key="frame" x="8" y="246" width="234" height="21"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6Y-QG-YZW">
                         <rect key="frame" x="8" y="267" width="234" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -46,23 +46,23 @@
             </view>
             <constraints>
                 <constraint firstItem="8Eg-O5-LeR" firstAttribute="leading" secondItem="FIu-Qg-S5S" secondAttribute="leading" id="6Am-o1-qgF"/>
+                <constraint firstItem="TwJ-rD-Ldb" firstAttribute="leading" secondItem="fdg-eS-ESc" secondAttribute="leading" constant="8" id="7JB-dL-fi3"/>
                 <constraint firstItem="8Eg-O5-LeR" firstAttribute="top" secondItem="FIu-Qg-S5S" secondAttribute="top" id="8P0-iB-bcr"/>
                 <constraint firstAttribute="bottom" secondItem="P6Y-QG-YZW" secondAttribute="bottom" constant="8" id="Hit-Z9-ZpJ"/>
                 <constraint firstAttribute="trailing" secondItem="P6Y-QG-YZW" secondAttribute="trailing" constant="8" id="NJa-3X-PM9"/>
                 <constraint firstItem="FIu-Qg-S5S" firstAttribute="top" secondItem="fdg-eS-ESc" secondAttribute="top" constant="8" id="NcC-nL-QKH"/>
-                <constraint firstItem="P6Y-QG-YZW" firstAttribute="top" secondItem="Yfo-pw-UES" secondAttribute="bottom" id="SF6-bi-Yed"/>
+                <constraint firstAttribute="trailing" secondItem="TwJ-rD-Ldb" secondAttribute="trailing" constant="8" id="SfG-5u-yew"/>
                 <constraint firstItem="8Eg-O5-LeR" firstAttribute="trailing" secondItem="FIu-Qg-S5S" secondAttribute="trailing" id="UaH-oz-Yum"/>
                 <constraint firstAttribute="trailing" secondItem="FIu-Qg-S5S" secondAttribute="trailing" constant="8" id="bxz-4H-gfx"/>
+                <constraint firstItem="TwJ-rD-Ldb" firstAttribute="top" secondItem="FIu-Qg-S5S" secondAttribute="bottom" constant="4" id="d2K-Yx-9Ch"/>
                 <constraint firstItem="FIu-Qg-S5S" firstAttribute="leading" secondItem="fdg-eS-ESc" secondAttribute="leading" constant="8" id="dfd-dd-9SN"/>
-                <constraint firstItem="Yfo-pw-UES" firstAttribute="leading" secondItem="fdg-eS-ESc" secondAttribute="leading" constant="8" id="sBb-Dk-WJ2"/>
-                <constraint firstItem="Yfo-pw-UES" firstAttribute="top" secondItem="FIu-Qg-S5S" secondAttribute="bottom" constant="4" id="sIQ-4O-Ba1"/>
+                <constraint firstItem="P6Y-QG-YZW" firstAttribute="top" secondItem="TwJ-rD-Ldb" secondAttribute="bottom" id="r5f-ad-IFk"/>
                 <constraint firstItem="8Eg-O5-LeR" firstAttribute="bottom" secondItem="FIu-Qg-S5S" secondAttribute="bottom" id="szh-05-wlL"/>
-                <constraint firstAttribute="trailing" secondItem="Yfo-pw-UES" secondAttribute="trailing" constant="8" id="uO6-FI-uV5"/>
                 <constraint firstItem="P6Y-QG-YZW" firstAttribute="leading" secondItem="fdg-eS-ESc" secondAttribute="leading" constant="8" id="xeN-dT-YE8"/>
             </constraints>
             <size key="customSize" width="268" height="272"/>
             <connections>
-                <outlet property="albumName" destination="Yfo-pw-UES" id="YnE-7C-hV0"/>
+                <outlet property="albumName" destination="TwJ-rD-Ldb" id="XZX-sZ-poh"/>
                 <outlet property="photoImageView" destination="FIu-Qg-S5S" id="Umi-jI-eOc"/>
                 <outlet property="totalItem" destination="P6Y-QG-YZW" id="zex-z6-gvY"/>
                 <outlet property="transparentView" destination="8Eg-O5-LeR" id="uXC-LX-4Mz"/>
