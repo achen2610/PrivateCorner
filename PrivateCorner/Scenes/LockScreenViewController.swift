@@ -55,10 +55,8 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
             TitleLabel.text = NSLocalizedString("Enter passcode", comment: "")
         } else if viewModel.passcodeState == .RequirePass {
             TitleLabel.text = NSLocalizedString("Enter passcode", comment: "")
-            TouchIDButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
         } else if viewModel.passcodeState == .ChangePass {
             TitleLabel.text = NSLocalizedString("Enter new passcode", comment: "")
-            TouchIDButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
         }
     }
     
@@ -94,7 +92,6 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
         viewModel.clearInput()
         viewModel.changePassState()
         TitleLabel.text = NSLocalizedString("Enter new passcode", comment: "")
-        TouchIDButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
     }
     
     private func styleButton(button: UIButton, isScaleFontSize: Bool) {
@@ -276,10 +273,6 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
     func setTitleLabel(text: String) {
         TitleLabel.text = text
     } 
-    
-    func setTitleButton(text: String) {
-        CancelButton.setTitle(text, for: .normal)
-    }
 }
 
 

@@ -27,7 +27,7 @@ public protocol GalleryPhotoViewModelDelegate: class {
 open class GalleryPhotoViewModel {
     
     fileprivate var album: Album
-    fileprivate var items = [Item]()
+    fileprivate var items: [Item] = []
     var titleAlbum: String
     var arraySelectedCell : [Bool] = []
     let kNumberOfSectionsInCollectionView = 1

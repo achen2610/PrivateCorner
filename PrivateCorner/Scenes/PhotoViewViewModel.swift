@@ -22,8 +22,8 @@ public protocol PhotoViewViewModelDelegate: class {
 
 open class PhotoViewViewModel {
 
-    fileprivate var album = Album()
-    fileprivate var items = [Item]()
+    fileprivate var album: Album
+    fileprivate var items: [Item] = []
     var isEndTransition: Bool = false
     weak var delegate: PhotoViewViewModelDelegate?
     
@@ -37,8 +37,8 @@ open class PhotoViewViewModel {
     }
     
     func configure(cell: Any, atIndex index: Int) {
+
         let item = items[index]
-        
         let directoryName = album.directoryName
         if item.type == "image" {
             if let photoCell = cell as? PhotoCell {
@@ -82,6 +82,7 @@ open class PhotoViewViewModel {
     }
     
     func deleteItem(index: Int, collectionView: UICollectionView) {
+
         let fileManager = FileManager.default
         let item = items[index]
         let directoryName = album.directoryName
@@ -128,6 +129,7 @@ open class PhotoViewViewModel {
     }
     
     func exportFile(index: Int, type: Key.ExportType) {
+
         let item = items[index]
         let directoryName = album.directoryName
         

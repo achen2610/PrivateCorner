@@ -28,7 +28,6 @@ public protocol LockScreenViewModelDelegate: class {
     func validationFail()
     func setInputDotCount(inputDotCount: Int)
     func setTitleLabel(text: String)
-    func setTitleButton(text: String)
 }
 
 open class LockScreenViewModel {
@@ -67,10 +66,6 @@ open class LockScreenViewModel {
         }
         
         inputString += string
-        
-        if inputString.count > 0 {
-            delegate?.setTitleButton(text: NSLocalizedString("Delete", comment: ""))
-        }
     }
     
     func deleteInputString(isFull: Bool) {
@@ -78,12 +73,6 @@ open class LockScreenViewModel {
             return
         }
         inputString = String(inputString.dropLast())
-        
-        if inputString.count == 0 && passcodeState == .SecondInput {
-            delegate?.setTitleButton(text: NSLocalizedString("Reset", comment: ""))
-        } else {
-            delegate?.setTitleButton(text: NSLocalizedString("Delete", comment: ""))
-        }
     }
     
     func resetInputString() {
