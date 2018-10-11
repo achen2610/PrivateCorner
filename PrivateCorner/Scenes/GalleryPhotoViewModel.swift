@@ -11,7 +11,6 @@ import UIKit
 import Photos
 import MessageUI
 import Differ
-import Gallery
 
 public protocol GalleryPhotoViewModelDelegate: class {
 
@@ -47,11 +46,11 @@ open class GalleryPhotoViewModel {
     // MARK: - Public Methods
     public init(album: Album) {
         self.album = album
-        self.titleAlbum = album.name!
+        self.titleAlbum = album.name
     }
     
     func getGallery() {
-        items = ItemManager.sharedInstance.getItems(album: album)
+        items = ItemManager.shared.getItems(album: album)
         arraySelectedCell.removeAll()
         if items.count > 0 {
             for _ in 0...items.count - 1 {
@@ -63,7 +62,7 @@ open class GalleryPhotoViewModel {
     
     func updateGallery(collectionView: UICollectionView) {
         let oldItems = items
-        items = ItemManager.sharedInstance.getItems(album: album)
+        items = ItemManager.shared.getItems(album: album)
         
         arraySelectedCell.removeAll()
         if items.count > 0 {
@@ -109,13 +108,8 @@ open class GalleryPhotoViewModel {
             
             cell.styleUI()
             let item = items[indexPath.row]
-            
-            if let directoryName = album.directoryName {
-                cell.setupData(item: item, albumName: directoryName)
-            } else {
-                cell.setupData(item: item, albumName: album.name!)
-            }
-            
+
+            cell.setupData(item: item, albumName: album.directoryName)
             cell.photoImageView.heroID = "image_\(indexPath.row)"
             cell.photoImageView.heroModifiers = [.fade, .scale(0.8)]
             cell.photoImageView.isOpaque = true
@@ -136,98 +130,122 @@ open class GalleryPhotoViewModel {
     
     func uploadImageToCoreData(images: [UIImage], assets: [PHAsset], collectionView: UICollectionView) {
         
-        let filenames = fetchImages(assets)
-        
-        let group = DispatchGroup()
-        let percent: CGFloat = 100 / CGFloat(images.count * 2)
-        var currentPercent: CGFloat = 0
-        let fileManager = FileManager.default
-        let currentIndex = Int(album.currentIndex)
-        
-        guard let directoryName = album.directoryName else {
-            return
-        }
-
-        for image in images {
-            let index = images.index(of: image) 
-            let name = filenames[index!]
-            let subtype = MediaLibrary.getSubTypeOfFile(filename: name)
-            let filename = String.init(format: "IMAGE_%i", currentIndex + index!) + "." + subtype
-            let thumbname = "thumbnail" + "_" + filename
-            
-            // Add image to DB
-            let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
-            ItemManager.sharedInstance.add(info: info, toAlbum: album)
-            
-            // Save original image
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
-            if fileManager.fileExists(atPath: path.path) {
-                print("===============")
-                print("Image \(filename) exists")
-            } else {
-                group.enter()
-                
-                let data = autoreleasepool(invoking: { () -> Data? in
-                    return UIImagePNGRepresentation(image)
-                })
-                
-                if let data = data {
-                    let success = fileManager.createFile(atPath: path.path, contents: data, attributes: nil)
-                    if success {
-                        currentPercent += percent
-                        delegate?.updateProgressRing(value: currentPercent)
-                        group.leave()
-                    }
-                }
-            }
-            
-            // Save thumbnail image
-            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
-            let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: image)
-            if fileManager.fileExists(atPath: thumbnailPath.path) {
-                print("===============")
-                print("Thumbnail \(thumbname) exists")
-            } else {
-                group.enter()
-                
-                let data = autoreleasepool(invoking: { () -> Data? in
-                    return UIImagePNGRepresentation(thumbnailImage)
-                })
-                if let data = data {
-                    let success = fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
-                    if success {
-                        currentPercent += percent
-                        delegate?.updateProgressRing(value: currentPercent)
-                        group.leave()
-                    }
-                }
-            }
-        }
-        
-        group.notify(queue: DispatchQueue.main) {
-            self.album.currentIndex = Int32(currentIndex + images.count)
-            CoreDataManager.sharedInstance.saveContext()
-            
-            let oldItems = self.items
-            self.items = ItemManager.sharedInstance.getItems(album: self.album)
-            
-            self.arraySelectedCell.removeAll()
-            if self.items.count > 0 {
-                for _ in 0...self.items.count - 1 {
-                    self.arraySelectedCell.append(false)
-                }
-            }
-            
-            self.delegate?.reloadGallery()
-            collectionView.animateItemChanges(oldData: oldItems, newData: self.items)
-            self.updateSupplementaryElement(collectionView: collectionView)
-
+        UploadManager.shared.uploadImage(images: images, assets: assets, album: self.album) { success in
             print("===============")
-            print("Upload images success")
+            if success {
+                let oldItems = self.items
+                self.items = ItemManager.shared.getItems(album: self.album)
+                
+                self.arraySelectedCell.removeAll()
+                if self.items.count > 0 {
+                    for _ in 0...self.items.count - 1 {
+                        self.arraySelectedCell.append(false)
+                    }
+                }
+                
+                self.delegate?.reloadGallery()
+                collectionView.animateItemChanges(oldData: oldItems, newData: self.items)
+                self.updateSupplementaryElement(collectionView: collectionView)
+                
+                print("Upload images success!")
+            } else {
+                print("Upload images error!")
+            }
         }
+        
+        
+//        let filenames = MediaLibrary.fetchImages(assets)
+//
+//        let group = DispatchGroup()
+//        let percent: CGFloat = 100 / CGFloat(images.count * 2)
+//        var currentPercent: CGFloat = 0
+//        let fileManager = FileManager.default
+//        let currentIndex = Int(album.currentIndex)
+//
+//        guard let directoryName = album.directoryName else {
+//            return
+//        }
+//
+//        for image in images {
+//            let index = images.index(of: image)
+//            let name = filenames[index!]
+//            let subtype = MediaLibrary.getSubTypeOfFile(filename: name)
+//            let filename = String.init(format: "IMAGE_%i", currentIndex + index!) + "." + subtype
+//            let thumbname = "thumbnail" + "_" + filename
+//
+//            // Add image to DB
+//            let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
+//            ItemManager.shared.add(info: info, toAlbum: album)
+//
+//            // Save original image
+//            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
+//            if fileManager.fileExists(atPath: path.path) {
+//                print("===============")
+//                print("Image \(filename) exists")
+//            } else {
+//                group.enter()
+//
+//                let data = autoreleasepool(invoking: { () -> Data? in
+//                    return image.pngData()
+//                })
+//
+//                if let data = data {
+//                    let success = fileManager.createFile(atPath: path.path, contents: data, attributes: nil)
+//                    if success {
+//                        currentPercent += percent
+//                        delegate?.updateProgressRing(value: currentPercent)
+//                        group.leave()
+//                    }
+//                }
+//            }
+//
+//            // Save thumbnail image
+//            let thumbnailPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
+//            let thumbnailImage = MediaLibrary.getThumbnailImage(originalImage: image)
+//            if fileManager.fileExists(atPath: thumbnailPath.path) {
+//                print("===============")
+//                print("Thumbnail \(thumbname) exists")
+//            } else {
+//                group.enter()
+//
+//                let data = autoreleasepool(invoking: { () -> Data? in
+//                    return thumbnailImage.pngData()
+//                })
+//                if let data = data {
+//                    let success = fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
+//                    if success {
+//                        currentPercent += percent
+//                        delegate?.updateProgressRing(value: currentPercent)
+//                        group.leave()
+//                    }
+//                }
+//            }
+//        }
+//
+//        group.notify(queue: DispatchQueue.main) {
+//            self.album.currentIndex = Int32(currentIndex + images.count)
+//            CoreDataManager.shared.saveContext()
+//
+//            let oldItems = self.items
+//            self.items = ItemManager.shared.getItems(album: self.album)
+//
+//            self.arraySelectedCell.removeAll()
+//            if self.items.count > 0 {
+//                for _ in 0...self.items.count - 1 {
+//                    self.arraySelectedCell.append(false)
+//                }
+//            }
+//
+//            self.delegate?.reloadGallery()
+//            collectionView.animateItemChanges(oldData: oldItems, newData: self.items)
+//            self.updateSupplementaryElement(collectionView: collectionView)
+//
+//            print("===============")
+//            print("Upload images success")
+//        }
     }
     
-    func uploadVideoToCoreData(video: Video, avasset: AVAsset, duration: Double = 0, collectionView: UICollectionView) {
+    func uploadVideoToCoreData(video: GVideo, avasset: AVAsset, duration: Double = 0, collectionView: UICollectionView) {
         
         if let avassetURL = avasset as? AVURLAsset {
             let videoUrl = avassetURL.url
@@ -236,31 +254,28 @@ open class GalleryPhotoViewModel {
             let subtype = MediaLibrary.getSubTypeOfFile(filename: name)
             let filename = String.init(format: "VIDEO_%i", currentIndex) + "." + subtype
             let thumbname = "thumbnail_" + String.init(format: "VIDEO_%i", currentIndex) + ".JPG"
-            
-            guard let directoryName = album.directoryName else {
-                return
-            }
+            let directoryName = album.directoryName
             
             // Add video to database
             let info: [String: Any] = ["filename": filename,
                                        "thumbname": thumbname,
                                        "type": Key.ItemType.VideoType,
                                        "duration": duration]
-            ItemManager.sharedInstance.add(info: info, toAlbum: album)
+            ItemManager.shared.add(info: info, toAlbum: album)
         
             // Save original video & thumbnail
             let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
             let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
             
-            UploadManager.sharedInstance.uploadVideo(video: video, videoPath: videoUrl, destinationPath: path, thumbPath: thumbPath, delegate: delegate, completion: { (status) in
+            UploadManager.shared.uploadVideo(video: video, videoPath: videoUrl, destinationPath: path, thumbPath: thumbPath, delegate: delegate, completion: { (status) in
                 if status {
                     
                     DispatchQueue.main.async {
                         self.album.currentIndex = currentIndex + 1
-                        CoreDataManager.sharedInstance.saveContext()
+                        CoreDataManager.shared.saveContext()
                         
                         let oldItems = self.items
-                        self.items = ItemManager.sharedInstance.getItems(album: self.album)
+                        self.items = ItemManager.shared.getItems(album: self.album)
                         
                         self.arraySelectedCell.removeAll()
                         if self.items.count > 0 {
@@ -284,48 +299,43 @@ open class GalleryPhotoViewModel {
     func deleteItem(indexes: [Int], collectionView: UICollectionView) {
         let fileManager = FileManager.default
         
-        guard let directoryName = album.directoryName else {
-            return
-        }
-        
+        let directoryName = album.directoryName
         for index in indexes {
             let item = items[index]
             
             // Delete file of item in documents
-            if let filename = item.fileName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
-                do {
-                    if fileManager.fileExists(atPath: path.path) {
-                        try fileManager.removeItem(at: path)
-                    } else {
-                        print("===============")
-                        print("File not exists")
-                        print("Can't delete file : \(filename)")
-                    }
-                } catch {
+            let filename = item.fileName
+            let namePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
+            do {
+                if fileManager.fileExists(atPath: namePath.path) {
+                    try fileManager.removeItem(at: namePath)
+                } else {
                     print("===============")
-                    print("Error remove item \(filename), \(error)")
+                    print("File not exists")
+                    print("Can't delete file : \(filename)")
                 }
+            } catch {
+                print("===============")
+                print("Error remove item \(filename), \(error)")
             }
             
-            if let thumbname = item.thumbName {
-                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
-                do {
-                    if fileManager.fileExists(atPath: path.path) {
-                        try fileManager.removeItem(at: path)
-                    } else {
-                        print("===============")
-                        print("File not exists")
-                        print("Can't delete file : \(thumbname)")
-                    }
-                } catch {
+            let thumbname = item.thumbName
+            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
+            do {
+                if fileManager.fileExists(atPath: thumbPath.path) {
+                    try fileManager.removeItem(at: thumbPath)
+                } else {
                     print("===============")
-                    print("Error remove item \(thumbname), \(error)")
+                    print("File not exists")
+                    print("Can't delete file : \(thumbname)")
                 }
+            } catch {
+                print("===============")
+                print("Error remove item \(thumbname), \(error)")
             }
             
             // Delete item from database
-            ItemManager.sharedInstance.deleteItem(item: item, atAlbum: album)
+            ItemManager.shared.deleteItem(item: item, atAlbum: album)
         }
         
         let indexesToRemove = Set(indexes.compactMap { $0 })
@@ -339,9 +349,7 @@ open class GalleryPhotoViewModel {
     }
     
     func exportFile(indexes: [Int], type: Key.ExportType) {
-        guard let directoryName = album.directoryName else {
-            return
-        }
+        let directoryName = album.directoryName
         
         let indexesToExport = Set(indexes.compactMap { $0 })
         let exportItems = items.enumerated().filter { indexesToExport.contains($0.offset) }.map { $0.element }
@@ -349,7 +357,7 @@ open class GalleryPhotoViewModel {
         switch type {
         case .PhotoLibrary:
             for item in exportItems {
-                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName!)
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName)
                 PHPhotoLibrary.shared().performChanges({
                     PHAssetChangeRequest.creationRequestForAsset(from: MediaLibrary.image(urlPath: urlPath))
                 }, completionHandler: { (success, error) in
@@ -358,12 +366,12 @@ open class GalleryPhotoViewModel {
                         if item == exportItems.last {
                             self.delegate?.exportSuccess()
                         }
-                        print("Export \(item.fileName!) success")
+                        print("Export \(item.fileName) success")
                     }
                     else if error != nil {
                         // Save photo failed with error
                         
-                        print("Export \(item.fileName!) error: \(error!)")
+                        print("Export \(item.fileName) error: \(error!)")
                     }
                     else {
                         // Save photo failed with no error
@@ -374,11 +382,11 @@ open class GalleryPhotoViewModel {
         case .Email:
             let composeVC = MFMailComposeViewController()
             for item in exportItems {
-                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName!)
-                let ext = item.fileName!.components(separatedBy: ".").last?.lowercased()
+                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName)
+                let ext = item.fileName.components(separatedBy: ".").last?.lowercased()
                 do {
                     let fileData = try Data(contentsOf: urlPath)
-                    composeVC.addAttachmentData(fileData, mimeType: String.init(format: "image/%@", ext!), fileName: item.fileName!)
+                    composeVC.addAttachmentData(fileData, mimeType: String.init(format: "image/%@", ext!), fileName: item.fileName)
                 }
                 catch {
                     print("\(error.localizedDescription)")
@@ -400,25 +408,23 @@ open class GalleryPhotoViewModel {
     }
     
     func pasteItemToAlbum(pasteItems: [Item], fromAlbum: Album, collectionView: UICollectionView) {
+        
+//        UploadManager.shared.p
+        
+        
         let currentIndex = album.currentIndex
         let fileManager = FileManager.default
         let percent: CGFloat = 100 / CGFloat(pasteItems.count * 2)
         var currentPercent: CGFloat = 0
-        
-        guard let directoryName = album.directoryName else {
-            return
-        }
-        
-        guard let fromDirectory = fromAlbum.directoryName else {
-            return
-        }
+        let directoryName = album.directoryName
+        let fromDirectory = fromAlbum.directoryName
         
         for item in pasteItems {
             let index = pasteItems.index(of: item)
-            let name = item.fileName!
-            let type = item.type!.uppercased()
+            let name = item.fileName
+            let type = item.type
             let subtype = MediaLibrary.getSubTypeOfFile(filename: name)
-            let filename = String.init(format: "%@_%i", type, currentIndex + Int32(index!)) + "." + subtype
+            let filename = String.init(format: "%@_%i", type.uppercased(), currentIndex + Int32(index!)) + "." + subtype
             var thumbname = "thumbnail" + "_" + filename
             if type == "video" {
                 thumbname = "thumbnail" + "_" + String.init(format: "%@_%i", type, currentIndex + Int32(index!)) + "." + "JPG"
@@ -434,31 +440,31 @@ open class GalleryPhotoViewModel {
                         "type": Key.ItemType.VideoType,
                         "duration": item.duration]
             }
-            ItemManager.sharedInstance.add(info: info, toAlbum: album)
+            ItemManager.shared.add(info: info, toAlbum: album)
             
             // Copy image/video to folder album
-            let imagePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromDirectory).appendingPathComponent(item.fileName!)
+            let imagePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromDirectory).appendingPathComponent(item.fileName)
             let newImagePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
             if fileManager.fileExists(atPath: imagePath.path) {
                 do {
                     try fileManager.copyItem(at: imagePath, to: newImagePath)
                 } catch let error as NSError {
                     print("=============")
-                    print("Copy \(item.fileName!) to \(directoryName) error : \(error.debugDescription)")
+                    print("Copy \(item.fileName) to \(directoryName) error : \(error.debugDescription)")
                 }
                 currentPercent += percent
                 delegate?.updateProgressRing(value: currentPercent)
             }
             
             // Copy thumbnail to folder album
-            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromDirectory).appendingPathComponent(item.thumbName!)
+            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromDirectory).appendingPathComponent(item.thumbName)
             let newThumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
             if fileManager.fileExists(atPath: thumbPath.path) {
                 do {
                     try fileManager.copyItem(at: thumbPath, to: newThumbPath)
                 } catch let error as NSError {
                     print("=============")
-                    print("Copy \(item.thumbName!) to \(directoryName) error : \(error.debugDescription)")
+                    print("Copy \(item.thumbName) to \(directoryName) error : \(error.debugDescription)")
                 }
                 currentPercent += percent
                 delegate?.updateProgressRing(value: currentPercent)
@@ -467,10 +473,10 @@ open class GalleryPhotoViewModel {
         
         //Copy Item success
         album.currentIndex = currentIndex + Int32(pasteItems.count)
-        CoreDataManager.sharedInstance.saveContext()
+        CoreDataManager.shared.saveContext()
         
         let oldItems = self.items
-        items = ItemManager.sharedInstance.getItems(album: album)
+        items = ItemManager.shared.getItems(album: album)
         delegate?.pasteImagesSuccess()
         collectionView.animateItemChanges(oldData: oldItems, newData: items)
         updateSupplementaryElement(collectionView: collectionView)
@@ -491,13 +497,13 @@ open class GalleryPhotoViewModel {
                 videos += 1
             }
         }
-        string = "\(photos) Photos, \(videos) Videos"
+        string = "\(photos) " + (photos > 1 ? "Photos" : "Photo") + ", " + "\(videos) " + (videos > 1 ? "Videos" : "Video")
         return string
     }
 
     // MARK: - Private Method
     private func updateSupplementaryElement(collectionView: UICollectionView) {
-        if let footerView = collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(row: 0, section: 0)) as? GalleryCollectionFooterView {
+        if let footerView = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionFooter, at: IndexPath(row: 0, section: 0)) as? GalleryCollectionFooterView {
             if numberOfItemInSection(section: 0) > 0 {
                 footerView.footerLabel.text = getCountPhotosAndVideos()
             } else {
@@ -506,37 +512,37 @@ open class GalleryPhotoViewModel {
         }
     }
     
-    private func fetchImages(_ assets: [PHAsset]) -> [String] {
-        var filenames = [String]()
-        let imageManager = PHImageManager.default()
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
-        let size: CGSize = CGSize(width: 720, height: 1280)
-        
-        for asset in assets {
-            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
-                if let info = info {
-                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
-                        //do sth with file name
-                        filenames.append(filename)
-                    } else {
-                        var name: String
-                        if let indexString = UserDefaults.standard.value(forKey: "IndexForImage") {
-                            let index = Int(indexString as! String)
-                            name = "IMAGE_\(index! + 1).JPG"
-                            UserDefaults.standard.set("\(index! + 1)", forKey: "IndexForImage")
-                        } else {
-                            name = "IMAGE_0.JPG"
-                            UserDefaults.standard.set("0", forKey: "IndexForImage")
-                        }
-                        filenames.append(name)
-                        UserDefaults.standard.synchronize()
-                    }
-                }
-            }
-        }
-        return filenames
-    }
+//    private func fetchImages(_ assets: [PHAsset]) -> [String] {
+//        var filenames = [String]()
+//        let imageManager = PHImageManager.default()
+//        let requestOptions = PHImageRequestOptions()
+//        requestOptions.isSynchronous = true
+//        let size: CGSize = CGSize(width: 720, height: 1280)
+//
+//        for asset in assets {
+//            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
+//                if let info = info {
+//                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
+//                        //do sth with file name
+//                        filenames.append(filename)
+//                    } else {
+//                        var name: String
+//                        if let indexString = UserDefaults.standard.value(forKey: "IndexForImage") {
+//                            let index = Int(indexString as! String)
+//                            name = "IMAGE_\(index! + 1).JPG"
+//                            UserDefaults.standard.set("\(index! + 1)", forKey: "IndexForImage")
+//                        } else {
+//                            name = "IMAGE_0.JPG"
+//                            UserDefaults.standard.set("0", forKey: "IndexForImage")
+//                        }
+//                        filenames.append(name)
+//                        UserDefaults.standard.synchronize()
+//                    }
+//                }
+//            }
+//        }
+//        return filenames
+//    }
     
     private func saveVideoFile(videoUrl: URL, destinationPath urlPath: URL) {
         let fileManager = FileManager.default

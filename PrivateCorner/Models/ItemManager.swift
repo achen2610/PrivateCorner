@@ -13,7 +13,7 @@ import CoreData
 class ItemManager {
     
     // MARK: - Item Manager stack
-    static let sharedInstance = ItemManager()
+    static let shared = ItemManager()
     
     // MARK: - Public Methods
     func getItems(album: Album) -> [Item] {
@@ -28,13 +28,13 @@ class ItemManager {
         var items = [Item]()
         var ids = [NSManagedObjectID]()
         for url in urls {
-            if let oid = CoreDataManager.sharedInstance.managedObjectId(url: url) {
+            if let oid = CoreDataManager.shared.managedObjectId(url: url) {
                 ids.append(oid)
             }
         }
         
         //1
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        let managedContext = CoreDataManager.shared.managedObjectContext
         
         //2
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Item")
@@ -54,24 +54,28 @@ class ItemManager {
     
     func add(info: [String: Any], toAlbum album: Album) {
         //1
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        let managedContext = CoreDataManager.shared.managedObjectContext
         
         //2
         let item = NSEntityDescription.insertNewObject(forEntityName: "Item", into: managedContext) as! Item
-        item.fileName = info["filename"] as? String
-        item.thumbName = info["thumbname"] as? String
-        item.uploadDate = Date()
-        switch info["type"] as! Key.ItemType {
-        case .ImageType:
-            item.type = "image"
-            break;
-        case .VideoType:
-            item.type = "video"
-            if let duration = info["duration"] as? Double {
-                item.duration = duration
-            }
-            break;
+        
+        if let name = info["filename"] as? String {
+            item.fileName = name
         }
+        
+        if let thumbName = info["thumbname"] as? String {
+            item.thumbName = thumbName
+        }
+        
+        if let type = info["type"] as? Key.ItemType {
+            item.type = type.getType()
+        }
+        
+        if let duration = info["duration"] as? Double {
+            item.duration = duration
+        }
+        
+        item.uploadDate = Date()
 
         //3
         let itemsInAlbum = album.mutableSetValue(forKey: "items")
@@ -84,7 +88,7 @@ class ItemManager {
     
     func deleteItem(item: Item, atAlbum album: Album) {
         //1
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        let managedContext = CoreDataManager.shared.managedObjectContext
         
         //2
         managedContext.delete(item)
@@ -96,7 +100,7 @@ class ItemManager {
         }
         
         //4
-        CoreDataManager.sharedInstance.saveContext()
+        CoreDataManager.shared.saveContext()
     }
     
     func moveItem(items: [Item], fromAlbum: Album, toAlbum: Album) {
@@ -104,22 +108,17 @@ class ItemManager {
         let fileManager = FileManager.default
         let currentIndex = toAlbum.currentIndex
         
-        guard let fromDirectory = fromAlbum.directoryName else {
-            return
-        }
-        
-        guard let toDirectory = toAlbum.directoryName else {
-            return
-        }
+        let fromDirectory = fromAlbum.directoryName
+        let toDirectory = toAlbum.directoryName
         
         for item in items {
             item.uploadDate = Date()
             let index = items.index(of: item)
-            var subtype = MediaLibrary.getSubTypeOfFile(filename: item.fileName!)
-            let type: String = item.type!.uppercased()
+            var subtype = MediaLibrary.getSubTypeOfFile(filename: item.fileName)
+            let type: String = item.type.uppercased()
             
             //large image
-            let filePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromDirectory).appendingPathComponent(item.fileName!)
+            let filePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromDirectory).appendingPathComponent(item.fileName)
             if fileManager.fileExists(atPath: filePath.path) {
                 let filename = String.init(format: "%@_%i", type, currentIndex + Int32(index!)) + "." + subtype
                 item.fileName = filename
@@ -128,14 +127,14 @@ class ItemManager {
                     try fileManager.moveItem(at: filePath, to: newPath)
                 } catch let error as NSError {
                     print("================")
-                    print("Move \(item.fileName!) error")
+                    print("Move \(item.fileName) error")
                     print(error.debugDescription)
                 }
                 
             }
             
             //thumb image
-            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromDirectory).appendingPathComponent(item.thumbName!)
+            let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(fromDirectory).appendingPathComponent(item.thumbName)
             if fileManager.fileExists(atPath: thumbPath.path) {
                 if type == "VIDEO" {
                     subtype = "JPG"
@@ -147,7 +146,7 @@ class ItemManager {
                     try fileManager.moveItem(at: thumbPath, to: newPath)
                 } catch let error as NSError {
                     print("================")
-                    print("Move \(item.fileName!) error")
+                    print("Move \(item.fileName) error")
                     print(error.debugDescription)
                 }
             }
@@ -171,6 +170,6 @@ class ItemManager {
         }
         
         //4
-        CoreDataManager.sharedInstance.saveContext()
+        CoreDataManager.shared.saveContext()
     }
 }

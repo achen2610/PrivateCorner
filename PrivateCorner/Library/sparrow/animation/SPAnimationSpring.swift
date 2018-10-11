@@ -31,7 +31,7 @@ public class SPAnimationSpring {
                         delay: TimeInterval = 0,
                         spring: CGFloat = spring,
                         velocity: CGFloat = velocity,
-                        options: UIViewAnimationOptions = [],
+                        options: UIView.AnimationOptions = [],
                         withComplection completion: (() -> Void)! = {}) {
         
         UIView.animate(
@@ -52,7 +52,7 @@ public class SPAnimationSpring {
                                        delay: TimeInterval = 0,
                                        spring: CGFloat = spring,
                                        velocity: CGFloat = velocity,
-                                       options: UIViewAnimationOptions = [],
+                                       options: UIView.AnimationOptions = [],
                                        withComplection completion: (() -> Void)! = {}) {
         
         var optionsWithRepeatition = options

@@ -38,7 +38,7 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var reusableView = UICollectionReusableView()
         
-        if kind == UICollectionElementKindSectionFooter {
+        if kind == UICollectionView.elementKindSectionFooter {
             if let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterView", for: indexPath) as? GalleryCollectionFooterView {
                 if viewModel.numberOfItemInSection(section: 0) > 0 {
                     footerView.footerLabel.text = viewModel.getCountPhotosAndVideos()
@@ -56,6 +56,10 @@ extension GalleryPhotoViewController: UICollectionViewDataSource, UICollectionVi
     // MARK: - UICollectionView FlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return viewModel.cellSize()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     // MARK: - UICollectionView Delegate

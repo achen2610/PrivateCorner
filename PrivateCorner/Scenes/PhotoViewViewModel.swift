@@ -39,33 +39,28 @@ open class PhotoViewViewModel {
     func configure(cell: Any, atIndex index: Int) {
         let item = items[index]
         
+        let directoryName = album.directoryName
         if item.type == "image" {
             if let photoCell = cell as? PhotoCell {
                 photoCell.imageView.prepareForReuse()
-                
-                if let directoryName = album.directoryName {
-                    let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName!)
-                    photoCell.image = MediaLibrary.image(urlPath: urlPath)
-                } else {
-                    let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(item.fileName!)
-                    photoCell.image = MediaLibrary.image(urlPath: urlPath)
-                }
+
+                let filename = item.fileName
+                let url = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
+                photoCell.image = MediaLibrary.image(urlPath: url)
             }
         } else {
             if let videoCell = cell as? VideoCell {
-                guard let directoryName = album.directoryName else {
-                    return
-                }
-                
-                let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName!)
-                videoCell.configureVideo(url: urlPath, isEndTransition: isEndTransition)
+
+                let filename = item.fileName
+                let url = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
+                videoCell.configureVideo(url: url, isEndTransition: isEndTransition)
             }
         }
     }
     
-    func getTypeItem(index: Int) -> String {
+    func getTypeItem(index: Int) -> String? {
         let item = items[index]
-        return item.type!
+        return item.type
     }
     
     func getUploadDate(index: Int) -> [String] {
@@ -89,45 +84,40 @@ open class PhotoViewViewModel {
     func deleteItem(index: Int, collectionView: UICollectionView) {
         let fileManager = FileManager.default
         let item = items[index]
-        
-        guard let directoryName = album.directoryName else {
-            return
-        }
+        let directoryName = album.directoryName
         
         // Delete item from database
-        ItemManager.sharedInstance.deleteItem(item: item, atAlbum: album)
+        ItemManager.shared.deleteItem(item: item, atAlbum: album)
         
         // Delete file of item in documents
-        if let filename = item.fileName {
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
-            do {
-                if fileManager.fileExists(atPath: path.path) {
-                    try fileManager.removeItem(at: path)
-                } else {
-                    print("===============")
-                    print("File not exists")
-                    print("Can't delete file : \(filename)")
-                }
-            } catch {
+        let filename = item.fileName
+        let filePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
+        do {
+            if fileManager.fileExists(atPath: filePath.path) {
+                try fileManager.removeItem(at: filePath)
+            } else {
                 print("===============")
-                print("Error remove item \(filename), \(error)")
+                print("File not exists")
+                print("Can't delete file : \(filename)")
             }
+        } catch {
+            print("===============")
+            print("Error remove item \(filename), \(error)")
         }
         
-        if let thumbname = item.thumbName {
-            let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
-            do {
-                if fileManager.fileExists(atPath: path.path) {
-                    try fileManager.removeItem(at: path)
-                } else {
-                    print("===============")
-                    print("File not exists")
-                    print("Can't delete file : \(thumbname)")
-                }
-            } catch {
+        let thumbname = item.thumbName
+        let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
+        do {
+            if fileManager.fileExists(atPath: thumbPath.path) {
+                try fileManager.removeItem(at: thumbPath)
+            } else {
                 print("===============")
-                print("Error remove item \(thumbname), \(error)")
+                print("File not exists")
+                print("Can't delete file : \(thumbname)")
             }
+        } catch {
+            print("===============")
+            print("Error remove item \(thumbname), \(error)")
         }
         
         let oldItems = items
@@ -139,26 +129,23 @@ open class PhotoViewViewModel {
     
     func exportFile(index: Int, type: Key.ExportType) {
         let item = items[index]
-        
-        guard let directoryName = album.directoryName else {
-            return
-        }
+        let directoryName = album.directoryName
         
         switch type {
         case .PhotoLibrary:
-            let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName!)
+            let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName)
             PHPhotoLibrary.shared().performChanges({
                 PHAssetChangeRequest.creationRequestForAsset(from: MediaLibrary.image(urlPath: urlPath))
             }, completionHandler: { (success, error) in
                 if success {
                     // Saved successfully!
                     self.delegate?.exportSuccess()
-                    print("Export \(item.fileName!) success")
+                    print("Export \(item.fileName) success")
                 }
                 else if error != nil {
                     // Save photo failed with error
                     
-                    print("Export \(item.fileName!) error: \(error!)")
+                    print("Export \(item.fileName) error: \(error!)")
                 }
                 else {
                     // Save photo failed with no error
@@ -167,11 +154,11 @@ open class PhotoViewViewModel {
             break
         case .Email:
             let composeVC = MFMailComposeViewController()
-            let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName!)
-            let ext = item.fileName!.components(separatedBy: ".").last?.lowercased()
+            let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(item.fileName)
+            let ext = item.fileName.components(separatedBy: ".").last?.lowercased()
             do {
                 let fileData = try Data(contentsOf: urlPath)
-                composeVC.addAttachmentData(fileData, mimeType: String.init(format: "image/%@", ext!), fileName: item.fileName!)
+                composeVC.addAttachmentData(fileData, mimeType: String.init(format: "image/%@", ext!), fileName: item.fileName)
             }
             catch {
                 print("\(error.localizedDescription)")

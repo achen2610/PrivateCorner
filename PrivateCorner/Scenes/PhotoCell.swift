@@ -46,7 +46,7 @@ class PhotoCell: UICollectionViewCell {
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         if #available(iOS 9.0, *) {
-            scrollView.panGestureRecognizer.allowedTouchTypes = [ NSNumber(value:UITouchType.indirect.rawValue) ]
+            scrollView.panGestureRecognizer.allowedTouchTypes = [ NSNumber(value:UITouch.TouchType.indirect.rawValue) ]
         }
         addSubview(scrollView)
         

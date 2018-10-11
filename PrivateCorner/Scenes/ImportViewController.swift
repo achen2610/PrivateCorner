@@ -51,12 +51,12 @@ class ImportViewController: BaseViewController {
         switch index {
         case 0:
             //Photo Library
-            controller.isPhotoLibrary = true
+            controller.importType = .photo
             present(navi, animated: true, completion: nil)
             break
         case 1:
             //Camera
-            controller.isPhotoLibrary = false
+            controller.importType = .camera
             present(navi, animated: true, completion: nil)
             break
         case 2:
@@ -68,8 +68,8 @@ class ImportViewController: BaseViewController {
             break
         case 3:
             //Wireless Syncing
-            let importWeb = mainStoryboard.instantiateViewController(withIdentifier: "ImportWeb") as! ImportWebViewController
-            navigationController?.pushViewController(importWeb, animated: true)
+            controller.importType = .wireless
+            present(navi, animated: true, completion: nil)
             break
             
         default:
@@ -86,12 +86,12 @@ class ImportViewController: BaseViewController {
         switch index {
         case 0:
             //Photo Library
-            controller.isPhotoLibrary = true
+            controller.importType = .photo
             present(navi, animated: true, completion: nil)
             break
         case 1:
             //Camera
-            controller.isPhotoLibrary = false
+            controller.importType = .camera
             present(navi, animated: true, completion: nil)
             break
         case 2:
@@ -103,8 +103,8 @@ class ImportViewController: BaseViewController {
             break
         case 3:
             //Wireless Syncing
-            let importWeb = mainStoryboard.instantiateViewController(withIdentifier: "ImportWeb") as! ImportWebViewController
-            navigationController?.pushViewController(importWeb, animated: true)
+            controller.importType = .wireless
+            present(navi, animated: true, completion: nil)
             break
             
         default:

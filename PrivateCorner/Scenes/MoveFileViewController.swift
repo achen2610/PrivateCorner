@@ -52,7 +52,7 @@ class MoveFileViewController: BaseViewController, MoveFileViewModelDelegate {
     
     // MARK: MoveFileViewModelDelegate
     func moveFileToAlbum(onSuccess: Bool) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateGalleryWhenMoveFile), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.SString.notiUpdateGalleryWhenMoveFile), object: nil)
         
         dismiss(animated: true, completion: nil)
     }

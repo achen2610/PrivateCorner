@@ -11,7 +11,7 @@ import CoreData
 
 class CoreDataManager {
     // MARK: - Core Data stack
-    static let sharedInstance = CoreDataManager()
+    static let shared = CoreDataManager()
     
     private lazy var applicationDocumentsDirectory: URL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named in the application's documents Application Support directory.

@@ -30,7 +30,7 @@ open class ChooseAlbumViewModel {
     }
     
     func getAlbumFromCoreData() {
-        albums = AlbumManager.sharedInstance.getAlbums()
+        albums = AlbumManager.shared.getAlbums()
     }
     
     func sectionInsets() -> UIEdgeInsets {
@@ -53,18 +53,14 @@ open class ChooseAlbumViewModel {
         let album = albums[index]
         cell.albumName.text = album.name
         
-        let array = ItemManager.sharedInstance.getItems(album: album)
+        let directoryName = album.directoryName
+        let array = ItemManager.shared.getItems(album: album)
         if array.count > 0 {
             let lastItem = array.last
             
             if let thumbname = lastItem?.thumbName {
-                if let directoryName = album.directoryName {
-                    let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
-                    cell.photoImageView.image = MediaLibrary.image(urlPath: path)
-                } else {
-                    let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
-                    cell.photoImageView.image = MediaLibrary.image(urlPath: path)
-                }
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
+                cell.photoImageView.image = MediaLibrary.image(urlPath: path)
             }
             
             cell.totalItem.text = "\(array.count)"
@@ -82,7 +78,7 @@ open class ChooseAlbumViewModel {
     }
     
     func saveAlbumToCoreData(title: String) {
-        let album = AlbumManager.sharedInstance.addAlbum(title: title)
+        let album = AlbumManager.shared.addAlbum(title: title)
         self.albums.insert(album, at: 0)
     }
     
@@ -93,11 +89,8 @@ open class ChooseAlbumViewModel {
             return
         }
         
-        guard let directoryName = selectedAlbum.directoryName else {
-            return
-        }
-        
-        let filenames = fetchImages(assets)
+        let directoryName = selectedAlbum.directoryName
+        let filenames = MediaLibrary.fetchImages(assets)
         
         let group = DispatchGroup()
         let percent: CGFloat = 100 / CGFloat(images.count * 2)
@@ -114,7 +107,7 @@ open class ChooseAlbumViewModel {
             
             // Add image to DB
             let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
-            ItemManager.sharedInstance.add(info: info, toAlbum: selectedAlbum)
+            ItemManager.shared.add(info: info, toAlbum: selectedAlbum)
             
             // Save original image
             let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
@@ -125,7 +118,7 @@ open class ChooseAlbumViewModel {
                 group.enter()
                 
                 let data = autoreleasepool(invoking: { () -> Data? in
-                    return UIImagePNGRepresentation(image)
+                    return image.pngData()
                 })
                 
                 if let data = data {
@@ -148,7 +141,7 @@ open class ChooseAlbumViewModel {
                 group.enter()
                 
                 let data = autoreleasepool(invoking: { () -> Data? in
-                    return UIImagePNGRepresentation(thumbnailImage)
+                    return thumbnailImage.pngData()
                 })
                 if let data = data {
                     let success = fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
@@ -163,7 +156,7 @@ open class ChooseAlbumViewModel {
         
         group.notify(queue: DispatchQueue.main) {
             selectedAlbum.currentIndex = Int32(currentIndex + images.count)
-            CoreDataManager.sharedInstance.saveContext()
+            CoreDataManager.shared.saveContext()
      
             print("===============")
             print("Upload images success")
@@ -172,35 +165,5 @@ open class ChooseAlbumViewModel {
     
     //MARK: - Private Method
     
-    private func fetchImages(_ assets: [PHAsset]) -> [String] {
-        var filenames = [String]()
-        let imageManager = PHImageManager.default()
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
-        let size: CGSize = CGSize(width: 720, height: 1280)
-        
-        for asset in assets {
-            imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { image, info in
-                if let info = info {
-                    if let filename = (info["PHImageFileURLKey"] as? NSURL)?.lastPathComponent {
-                        //do sth with file name
-                        filenames.append(filename)
-                    } else {
-                        var name: String
-                        if let indexString = UserDefaults.standard.value(forKey: "IndexForImage") {
-                            let index = Int(indexString as! String)
-                            name = "IMAGE_\(index! + 1).JPG"
-                            UserDefaults.standard.set("\(index! + 1)", forKey: "IndexForImage")
-                        } else {
-                            name = "IMAGE_0.JPG"
-                            UserDefaults.standard.set("0", forKey: "IndexForImage")
-                        }
-                        filenames.append(name)
-                        UserDefaults.standard.synchronize()
-                    }
-                }
-            }
-        }
-        return filenames
-    }
+    
 }

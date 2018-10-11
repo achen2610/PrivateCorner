@@ -26,7 +26,7 @@ public class SPAnimation {
     static func animate(_ duration: TimeInterval,
                         animations: (() -> Void)!,
                         delay: TimeInterval = 0,
-                        options: UIViewAnimationOptions = [],
+                        options: UIView.AnimationOptions = [],
                         withComplection completion: (() -> Void)! = {}) {
         
         UIView.animate(
@@ -43,7 +43,7 @@ public class SPAnimation {
     static func animateWithRepeatition(_ duration: TimeInterval,
                                        animations: (() -> Void)!,
                                        delay: TimeInterval = 0,
-                                       options: UIViewAnimationOptions = [],
+                                       options: UIView.AnimationOptions = [],
                                        withComplection completion: (() -> Void)! = {}) {
         
         var optionsWithRepeatition = options

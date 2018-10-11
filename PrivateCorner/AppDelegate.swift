@@ -31,22 +31,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return button
     }()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-        UIApplication.shared.statusBarStyle = .lightContent
+        UINavigationBar.appearance().barTintColor = ElementColor.bar.getColor()
+        UINavigationBar.appearance().tintColor = ElementColor.title.getColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor(hex: "#3398FB")]
         
-        UINavigationBar.appearance().barTintColor = AppColor.blue.getColor()
-        UINavigationBar.appearance().tintColor = AppColor.title.getColor()
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
-        
-        UITabBar.appearance().barTintColor = AppColor.blue.getColor()
-//        UITabBar.appearance().tintColor = AppColor.title.getColor()
-//        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.white], for:.normal)
+        UITabBar.appearance().barTintColor = ElementColor.bar.getColor()
+        UITabBar.appearance().tintColor = ElementColor.title.getColor()
+//        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor(hex: "#3398FB")], for:.normal)
 //        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.red], for:.selected)
         
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        tabBarController = mainStoryboard.instantiateViewController(withIdentifier: "tabBarController") as! TabBarController
+        tabBarController = mainStoryboard.instantiateViewController(withIdentifier: "tabBarController") as? TabBarController
         tabBarController.delegate = tabBarController
         
         let lockScreenNavi = mainStoryboard.instantiateViewController(withIdentifier: "LockScreenNavi") as! UINavigationController
@@ -63,8 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         lockScreen.viewModel = viewModel
         window?.rootViewController = lockScreenNavi
         
-        NotificationCenter.default.addObserver(self, selector: #selector(windowBecameHidden(notification:)), name: NSNotification.Name.UIWindowDidBecomeVisible, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(windowBecameVisible(notification:)), name: NSNotification.Name.UIWindowDidBecomeHidden, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(windowBecameHidden(notification:)), name: UIWindow.didBecomeVisibleNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(windowBecameVisible(notification:)), name: UIWindow.didBecomeHiddenNotification, object: nil)
         
         return true
     }
@@ -93,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
-        CoreDataManager.sharedInstance.saveContext()
+        CoreDataManager.shared.saveContext()
     }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {

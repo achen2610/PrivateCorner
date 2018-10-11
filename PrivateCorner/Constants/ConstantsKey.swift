@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 //FOR ALL THE KEYS USED IN APP
 
@@ -38,7 +39,7 @@ struct Key {
         static let validationError      = "ERROR_VALIDATION"
     }
     
-    struct String {
+    struct SString {
         static let notiUpdateGalleryWhenMoveFile    = "notiUpdateGalleryWhenMoveFile"
         static let notiUpdateGallery                = "notiUpdateGallery"
         static let notiPerformSeguePasscodeView     = "notiPerformSeguePasscodeView"
@@ -50,7 +51,7 @@ struct Key {
         static let importPhoto                      = "Import"
         static let importWeb                        = "Web Server"
         static let setting                          = "Setting"
-        static let passcode                         = "Passcode"
+        static let privacy                          = "Privacy"
         static let usability                        = "Usability"
         static let howToUse                         = "How to use"
         static let moveFile                         = "Add photos to Album"
@@ -60,6 +61,19 @@ struct Key {
     enum ItemType {
         case ImageType
         case VideoType
+        
+        func getType() -> String {
+            var type: String = ""
+            switch self {
+            case .ImageType:
+                type = "image"
+                break
+            case .VideoType:
+                type = "video"
+                break
+            }
+            return type
+        }
     }
     
     enum ExportType {

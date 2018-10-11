@@ -69,7 +69,7 @@ class VideoCell: UICollectionViewCell {
     
     func playVideo() {
         if isEnd {
-            player.seek(to: kCMTimeZero)
+            player.seek(to: CMTime.zero)
             isEnd = false
         }
         

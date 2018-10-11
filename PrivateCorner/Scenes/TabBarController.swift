@@ -20,18 +20,18 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         let tabBarSettingItem = tabBar.items?[3]
 
 //        tabBarAlbumItem?.title = nil
-        tabBarAlbumItem?.image = UIImage.init(named: "album.png")?.withRenderingMode(.alwaysOriginal)
-        tabBarAlbumItem?.selectedImage = UIImage.init(named: "album-on.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarAlbumItem?.image = UIImage.init(named: "album.png")
+        tabBarAlbumItem?.selectedImage = UIImage.init(named: "album-on.png")
 //        tabBarAlbumItem?.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
 
-        tabBarImportItem?.image = UIImage.init(named: "import.png")?.withRenderingMode(.alwaysOriginal)
-        tabBarImportItem?.selectedImage = UIImage.init(named: "import-on.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarImportItem?.image = UIImage.init(named: "import.png")
+        tabBarImportItem?.selectedImage = UIImage.init(named: "import-on.png")
 
-        tabBarWebItem?.image = UIImage.init(named: "web.png")?.withRenderingMode(.alwaysOriginal)
-        tabBarWebItem?.selectedImage = UIImage.init(named: "web-on.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarWebItem?.image = UIImage.init(named: "web.png")
+        tabBarWebItem?.selectedImage = UIImage.init(named: "web-on.png")
         
-        tabBarSettingItem?.image = UIImage.init(named: "setting.png")?.withRenderingMode(.alwaysOriginal)
-        tabBarSettingItem?.selectedImage = UIImage.init(named: "setting-on.png")?.withRenderingMode(.alwaysOriginal)
+        tabBarSettingItem?.image = UIImage.init(named: "setting.png")
+        tabBarSettingItem?.selectedImage = UIImage.init(named: "setting-on.png")
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {

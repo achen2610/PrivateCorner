@@ -26,7 +26,7 @@ class SPDeepButton: UIButton {
     
     private func commonInit() {
         self.backgroundColor = UIColor.white
-        self.setTitle("Title", for: UIControlState.normal)
+        self.setTitle("Title", for: UIControl.State.normal)
         self.titleLabel?.font = UIFont.fonts.AvenirNext(type: .Bold, size: 14)
         self.setTitleColorForNoramlAndHightlightedStates(color: UIColor.blue)
         self.layer.cornerRadius = 4

@@ -31,11 +31,10 @@ open class AlbumsViewModel {
     
     public init(delegate: AlbumsViewModelDelegate) {
         self.delegate = delegate
-        getAlbumFromCoreData()
     }
     
     func getAlbumFromCoreData() {
-        let totalAlbums = AlbumManager.sharedInstance.getAlbums()
+        let totalAlbums = AlbumManager.shared.getAlbums()
         albums = totalAlbums.filter{ $0.isSpecial == false }
         specialAlbums = totalAlbums.filter{ $0.isSpecial == true }
         delegate?.reloadAlbum()
@@ -73,18 +72,14 @@ open class AlbumsViewModel {
         let album = section == 0 ? albums[index] : specialAlbums[index]
         cell.albumName.text = album.name
 
-        let array = ItemManager.sharedInstance.getItems(album: album)
+        let directoryName = album.directoryName
+        let array = ItemManager.shared.getItems(album: album)
         if array.count > 0 {
             let lastItem = array.last
             
             if let thumbname = lastItem?.thumbName {
-                if let directoryName = album.directoryName {
-                    let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
-                    cell.photoImageView.image = MediaLibrary.image(urlPath: path)
-                } else {
-                    let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
-                    cell.photoImageView.image = MediaLibrary.image(urlPath: path)
-                }
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
+                cell.photoImageView.image = MediaLibrary.image(urlPath: path)
             }
             
             cell.totalItem.text = "\(array.count)"
@@ -102,7 +97,7 @@ open class AlbumsViewModel {
     }
     
     func saveAlbumToCoreData(title: String) {
-        let album = AlbumManager.sharedInstance.addAlbum(title: title)
+        let album = AlbumManager.shared.addAlbum(title: title)
         self.albums.insert(album, at: 0)
     }
     
@@ -112,13 +107,8 @@ open class AlbumsViewModel {
         //Get old name and new name album
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy-hh-mm-ss"
-        var oldDirectoryName:String
-        if let oldD = album.directoryName {
-            oldDirectoryName = oldD
-        } else {
-            oldDirectoryName = album.name!
-        }
-        let newDirectoryName = title + "_" + dateFormatter.string(from: album.createdDate!)
+        let oldDirectoryName = album.directoryName
+        let newDirectoryName = title + "_" + dateFormatter.string(from: album.createdDate)
         
         //Save name to core data
         album.name = title
@@ -126,7 +116,7 @@ open class AlbumsViewModel {
         albums[index] = album
 
         //1
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        let managedContext = CoreDataManager.shared.managedObjectContext
         
         //2
         do {
@@ -159,7 +149,7 @@ open class AlbumsViewModel {
     
     func deleteAlbumFromList(index: Int) {
         let album = albums[index]
-        AlbumManager.sharedInstance.deleteAlbum(album: album)
+        AlbumManager.shared.deleteAlbum(album: album)
         albums.remove(at: index)
     }
 }

@@ -14,3 +14,9 @@ open class ImportViewModel {
     
     
 }
+
+enum ImportType {
+    case photo
+    case camera
+    case wireless
+}

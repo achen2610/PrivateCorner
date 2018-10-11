@@ -203,7 +203,7 @@ public class SPCollectionViewLayout: UICollectionViewFlowLayout {
             return
         }
         
-        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         
         self.itemSize = SPLayout.sizeWith(widthFactor: self.widthFactor, maxWidth: self.maxWidth, heightFactor: self.heightFactor, maxHeight: self.maxHeight, relativeSideFactor: self.cellSideRatio, from: collectionView.bounds.size)
         

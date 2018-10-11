@@ -56,9 +56,9 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
         
         navigationController?.isHeroEnabled = true
         
-        UIView.animate(withDuration: 0.3, animations: {
-            self.tabBarController?.tabBar.alpha = 0.0
-        })
+//        UIView.animate(withDuration: 0.3, animations: {
+//            self.tabBarController?.tabBar.alpha = 0.0
+//        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,7 +70,7 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        tabBarController?.tabBar.alpha = 1.0
+//        tabBarController?.tabBar.alpha = 1.0
         AppUtility.lockOrientation(.portrait)
     }
     
@@ -87,7 +87,7 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
             cell.playerLayer.frame = cell.containerView.bounds
         }
 
-        if UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation) {
+        if UIApplication.shared.statusBarOrientation.isLandscape {
             //here you can do the logic for the cell size if phone is in landscape
             
         } else {
@@ -135,10 +135,10 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
     }
     
     func setupTitleView(topText: String, bottomText: String) {
-        let titleParameters = [NSAttributedStringKey.foregroundColor : UIColor.white,
-                               NSAttributedStringKey.font : UIFont.systemFont(ofSize: 16)]
-        let subtitleParameters = [NSAttributedStringKey.foregroundColor : UIColor.white,
-                                  NSAttributedStringKey.font : UIFont.systemFont(ofSize: 12)]
+        let titleParameters = [NSAttributedString.Key.foregroundColor : UIColor(hex: "#3398FB"),
+                               NSAttributedString.Key.font : UIFont.systemFont(ofSize: 16)]
+        let subtitleParameters = [NSAttributedString.Key.foregroundColor :  UIColor(hex: "#3398FB"),
+                                  NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]
         
         let title:NSMutableAttributedString = NSMutableAttributedString(string: topText, attributes: titleParameters)
         let subtitle:NSAttributedString = NSAttributedString(string: bottomText, attributes: subtitleParameters)
@@ -301,7 +301,7 @@ class PhotoViewController: UIViewController, PhotoViewViewModelDelegate {
             self.alert.hide(isPopupAnimated: true)
         })
         
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.String.notiUpdateGallery), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Key.SString.notiUpdateGallery), object: nil)
 
         if popView {
             self.navigationController?.popViewController(animated: true)

@@ -12,12 +12,12 @@ import CoreData
 class AlbumManager {
     
     // MARK: - Album Manager stack
-    static let sharedInstance = AlbumManager()
+    static let shared = AlbumManager()
     
     func getAlbums() -> [Album] {
         var array = [Album]()
         //1
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        let managedContext = CoreDataManager.shared.managedObjectContext
         
         //2
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Album")
@@ -35,9 +35,9 @@ class AlbumManager {
     }
     
     func getAlbum(url: URL) -> Album? {
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        let managedContext = CoreDataManager.shared.managedObjectContext
         var album: Album?
-        if let oid = CoreDataManager.sharedInstance.managedObjectId(url: url) {
+        if let oid = CoreDataManager.shared.managedObjectId(url: url) {
             do {
                 try album = managedContext.existingObject(with: oid) as? Album
             } catch let error as NSError {
@@ -52,7 +52,7 @@ class AlbumManager {
     func getAlbum(title: String, isSpecial: Bool = false) -> Album? {
         var album: Album?
         //1
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        let managedContext = CoreDataManager.shared.managedObjectContext
         
         //2
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Album")
@@ -73,7 +73,7 @@ class AlbumManager {
     
     func addAlbum(title: String, isSpecial: Bool = false) -> Album {
         //1
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        let managedContext = CoreDataManager.shared.managedObjectContext
         
         //2
         let album = NSEntityDescription.insertNewObject(forEntityName: "Album", into: managedContext) as! Album
@@ -84,17 +84,17 @@ class AlbumManager {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy-hh-mm-ss"
-        let directoryName = title + "_" + dateFormatter.string(from: album.createdDate!)
+        let directoryName = title + "_" + dateFormatter.string(from: album.createdDate)
         album.directoryName = directoryName
         
         //3
-        CoreDataManager.sharedInstance.saveContext()
+        CoreDataManager.shared.saveContext()
         
         //4
         let fileManager = FileManager.default
         var isDir : ObjCBool = false
         
-        let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!)
+        let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName)
         if !fileManager.fileExists(atPath: urlPath.path, isDirectory: &isDir) {
             do {
                 try fileManager.createDirectory(at: urlPath, withIntermediateDirectories: false, attributes: nil)
@@ -116,17 +116,12 @@ class AlbumManager {
     
     func deleteAlbum(album: Album) {
         //1
-        let managedContext = CoreDataManager.sharedInstance.managedObjectContext
+        let managedContext = CoreDataManager.shared.managedObjectContext
         let fileManager = FileManager.default
-        var albumPath:URL
-        if let directoryName = album.directoryName {
-            albumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName)
-        } else {
-            albumPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!)
-        }
+        let albumUrl = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName)
         
         //2
-        let items = ItemManager.sharedInstance.getItems(album: album)
+        let items = ItemManager.shared.getItems(album: album)
         for item in items {
             
             //            if let filename = item.fileName {
@@ -164,9 +159,9 @@ class AlbumManager {
         }
         
         //3
-        if fileManager.fileExists(atPath: albumPath.path) {
+        if fileManager.fileExists(atPath: albumUrl.path) {
             do {
-                try fileManager.removeItem(at: albumPath)
+                try fileManager.removeItem(at: albumUrl)
             } catch let error as NSError {
                 print("============")
                 print("Remove album folder error")
@@ -178,6 +173,6 @@ class AlbumManager {
         managedContext.delete(album)
         
         //5
-        CoreDataManager.sharedInstance.saveContext()
+        CoreDataManager.shared.saveContext()
     }
 }

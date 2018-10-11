@@ -17,6 +17,7 @@ class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
     var isEditMode: Bool = false
     
     @IBOutlet weak var albumsCollectionView: UICollectionView!
+    @IBOutlet weak var noAlbumView: UIView!
     
     // MARK: Object lifecycle
     
@@ -33,10 +34,14 @@ class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
         title = Key.Screen.album
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         viewModel = AlbumsViewModel(delegate: self)
+        viewModel.getAlbumFromCoreData()
         configureCollectionViewOnLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        // StyleUI
+        noAlbumView.isHidden = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,14 +50,23 @@ class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
         viewModel.getAlbumFromCoreData()
     }
     
-    // MARK: Event handling
+    // MARK: - Event handling
     
     func configureCollectionViewOnLoad() {
         let nibName = UINib(nibName: "AlbumsCell", bundle:Bundle.main)
         albumsCollectionView.register(nibName, forCellWithReuseIdentifier: viewModel.cellIdentifier())
         albumsCollectionView.alwaysBounceVertical = true
     }
+    
+    func styleNoAlbumView() {
+        if viewModel.numberItemInSection(section: 0) > 0 {
+            noAlbumView.isHidden = true
+        } else {
+            noAlbumView.isHidden = false
+        }
+    }
 
+    // MARK: - Event selectors
     
     @IBAction func addAlbumButtonItemTapped(_ sender: Any) {
         let alert = UIAlertController.init(title: "New Album", message: "Enter a name for this album", preferredStyle: .alert)
@@ -70,6 +84,7 @@ class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
                 self.albumsCollectionView.performBatchUpdates({
                     self.viewModel.saveAlbumToCoreData(title: (textField?.text)!)
                     self.albumsCollectionView.insertItems(at: [IndexPath.init(row: 0, section: 0)])
+                    self.styleNoAlbumView()
                 }) { (finished) in
                     
                 }
@@ -105,6 +120,7 @@ class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
         }) { (finished) in
             if finished {
                 self.albumsCollectionView.reloadData()
+                self.styleNoAlbumView()
             }
         }
     }
@@ -122,12 +138,13 @@ class AlbumsViewController: BaseViewController, AlbumsViewModelDelegate {
     
     func reloadAlbum() {
         albumsCollectionView.reloadData()
+        styleNoAlbumView()
     }
     
     // MARK: Keyboard Function
     @objc func keyboardWillShow(notification: NSNotification) {
         let userInfo = notification.userInfo ?? [:]
-        let keyboardFrame = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        let keyboardFrame = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         let adjustmentHeight = keyboardFrame.height
         var contentInset:UIEdgeInsets = albumsCollectionView.contentInset
         contentInset.bottom = adjustmentHeight
@@ -155,7 +172,7 @@ extension AlbumsViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let index = textField.tag
         let indexPath = IndexPath(row: index, section: 0)
-        albumsCollectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
+        albumsCollectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
     }
     
     

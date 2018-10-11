@@ -41,12 +41,12 @@ class WebViewController: BaseViewController {
     lazy var searchBars: UISearchBar = {
         let bars = UISearchBar(frame: CGRect(x: 0, y: 0, width: 288 * kScale, height: 44))
         bars.delegate = self
-        bars.setPositionAdjustment(UIOffsetMake(5, 0), for: UISearchBarIcon.search)
+        bars.setPositionAdjustment(UIOffset.init(horizontal: 5, vertical: 0), for: UISearchBar.Icon.search)
         return bars
     }()
     
     lazy var activity: UIActivityIndicatorView = {
-        let act = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        let act = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
         act.frame = CGRect(x: 0, y: kNavigationView, width: kScreenWidth, height: kScreenHeight - kNavigationView - tabBarHeight)
         act.layer.backgroundColor = UIColor(white: 0.0, alpha: 0.2).cgColor
         return act
@@ -125,14 +125,14 @@ class WebViewController: BaseViewController {
     
     // MARK: - Event handling
     func styleUI() {
-        webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 36 * kScale, 0)
+        webView.scrollView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 36 * kScale, right: 0)
         
         let leftNavBarButton = UIBarButtonItem(customView: searchBars)
         navigationItem.leftBarButtonItem = leftNavBarButton
         
         searchBars.keyboardType = .webSearch
         searchBars.autocapitalizationType = .none
-        
+
         view.addSubview(activity)
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(clickContainerView))
@@ -188,6 +188,10 @@ class WebViewController: BaseViewController {
                     bounds.size.height = 30
                     textField.bounds = bounds
                     textField.font = UIFont.systemFont(ofSize: 12)
+                    
+                    textField.layer.cornerRadius = 5.0
+                    textField.layer.borderColor = UIColor(hex: "#3398FB").cgColor
+                    textField.layer.borderWidth = 1.0
                 }
             }
         }
@@ -396,7 +400,7 @@ extension WebViewController: UISearchBarDelegate {
 }
 
 extension WebViewController: UIWebViewDelegate {
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
         return true
     }
     

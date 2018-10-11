@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import CDAlertView
-import Gallery
 
 class ChooseAlbumViewController: BaseViewController, ChooseAlbumViewModelDelegate {
     
@@ -21,7 +20,7 @@ class ChooseAlbumViewController: BaseViewController, ChooseAlbumViewModelDelegat
     var alert: CDAlertView!
     var isUploading: Bool = false
     var isRequestPermission: Bool = false
-    var isPhotoLibrary: Bool = true
+    var importType: ImportType = .photo
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -71,30 +70,45 @@ class ChooseAlbumViewController: BaseViewController, ChooseAlbumViewModelDelegat
     
     // MARK: ChooseAlbumViewModelDelegate
     func chooseAlbumSuccess(onSuccess: Bool) {
-        if isPhotoLibrary {
+        if importType == .photo {
             if SPRequestPermission.isAllowPermissions([.photoLibrary]) {
-                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
                     Config.tabsToShow = [.imageTab, .videoTab]
                     self.gallery = GalleryController()
                     self.gallery.delegate = self
                     self.navigationController?.pushViewController(self.gallery, animated: true)
+                } else {
+                    let title = "Error"
+                    let message = "Device not support photo library. Please check again!!!"
+                    let alert = GlobalMethods.alertController(title: title, message: message, cancelTitle: "OK")
+                    present(alert, animated: true, completion: nil)
                 }
             } else {
                 self.isRequestPermission = true
                 SPRequestPermission.dialog.interactive.present(on: self, with: [.photoLibrary], dataSource: CustomDataSource(), delegate: self)
             }
-        } else {
+        } else if importType == .camera {
             if SPRequestPermission.isAllowPermissions([.camera]) {
-                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
                     Config.tabsToShow = [.cameraTab]
                     self.gallery = GalleryController()
                     self.gallery.delegate = self
                     self.navigationController?.pushViewController(self.gallery, animated: true)
+                } else {
+                    let title = "Error"
+                    let message = "Device not support camera. Please check again!!!"
+                    let alert = GlobalMethods.alertController(title: title, message: message, cancelTitle: "OK")
+                    present(alert, animated: true, completion: nil)
                 }
             } else {
                 self.isRequestPermission = true
                 SPRequestPermission.dialog.interactive.present(on: self, with: [.camera], dataSource: CustomDataSource(), delegate: self)
             }
+        } else {
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let importWeb = mainStoryboard.instantiateViewController(withIdentifier: "ImportWeb") as! ImportWebViewController
+            importWeb.viewModel.album = viewModel.selectedAlbum
+            self.navigationController?.pushViewController(importWeb, animated: true)
         }
     }
 }
@@ -102,15 +116,15 @@ class ChooseAlbumViewController: BaseViewController, ChooseAlbumViewModelDelegat
 extension ChooseAlbumViewController: SPRequestPermissionEventsDelegate {
     func didHide() {
         isRequestPermission = false
-        var permission: [SPRequestPermissionType]
-        if isPhotoLibrary {
+        var permission: [SPRequestPermissionType] = [.photoLibrary, .camera]
+        if importType == .photo {
             permission = [.photoLibrary]
-        } else {
+        } else if importType == .camera {
             permission = [.camera]
         }
         
         if SPRequestPermission.isAllowPermissions(permission) {
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
                 self.gallery = GalleryController()
                 self.gallery.delegate = self
                 self.navigationController?.pushViewController(self.gallery, animated: true)
@@ -132,19 +146,19 @@ extension ChooseAlbumViewController: SPRequestPermissionEventsDelegate {
 }
 
 extension ChooseAlbumViewController: GalleryControllerDelegate {
-    func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
+    func galleryController(_ controller: GalleryController, didSelectImages images: [GImage]) {
         DispatchQueue.main.async {
             controller.dismiss(animated: true, completion: nil)
             self.gallery = nil
         }
     }
     
-    func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+    func galleryController(_ controller: GalleryController, didSelectVideo video: GVideo) {
         controller.dismiss(animated: true, completion: nil)
         gallery = nil
     }
     
-    func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
+    func galleryController(_ controller: GalleryController, requestLightbox images: [GImage]) {
         
     }
     

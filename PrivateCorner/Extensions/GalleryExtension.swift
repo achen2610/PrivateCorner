@@ -8,9 +8,8 @@
 
 import UIKit
 import Photos
-import Gallery
 
-extension Video {
+extension GVideo {
 
     public func fetchDurationEx(_ completion: @escaping (Double) -> Void) {
         let options = PHVideoRequestOptions()

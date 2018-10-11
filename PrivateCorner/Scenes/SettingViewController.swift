@@ -32,11 +32,11 @@ class SettingViewController: UITableViewController, MFMailComposeViewControllerD
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(performSeguePasscodeViewWithNotification(noti:)),
-                                               name: Notification.Name(rawValue: Key.String.notiPerformSeguePasscodeView),
+                                               name: Notification.Name(rawValue: Key.SString.notiPerformSeguePasscodeView),
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showAlertWhenChangePassSuccess(noti:)),
-                                               name: Notification.Name(rawValue: Key.String.notiAlertChangePassSuccess),
+                                               name: Notification.Name(rawValue: Key.SString.notiAlertChangePassSuccess),
                                                object: nil)
     }
     
@@ -66,6 +66,7 @@ class SettingViewController: UITableViewController, MFMailComposeViewControllerD
         
         switch section {
         case 1:
+            /*
             if indexPath.row == 0 {
                 //Passcode
                 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -78,6 +79,7 @@ class SettingViewController: UITableViewController, MFMailComposeViewControllerD
                 lockScreen.heroModalAnimationType = .fade
                 present(lockScreen, animated: true, completion: nil)
             }
+            */
             break
         case 2:
             if indexPath.row == 0 && MFMailComposeViewController.canSendMail() {

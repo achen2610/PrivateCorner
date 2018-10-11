@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-enum AppColor {
+enum ElementColor {
     // Background
     case background
     
-    // Blue
-    case blue
+    // Bar
+    case bar
     
     // Title color
     case title
@@ -24,12 +24,31 @@ enum AppColor {
         case .background:
             return UIColor.white
             
-        case .blue:
-            return UIColor(hex: "#3398FB")
+        case .bar:
+            return UIColor.white
             
         case .title:
-            return UIColor.white
+            return UIColor(hex: "#3398FB")
         }
     }
+}
+
+enum AppColor {
+    
+    case blue
+    case white
+    case black
+    
+    func getColor() -> UIColor {
+        switch self {
+        case .blue:
+            return UIColor(hex: "#3398FB")
+        case .white:
+            return UIColor.white
+        case .black:
+            return UIColor.black
+        }
+    }
+    
 }
 

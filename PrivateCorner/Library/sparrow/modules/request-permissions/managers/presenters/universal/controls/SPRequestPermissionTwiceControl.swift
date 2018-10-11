@@ -40,7 +40,7 @@ class SPRequestPermissionTwiceControl: UIButton, SPRequestPermissionTwiceControl
         self.normalColor = normalColor
         self.selectedColor = selectedColor
         super.init(frame: CGRect.zero)
-        self.setTitle(title, for: UIControlState.normal)
+        self.setTitle(title, for: UIControl.State.normal)
         self.commonInit()
         //self.iconView.backgroundColor = UIColor.red
     }
@@ -64,10 +64,10 @@ class SPRequestPermissionTwiceControl: UIButton, SPRequestPermissionTwiceControl
     func setNormalState(animated: Bool) {
         self.layer.borderColor = self.selectedColor.cgColor
         self.backgroundColor = self.normalColor
-        self.setTitleColor(self.selectedColor, for: UIControlState.normal)
+        self.setTitleColor(self.selectedColor, for: UIControl.State.normal)
         self.iconView.setColor(self.selectedColor)
         self.iconView.setIconImageView(self.iconView.iconImage!)
-        self.setTitleColor(self.selectedColor.withAlphaComponent(0.62), for: UIControlState.highlighted)
+        self.setTitleColor(self.selectedColor.withAlphaComponent(0.62), for: UIControl.State.highlighted)
     }
     
     func setSelectedState(animated: Bool) {
@@ -83,13 +83,13 @@ class SPRequestPermissionTwiceControl: UIButton, SPRequestPermissionTwiceControl
         if self.normalColor == UIColor.clear {
             colorForTitle = UIColor.white
         }
-        self.setTitleColor(colorForTitle, for: UIControlState.normal)
-        self.setTitleColor(colorForTitle.withAlphaComponent(0.62), for: UIControlState.highlighted)
+        self.setTitleColor(colorForTitle, for: UIControl.State.normal)
+        self.setTitleColor(colorForTitle.withAlphaComponent(0.62), for: UIControl.State.highlighted)
         self.iconView.setSelectedState(with: self.normalColor) 
     }
     
     internal func addAction(_ target: Any?, action: Selector) {
-        self.addTarget(target, action: action, for: UIControlEvents.touchUpInside)
+        self.addTarget(target, action: action, for: UIControl.Event.touchUpInside)
     }
     
     internal func addAsSubviewTo(_ view: UIView) {
@@ -143,7 +143,7 @@ class SPRequestPermissionIconView: UIView {
         rotationAnimation.fromValue = 0.0
         rotationAnimation.toValue = Double.pi * 2
         rotationAnimation.duration = 0.18
-        rotationAnimation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
+        rotationAnimation.timingFunction = CAMediaTimingFunction.init(name: CAMediaTimingFunctionName.easeInEaseOut)
         self.imageView?.layer.shouldRasterize = true
         self.imageView?.layer.rasterizationScale = UIScreen.main.scale
         self.imageView?.layer.add(rotationAnimation, forKey: nil)
@@ -166,7 +166,7 @@ class SPRequestPermissionIconView: UIView {
                 }
             }
             
-        }, options: UIViewAnimationOptions.curveEaseIn,
+        }, options: UIView.AnimationOptions.curveEaseIn,
            withComplection: {
             SPAnimation.animate(0.1, animations: {
                 if #available(iOS 9, *) {
@@ -174,7 +174,7 @@ class SPRequestPermissionIconView: UIView {
                         view.setBlurRadius(0)
                     }
                 }
-            }, options: UIViewAnimationOptions.curveEaseOut,
+            }, options: UIView.AnimationOptions.curveEaseOut,
                withComplection: {
                 blurView.removeFromSuperview()
             })
@@ -185,7 +185,7 @@ class SPRequestPermissionIconView: UIView {
     }
     
     func setColor(_ color: UIColor) {
-        UIView.transition(with: self.imageView!, duration: 0.2, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
+        UIView.transition(with: self.imageView!, duration: 0.2, options: UIView.AnimationOptions.beginFromCurrentState, animations: {
             self.imageView?.tintColor = color
         }, completion: nil)
     }

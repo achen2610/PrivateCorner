@@ -35,7 +35,7 @@ open class MoveFileViewModel {
     }
     
     func getAlbumFromCoreData() {
-        albums = AlbumManager.sharedInstance.getAlbums()
+        albums = AlbumManager.shared.getAlbums()
 //        delegate?.reloadAlbum()
     }
     
@@ -59,18 +59,14 @@ open class MoveFileViewModel {
         let album = albums[index]
         cell.albumName.text = album.name
 
-        let array = ItemManager.sharedInstance.getItems(album: album)        
+        let directoryName = album.directoryName
+        let array = ItemManager.shared.getItems(album: album)
         if array.count > 0 {
             let lastItem = array.last
             
             if let thumbname = lastItem?.thumbName {
-                if let directoryName = album.directoryName {
-                    let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
-                    cell.photoImageView.image = MediaLibrary.image(urlPath: path)
-                } else {
-                    let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
-                    cell.photoImageView.image = MediaLibrary.image(urlPath: path)
-                }
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
+                cell.photoImageView.image = MediaLibrary.image(urlPath: path)
             }
             
             cell.totalItem.text = "\(array.count)"
@@ -93,7 +89,7 @@ open class MoveFileViewModel {
         }
         
         // Move file
-        ItemManager.sharedInstance.moveItem(items: selectedItems, fromAlbum: currentAlbum, toAlbum: album)
+        ItemManager.shared.moveItem(items: selectedItems, fromAlbum: currentAlbum, toAlbum: album)
         
         // Send delegate when move done
         delegate?.moveFileToAlbum(onSuccess: true)

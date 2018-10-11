@@ -268,17 +268,17 @@ public class SPIndicationBannerController<BottomView: UIView>: SPStatusBarManage
         let location = sender.location(in: view)
         let boxLocation = sender.location(in: myView)
         
-        if sender.state == UIGestureRecognizerState.began {
+        if sender.state == UIGestureRecognizer.State.began {
             animator.removeAllBehaviors()
-            let centerOffset = UIOffsetMake(boxLocation.x - myView.bounds.midX, boxLocation.y - myView.bounds.midY);
+            let centerOffset = UIOffset.init(horizontal: boxLocation.x - myView.bounds.midX, vertical: boxLocation.y - myView.bounds.midY);
             attachmentBehavior = UIAttachmentBehavior(item: myView, offsetFromCenter: centerOffset, attachedToAnchor: location)
             attachmentBehavior.frequency = 0
             animator.addBehavior(attachmentBehavior)
         }
-        else if sender.state == UIGestureRecognizerState.changed {
+        else if sender.state == UIGestureRecognizer.State.changed {
             self.attachmentBehavior.anchorPoint = location
         }
-        else if sender.state == UIGestureRecognizerState.ended {
+        else if sender.state == UIGestureRecognizer.State.ended {
             animator.removeBehavior(attachmentBehavior)
             snapBehavior = UISnapBehavior(item: myView, snapTo: self.alertCenteringPoint)
             animator.addBehavior(snapBehavior)

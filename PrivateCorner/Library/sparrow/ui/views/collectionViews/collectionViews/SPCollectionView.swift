@@ -44,7 +44,7 @@ public class SPCollectionView: UICollectionView {
         self.layout.scrollDirection = .vertical
         self.backgroundColor = UIColor.clear
         self.collectionViewLayout = self.layout
-        self.decelerationRate = UIScrollViewDecelerationRateFast
+        self.decelerationRate = UIScrollView.DecelerationRate.fast
         self.delaysContentTouches = false
         self.isPagingEnabled = false
         self.showsHorizontalScrollIndicator = false

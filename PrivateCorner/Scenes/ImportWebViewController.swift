@@ -26,16 +26,16 @@ class ImportWebViewController: BaseViewController, ImportWebViewModelDelegate {
         
         viewModel = ImportWebViewModel(delegate: self)
         
-        WebServer.sharedInstance.delegate = self
-        WebServer.sharedInstance.setDelegate()
-        WebServer.sharedInstance.startServer()
-        addressTextField.text = WebServer.sharedInstance.getAddress()
+        WebServer.shared.delegate = self
+        WebServer.shared.setDelegate()
+        WebServer.shared.startServer()
+        addressTextField.text = WebServer.shared.getAddress()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        WebServer.sharedInstance.stopServer()
+        WebServer.shared.stopServer()
     }
     
     // MARK: View Model Delegate

@@ -30,7 +30,7 @@ class SPRateAppBannerWithIndicatorTwiceButton: UIButton {
         self.normalColor = normalColor
         self.selectedColor = selectedColor
         super.init(frame: CGRect.zero)
-        self.setTitle(title, for: UIControlState.normal)
+        self.setTitle(title, for: UIControl.State.normal)
         self.commonInit()
     }
     
@@ -57,8 +57,8 @@ class SPRateAppBannerWithIndicatorTwiceButton: UIButton {
     func setNormalState(animated: Bool) {
         self.layer.borderColor = self.normalColor.cgColor
         self.backgroundColor = self.selectedColor
-        self.setTitleColor(self.normalColor, for: UIControlState.normal)
-        self.setTitleColor(self.normalColor.withAlphaComponent(0.62), for: UIControlState.highlighted)
+        self.setTitleColor(self.normalColor, for: UIControl.State.normal)
+        self.setTitleColor(self.normalColor.withAlphaComponent(0.62), for: UIControl.State.highlighted)
     }
     
     func setSelectedState(animated: Bool) {
@@ -74,8 +74,8 @@ class SPRateAppBannerWithIndicatorTwiceButton: UIButton {
         if self.normalColor == UIColor.clear {
             colorForTitle = UIColor.white
         }
-        self.setTitleColor(colorForTitle, for: UIControlState.normal)
-        self.setTitleColor(colorForTitle.withAlphaComponent(0.62), for: UIControlState.highlighted)
+        self.setTitleColor(colorForTitle, for: UIControl.State.normal)
+        self.setTitleColor(colorForTitle.withAlphaComponent(0.62), for: UIControl.State.highlighted)
     }
     
     override func layoutSubviews() {

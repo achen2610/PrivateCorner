@@ -214,12 +214,12 @@ public class SPDialogSwipeController<DialogView: UIView, BottomView: UIView>: SP
             }
             SPAnimationSpring.animate(0.3, animations: {
                 self.actionBeforeRotation()
-            }, spring: self.spring, velocity: self.velocity, options: UIViewAnimationOptions.curveEaseIn)
+            }, spring: self.spring, velocity: self.velocity, options: UIView.AnimationOptions.curveEaseIn)
         }, completion: {
             finished in
             SPAnimationSpring.animate(0.35, animations: {
                 self.actionAfterRotation()
-            }, spring: self.spring, velocity: self.velocity, options: UIViewAnimationOptions.curveEaseOut)
+            }, spring: self.spring, velocity: self.velocity, options: UIView.AnimationOptions.curveEaseOut)
             
             self.updateLayoutAndSizes()
         })
@@ -294,17 +294,17 @@ public class SPDialogSwipeController<DialogView: UIView, BottomView: UIView>: SP
         let location = sender.location(in: view)
         let boxLocation = sender.location(in: myView)
         
-        if sender.state == UIGestureRecognizerState.began {
+        if sender.state == UIGestureRecognizer.State.began {
             animator.removeAllBehaviors()
-            let centerOffset = UIOffsetMake(boxLocation.x - myView.bounds.midX, boxLocation.y - myView.bounds.midY);
+            let centerOffset = UIOffset.init(horizontal: boxLocation.x - myView.bounds.midX, vertical: boxLocation.y - myView.bounds.midY);
             attachmentBehavior = UIAttachmentBehavior(item: myView, offsetFromCenter: centerOffset, attachedToAnchor: location)
             attachmentBehavior.frequency = 0
             animator.addBehavior(attachmentBehavior)
         }
-        else if sender.state == UIGestureRecognizerState.changed {
+        else if sender.state == UIGestureRecognizer.State.changed {
             self.attachmentBehavior.anchorPoint = location
         }
-        else if sender.state == UIGestureRecognizerState.ended {
+        else if sender.state == UIGestureRecognizer.State.ended {
             animator.removeBehavior(attachmentBehavior)
             snapBehavior = UISnapBehavior(item: myView, snapTo: self.dialogCenteringPoint)
             animator.addBehavior(snapBehavior)

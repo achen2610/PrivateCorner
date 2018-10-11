@@ -20,17 +20,17 @@ public protocol WebServerDelegate: class {
 public class WebServer: NSObject  {
     
     // MARK: - Web Server stack
-    static let sharedInstance = WebServer()
+    static let shared = WebServer()
     
     
     // MARK: - Init
     private override init() {
         var urlPath: URL
-        if let importAlbum = AlbumManager.sharedInstance.getAlbum(title: "Import", isSpecial: true) {
-            urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(importAlbum.directoryName!)
+        if let importAlbum = AlbumManager.shared.getAlbum(title: "Import", isSpecial: true) {
+            urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(importAlbum.directoryName)
         } else {
-            let album = AlbumManager.sharedInstance.addAlbum(title: "Import", isSpecial: true)
-            urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName!)
+            let album = AlbumManager.shared.addAlbum(title: "Import", isSpecial: true)
+            urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName)
         }
 
         let fileExtensions = ["mov", "mp4", "gif", "jpg", "jpeg", "png"]

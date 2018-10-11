@@ -31,21 +31,23 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var CancelButton: UIButton!
     @IBOutlet weak var TouchIDButton: UIButton!
+    @IBOutlet weak var CloseButton: UIButton!
     
-    // MARK: Object lifecycle
+    // MARK: - Object lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
 
     }
     
-    // MARK: View lifecycle
+    // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         styleUI()
         PasscodeView.totalDotCount = 6
+        PasscodeView.fillColor = AppColor.blue.getColor()
 
         if viewModel.passcodeState == .FirstStart {
             TitleLabel.text = NSLocalizedString("Create passcode for app", comment: "")
@@ -60,13 +62,13 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
         }
     }
     
-    // MARK: Event handling
+    // MARK: - Display logic
     
     private func styleUI() {
         backgroundImageView.image = UIImage.init(named: "data-security-tips.jpg")
         blurImage()
         TitleLabel.font = UIFont.boldSystemFont(ofSize: 17 * kScale)
-
+        
         buttonArray.append(ZeroButton)
         buttonArray.append(OneButton)
         buttonArray.append(TwoButton)
@@ -77,13 +79,15 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
         buttonArray.append(SevenButton)
         buttonArray.append(EightButton)
         buttonArray.append(NineButton)
-
+        
         for button in buttonArray {
             self.styleButton(button: button, isScaleFontSize: true)
             button.tag = buttonArray.index(of: button)!
         }
-//        styleButton(button: CancelButton, isScaleFontSize: false)
-//        styleButton(button: TouchIDButton, isScaleFontSize: false)
+        
+        styleCloseButton()
+        //        styleButton(button: CancelButton, isScaleFontSize: false)
+        //        styleButton(button: TouchIDButton, isScaleFontSize: false)
     }
     
     func styleChangePassState() {
@@ -91,20 +95,6 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
         viewModel.changePassState()
         TitleLabel.text = NSLocalizedString("Enter new passcode", comment: "")
         TouchIDButton.setTitle(NSLocalizedString("Cancel", comment: ""), for: .normal)
-    }
-    
-    private func blurImage() {
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
-            backgroundImageView.backgroundColor = UIColor.clear
-            
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            //always fill the view
-            blurEffectView.frame = backgroundImageView.bounds
-            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
-            backgroundImageView.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
-        }
     }
     
     private func styleButton(button: UIButton, isScaleFontSize: Bool) {
@@ -116,6 +106,32 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
         button.layer.borderWidth = 1.0;
     }
     
+    func styleCloseButton() {
+        if let state = viewModel.passcodeState {
+            if state == .RequirePass || state == .ChangePass {
+                CloseButton.isHidden = false
+                return
+            }
+        }
+        CloseButton.isHidden = true
+    }
+    
+    // MARK: - Event handling
+    
+    private func blurImage() {
+        if !UIAccessibility.isReduceTransparencyEnabled {
+            backgroundImageView.backgroundColor = UIColor.clear
+            
+            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //always fill the view
+            blurEffectView.frame = backgroundImageView.bounds
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            backgroundImageView.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
+        }
+    }
+    
     private func wrongPasscode() {
         PasscodeView.shakeAnimationWithCompletion {
             self.viewModel.clearInput()
@@ -123,15 +139,15 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
         }
     }
     
-    // MARK: Navigation
+    // MARK: - Navigation
     func navigateToHomeScreen() {
         if viewModel.passcodeState == .RequirePass {
             dismiss(animated: true, completion: { 
-                NotificationCenter.default.post(name: Notification.Name(rawValue: Key.String.notiPerformSeguePasscodeView), object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Key.SString.notiPerformSeguePasscodeView), object: nil)
             })
         } else if viewModel.passcodeState == .ChangePass {
             dismiss(animated: true, completion: {
-                NotificationCenter.default.post(name: Notification.Name(rawValue: Key.String.notiAlertChangePassSuccess), object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: Key.SString.notiAlertChangePassSuccess), object: nil)
             })
         
         } else {
@@ -140,10 +156,10 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
         }
     }
 
-    // MARK: Display logic
     
     
-    // MARK: Selector logic
+    
+    // MARK: - Selector logic
     @IBAction func clickedNumberButton(_ sender: Any) {
         let button = sender as! UIButton
         print("clicked \(button.tag) Button")
@@ -238,8 +254,11 @@ class LockScreenViewController: BaseViewController, LockScreenViewModelDelegate 
         }
     }
     
-
-    // MARK: LockScreenViewModelDelegate
+    @IBAction func clickedCloseButton(_ sender: Any) {
+        dismiss(animated: true, completion:nil )
+    }
+    
+    // MARK: - LockScreenViewModelDelegate
     func validationSuccess() {
         TitleLabel.text = NSLocalizedString("Enter passcode", comment: "")
         viewModel.clearInput()

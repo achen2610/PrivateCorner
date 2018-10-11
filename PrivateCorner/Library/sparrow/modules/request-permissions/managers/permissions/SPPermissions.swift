@@ -112,7 +112,7 @@ class SPPhotoLibraryPermission: SPPermissionInterface {
 class SPMicrophonePermission: SPPermissionInterface {
     
     func isAuthorized() -> Bool {
-        if AVAudioSession.sharedInstance().recordPermission() == .granted {
+        if AVAudioSession.sharedInstance().recordPermission == .granted {
             return true
         }
         return false

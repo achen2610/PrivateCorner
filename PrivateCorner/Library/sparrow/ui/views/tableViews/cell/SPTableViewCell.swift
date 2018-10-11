@@ -25,7 +25,7 @@ public class SPTableViewCell<ContentView: UIView>: UITableViewCell {
     
     let view = ContentView.init()
 
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = UIColor.clear
         self.addSubview(view)

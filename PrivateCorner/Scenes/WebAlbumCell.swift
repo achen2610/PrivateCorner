@@ -38,18 +38,13 @@ class WebAlbumCell: UICollectionViewCell {
     func configure(album: Album) {
         nameLabel.text = album.name
         
-        let array = ItemManager.sharedInstance.getItems(album: album)
+        let array = ItemManager.shared.getItems(album: album)
         if array.count > 0 {
             let lastItem = array.last
             
             if let thumbname = lastItem?.thumbName {
-                if let directoryName = album.directoryName {
-                    let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
-                    albumImageView.image = MediaLibrary.image(urlPath: path)
-                } else {
-                    let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.name!).appendingPathComponent(thumbname)
-                    albumImageView.image = MediaLibrary.image(urlPath: path)
-                }
+                let path = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName).appendingPathComponent(thumbname)
+                albumImageView.image = MediaLibrary.image(urlPath: path)
             }
         } else {
             albumImageView.image = UIImage(named: "albums.png")

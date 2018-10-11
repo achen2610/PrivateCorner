@@ -24,15 +24,15 @@ open class ImportWebViewModel {
     }
     
     weak var delegate: ImportWebViewModelDelegate?
-    var album: Album
+    var album: Album?
     
     public init(delegate: ImportWebViewModelDelegate) {
         self.delegate = delegate
         
-        if let importAlbum = AlbumManager.sharedInstance.getAlbum(title: "Import", isSpecial: true) {
+        if let importAlbum = AlbumManager.shared.getAlbum(title: "Import", isSpecial: true) {
             album = importAlbum
         } else {
-            album = AlbumManager.sharedInstance.addAlbum(title: "Import", isSpecial: true)
+            album = AlbumManager.shared.addAlbum(title: "Import", isSpecial: true)
         }
     }
     
@@ -77,34 +77,37 @@ open class ImportWebViewModel {
     }
     
     func saveVideo(path: String, completion: @escaping(Bool) -> Void) {
+        
+        guard let album = self.album else {
+            completion(false)
+            return
+        }
+        
         let videoUrl = URL(fileURLWithPath: path)
         let name = videoUrl.lastPathComponent
         let currentIndex = album.currentIndex
         let subtype = MediaLibrary.getSubTypeOfFile(filename: name)
         let filename = String.init(format: "VIDEO_%i", currentIndex) + "." + subtype
         let thumbname = "thumbnail_" + String.init(format: "VIDEO_%i", currentIndex) + ".JPG"
-        
-        guard let directoryName = album.directoryName else {
-            return
-        }
+
         
         // Rename file
-        let filePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
+        let fileUrl = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName).appendingPathComponent(filename)
         do {
-            try FileManager.default.moveItem(at: videoUrl, to: filePath)
+            try FileManager.default.moveItem(at: videoUrl, to: fileUrl)
         } catch {
             print(error)
             completion(false)
         }
         
-        let asset : AVURLAsset = AVURLAsset(url: filePath, options: nil)
+        let asset : AVURLAsset = AVURLAsset(url: fileUrl, options: nil)
         let duration : CMTime = asset.duration
 
         // Get thumb image video
         var thumbImage = UIImage()
         let generator = AVAssetImageGenerator(asset: asset)
         do {
-            let frameRef = try generator.copyCGImage(at: CMTimeMake(0, 1), actualTime: nil)
+            let frameRef = try generator.copyCGImage(at: CMTimeMake(value: 0, timescale: 1), actualTime: nil)
             thumbImage = UIImage(cgImage: frameRef)
         } catch let error as NSError {
             print("Error : \(error)")
@@ -112,16 +115,16 @@ open class ImportWebViewModel {
         }
         
         // Thumbnail path
-        let thumbPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(thumbname)
+        let thumbUrl = MediaLibrary.getDocumentsDirectory().appendingPathComponent(album.directoryName).appendingPathComponent(thumbname)
         
         // Save thumbnail
         let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: thumbPath.path) {
+        if fileManager.fileExists(atPath: thumbUrl.path) {
             print("===============")
-            print("Thumbnail \(thumbPath.lastPathComponent) exists")
+            print("Thumbnail \(thumbUrl.lastPathComponent) exists")
         } else {
-            if let data = UIImagePNGRepresentation(thumbImage) {
-                fileManager.createFile(atPath: thumbPath.path, contents: data, attributes: nil)
+            if let data = thumbImage.pngData() {
+                fileManager.createFile(atPath: thumbUrl.path, contents: data, attributes: nil)
             }
         }
         
@@ -130,19 +133,26 @@ open class ImportWebViewModel {
                                    "thumbname": thumbname,
                                    "type": Key.ItemType.VideoType,
                                    "duration": CMTimeGetSeconds(duration)]
-        ItemManager.sharedInstance.add(info: info, toAlbum: album)
+        ItemManager.shared.add(info: info, toAlbum: album)
         
         DispatchQueue.main.async {
             print("===============")
             print("Upload video success")
-            self.album.currentIndex = currentIndex + 1
-            CoreDataManager.sharedInstance.saveContext()
+            album.currentIndex = currentIndex + 1
+            CoreDataManager.shared.saveContext()
             
             completion(true)
         }
     }
     
     func saveImage(path: String, completion: @escaping(Bool) -> Void) {
+        
+        guard let album = self.album else {
+            completion(false)
+            return
+        }
+        
+        let directoryName = album.directoryName
         let fileManager = FileManager.default
         let imageUrl = URL(fileURLWithPath: path)
         let name = imageUrl.lastPathComponent
@@ -151,13 +161,11 @@ open class ImportWebViewModel {
         let filename = String.init(format: "IMAGE_%i", currentIndex) + "." + subtype
         let thumbname = "thumbnail" + "_" + filename
         
-        guard let directoryName = album.directoryName else {
-            return
-        }
+        
         
         // Add image to DB
         let info: [String: Any] = ["filename": filename, "thumbname": thumbname, "type": Key.ItemType.ImageType]
-        ItemManager.sharedInstance.add(info: info, toAlbum: album)
+        ItemManager.shared.add(info: info, toAlbum: album)
 
         // Rename file
         let filePath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(directoryName).appendingPathComponent(filename)
@@ -176,13 +184,13 @@ open class ImportWebViewModel {
             print("===============")
             print("Thumbnail \(thumbname) exists")
         } else {
-            if let data = UIImagePNGRepresentation(thumbnailImage) {
+            if let data = thumbnailImage.pngData() {
                 fileManager.createFile(atPath: thumbnailPath.path, contents: data, attributes: nil)
             }
         }
         
         album.currentIndex = currentIndex + 1
-        CoreDataManager.sharedInstance.saveContext()
+        CoreDataManager.shared.saveContext()
 
         print("===============")
         print("Upload image success")

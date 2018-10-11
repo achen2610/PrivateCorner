@@ -159,12 +159,12 @@ class SPRequestPermissionDialogInteractivePresenter {
         let alert = UIAlertController.init(
             title: dataSource.titleForAlertDenidPermission(),
             message: dataSource.subtitleForAlertDenidPermission(),
-            preferredStyle: UIAlertControllerStyle.alert
+            preferredStyle: UIAlertController.Style.alert
         )
         
         alert.addAction(UIAlertAction.init(
             title: dataSource.cancelForAlertDenidPermission(),
-            style: UIAlertActionStyle.cancel,
+            style: UIAlertAction.Style.cancel,
             handler: {
                 finished in
                 cancelHandler()
@@ -173,20 +173,20 @@ class SPRequestPermissionDialogInteractivePresenter {
         
         alert.addAction(UIAlertAction.init(
             title: dataSource.settingForAlertDenidPermission(),
-            style: UIAlertActionStyle.default,
+            style: UIAlertAction.Style.default,
             handler: {
                 finished in
                 
-                NotificationCenter.default.addObserver(self, selector: #selector(self.updatePermissionsStyle), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(self.updatePermissionsStyle), name: UIApplication.didBecomeActiveNotification, object: nil)
                 
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(
-                        URL.init(string: UIApplicationOpenSettingsURLString)!,
-                        options: [:],
+                        URL.init(string: UIApplication.openSettingsURLString)!,
+                        options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]),
                         completionHandler: nil
                     )
                 } else {
-                    UIApplication.shared.openURL(URL.init(string: UIApplicationOpenSettingsURLString)!)
+                    UIApplication.shared.openURL(URL.init(string: UIApplication.openSettingsURLString)!)
                 }
         }))
         if let controller = self.viewController as? UIViewController {
@@ -195,7 +195,7 @@ class SPRequestPermissionDialogInteractivePresenter {
     }
     
     @objc private func updatePermissionsStyle() {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
         for control in controls {
             if permissionManager.isAuthorizedPermission(control.permission) {
                 control.setSelectedState(animated: false)
@@ -211,4 +211,9 @@ extension SPRequestPermissionDialogInteractivePresenter: SPRequestPermissionDial
     func didHide() {
         self.eventsDelegate?.didHide()
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

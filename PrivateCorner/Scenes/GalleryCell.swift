@@ -39,7 +39,7 @@ class GalleryCell: UICollectionViewCell {
     }
 
     func setupData(item: Item, albumName: String) {
-        let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(albumName).appendingPathComponent(item.thumbName!)
+        let urlPath = MediaLibrary.getDocumentsDirectory().appendingPathComponent(albumName).appendingPathComponent(item.thumbName)
         if item.type == "image" {
             
             durationLabel.isHidden = true

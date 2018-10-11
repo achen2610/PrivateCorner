@@ -20,7 +20,6 @@ class BaseViewController: UIViewController {
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,4 +38,9 @@ class BaseViewController: UIViewController {
         super.viewDidDisappear(animated)
         
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
 }

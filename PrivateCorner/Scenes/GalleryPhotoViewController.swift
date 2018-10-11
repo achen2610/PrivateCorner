@@ -14,7 +14,6 @@ import MessageUI
 import DynamicColor
 import CoreData
 import CDAlertView
-import Gallery
 
 class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDelegate {
 
@@ -34,6 +33,7 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
     @IBOutlet weak var exportButton: UIBarButtonItem!
     @IBOutlet weak var moveButton: UIBarButtonItem!
     @IBOutlet weak var deleteButton: UIBarButtonItem!
+    @IBOutlet weak var noImageView: UIView!
     @IBOutlet weak var bottomConstraintCollectionView: NSLayoutConstraint!
     
     // MARK: - Object lifecycle
@@ -53,8 +53,8 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
         configureCollectionViewOnLoad()
         getGalleryPhotoOnLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionViewWhenMoveFile), name: NSNotification.Name(rawValue: Key.String.notiUpdateGalleryWhenMoveFile), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionView), name: NSNotification.Name(rawValue: Key.String.notiUpdateGallery), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionViewWhenMoveFile), name: NSNotification.Name(rawValue: Key.SString.notiUpdateGalleryWhenMoveFile), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionView), name: NSNotification.Name(rawValue: Key.SString.notiUpdateGallery), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,6 +85,8 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
         progressRing.innerRingSpacing = 0
         progressRing.fontColor = blue.darkened()
         containerView.addSubview(progressRing)
+        
+        noImageView.isHidden = true
     }
     
     func configureCollectionViewOnLoad() {
@@ -191,7 +193,7 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
         let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
             
             if SPRequestPermission.isAllowPermissions([.camera, .photoLibrary]) {
-                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+                if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
                     self.gallery = GalleryController()
                     self.gallery.delegate = self
                     self.present(self.gallery, animated: true, completion: nil)
@@ -205,8 +207,8 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
         let pasteAction = UIAlertAction(title: "Paste", style: .default) { (action) in
             if let data = UserDefaults.standard.value(forKey: "ItemCopy") as? Data {
                 if let info = NSKeyedUnarchiver.unarchiveObject(with: data) as? [String: Any] {
-                    let fromAlbum = AlbumManager.sharedInstance.getAlbum(url: info["album"] as! URL)
-                    let pasteItems = ItemManager.sharedInstance.getItems(urls: info["items"] as! [URL])
+                    let fromAlbum = AlbumManager.shared.getAlbum(url: info["album"] as! URL)
+                    let pasteItems = ItemManager.shared.getItems(urls: info["items"] as! [URL])
                     
                     if let fromAlbum = fromAlbum, pasteItems.count > 0 {
                         self.alert = CDAlertView(title: nil, message: "Paste images processing!", type: .warning)
@@ -233,17 +235,13 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
     @IBAction func clickEditMode(_ sender: Any) {
         isEditMode = !isEditMode
         UIView.animate(withDuration: 0.3) {
-            var rect = self.toolBar.frame
             if self.isEditMode {
-                rect.origin.y -= rect.size.height
-                self.tabBarController?.tabBar.frame.origin.y += (self.tabBarController?.tabBar.frame.size.height)!
+                self.toolBar.alpha = 1.0
+                self.addPhotoButton.alpha = 0.0
             } else {
-                rect.origin.y += rect.size.height
-                self.tabBarController?.tabBar.frame.origin.y -= (self.tabBarController?.tabBar.frame.size.height)!
+                self.toolBar.alpha = 0.0
+                self.addPhotoButton.alpha = 1.0
             }
-            self.toolBar.frame = rect
-            
-            self.addPhotoButton.isHidden = self.isEditMode
         }
         
         if isEditMode {
@@ -296,37 +294,44 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
     }
     
     @IBAction func clickExportButton(_ sender: Any) {
-        let alertController = UIAlertController(title: nil, message: "Export to", preferredStyle: .actionSheet)
-        let cameraAction = UIAlertAction(title: "Photo Library", style: .default) { (alertAction) in
-            self.alertExport()
-        }
-        let emailAction = UIAlertAction(title: "Email", style: .default) { (alertAction) in
-            if MFMailComposeViewController.canSendMail() {
-                var indexSelectedImage = [Int]()
-                var index = 0
-                for check in self.viewModel.arraySelectedCell {
-                    if check {
-                        indexSelectedImage.append(index)
-                    }
-                    index += 1
-                }
-                
-                if indexSelectedImage.count <= 0 {
-                    return
-                }
-                
-                self.viewModel.exportFile(indexes: indexSelectedImage, type: .Email)
-            }
-        }
-        let copyAction = UIAlertAction(title: "Copy", style: .default) { (alertAction) in
-            self.copyImages()
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(cameraAction)
-        alertController.addAction(emailAction)
-        alertController.addAction(copyAction)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true, completion: nil)
+        
+        let activityViewController = UIActivityViewController(activityItems: [UIImage()], applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [.airDrop, .copyToPasteboard, .mail, .message, .postToFacebook, .postToFlickr, .postToTwitter, .postToVimeo, .print, .saveToCameraRoll]
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        present(activityViewController, animated: true, completion: nil)
+        
+        
+//        let alertController = UIAlertController(title: nil, message: "Export to", preferredStyle: .actionSheet)
+//        let cameraAction = UIAlertAction(title: "Photo Library", style: .default) { (alertAction) in
+//            self.alertExport()
+//        }
+//        let emailAction = UIAlertAction(title: "Email", style: .default) { (alertAction) in
+//            if MFMailComposeViewController.canSendMail() {
+//                var indexSelectedImage = [Int]()
+//                var index = 0
+//                for check in self.viewModel.arraySelectedCell {
+//                    if check {
+//                        indexSelectedImage.append(index)
+//                    }
+//                    index += 1
+//                }
+//
+//                if indexSelectedImage.count <= 0 {
+//                    return
+//                }
+//
+//                self.viewModel.exportFile(indexes: indexSelectedImage, type: .Email)
+//            }
+//        }
+//        let copyAction = UIAlertAction(title: "Copy", style: .default) { (alertAction) in
+//            self.copyImages()
+//        }
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//        alertController.addAction(cameraAction)
+//        alertController.addAction(emailAction)
+//        alertController.addAction(copyAction)
+//        alertController.addAction(cancelAction)
+//        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func clickMoveButton(_ sender: Any) {
@@ -374,6 +379,13 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
     
             // Update state edit buttons
             self.updateStateEditButton()
+            
+            // Update state no image label
+            if self.viewModel.numberOfItemInSection(section: 0) > 0 {
+                self.noImageView.isHidden = true
+            } else {
+                self.noImageView.isHidden = false
+            }
         }
         deleteAction.setValue(UIColor(hexString: "#F71700"), forKey: "titleTextColor")
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -407,6 +419,12 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
                     self.scrollToBottom(animated: false)
                 }
             })
+        }
+        
+        if viewModel.numberOfItemInSection(section: 0) > 0 {
+            noImageView.isHidden = true
+        } else {
+            noImageView.isHidden = false
         }
     }
     
@@ -485,7 +503,7 @@ class GalleryPhotoViewController: BaseViewController, GalleryPhotoViewModelDeleg
 
 
 extension GalleryPhotoViewController: GalleryControllerDelegate {
-    func galleryController(_ controller: GalleryController, didSelectImages images: [Image]) {
+    func galleryController(_ controller: GalleryController, didSelectImages images: [GImage]) {
         controller.dismiss(animated: true, completion: nil)
         gallery = nil
         isUploading = true
@@ -500,7 +518,7 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
             assets.append(asset);
         }
         
-        Image.resolve(images: images, completion: { [weak self] resolvedImages in
+        GImage.resolve(images: images, completion: { [weak self] resolvedImages in
             if let collectionView = self?.galleryCollectionView {
                 self?.viewModel.uploadImageToCoreData(images: resolvedImages as! [UIImage], assets: assets, collectionView: collectionView)
             }
@@ -513,7 +531,7 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
 //        }
     }
     
-    func galleryController(_ controller: GalleryController, didSelectVideo video: Video) {
+    func galleryController(_ controller: GalleryController, didSelectVideo video: GVideo) {
         controller.dismiss(animated: true, completion: nil)
         gallery = nil
         isUploading = true
@@ -523,13 +541,13 @@ extension GalleryPhotoViewController: GalleryControllerDelegate {
         alert.show()
 
         video.fetchAVAsset { (avasset) in
-            video.fetchDurationEx({ (duration) in
+            video.fetchDuration({ (duration) in
                 self.viewModel.uploadVideoToCoreData(video: video, avasset: avasset!, duration: duration, collectionView: self.galleryCollectionView)
             })
         }
     }
     
-    func galleryController(_ controller: GalleryController, requestLightbox images: [Image]) {
+    func galleryController(_ controller: GalleryController, requestLightbox images: [GImage]) {
         
     }
     
@@ -618,7 +636,7 @@ extension GalleryPhotoViewController: SPRequestPermissionEventsDelegate {
         isRequestPermission = false
         
         if SPRequestPermission.isAllowPermissions([.camera, .photoLibrary]) {
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary) {
                 self.gallery = GalleryController()
                 self.gallery.delegate = self
                 self.present(self.gallery, animated: true, completion: nil)
